@@ -10,7 +10,7 @@ public class Application {
     Connection connection = null;
     public void connectToDatabase() throws SQLException {
         // create a database connection
-        connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/theot/Documents/TELECOM/2A/codingweek-12/src/main/resources/eu/telecomnancy/directdealing/database/database.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:database.db");
         Statement statement = connection.createStatement();
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
     }
