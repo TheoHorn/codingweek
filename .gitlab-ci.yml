@@ -9,9 +9,6 @@ build:
   script:
     - chmod +x ./mvnw
     - ./mvnw clean install -DskipTest
-  artifacts:
-    paths:
-      - target/*.jar
 
 test:
   stage: test
