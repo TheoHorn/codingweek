@@ -1,6 +1,4 @@
-image:
-  name: amazoncorretto:17
-  pull_policy: if-not-present
+image: amazoncorretto:17
 
 stages:
   - build
