@@ -32,7 +32,7 @@ public class SceneController {
         root.setControllerFactory(iC -> new AccountCreatingController(Main.app));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
-        stage.setTitle("TELECOM Nancy DirectDealing - Login");
+        stage.setTitle("TELECOM Nancy DirectDealing - Signin");
         stage.setScene(scene);
         stage.show();
     }

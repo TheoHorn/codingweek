@@ -7,6 +7,7 @@ import eu.telecomnancy.directdealing.model.User;
 import eu.telecomnancy.directdealing.SceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -27,6 +28,8 @@ public class AccountCreatingController implements Observer {
     public TextField password_confirm_textfield;
     @FXML
     public Button creationButton;
+    @FXML
+    public Label statusLabel;
     private Application app;
 
     public AccountCreatingController(Application app) {
@@ -48,6 +51,13 @@ public class AccountCreatingController implements Observer {
                 accountManager.addUser(user);
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
             }
+            else {
+                statusLabel.setText("Email déjà utilisé");
+                System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
+            }
+        } else {
+            statusLabel.setText("Veuillez remplir tous les champs");
+            System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
         }
         System.out.println("creationButton pressed");
     }

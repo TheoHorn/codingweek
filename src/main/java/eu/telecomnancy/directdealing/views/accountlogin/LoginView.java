@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.security.NoSuchAlgorithmException;
@@ -18,6 +19,8 @@ public class LoginView implements Observer {
     public TextField mail_TextField;
     @FXML
     public TextField password_TextField;
+    @FXML
+    public Label statusLabel;
     private Application app;
 
     public LoginView(Application app) {
@@ -40,6 +43,7 @@ public class LoginView implements Observer {
             SceneController sceneController = new SceneController();
             sceneController.switchToHome(event);
         } else {
+            statusLabel.setText("Mot de passe ou email incorrect");
             System.out.println("Login failed");
         }
     }
