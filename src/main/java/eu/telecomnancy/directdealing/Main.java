@@ -24,8 +24,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         AccountManager accountManager = new AccountManager();
-        User user = new User("larousse", "adrien", "ad.la@mail.com",0.5, false);
-        accountManager.addUser(user);
+        // User user = new User("larousse", "adrien", "ad2.la@mail.com",0.5, false);
+        // accountManager.addUser(user);
+        User user2 = (User)accountManager.getAccount("ad2.la@mail.com");
+        System.out.println(user2.toString());
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");

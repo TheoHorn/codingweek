@@ -27,4 +27,15 @@ public class User extends Account{
     public void setSleeping(boolean sleeping) {
         isSleeping = sleeping;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "balance=" + balance +
+                ", isSleeping=" + isSleeping +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

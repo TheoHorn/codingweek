@@ -60,8 +60,39 @@ public class AccountManager {
         }
     }
 
-    public Account getAccount(String mail){
+    public Account getAccount(String mail) throws SQLException {
         // getting account from mail primary key
+        String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setString(1, mail);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // recup des infos
+                String mail1 = resultSet.getString("mail");
+                String lastname = resultSet.getString("lastname");
+                String firstname = resultSet.getString("firstname");
+                double credit = resultSet.getDouble("credit");
+                boolean sleep = resultSet.getBoolean("sleep");
+                int type = resultSet.getInt("type");
+                String password = resultSet.getString("password");
+
+                // creation de l'objet
+                if (type == 1) {
+                    return new User(lastname, firstname, mail1, credit, sleep);
+                } else if (type == 2) {
+                    return new Admin(lastname, firstname, mail1);
+                }
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+
         return null;
     }
+
 }
