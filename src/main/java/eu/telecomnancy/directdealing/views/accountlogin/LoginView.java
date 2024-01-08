@@ -24,14 +24,14 @@ public class LoginView {
     }
 
     @FXML
-    public void loginButton() throws Exception {
+    public void loginButton(ActionEvent event) throws Exception {
         String localMail = mail_TextField.getText();
         String localPassword = password_TextField.getText();
         AccountManager accountManager = new AccountManager();
         Main.currentUser = accountManager.login(localMail, localPassword);
         if (Main.currentUser != null) {
             SceneController sceneController = new SceneController();
-            sceneController.switchToHome(null);
+            sceneController.switchToHome(event);
         } else {
             System.out.println("Login failed");
         }
