@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.accountcreating.AccountCreatingController">
    <children>
       <HBox prefHeight="23.0" prefWidth="602.0" />
       <GridPane alignment="CENTER" prefHeight="358.0" prefWidth="600.0">
@@ -65,15 +65,15 @@
             </HBox>
             <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="173.0" text="Email : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="170.0" text="Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <TextField prefHeight="26.0" prefWidth="239.0" promptText="Votre Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" text="Créer votre compte" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+            <TextField fx:id="mail_textfield" prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <TextField fx:id="password_textfield" prefHeight="26.0" prefWidth="239.0" promptText="Votre Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            <Button fx:id="creationButton" onAction="#pressCreationButton" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" text="Créer votre compte" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <Label alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="170.0" text="Prénom :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="169.0" text="Nom : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextField prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <TextField fx:id="firstname_textfield" prefHeight="26.0" prefWidth="214.0" promptText="Votre prénom" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField fx:id="lastname_textfield" prefHeight="26.0" prefWidth="214.0" promptText="Votre nom" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
             <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="170.0" text="Confirmez le Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField prefHeight="26.0" prefWidth="239.0" promptText="Confirmez le Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+            <TextField fx:id="password_confirm_textfield" prefHeight="26.0" prefWidth="239.0" promptText="Confirmez le Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="72.0" prefWidth="601.0" />

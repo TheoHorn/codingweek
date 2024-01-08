@@ -9,7 +9,6 @@ import java.sql.*;
 public class AccountManager {
     public void addUser(User user) throws SQLException {
         // adding account to the database
-        System.out.println(DatabaseAccess.connection);
         String query1 = "SELECT tbl_name FROM sqlite_master;";
         ResultSet resultSet = null;
         try (Statement statement = DatabaseAccess.connection.createStatement()){
@@ -34,11 +33,7 @@ public class AccountManager {
 
             // Exécuter la requête d'insertion
             preparedStatement.executeUpdate();
-        }
-        catch (
-                Exception e        )
-        {
-            e.printStackTrace();
+            System.out.println("heloo2");
         }
     }
 
@@ -93,6 +88,26 @@ public class AccountManager {
         }
 
         return null;
+    }
+
+    public boolean isSave(String mail) throws SQLException {
+        String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setString(1, mail);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
     }
 
 }
