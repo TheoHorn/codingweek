@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.accountlogin.LoginView">
    <children>
       <HBox prefHeight="72.0" prefWidth="601.0" />
       <GridPane alignment="CENTER" prefHeight="268.0" prefWidth="600.0">
@@ -64,7 +64,7 @@
             <TextField prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
             <TextField prefHeight="26.0" prefWidth="239.0" promptText="Votre Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
             <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" text="Connexion" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="139.0" text="Pas de compte ?" textAlignment="CENTER" textFill="#e54012" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label onMouseClicked="#switchToSign" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="139.0" text="Pas de compte ?" textAlignment="CENTER" textFill="#e54012" GridPane.columnIndex="2" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="72.0" prefWidth="601.0" />

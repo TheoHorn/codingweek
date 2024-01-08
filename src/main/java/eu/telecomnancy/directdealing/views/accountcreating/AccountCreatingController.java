@@ -2,9 +2,11 @@ package eu.telecomnancy.directdealing.views.accountcreating;
 
 import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.User;
+import eu.telecomnancy.directdealing.views.SceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 
@@ -41,4 +43,9 @@ public class AccountCreatingController {
         System.out.println("creationButton pressed");
     }
 
+    @FXML
+    public void switchToLoginPage(MouseEvent mouseEvent) throws Exception {
+        SceneController sceneController = new SceneController();
+        sceneController.switchToLoginView(mouseEvent);
+    }
 }
