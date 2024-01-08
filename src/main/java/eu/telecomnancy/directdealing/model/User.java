@@ -1,4 +1,8 @@
 package eu.telecomnancy.directdealing.model;
 
-public class User implements Account{
+public class User extends Account{
+
+    float balance;
+
+    boolean isSleeping;
 }
