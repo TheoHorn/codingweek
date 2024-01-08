@@ -129,9 +129,7 @@ TODO
 
 ## Roadmap
 
-- [] TODO
-
-- [ ] Gestion des comptes
+1. Gestion des comptes
     - [x] Création des représentations
       - [x] Classes Account, User, Admin
       - [x] Table Account dans la DB
