@@ -128,8 +128,10 @@ public class AccountManager {
                 String passwordFromDatabase = resultSet.getString("password");
                 boolean matched = passwordHashed.equals(passwordFromDatabase);
                 if(matched){
+                    System.out.println("Login successful");
                     return getAccount(mail);
                 }else{
+                    System.out.println("Login failed");
                     return null;
                 }
             }
