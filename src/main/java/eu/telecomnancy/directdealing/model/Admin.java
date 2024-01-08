@@ -1,8 +1,11 @@
 package eu.telecomnancy.directdealing.model;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 public class Admin extends Account {
-    public Admin(String lastName, String firstName, String email) {
-        super(lastName, firstName, email);
+    public Admin(String lastName, String firstName, String email, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        super(lastName, firstName, email, password);
     }
 
     @Override

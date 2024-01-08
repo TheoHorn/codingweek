@@ -1,4 +1,4 @@
-package eu.telecomnancy.directdealing;
+package eu.telecomnancy.directdealing.database;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
@@ -10,23 +10,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class ReallyStrongSecuredPassword {
 
-    public static void main(String[] args)
-            throws NoSuchAlgorithmException, InvalidKeySpecException {
-
-        String originalPassword = "password";
-        String generatedSecuredPasswordHash =
-                generateStorngPasswordHash(originalPassword);
-        System.out.println(generatedSecuredPasswordHash);
-
-        boolean matched =
-                validatePassword("password", generatedSecuredPasswordHash);
-        System.out.println(matched);
-
-        matched = validatePassword("password1", generatedSecuredPasswordHash);
-        System.out.println(matched);
-    }
-
-    private static boolean validatePassword(String originalPassword,String storedPassword)
+    public static boolean validatePassword(String originalPassword, String storedPassword)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         String[] parts = storedPassword.split(":");
         int iterations = Integer.parseInt(parts[0]);
@@ -50,7 +34,7 @@ public class ReallyStrongSecuredPassword {
         return diff == 0;
     }
 
-    private static String generateStorngPasswordHash(String password)
+    public static String generateStrongPasswordHash(String password)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 1000;
         char[] chars = password.toCharArray();
