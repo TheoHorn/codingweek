@@ -1,6 +1,8 @@
 package eu.telecomnancy.directdealing.views.accountcreating;
 
 import eu.telecomnancy.directdealing.database.AccountManager;
+import eu.telecomnancy.directdealing.model.Application;
+import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.User;
 import eu.telecomnancy.directdealing.SceneController;
 import javafx.fxml.FXML;
@@ -12,19 +14,24 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
-public class AccountCreatingController {
+public class AccountCreatingController implements Observer {
     @FXML
-    public TextField mail_textfield;
+    private TextField mail_textfield;
     @FXML
-    public TextField password_textfield;
+    private TextField password_textfield;
     @FXML
-    public TextField firstname_textfield;
+    private TextField firstname_textfield;
     @FXML
-    public TextField lastname_textfield;
+    private TextField lastname_textfield;
     @FXML
-    public TextField password_confirm_textfield;
+    private TextField password_confirm_textfield;
     @FXML
-    public Button creationButton;
+    private Button creationButton;
+    private Application app;
+
+    public AccountCreatingController(Application app) {
+        this.app = app;
+    }
 
     public void pressCreationButton() throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
         AccountManager accountManager = new AccountManager();
@@ -49,5 +56,10 @@ public class AccountCreatingController {
     public void switchToLoginPage(MouseEvent mouseEvent) throws Exception {
         SceneController sceneController = new SceneController();
         sceneController.switchToLoginView(mouseEvent);
+    }
+
+    @Override
+    public void update() {
+        // TODO
     }
 }
