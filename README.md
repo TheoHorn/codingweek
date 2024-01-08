@@ -131,8 +131,13 @@ TODO
 
 - [] TODO
 
-- [ ] TODO
-    - [x] TODO
+- [ ] Gestion des comptes
+    - [x] Création des représentations
+      - [x] Classes Account, User, Admin
+      - [x] Table Account dans la DB
+    - [ ] Instanciation d'un compte
+    - [ ] Ajout d'un compte à la DB
+    - [ ] Connexion à un compte existant de la DB
 
 See the [open issues](https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12/-/issues) for a full list of proposed features (and known issues).
 
