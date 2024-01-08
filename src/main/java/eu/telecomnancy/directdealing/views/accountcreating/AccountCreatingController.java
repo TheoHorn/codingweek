@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 public class AccountCreatingController {
@@ -22,7 +24,7 @@ public class AccountCreatingController {
     @FXML
     public Button creationButton;
 
-    public void pressCreationButton() throws SQLException {
+    public void pressCreationButton() throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
         AccountManager accountManager = new AccountManager();
         String localMail = this.mail_textfield.getText().toString();
         String localPassword = this.password_textfield.getText().toString();
@@ -33,7 +35,7 @@ public class AccountCreatingController {
         if (!localMail.equals("") && !localPassword.equals("") && !localLastname.equals("") && !localFirstname.equals("") && !localPasswordConfirm.equals("")){
             System.out.println(!accountManager.isSave(localMail));
             if (!accountManager.isSave(localMail)){
-                User user = new User(localLastname,localFirstname,localMail,500.0, false);
+                User user = new User(localLastname,localFirstname,localMail,500.0, false,localPassword);
                 accountManager.addUser(user);
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
             }
