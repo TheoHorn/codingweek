@@ -75,7 +75,9 @@ TelecomNancy DirectDealing is an online circular economy application allowing pe
 ### Built With
 
 - ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+- ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 - ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+- ![GitLab CI](https://img.shields.io/badge/gitlab%20ci-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -87,12 +89,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-TODO
-
-- TODO
-  ```sh
-  TODO
-  ```
+Download and install the latest version of [JavaFX](https://openjfx.io/openjfx-docs/).
 
 ### Installation
 
@@ -102,7 +99,7 @@ TODO
    ```
 2. Build all
    ```sh
-   TODO
+   ./mvnw clean install -DskipTest
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -111,19 +108,11 @@ TODO
 
 ## Usage
 
-### TODO
+### Launch the application
 
 ```sh
-USAGE: ./tncyDD TODO
-
-OPTIONS:
-  -h                      Show this help message
-  TODO
+USAGE: ./mvnw clean javafx:run
 ```
-
-**Examples:**
-
-TODO
 
 <!-- ROADMAP -->
 
@@ -133,9 +122,9 @@ TODO
     - [x] Création des représentations
       - [x] Classes Account, User, Admin
       - [x] Table Account dans la DB
-    - [ ] Instanciation d'un compte
-    - [ ] Ajout d'un compte à la DB
-    - [ ] Connexion à un compte existant de la DB
+    - [x] Instanciation d'un compte
+    - [x] Ajout d'un compte à la DB
+    - [x] Connexion à un compte existant de la DB
 
 See the [open issues](https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12/-/issues) for a full list of proposed features (and known issues).
 
