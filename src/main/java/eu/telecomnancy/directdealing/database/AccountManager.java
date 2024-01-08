@@ -9,6 +9,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 
 import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.generateStrongPasswordHash;
+import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
 
 public class AccountManager {
     public void addUser(User user) throws SQLException {
@@ -117,7 +118,6 @@ public class AccountManager {
     }
 
     public Account login(String mail, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
-        String passwordHashed = generateStrongPasswordHash(password);
         String query = "SELECT password FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
 
@@ -126,7 +126,9 @@ public class AccountManager {
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 String passwordFromDatabase = resultSet.getString("password");
-                boolean matched = passwordHashed.equals(passwordFromDatabase);
+                System.out.println(passwordFromDatabase);
+                System.out.println(password);
+                boolean matched = validatePassword(password, passwordFromDatabase);
                 if(matched){
                     System.out.println("Login successful");
                     return getAccount(mail);
