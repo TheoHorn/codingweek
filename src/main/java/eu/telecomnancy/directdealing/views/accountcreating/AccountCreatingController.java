@@ -1,10 +1,12 @@
 package eu.telecomnancy.directdealing.views.accountcreating;
 
+import eu.telecomnancy.directdealing.Main;
 import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.User;
 import eu.telecomnancy.directdealing.SceneController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,7 +38,7 @@ public class AccountCreatingController implements Observer {
         this.app = app;
     }
 
-    public void pressCreationButton() throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public void pressCreationButton(ActionEvent event) throws Exception {
         AccountManager accountManager = new AccountManager();
         String localMail = this.mail_textfield.getText().toString();
         String localPassword = this.password_textfield.getText().toString();
@@ -49,6 +51,9 @@ public class AccountCreatingController implements Observer {
             if (!accountManager.isSave(localMail)){
                 User user = new User(localLastname,localFirstname,localMail,500.0, false,localPassword);
                 accountManager.addUser(user);
+                Main.currentUser = user;
+                SceneController sceneController = new SceneController();
+                sceneController.switchToHome(event);
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
             }
             else {
