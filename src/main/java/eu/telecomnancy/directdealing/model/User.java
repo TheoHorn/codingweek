@@ -2,13 +2,29 @@ package eu.telecomnancy.directdealing.model;
 
 public class User extends Account{
 
-    float balance;
+    double balance;
 
     boolean isSleeping;
 
-    public User(String lastName, String firstName, String email, float balance, boolean isSleeping) {
+    public User(String lastName, String firstName, String email, double balance, boolean isSleeping) {
         super(lastName, firstName, email);
         this.balance = balance;
         this.isSleeping = isSleeping;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+
+    public boolean isSleeping() {
+        return isSleeping;
+    }
+
+    public void setSleeping(boolean sleeping) {
+        isSleeping = sleeping;
     }
 }
