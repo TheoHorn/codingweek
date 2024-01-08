@@ -16,17 +16,17 @@ import java.sql.SQLException;
 
 public class AccountCreatingController implements Observer {
     @FXML
-    private TextField mail_textfield;
+    public TextField mail_textfield;
     @FXML
-    private TextField password_textfield;
+    public TextField password_textfield;
     @FXML
-    private TextField firstname_textfield;
+    public TextField firstname_textfield;
     @FXML
-    private TextField lastname_textfield;
+    public TextField lastname_textfield;
     @FXML
-    private TextField password_confirm_textfield;
+    public TextField password_confirm_textfield;
     @FXML
-    private Button creationButton;
+    public Button creationButton;
     private Application app;
 
     public AccountCreatingController(Application app) {

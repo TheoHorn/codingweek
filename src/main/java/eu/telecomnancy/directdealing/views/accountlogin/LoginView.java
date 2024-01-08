@@ -9,32 +9,25 @@ import eu.telecomnancy.directdealing.model.Observer;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 
 public class LoginView implements Observer {
+    @FXML
+    public TextField mail_TextField;
+    @FXML
+    public TextField password_TextField;
     private Application app;
 
     public LoginView(Application app) {
         this.app = app;
     }
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
-
-public class LoginView {
-    @FXML
-    public TextField mail_TextField;
-    @FXML
-    public TextField password_TextField;
     @FXML
     public void switchToSign(MouseEvent event) throws Exception {
         SceneController sceneController = new SceneController();
         sceneController.switchToSignView(event);
-    }
-
-    @Override
-    public void update() {
-        // TODO
     }
 
     @FXML
@@ -49,6 +42,11 @@ public class LoginView {
         } else {
             System.out.println("Login failed");
         }
+    }
+
+    @Override
+    public void update() {
+        // TODO
     }
 
 }
