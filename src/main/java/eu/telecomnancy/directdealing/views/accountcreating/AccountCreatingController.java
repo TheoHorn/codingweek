@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -21,13 +22,13 @@ public class AccountCreatingController implements Observer {
     @FXML
     public TextField mail_textfield;
     @FXML
-    public TextField password_textfield;
+    public PasswordField password_textfield;
     @FXML
     public TextField firstname_textfield;
     @FXML
     public TextField lastname_textfield;
     @FXML
-    public TextField password_confirm_textfield;
+    public PasswordField password_confirm_textfield;
     @FXML
     public Button creationButton;
     @FXML

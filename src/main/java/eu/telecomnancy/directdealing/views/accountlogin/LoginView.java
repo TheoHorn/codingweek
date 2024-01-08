@@ -8,6 +8,7 @@ import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.security.NoSuchAlgorithmException;
@@ -18,7 +19,7 @@ public class LoginView implements Observer {
     @FXML
     public TextField mail_TextField;
     @FXML
-    public TextField password_TextField;
+    public PasswordField password_TextField;
     @FXML
     public Label statusLabel;
     private Application app;
