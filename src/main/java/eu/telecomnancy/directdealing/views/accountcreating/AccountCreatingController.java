@@ -2,7 +2,7 @@ package eu.telecomnancy.directdealing.views.accountcreating;
 
 import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.User;
-import eu.telecomnancy.directdealing.views.SceneController;
+import eu.telecomnancy.directdealing.SceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

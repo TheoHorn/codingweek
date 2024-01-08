@@ -8,5 +8,4 @@ module eu.telecomnancy.directdealing {
     exports eu.telecomnancy.directdealing;
     exports eu.telecomnancy.directdealing.views.accountcreating;
     exports eu.telecomnancy.directdealing.views.accountlogin;
-    exports eu.telecomnancy.directdealing.views;
 }

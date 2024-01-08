@@ -1,6 +1,6 @@
 package eu.telecomnancy.directdealing.views.accountlogin;
 
-import eu.telecomnancy.directdealing.views.SceneController;
+import eu.telecomnancy.directdealing.SceneController;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
