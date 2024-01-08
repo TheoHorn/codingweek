@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -23,6 +24,15 @@ public class SceneController {
 
     public void switchToSignView(MouseEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/eu/telecomnancy/directdealing/views/accountcreating/create_account.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("TELECOM Nancy DirectDealing - Login");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToHome(ActionEvent event) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setTitle("TELECOM Nancy DirectDealing - Login");

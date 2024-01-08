@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing;
 
 import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.database.DatabaseAccess;
+import eu.telecomnancy.directdealing.model.Account;
 import eu.telecomnancy.directdealing.model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main extends Application {
+    public static Account currentUser;
     @Override
     public void init() throws SQLException, IOException {
         DatabaseAccess.connectToDatabase();
@@ -29,7 +31,7 @@ public class Main extends Application {
         // DatabaseAccess.disconnectFromDatabase();
         //User user2 = (User)accountManager.getAccount("ad2.la@mail.com");
         // System.out.println(user2.toString());
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/accountcreating/create_account.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/accountcreating/connexion_account.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
