@@ -1,34 +1,30 @@
 package eu.telecomnancy.directdealing.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
+    private final Account currentUser;
+    private final List<Offer> offers;
+    private final List<Observer> observers;
 
-    Connection connection = null;
-    public void connectToDatabase() throws SQLException {
-        // create a database connection
-        connection = DriverManager.getConnection("jdbc:sqlite:database.db");
-        Statement statement = connection.createStatement();
-        statement.setQueryTimeout(30);  // set timeout to 30 sec.
+    public Application(Account currentUser) {
+        this.currentUser = currentUser;
+        this.offers = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
-    public void disconnectFromDatabase() throws SQLException {
-        if (connection != null)
-            connection.close();
+    public void addObserver(Observer observer) {
+        observers.add(observer);
     }
 
-    public static void main(String[] args) {
-        Application app = new Application();
-        try {
-            app.connectToDatabase();
-            app.disconnectFromDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void removeAllObservers() {
+        this.observers.clear();
+    }
+
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update();
         }
     }
-
-
 }
