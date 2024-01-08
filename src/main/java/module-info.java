@@ -7,4 +7,6 @@ module eu.telecomnancy.directdealing {
     opens eu.telecomnancy.directdealing to javafx.fxml;
     exports eu.telecomnancy.directdealing;
     exports eu.telecomnancy.directdealing.views.accountcreating;
+    exports eu.telecomnancy.directdealing.database;
+    opens eu.telecomnancy.directdealing.database to javafx.fxml;
 }

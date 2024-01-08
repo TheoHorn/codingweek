@@ -4,7 +4,11 @@ import eu.telecomnancy.directdealing.model.Account;
 import eu.telecomnancy.directdealing.model.Admin;
 import eu.telecomnancy.directdealing.model.User;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
+
+import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.generateStrongPasswordHash;
 
 public class AccountManager {
     public void addUser(User user) throws SQLException {
@@ -26,7 +30,7 @@ public class AccountManager {
                 preparedStatement.setDouble(4, user.getBalance());
                 preparedStatement.setBoolean(5, user.isSleeping());
                 preparedStatement.setInt(6, 1);
-                preparedStatement.setString(7, " ");
+                preparedStatement.setString(7, user.getPassword());
 
                 // Execute the insertion query
                 int rowsAffected = preparedStatement.executeUpdate();
@@ -48,7 +52,7 @@ public class AccountManager {
             preparedStatement.setFloat(4, 0);
             preparedStatement.setBoolean(5, false);
             preparedStatement.setInt(6,2);
-            preparedStatement.setString(7, " ");
+            preparedStatement.setString(7, admin.getPassword());
 
             // Exécuter la requête d'insertion
             preparedStatement.executeUpdate();
@@ -76,11 +80,13 @@ public class AccountManager {
 
                 // creation de l'objet
                 if (type == 1) {
-                    return new User(lastname, firstname, mail1, credit, sleep);
+                    return new User(lastname, firstname, mail1, credit, sleep, password);
                 } else if (type == 2) {
-                    return new Admin(lastname, firstname, mail1);
+                    return new Admin(lastname, firstname, mail1, password);
                 }
             }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException(e);
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -110,4 +116,26 @@ public class AccountManager {
         }
     }
 
+    public Account login(String mail, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+        String passwordHashed = generateStrongPasswordHash(password);
+        String query = "SELECT password FROM ACCOUNT WHERE mail = ?";
+        ResultSet resultSet = null;
+
+        try(PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)){
+            preparedStatement.setString(1, mail);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                String passwordFromDatabase = resultSet.getString("password");
+                boolean matched = passwordHashed.equals(passwordFromDatabase);
+                if(matched){
+                    return getAccount(mail);
+                }else{
+                    return null;
+                }
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

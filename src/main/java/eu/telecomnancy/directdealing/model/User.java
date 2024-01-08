@@ -1,13 +1,16 @@
 package eu.telecomnancy.directdealing.model;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 public class User extends Account{
 
     double balance;
 
     boolean isSleeping;
 
-    public User(String lastName, String firstName, String email, double balance, boolean isSleeping) {
-        super(lastName, firstName, email);
+    public User(String lastName, String firstName, String email, double balance, boolean isSleeping, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        super(lastName, firstName, email, password);
         this.balance = balance;
         this.isSleeping = isSleeping;
     }
