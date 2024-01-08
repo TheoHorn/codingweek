@@ -1,0 +1,20 @@
+image: amazoncorretto:latest
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - chmod +x ./mvnw
+    - ./mvnw clean install -DskipTest
+  artifacts:
+    paths:
+      - target/*.jar
+
+test:
+  stage: test
+  script:
+    - chmod +x ./mvnw
+    - ./mvnw test
