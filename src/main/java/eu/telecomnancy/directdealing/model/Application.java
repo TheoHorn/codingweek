@@ -9,7 +9,6 @@ import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 
-import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,8 +28,8 @@ public class Application {
     private ContentManager contentManager;
     private OfferManager offerManager;
 
-    private SlotDAO slotManager;
-    private ReservationManager reservationManager;
+    private SlotDAO slotDAO;
+    private ReservationDAO reservationDAO;
 
     private Application() {
         this.currentUser = null;
@@ -40,8 +39,8 @@ public class Application {
         this.accountManager = new AccountManager();
         this.contentManager = new ContentManager();
         this.offerManager = new OfferManager();
-        this.slotManager = new SlotDAO();
-        this.reservationManager = new ReservationManager();
+        this.slotDAO = new SlotDAO();
+        this.reservationDAO = new ReservationDAO();
 
 //        test
         this.offers.add(new Proposal(null, null, null, false));
@@ -117,11 +116,11 @@ public class Application {
     }
 
     public SlotDAO getSlotDAO() {
-        return slotManager;
+        return slotDAO;
     }
 
-    public ReservationManager getReservationManager() {
-        return reservationManager;
+    public ReservationDAO getReservationDAO() {
+        return reservationDAO;
     }
 
     public boolean login(String mail, String password) throws Exception {
