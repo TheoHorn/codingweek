@@ -17,12 +17,13 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" prefHeight="83.0" prefWidth="600.0" spacing="20.0">
+      <HBox alignment="CENTER" prefHeight="83.0" prefWidth="900.0" spacing="20.0">
          <children>
-            <Circle radius="21.0" stroke="BLACK" strokeType="INSIDE">
+            <Circle radius="27.0" stroke="BLACK" strokeType="INSIDE">
                <fill>
                   <LinearGradient endX="1.0" endY="1.0" startX="0.4734848620313587">
                      <stops>
@@ -43,10 +44,10 @@
                   <Blend />
                </effect>
             </Circle>
-            <HBox alignment="CENTER" prefHeight="83.0" prefWidth="302.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="83.0" prefWidth="349.0" spacing="10.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="256.0" promptText="Rechercher" />
-                  <Button mnemonicParsing="false">
+                  <TextField prefHeight="29.0" prefWidth="288.0" promptText="Rechercher" />
+                  <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="42.0">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -57,11 +58,19 @@
                   </Button>
                </children>
             </HBox>
-            <Label text="Proposal" />
-            <Label text="Request" />
+            <Label text="Proposal">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Request">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
             <Button mnemonicParsing="false">
                <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@user_picture.png" />
                      </image>
@@ -73,29 +82,41 @@
             <Insets />
          </FlowPane.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="600.0" spacing="20.0">
+      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="901.0" spacing="20.0">
          <children>
-            <Label text="Filtre : " />
+            <Label text="Filtre : ">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
             <MenuButton mnemonicParsing="false" text="Localisation">
-              <items>
+               <items>
                   <CheckMenuItem mnemonicParsing="false" />
-              </items>
+               </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </MenuButton>
             <MenuButton mnemonicParsing="false" text="Période">
                <items>
                   <CheckMenuItem mnemonicParsing="false" />
                </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </MenuButton>
             <MenuButton mnemonicParsing="false" text="Evaluation">
                <items>
                   <CheckMenuItem mnemonicParsing="false" />
                </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </MenuButton>
          </children>
       </HBox>
-      <Pane prefHeight="274.0" prefWidth="602.0">
+      <Pane prefHeight="458.0" prefWidth="900.0">
          <children>
-            <ListView prefHeight="275.0" prefWidth="600.0" />
+            <ListView prefHeight="459.0" prefWidth="900.0" />
          </children>
       </Pane>
    </children>
