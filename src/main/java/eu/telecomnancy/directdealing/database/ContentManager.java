@@ -24,7 +24,7 @@ public class ContentManager {
         try (Statement statement = DatabaseAccess.connection.createStatement()) {
 
             // Insert new user into the ACCOUNT table
-            String query = "INSERT INTO CONTENT (id, title, category, description, image, price, isEquipment, localisation) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            String query = "INSERT INTO CONTENT (idContent, title, category, description, image, price, isEquipment, localisation) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
                 // Set parameters for the prepared statement
                 preparedStatement.setInt(1, content.getId());
@@ -33,8 +33,8 @@ public class ContentManager {
                 preparedStatement.setString(4, content.getDescription());
                 preparedStatement.setObject(5, content.getImage());
                 preparedStatement.setInt(6, content.getPrice());
-                preparedStatement.setBoolean(7, content.isEquipment());
-                preparedStatement.setObject(8, content.getLocalisation());
+                preparedStatement.setBoolean(7, content.isEquipement());
+                preparedStatement.setString(8, content.getLocalisation());
 
                 // Execute the insertion query
                 int rowsAffected = preparedStatement.executeUpdate();
@@ -62,7 +62,7 @@ public class ContentManager {
                 String description = resultSet.getString("description");
                 Image image = (Image) resultSet.getObject("image");
                 boolean isEquipment = resultSet.getBoolean("isEquipment");
-                Localisation localisation = resultSet.getDate("localisation");
+                String localisation = resultSet.getString("localisation");
 
                 // creation de l'objet
                 if (isEquipment) {

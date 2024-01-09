@@ -111,9 +111,11 @@ public class OfferManager {
                 int idContent = resultSet.getInt("idContent");
                 int idCreneau = resultSet.getInt("idCreneau");
 
-                // creation de l'objet
-                return new Offer(AccountManager.getAccount(mail), request, ContentManager.getContent(idContent), CreneauManager.getCreneau(idCreneau));
-
+                if (request){
+                    return new Request((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent));
+                } else {
+                    return new Proposal((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), 0);
+                }
             }
         } finally {
             if (resultSet != null) {

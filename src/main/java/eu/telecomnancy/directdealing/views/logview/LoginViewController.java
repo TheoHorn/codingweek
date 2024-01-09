@@ -34,8 +34,7 @@ public class LoginViewController implements Observer {
     public void loginButton(ActionEvent event) throws Exception {
         String localMail = mail_TextField.getText();
         String localPassword = password_TextField.getText();
-        AccountManager accountManager = new AccountManager();
-        app.setCurrentUser(accountManager.login(localMail, localPassword));
+        app.setCurrentUser(AccountManager.login(localMail, localPassword));
         if (app.getCurrentUser() != null) {
             SceneController sceneController = new SceneController();
             sceneController.switchToHome(event);

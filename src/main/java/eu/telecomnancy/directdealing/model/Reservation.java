@@ -1,19 +1,52 @@
 package eu.telecomnancy.directdealing.model;
 
+import eu.telecomnancy.directdealing.database.OfferManager;
 import eu.telecomnancy.directdealing.database.SlotManager;
 
 import java.sql.SQLException;
 import java.util.Date;
 
 public class Reservation {
-    private int idOffer;
+    private Offer offer;
     private String emailReserver;
     private Slot slot;
     private Date reservationDate;
-    public Reservation(int idOffer, String emailReserver, Slot slot, Date reservationDate) throws SQLException {
-        this.idOffer = idOffer;
+    public Reservation(Offer offer, String emailReserver, Slot slot, Date reservationDate) throws SQLException {
+        this.offer = offer;
         this.emailReserver = emailReserver;
         this.slot = slot;
         this.reservationDate = reservationDate;
     }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+
+
+    public String getEmailReserver() {
+        return emailReserver;
+    }
+
+    public void setEmailReserver(String emailReserver) {
+        this.emailReserver = emailReserver;
+    }
+
+    public Slot getSlot() {
+        return slot;
+    }
+
+    public void setSlot(Slot slot) {
+        this.slot = slot;
+    }
+
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+
 }

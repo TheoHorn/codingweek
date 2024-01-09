@@ -68,7 +68,7 @@ public class AccountManager {
         ResultSet resultSet = null;
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setString(2, mail);
+            preparedStatement.setString(1, mail);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results

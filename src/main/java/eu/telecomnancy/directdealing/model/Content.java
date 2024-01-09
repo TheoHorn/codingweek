@@ -12,6 +12,10 @@ public abstract class Content {
     private Integer price;
     protected int type;
 
+    public boolean isEquipement;
+
+    private String localisation;
+
     public Content(String title, String category, String description, Image image) {
         this.id = currentId;
         currentId++;
@@ -65,4 +69,11 @@ public abstract class Content {
         this.price = price;
     }
 
+    public String getLocalisation() {
+        return localisation;
+    }
+
+    public boolean isEquipement() {
+        return isEquipement;
+    }
 }
