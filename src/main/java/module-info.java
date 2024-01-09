@@ -15,4 +15,5 @@ module eu.telecomnancy.directdealing {
     exports eu.telecomnancy.directdealing.model.offer;
     exports eu.telecomnancy.directdealing.views.navbar;
     exports eu.telecomnancy.directdealing.views.offer to javafx.fxml;
+    opens eu.telecomnancy.directdealing.views.offer to javafx.fxml;
 }
