@@ -36,20 +36,12 @@ public class SignInViewController implements Observer {
     }
 
     public void pressCreationButton(ActionEvent event) throws Exception {
-        int err = app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText());
-        switch (err){
-            case 0 :
-                app.getSceneController().switchToHome();
-                break;
-            case 1 :
-                statusLabel.setText("Email déjà utilisé");
-                System.out.println("SignIn failed");
-                break;
-            case 2 :
-                statusLabel.setText("Tous les champs doivent être remplis");
-                System.out.println("Login failed");
-                break;
+        try {
+            app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText());
+        } catch (Exception e) {
+            statusLabel.setText(e.getMessage());
         }
+
     }
 
     @FXML

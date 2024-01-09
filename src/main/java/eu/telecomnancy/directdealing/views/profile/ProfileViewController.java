@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class UpdateProfileManager implements Observer {
+public class ProfileViewController implements Observer {
 
     @FXML
     private TextField name_field;
@@ -36,20 +36,32 @@ public class UpdateProfileManager implements Observer {
 
     private Application app;
 
-    public UpdateProfileManager() {
+    public ProfileViewController() {
+
         this.app = Application.getInstance();
+        this.app.addObserver(this);
     }
 
     @FXML
-    public void initialize() {
-        this.name_field.setText(this.app.getCurrentUser().getFirstName());
-        this.surname_field.setText(this.app.getCurrentUser().getLastName());
-        this.email_field.setText(this.app.getCurrentUser().getEmail());
-        this.modify_info_label.setVisible(false);
-        this.modify_password_label.setVisible(false);
+    public void updateProfile() throws Exception {
+        isFailed = this.app.updateCurrentAccount(this.name_field.getText(), this.surname_field.getText());
+        System.out.println(isFailed);
     }
 
-    public void updateField(){
+    @FXML
+    public void updatePassword() throws Exception {
+        isFailed = this.app.updateCurrentPassword(this.old_password_field.getText(), this.new_password_field.getText(), this.confirm_password_field.getText());
+        System.out.println(isFailed);
+    }
+
+    @FXML
+    public void disconnection() throws Exception {
+        this.app.deleteCurrentUser();
+        this.app.getSceneController().switchToLoginView();
+    }
+
+    @Override
+    public void update() {
         if (!isFailed){
             this.modify_password_label.setVisible(true);
             this.modify_info_label.setVisible(true);
@@ -58,28 +70,10 @@ public class UpdateProfileManager implements Observer {
             this.modify_password_label.setVisible(false);
             this.modify_info_label.setVisible(false);
         }
-    }
-
-    @FXML
-    public void updateProfile() throws Exception {
-        isFailed = this.app.updateCurrentAccount(this.name_field.getText(), this.surname_field.getText());
-        System.out.println(isFailed);
-        this.updateField();
-    }
-
-    @FXML
-    public void updatePassword() throws Exception {
-        isFailed = this.app.updateCurrentPassword(this.old_password_field.getText(), this.new_password_field.getText(), this.confirm_password_field.getText());
-        System.out.println(isFailed);
-        this.updateField();
-    }
-
-    @FXML
-    public void disconnection(){
-        this.app.deleteCurrentUser();
-    }
-
-    @Override
-    public void update() {
+        this.name_field.setText(this.app.getCurrentUser().getFirstName());
+        this.surname_field.setText(this.app.getCurrentUser().getLastName());
+        this.email_field.setText(this.app.getCurrentUser().getEmail());
+        this.modify_info_label.setVisible(false);
+        this.modify_password_label.setVisible(false);
     }
 }

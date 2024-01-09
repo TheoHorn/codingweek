@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,10 +15,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<?import javafx.scene.control.PasswordField?>
 <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.SignInViewController">
    <children>
-      <HBox prefHeight="23.0" prefWidth="602.0" />
+      <fx:include source="menu_bar.fxml" />
       <GridPane alignment="CENTER" prefHeight="358.0" prefWidth="600.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.20001220703125" minWidth="10.0" prefWidth="62.4000244140625" />
@@ -76,7 +76,7 @@
             <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="169.0" text="Nom : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="170.0" text="Confirmez le Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label onMouseClicked="#switchToLoginPage" prefHeight="16.0" prefWidth="145.0" text="Déjà un compte ?" textFill="RED" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
-            <Label fx:id="statusLabel" textFill="indianred" prefHeight="16.0" prefWidth="355.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+            <Label fx:id="statusLabel" prefHeight="16.0" prefWidth="355.0" textAlignment="CENTER" textFill="indianred" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
          </children>
       </GridPane>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="72.0" prefWidth="601.0" />

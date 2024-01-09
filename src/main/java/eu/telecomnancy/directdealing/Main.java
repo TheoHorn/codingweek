@@ -13,10 +13,6 @@ import java.sql.SQLException;
 public class Main extends Application {
     public static eu.telecomnancy.directdealing.model.Application app;
     @Override
-    public void init() throws SQLException, IOException {
-        DatabaseAccess.connectToDatabase();
-    }
-    @Override
     public void stop() throws SQLException {
         DatabaseAccess.disconnectFromDatabase();
     }

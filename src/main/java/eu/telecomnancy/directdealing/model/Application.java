@@ -9,6 +9,7 @@ import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -126,18 +127,23 @@ public class Application {
         return reservationManager;
     }
 
-    public boolean login(String mail, String password) throws Exception {
+    public void login(String mail, String password) throws Exception {
+        if (DatabaseAccess.connection == null) {
+            throw new Exception("Veuillez créer ou ouvrir une base de données (Fichier)");
+        }
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
             notifyObservers();
-            return true;
+        } else {
+            throw new Exception("Mot de passe ou email incorrect");
         }
-        System.out.println("Login failed");
-        return false;
     }
 
-    public int signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
+    public void signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
+        if (DatabaseAccess.connection == null) {
+            throw new Exception("Veuillez créer ou ouvrir une base de données (Fichier)");
+        }
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
@@ -146,15 +152,14 @@ public class Application {
                 setCurrentUser(user);
                 sceneController.switchToHome();
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
-                return 0;
             }
             else {
                 System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
-                return 1;
+                throw new Exception("Email déjà utilisé");
             }
         } else {
             System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
-            return 2;
+            throw new Exception("Veuillez remplir tous les champs");
         }
     }
 
@@ -181,16 +186,14 @@ public class Application {
     }
 
     public boolean updateCurrentAccount(String name, String surname) throws Exception {
-        boolean isGood = false;
         if (!(name.isEmpty() || surname.isEmpty())) {
             this.getCurrentUser().setFirstName(name);
             this.getCurrentUser().setLastName(surname);
-            isGood = accountManager.updateAccountInfo(this.getCurrentUser());
+            accountManager.updateAccountInfo(this.getCurrentUser());
+            notifyObservers();
+            return true;
         }
-        if (isGood) {
-            sceneController.switchToHome();
-        }
-        return isGood;
+        return false;
     }
 
     public boolean updateCurrentPassword(String oldPassword, String newPassword, String confirmPassword) throws Exception {
@@ -202,5 +205,14 @@ public class Application {
            sceneController.switchToHome();
         }
         return isGood;
+    }
+
+    public void createNewDatabaseFile(File file) throws SQLException {
+        DatabaseAccess.createDatabase(file);
+        DatabaseAccess.connectToDatabase(file.getAbsolutePath());
+    }
+
+    public void openDatabaseFile(File file) throws SQLException {
+        DatabaseAccess.connectToDatabase(file.getAbsolutePath());
     }
 }

@@ -224,6 +224,10 @@ public class AccountManager {
             }
         }catch(SQLException e){
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
         }
         return null;
     }
