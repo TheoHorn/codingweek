@@ -1,6 +1,5 @@
-package eu.telecomnancy.directdealing.views.accountcreating;
+package eu.telecomnancy.directdealing.views.logview;
 
-import eu.telecomnancy.directdealing.Main;
 import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
@@ -14,7 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class AccountCreatingController implements Observer {
+public class SignInViewController implements Observer {
     @FXML
     private TextField mail_textfield;
     @FXML
@@ -31,8 +30,8 @@ public class AccountCreatingController implements Observer {
     private Label statusLabel;
     private Application app;
 
-    public AccountCreatingController(Application app) {
-        this.app = app;
+    public SignInViewController() {
+        this.app = Application.getInstance();
     }
 
     public void pressCreationButton(ActionEvent event) throws Exception {
@@ -48,7 +47,7 @@ public class AccountCreatingController implements Observer {
             if (!accountManager.isSave(localMail)){
                 User user = new User(localLastname,localFirstname,localMail,500.0, false,localPassword);
                 accountManager.addUser(user);
-                Main.currentUser = user;
+                app.setCurrentUser(user);
                 SceneController sceneController = new SceneController();
                 sceneController.switchToHome(event);
                 System.out.println("[Debug:AccountCreatingController] Succesfull");

@@ -1,14 +1,8 @@
 package eu.telecomnancy.directdealing;
 
-import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.database.DatabaseAccess;
-import eu.telecomnancy.directdealing.model.Account;
-import eu.telecomnancy.directdealing.model.User;
-import eu.telecomnancy.directdealing.views.accountcreating.AccountCreatingController;
-import eu.telecomnancy.directdealing.views.accountlogin.LoginView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.AccessibleAction;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -16,7 +10,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main extends Application {
-    public static Account currentUser;
     public static eu.telecomnancy.directdealing.model.Application app;
     @Override
     public void init() throws SQLException, IOException {
@@ -27,13 +20,10 @@ public class Main extends Application {
         DatabaseAccess.disconnectFromDatabase();
     }
     @Override
-    public void start(Stage stage) throws IOException, SQLException {
-        AccountManager accountManager = new AccountManager();
-        app = new eu.telecomnancy.directdealing.model.Application(currentUser);
+    public void start(Stage stage) throws IOException {
+        app = eu.telecomnancy.directdealing.model.Application.getInstance();
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("views/accountcreating/connexion_account.fxml"));
-        fxmlLoader.setControllerFactory(iC -> new LoginView(app));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/logview/login_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);

@@ -1,12 +1,8 @@
 package eu.telecomnancy.directdealing;
 
-import eu.telecomnancy.directdealing.model.Application;
-import eu.telecomnancy.directdealing.views.accountcreating.AccountCreatingController;
-import eu.telecomnancy.directdealing.views.accountlogin.LoginView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -16,9 +12,7 @@ public class SceneController {
     private Scene scene;
 
     public void switchToLoginView(MouseEvent event) throws Exception {
-        FXMLLoader root = new FXMLLoader();
-        root.setLocation(getClass().getResource("views/accountcreating/connexion_account.fxml"));
-        root.setControllerFactory(iC -> new LoginView(Main.app));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("views/logview/login_view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Login");
@@ -27,9 +21,7 @@ public class SceneController {
     }
 
     public void switchToSignView(MouseEvent event) throws Exception {
-        FXMLLoader root = new FXMLLoader();
-        root.setLocation(getClass().getResource("views/accountcreating/create_account.fxml"));
-        root.setControllerFactory(iC -> new AccountCreatingController(Main.app));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("views/logview/signin_view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Signin");
@@ -38,9 +30,7 @@ public class SceneController {
     }
 
     public void switchToHome(ActionEvent event) throws Exception{
-        FXMLLoader root = new FXMLLoader();
-        root.setLocation(getClass().getResource("views/home/home_view.fxml"));
-//        root.setControllerFactory(iC -> new AccountCreatingController(Main.app));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("views/home/home_view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Login");

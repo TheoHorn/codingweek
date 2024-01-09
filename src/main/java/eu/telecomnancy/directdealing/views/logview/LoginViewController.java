@@ -1,8 +1,7 @@
-package eu.telecomnancy.directdealing.views.accountlogin;
+package eu.telecomnancy.directdealing.views.logview;
 
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.AccountManager;
-import eu.telecomnancy.directdealing.Main;
 import javafx.event.ActionEvent;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
@@ -12,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class LoginView implements Observer {
+public class LoginViewController implements Observer {
     @FXML
     private TextField mail_TextField;
     @FXML
@@ -21,8 +20,8 @@ public class LoginView implements Observer {
     private Label statusLabel;
     private Application app;
 
-    public LoginView(Application app) {
-        this.app = app;
+    public LoginViewController() {
+        this.app = Application.getInstance();
     }
 
     @FXML
@@ -36,8 +35,8 @@ public class LoginView implements Observer {
         String localMail = mail_TextField.getText();
         String localPassword = password_TextField.getText();
         AccountManager accountManager = new AccountManager();
-        Main.currentUser = accountManager.login(localMail, localPassword);
-        if (Main.currentUser != null) {
+        app.setCurrentUser(accountManager.login(localMail, localPassword));
+        if (app.getCurrentUser() != null) {
             SceneController sceneController = new SceneController();
             sceneController.switchToHome(event);
         } else {

@@ -4,14 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
-    private final Account currentUser;
+    public static volatile Application instance = null;
+    private Account currentUser;
     private final List<Offer> offers;
     private final List<Observer> observers;
 
-    public Application(Account currentUser) {
-        this.currentUser = currentUser;
+    private Application() {
+        this.currentUser = null;
         this.offers = new ArrayList<>();
         this.observers = new ArrayList<>();
+    }
+
+    public static Application getInstance() {
+        Application result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(Application.class) {
+            if (instance == null) {
+                instance = new Application();
+            }
+            return instance;
+        }
     }
 
     public void addObserver(Observer observer) {
@@ -26,5 +40,17 @@ public class Application {
         for (Observer observer : observers) {
             observer.update();
         }
+    }
+
+    public Account getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(Account currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
     }
 }
