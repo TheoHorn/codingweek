@@ -20,7 +20,7 @@ public class OfferManager {
         try (Statement statement = DatabaseAccess.connection.createStatement()) {
 
             // Insert new user into the ACCOUNT table
-            String query = "INSERT INTO OFFER (idOff, mail, isRequest, idContent, idCreneau) VALUES (?, ?, ?, ?, ?);";
+            String query = "INSERT INTO OFFER (idOffer, mail, isRequest, idContent, idCreneau) VALUES (?, ?, ?, ?, ?);";
             try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
                 // Set parameters for the prepared statement
                 preparedStatement.setInt(1, offer.getId());
@@ -46,7 +46,7 @@ public class OfferManager {
         ResultSet resultSet = null;
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setString(2, idContent);
+            preparedStatement.setString(1, idContent);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
@@ -85,6 +85,35 @@ public class OfferManager {
                 Content content = ContentManager.getContent(idContent);
 
                 return content;
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+
+        return null;
+    }
+
+    public Offer getOffer(int idOffer) throws SQLException{
+        // getting account from mail primary key
+        String query = "SELECT * FROM OFFER WHERE idOffer = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idOffer);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // recup des infos
+                String mail = resultSet.getString("mail");
+                boolean request = resultSet.getBoolean("isRequest");
+                int idContent = resultSet.getInt("idContent");
+                int idCreneau = resultSet.getInt("idCreneau");
+
+                // creation de l'objet
+                return new Offer(AccountManager.getAccount(mail), request, ContentManager.getContent(idContent), CreneauManager.getCreneau(idCreneau));
+
             }
         } finally {
             if (resultSet != null) {
