@@ -78,7 +78,6 @@ public class NewOfferController implements Observer {
         } else {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
-
                 Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDate, endDate,0), true);
                 OfferManager.addRequest(request);
             } else {
