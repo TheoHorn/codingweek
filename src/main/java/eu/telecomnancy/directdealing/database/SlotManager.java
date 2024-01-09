@@ -9,7 +9,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 
 public class SlotManager {
-    public Slot getSlotWithId(int idSlot) throws SQLException {
+    public static Slot getSlotWithId(int idSlot) throws SQLException {
         String query = "SELECT * FROM SLOT WHERE idSlot = ?";
         ResultSet resultSet = null;
 
