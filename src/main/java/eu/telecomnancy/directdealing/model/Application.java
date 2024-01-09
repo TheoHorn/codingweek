@@ -8,8 +8,6 @@ import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
-import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +24,7 @@ public class Application {
     public static volatile Application instance = null;
     private Account currentUser;
     private final List<Offer> offers;
+    private final List<Proposal> myProposals;
     private final List<Observer> observers;
     private SceneController sceneController;
     private AccountManager accountManager;
@@ -38,6 +37,7 @@ public class Application {
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
+        this.myProposals = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.accountManager = new AccountManager();
         this.contentManager = new ContentManager();
@@ -94,6 +94,10 @@ public class Application {
         return offers;
     }
 
+    public List<Proposal> getMyProposals(){
+        return myProposals;
+    }
+
     public SceneController getSceneController() {
         return sceneController;
     }
@@ -133,7 +137,7 @@ public class Application {
         return false;
     }
 
-    public boolean signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
+    public int signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
@@ -142,15 +146,15 @@ public class Application {
                 setCurrentUser(user);
                 sceneController.switchToHome();
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
-                return true;
+                return 0;
             }
             else {
                 System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
-                return false;
+                return 1;
             }
         } else {
             System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
-            return false;
+            return 2;
         }
     }
 
@@ -174,5 +178,29 @@ public class Application {
             }
             return true;
         }
+    }
+
+    public boolean updateCurrentAccount(String name, String surname) throws Exception {
+        boolean isGood = false;
+        if (!(name.isEmpty() || surname.isEmpty())) {
+            this.getCurrentUser().setFirstName(name);
+            this.getCurrentUser().setLastName(surname);
+            isGood = accountManager.updateAccountInfo(this.getCurrentUser());
+        }
+        if (isGood) {
+            sceneController.switchToHome();
+        }
+        return isGood;
+    }
+
+    public boolean updateCurrentPassword(String oldPassword, String newPassword, String confirmPassword) throws Exception {
+        boolean isGood = false;
+        if (newPassword.equals(confirmPassword)) {
+            isGood = accountManager.updatePasswordAccount(oldPassword, newPassword, this.getCurrentUser());
+        }
+        if (isGood) {
+           sceneController.switchToHome();
+        }
+        return isGood;
     }
 }

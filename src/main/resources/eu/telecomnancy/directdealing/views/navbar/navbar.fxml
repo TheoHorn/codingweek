@@ -50,7 +50,7 @@
             </Button>
          </children>
       </HBox>
-      <Label text="Proposal">
+      <Label fx:id="my_proposalLabel" onMouseClicked="#switchToMyProposal" text="Proposal">
          <font>
             <Font size="18.0" />
          </font>
