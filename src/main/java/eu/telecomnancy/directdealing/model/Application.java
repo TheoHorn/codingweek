@@ -27,6 +27,7 @@ public class Application {
     private final List<Observer> observers;
     private SceneController sceneController;
     private AccountManager accountManager;
+
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
@@ -89,8 +90,12 @@ public class Application {
         this.sceneController = sceneController;
     }
 
+    public AccountManager getAccountManager() {
+        return accountManager;
+    }
+
     public boolean login(String mail, String password) throws Exception {
-        setCurrentUser(AccountManager.login(mail, password));
+        setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
             notifyObservers();

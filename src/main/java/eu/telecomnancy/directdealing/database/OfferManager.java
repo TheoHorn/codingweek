@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static eu.telecomnancy.directdealing.Main.app;
+
 public class OfferManager {
     public static void addProposal(Proposal proposal) throws SQLException {
         // Check database connection
@@ -85,7 +87,7 @@ public class OfferManager {
                 int idOwner = resultSet.getInt("idOwner");
 
                 // creation de l'objet
-                Account account = AccountManager.getAccount(idOwner);
+                Account account = app.getAccountManager().getAccount(idOwner);
 
                 return account;
             }
@@ -144,10 +146,10 @@ public class OfferManager {
 
                 if (request){
                     Slot slot =  SlotManager.getSlot(idSlot);
-                    return new Request((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), slot, true);
+                    return new Request((User) app.getAccountManager().getAccount(mail), ContentManager.getContent(idContent), slot, true);
                 } else {
                     Slot slot =  SlotManager.getSlot(idSlot);
-                    return new Proposal((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), slot,false);
+                    return new Proposal((User) app.getAccountManager().getAccount(mail), ContentManager.getContent(idContent), slot,false);
                 }
             }
         } finally {
