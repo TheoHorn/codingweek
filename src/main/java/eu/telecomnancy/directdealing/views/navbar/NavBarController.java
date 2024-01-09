@@ -27,4 +27,10 @@ public class NavBarController {
         SceneController sceneController = new SceneController();
         sceneController.switchToHomeWithMouse(event);
     }
+
+    @FXML
+    public void switchToProfile(ActionEvent event) throws Exception {
+        SceneController sceneController = new SceneController();
+        sceneController.switchToProfile(event);
+    }
 }

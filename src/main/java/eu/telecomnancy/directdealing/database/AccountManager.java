@@ -55,8 +55,9 @@ public class AccountManager {
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             preparedStatement.setString(1, account.getLastName());
             preparedStatement.setString(2, account.getFirstName());
-            preparedStatement.setString(5, account.getPassword());
+            preparedStatement.setString(3, account.getEmail());
 
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // Handle SQL exceptions
             e.printStackTrace();
@@ -78,6 +79,7 @@ public class AccountManager {
             preparedStatement.setString(1, account.getPassword());
             preparedStatement.setString(2, account.getEmail());
 
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // Handle SQL exceptions
             e.printStackTrace();

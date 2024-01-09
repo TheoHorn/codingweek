@@ -65,7 +65,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false">
+      <Button mnemonicParsing="false" onAction="#switchToProfile">
          <graphic>
             <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                <image>

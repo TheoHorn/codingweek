@@ -53,6 +53,10 @@ public class Application {
         this.currentUser = currentUser;
     }
 
+    public void deleteCurrentUser() {
+        this.currentUser = null;
+    }
+
     public List<Offer> getOffers() {
         return offers;
     }

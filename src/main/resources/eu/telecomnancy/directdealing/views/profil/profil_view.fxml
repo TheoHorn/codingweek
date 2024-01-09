@@ -106,9 +106,9 @@
                </children>
             </VBox>
             <Label fx:id="email_field" prefHeight="32.0" prefWidth="444.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Label alignment="CENTER" disable="true" prefHeight="38.0" prefWidth="748.0" text="Les modifications ont échouées" textAlignment="CENTER" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" fx:id="modify_info_label">
+            <TextField fx:id="surname_field" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="name_field" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label fx:id="modify_info_label" alignment="CENTER" disable="true" prefHeight="38.0" prefWidth="748.0" text="Les modifications ont échouées" textAlignment="CENTER" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5">
                <font>
                   <Font size="14.0" />
                </font>
@@ -139,9 +139,9 @@
             <Label alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="236.0" text="Mot de Passe actuel : " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="234.0" text="Nouveau Mot de Passe : " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label prefHeight="40.0" prefWidth="153.0" text="Confirmez votre nouveau Mot de Passe : " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <PasswordField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <PasswordField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <PasswordField GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <PasswordField fx:id="old_password_field" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <PasswordField fx:id="new_password_field" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <PasswordField fx:id="confirm_password_field" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4">
                <children>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#updatePassword" text="Validez le nouveau Mot de Passe" textAlignment="CENTER" />
@@ -150,7 +150,7 @@
                   <Insets />
                </GridPane.margin>
             </VBox>
-            <Label alignment="CENTER" disable="true"  prefHeight="38.0" prefWidth="748.0" text="Les modifications ont échouées" textAlignment="CENTER" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" fx:id="modify_password_label">
+            <Label fx:id="modify_password_label" alignment="CENTER" disable="true" prefHeight="38.0" prefWidth="748.0" text="Les modifications ont échouées" textAlignment="CENTER" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5">
                <font>
                   <Font size="14.0" />
                </font>
@@ -160,5 +160,14 @@
             <Insets bottom="10.0" />
          </FlowPane.margin>
       </GridPane>
+      <VBox alignment="CENTER" prefHeight="91.0" prefWidth="901.0">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Se déconnecter" textAlignment="CENTER" onAction="#deconnexion">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </FlowPane>

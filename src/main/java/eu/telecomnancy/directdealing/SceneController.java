@@ -23,6 +23,16 @@ public class SceneController {
         stage.show();
     }
 
+    public void switchToLoginViewWithAction(ActionEvent event) throws Exception{
+        Main.app.removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root.load());
+        stage.setTitle("TELECOM Nancy DirectDealing - Login");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void switchToSignView(MouseEvent event) throws Exception {
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/signin_view.fxml"));

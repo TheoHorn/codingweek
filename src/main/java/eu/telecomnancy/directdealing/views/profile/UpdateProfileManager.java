@@ -5,11 +5,13 @@ import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.account.User;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -96,7 +98,13 @@ public class UpdateProfileManager {
         } else {
             sceneController.switchToHome(event);
         }
+    }
 
+    @FXML
+    public void deconnexion(ActionEvent event) throws Exception {
+        this.app.deleteCurrentUser();
+        SceneController sceneController = new SceneController();
+        sceneController.switchToLoginViewWithAction(event);
     }
 
 }
