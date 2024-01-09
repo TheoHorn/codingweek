@@ -74,7 +74,7 @@ public class UpdateProfileManager {
         if (!(name.isEmpty() || surname.isEmpty())) {
             this.app.getCurrentUser().setFirstName(name);
             this.app.getCurrentUser().setLastName(surname);
-            isfailed = AccountManager.updateAccountInfo(this.app.getCurrentUser());
+            isfailed = app.getAccountManager().updateAccountInfo(this.app.getCurrentUser());
         }
         if (isfailed) {
             app.getSceneController().switchToProfile();
@@ -89,7 +89,7 @@ public class UpdateProfileManager {
         String newPassword = this.new_password_field.getText();
         String confirmPassword = this.confirm_password_field.getText();
         if (newPassword.equals(confirmPassword)) {
-                isfailed = AccountManager.updatePasswordAccount(oldPassword, newPassword, this.app.getCurrentUser());
+                isfailed = app.getAccountManager().updatePasswordAccount(oldPassword, newPassword, this.app.getCurrentUser());
         }
         if (isfailed) {
             app.getSceneController().switchToProfile();

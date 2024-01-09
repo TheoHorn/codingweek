@@ -61,30 +61,9 @@ public class NewOfferController implements Observer {
 
     @FXML
     public void pressValiderNewOffer(ActionEvent actionEvent) throws SQLException {
-        String title = this.titleTextField.getText();
-        String description = this.descriptionTextArea.getText();
-        // String category = this.categoryChoiceBox.getValue().toString();
-        LocalDate selectedDate = this.startDatePicker.getValue();
-        LocalDateTime startOfDay = selectedDate.atStartOfDay();
-        Date startDate = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-        selectedDate = this.endDatePicker.getValue();
-        startOfDay = selectedDate.atStartOfDay();
-        Date endDate = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-        boolean isRequest = this.request_button.isSelected();
-        double price = Double.parseDouble(this.priceTextField.getText());
-
-        if (title.isEmpty() || description.isEmpty() || startDate == null || endDate == null || price == 0){
-            System.out.println("Veuillez remplir tous les champs");
-        } else {
-            if (isRequest) {
-                Service service = new Service(title, "", description, null, price);
-                Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDate, endDate,0), true);
-                OfferManager.addRequest(request);
-            } else {
-                Service service = new Service(title, "", description, null, price);
-                Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDate, endDate,0), false);
-                OfferManager.addProposal(proposal);
-            }
+        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), " ", this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()));
+        if (!err) {
+            System.out.println("Une erreur est survenue");
         }
     }
 }

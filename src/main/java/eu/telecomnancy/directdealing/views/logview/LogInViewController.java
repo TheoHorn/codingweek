@@ -44,7 +44,7 @@ public class LogInViewController implements Observer {
 //            System.out.println("Login failed");
 //        }
         boolean err = app.login(mail_TextField.getText(), password_TextField.getText());
-        if (err) {
+        if (!err) {
             statusLabel.setText("Mot de passe ou email incorrect");
             System.out.println("Login failed");
         }

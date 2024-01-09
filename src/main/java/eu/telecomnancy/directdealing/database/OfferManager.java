@@ -13,8 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static eu.telecomnancy.directdealing.Main.app;
+
 public class OfferManager {
-    public static void addProposal(Proposal proposal) throws SQLException {
+    public void addProposal(Proposal proposal) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -42,7 +44,7 @@ public class OfferManager {
         }
     }
 
-    public static void addRequest(Request request) throws SQLException {
+    public void addRequest(Request request) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -70,7 +72,7 @@ public class OfferManager {
         }
     }
 
-    public static Account getAccount(String idContent) throws SQLException {
+    public Account getAccount(String idContent) throws SQLException {
 
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idContent = ?";
@@ -85,7 +87,7 @@ public class OfferManager {
                 int idOwner = resultSet.getInt("idOwner");
 
                 // creation de l'objet
-                Account account = AccountManager.getAccount(idOwner);
+                Account account = app.getAccountManager().getAccount(idOwner);
 
                 return account;
             }
@@ -98,7 +100,7 @@ public class OfferManager {
         return null;
     }
 
-    public static Content getContent(int idOwner) throws SQLException {
+    public Content getContent(int idOwner) throws SQLException {
 
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idContent = ?";
@@ -113,7 +115,7 @@ public class OfferManager {
                 int idContent = resultSet.getInt("idOwner");
 
                 // creation de l'objet
-                Content content = ContentManager.getContent(idContent);
+                Content content = app.getContentManager().getContent(idContent);
 
                 return content;
             }
@@ -126,7 +128,7 @@ public class OfferManager {
         return null;
     }
 
-    public static Offer getOffer(int idOffer) throws SQLException{
+    public Offer getOffer(int idOffer) throws SQLException{
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idOffer = ?";
         ResultSet resultSet = null;
@@ -143,11 +145,11 @@ public class OfferManager {
                 int idSlot = resultSet.getInt("idSlot");
 
                 if (request){
-                    Slot slot =  SlotManager.getSlot(idSlot);
-                    return new Request((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), slot, true);
+                    Slot slot =  app.getSlotManager().getSlot(idSlot);
+                    return new Request((User) app.getAccountManager().getAccount(mail), app.getContentManager().getContent(idContent), slot, true);
                 } else {
-                    Slot slot =  SlotManager.getSlot(idSlot);
-                    return new Proposal((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), slot,false);
+                    Slot slot =  app.getSlotManager().getSlot(idSlot);
+                    return new Proposal((User) app.getAccountManager().getAccount(mail), app.getContentManager().getContent(idContent), slot,false);
                 }
             }
         } finally {

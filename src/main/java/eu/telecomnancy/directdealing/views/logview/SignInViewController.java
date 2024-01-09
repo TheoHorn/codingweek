@@ -36,42 +36,14 @@ public class SignInViewController implements Observer {
     }
 
     public void pressCreationButton(ActionEvent event) throws Exception {
-//        AccountManager accountManager = new AccountManager();
-//        String localMail = this.mail_textfield.getText().toString();
-//        String localPassword = this.password_textfield.getText().toString();
-//        String localLastname = this.lastname_textfield.getText().toString();
-//        String localFirstname = this.firstname_textfield.getText().toString();
-//        String localPasswordConfirm = this.password_confirm_textfield.getText().toString();
-//        System.out.println(localMail);
-//        if (!localMail.isEmpty() && !localPassword.isEmpty() && !localLastname.isEmpty() && !localFirstname.isEmpty() && !localPasswordConfirm.isEmpty()){
-//            System.out.println(!accountManager.isSave(localMail));
-//            if (!accountManager.isSave(localMail)){
-//                User user = new User(localLastname,localFirstname,localMail,500.0, false,localPassword);
-//                accountManager.addUser(user);
-//                app.setCurrentUser(user);
-////                SceneController sceneController = new SceneController();
-////                sceneController.switchToHome(event);
-//                System.out.println("[Debug:AccountCreatingController] Succesfull");
-//            }
-//            else {
-//                statusLabel.setText("Email déjà utilisé");
-//                System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
-//            }
-//        } else {
-//            statusLabel.setText("Veuillez remplir tous les champs");
-//            System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
-//        }
-//        System.out.println("creationButton pressed");
         boolean err = app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText());
-        if (err) {
+        if (!err) {
             statusLabel.setText("Une erreur est survenue");
         }
     }
 
     @FXML
     public void switchToLoginPage(MouseEvent mouseEvent) throws Exception {
-//        SceneController sceneController = new SceneController();
-//        sceneController.switchToLoginView(mouseEvent);
         app.getSceneController().switchToLoginView();
     }
 

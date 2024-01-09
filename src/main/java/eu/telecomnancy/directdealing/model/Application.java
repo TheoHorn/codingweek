@@ -1,17 +1,26 @@
 package eu.telecomnancy.directdealing.model;
 
 import eu.telecomnancy.directdealing.SceneController;
-import eu.telecomnancy.directdealing.database.AccountManager;
+import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static eu.telecomnancy.directdealing.Main.app;
 
 public class Application {
     public static volatile Application instance = null;
@@ -20,11 +29,22 @@ public class Application {
     private final List<Observer> observers;
     private SceneController sceneController;
     private AccountManager accountManager;
+    private ContentManager contentManager;
+    private OfferManager offerManager;
+
+    private SlotManager slotManager;
+    private ReservationManager reservationManager;
+
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.accountManager = new AccountManager();
+        this.contentManager = new ContentManager();
+        this.offerManager = new OfferManager();
+        this.slotManager = new SlotManager();
+        this.reservationManager = new ReservationManager();
+
 //        test
         this.offers.add(new Proposal(null, null, null, false));
         this.offers.add(new Request(null, null, null, false));
@@ -82,8 +102,28 @@ public class Application {
         this.sceneController = sceneController;
     }
 
+    public AccountManager getAccountManager() {
+        return accountManager;
+    }
+
+    public ContentManager getContentManager() {
+        return contentManager;
+    }
+
+    public OfferManager getOfferManager() {
+        return offerManager;
+    }
+
+    public SlotManager getSlotManager() {
+        return slotManager;
+    }
+
+    public ReservationManager getReservationManager() {
+        return reservationManager;
+    }
+
     public boolean login(String mail, String password) throws Exception {
-        setCurrentUser(AccountManager.login(mail, password));
+        setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
             notifyObservers();
@@ -111,6 +151,28 @@ public class Application {
         } else {
             System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
             return false;
+        }
+    }
+
+    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws SQLException {
+        LocalDateTime startOfDay = startDate.atStartOfDay();
+        Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+        startOfDay = endDate.atStartOfDay();
+        Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null){
+            System.out.println("Veuillez remplir tous les champs");
+            return false;
+        } else {
+            if (isRequest) {
+                Service service = new Service(title, "", description, null, price);
+                Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
+                getOfferManager().addRequest(request);
+            } else {
+                Service service = new Service(title, "", description, null, price);
+                Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
+                getOfferManager().addProposal(proposal);
+            }
+            return true;
         }
     }
 }

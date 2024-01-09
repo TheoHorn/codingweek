@@ -12,7 +12,7 @@ import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword
 
 public class AccountManager {
 
-    public static void addUser(User user) throws SQLException {
+    public void addUser(User user) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -43,7 +43,7 @@ public class AccountManager {
         }
     }
 
-    public static boolean updateAccountInfo(Account account) throws SQLException {
+    public boolean updateAccountInfo(Account account) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -66,7 +66,7 @@ public class AccountManager {
         return true;
     }
 
-    public static boolean updateAccountPassword(Account account) throws SQLException{
+    public boolean updateAccountPassword(Account account) throws SQLException{
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -89,7 +89,7 @@ public class AccountManager {
     }
 
 
-    public static void addAdmin(Admin admin) throws SQLException {
+    public void addAdmin(Admin admin) throws SQLException {
         // adding account to the database
         String query = "INSERT INTO ACCOUNT (id, mail, lastname, firstname, credit, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
@@ -108,7 +108,7 @@ public class AccountManager {
         }
     }
 
-    public static Account getAccount(String mail) throws SQLException {
+    public Account getAccount(String mail) throws SQLException {
         // getting account from mail primary key
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
@@ -145,7 +145,7 @@ public class AccountManager {
         return null;
     }
 
-    public static Account getAccount(int id) throws SQLException {
+    public Account getAccount(int id) throws SQLException {
         // getting account from mail primary key
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
@@ -182,7 +182,7 @@ public class AccountManager {
         return null;
     }
 
-    public static boolean isSave(String mail) throws SQLException {
+    public boolean isSave(String mail) throws SQLException {
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
 
@@ -202,7 +202,7 @@ public class AccountManager {
         }
     }
 
-    public static Account login(String mail, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+    public Account login(String mail, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String query = "SELECT password FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
 
@@ -228,7 +228,7 @@ public class AccountManager {
         return null;
     }
 
-    public static boolean updatePasswordAccount(String old_password, String new_password, Account account) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public boolean updatePasswordAccount(String old_password, String new_password, Account account) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
         if (login(account.getEmail(), old_password) != null) {
             account.setPassword(new_password);
             return updateAccountPassword(account);

@@ -17,16 +17,11 @@ public class NavBarController {
 
     @FXML
     public void switchToNewOffer() throws Exception {
-//        SceneController sceneController = new SceneController();
-//        sceneController.switchToOffer(event);
         app.getSceneController().switchToOffer();
     }
 
     @FXML
-    public void backToHome() throws Exception {
-        System.out.println("hello");
-//        SceneController sceneController = new SceneController();
-//        sceneController.switchToHomeWithMouse(event);
+    public void backToHome(MouseEvent event) throws Exception {
         app.getSceneController().switchToHome();
     }
 

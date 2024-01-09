@@ -6,8 +6,10 @@ import javafx.scene.image.Image;
 import java.sql.*;
 import java.util.Date;
 
+import static eu.telecomnancy.directdealing.Main.app;
+
 public class ReservationManager {
-    public static void addReservation(Reservation reservation) throws SQLException {
+    public void addReservation(Reservation reservation) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -36,7 +38,7 @@ public class ReservationManager {
         }
     }
 
-    public static Reservation getReservation(int idOffer, int idSlot) throws SQLException {
+    public Reservation getReservation(int idOffer, int idSlot) throws SQLException {
         // get reservation with primary_key (idOffer, idSlot)
 
         String query = "SELECT * FROM ACCOUNT WHERE idOffer = ? AND idSlot = ?";
@@ -55,7 +57,7 @@ public class ReservationManager {
                 Date date = resultSet.getDate("dateReservation");
 
                 // creation of the reservation and return
-                return new Reservation(OfferManager.getOffer(idOfferRes), mail, SlotManager.getSlot(idSlotRes), date);
+                return new Reservation(app.getOfferManager().getOffer(idOfferRes), mail, app.getSlotManager().getSlot(idSlotRes), date);
             }
         } finally {
             if (resultSet != null) {

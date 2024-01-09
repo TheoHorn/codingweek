@@ -13,7 +13,7 @@ import java.sql.Statement;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
 public class ContentManager {
-    public static int addContent(Content content) throws SQLException {
+    public int addContent(Content content) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -56,7 +56,7 @@ public class ContentManager {
         return 0;
     }
 
-    public static Content getContent(int id) throws SQLException {
+    public Content getContent(int id) throws SQLException {
         // getting account from mail primary key
         String query = "SELECT * FROM ACCOUNT WHERE id = ?";
         ResultSet resultSet = null;
