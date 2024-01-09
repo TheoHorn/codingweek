@@ -51,5 +51,15 @@ public class SceneController {
         stage.show();
     }
 
+    public void switchToHomeWithMouse(MouseEvent event) throws Exception{
+        Main.app.removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root.load());
+        stage.setTitle("TELECOM Nancy DirectDealing - Login");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 }
