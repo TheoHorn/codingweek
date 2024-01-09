@@ -24,10 +24,12 @@ public class NewOfferController implements Observer {
     @FXML
     public void pressRequest(ActionEvent actionEvent) {
         this.proposal_button.setSelected(false);
+        this.request_button.setSelected(true);
     }
 
     @FXML
     public void pressProposal(ActionEvent actionEvent) {
         this.request_button.setSelected(false);
+        this.proposal_button.setSelected(true);
     }
 }
