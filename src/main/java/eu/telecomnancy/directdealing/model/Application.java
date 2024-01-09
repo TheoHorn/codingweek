@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static eu.telecomnancy.directdealing.Main.app;
+
 public class Application {
     public static volatile Application instance = null;
     private Account currentUser;
@@ -29,6 +31,7 @@ public class Application {
     private SceneController sceneController;
     private AccountManager accountManager;
     private ContentManager contentManager;
+    private OfferManager offerManager;
 
     private Application() {
         this.currentUser = null;
@@ -36,6 +39,7 @@ public class Application {
         this.observers = new ArrayList<>();
         this.accountManager = new AccountManager();
         this.contentManager = new ContentManager();
+        this.offerManager = new OfferManager();
 //        test
         this.offers.add(new Proposal(null, null, null, false));
         this.offers.add(new Request(null, null, null, false));
@@ -101,6 +105,10 @@ public class Application {
         return contentManager;
     }
 
+    public OfferManager getOfferManager() {
+        return offerManager;
+    }
+
     public boolean login(String mail, String password) throws Exception {
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
@@ -145,11 +153,11 @@ public class Application {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
                 Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
-                OfferManager.addRequest(request);
+                getOfferManager().addRequest(request);
             } else {
                 Service service = new Service(title, "", description, null, price);
                 Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
-                OfferManager.addProposal(proposal);
+                getOfferManager().addProposal(proposal);
             }
             return true;
         }

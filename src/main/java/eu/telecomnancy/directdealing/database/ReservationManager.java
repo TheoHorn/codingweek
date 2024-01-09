@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import java.sql.*;
 import java.util.Date;
 
+import static eu.telecomnancy.directdealing.Main.app;
+
 public class ReservationManager {
     public static void addReservation(Reservation reservation) throws SQLException {
         // Check database connection
@@ -55,7 +57,7 @@ public class ReservationManager {
                 Date date = resultSet.getDate("dateReservation");
 
                 // creation of the reservation and return
-                return new Reservation(OfferManager.getOffer(idOfferRes), mail, SlotManager.getSlot(idSlotRes), date);
+                return new Reservation(app.getOfferManager().getOffer(idOfferRes), mail, SlotManager.getSlot(idSlotRes), date);
             }
         } finally {
             if (resultSet != null) {

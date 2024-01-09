@@ -16,7 +16,7 @@ import java.sql.Statement;
 import static eu.telecomnancy.directdealing.Main.app;
 
 public class OfferManager {
-    public static void addProposal(Proposal proposal) throws SQLException {
+    public void addProposal(Proposal proposal) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -44,7 +44,7 @@ public class OfferManager {
         }
     }
 
-    public static void addRequest(Request request) throws SQLException {
+    public void addRequest(Request request) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -72,7 +72,7 @@ public class OfferManager {
         }
     }
 
-    public static Account getAccount(String idContent) throws SQLException {
+    public Account getAccount(String idContent) throws SQLException {
 
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idContent = ?";
@@ -100,7 +100,7 @@ public class OfferManager {
         return null;
     }
 
-    public static Content getContent(int idOwner) throws SQLException {
+    public Content getContent(int idOwner) throws SQLException {
 
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idContent = ?";
@@ -128,7 +128,7 @@ public class OfferManager {
         return null;
     }
 
-    public static Offer getOffer(int idOffer) throws SQLException{
+    public Offer getOffer(int idOffer) throws SQLException{
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idOffer = ?";
         ResultSet resultSet = null;
