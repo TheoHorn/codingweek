@@ -61,8 +61,8 @@ public class NewOfferController implements Observer {
 
     @FXML
     public void pressValiderNewOffer(ActionEvent actionEvent) throws SQLException {
-        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), this.categoryChoiceBox.getValue().toString(), this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()));
-        if (err) {
+        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), " ", this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()));
+        if (!err) {
             System.out.println("Une erreur est survenue");
         }
     }
