@@ -19,7 +19,7 @@ public class SceneController {
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
         scene = new Scene(root.load());
-        stage.setTitle("TELECOM Nancy DirectDealing - Login");
+        stage.setTitle("TELECOM Nancy DirectDealing - LogIn");
         stage.setScene(scene);
         stage.show();
     }
@@ -28,7 +28,7 @@ public class SceneController {
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/signin_view.fxml"));
         scene = new Scene(root.load());
-        stage.setTitle("TELECOM Nancy DirectDealing - Signin");
+        stage.setTitle("TELECOM Nancy DirectDealing - SignIn");
         stage.setScene(scene);
         stage.show();
     }
@@ -37,7 +37,7 @@ public class SceneController {
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
         scene = new Scene(root.load());
-        stage.setTitle("TELECOM Nancy DirectDealing - Login");
+        stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
         stage.show();
     }
