@@ -20,13 +20,7 @@ public class DatabaseAccess {
 
     public static void disconnectFromDatabase() throws SQLException {
         if (connection != null){
-            commitDatabase();
             connection.close();
-        }
-    }
-    public static void commitDatabase() throws SQLException {
-        if (connection != null){
-            connection.commit();
         }
     }
 }
