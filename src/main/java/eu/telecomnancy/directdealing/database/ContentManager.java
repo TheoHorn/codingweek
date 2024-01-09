@@ -2,7 +2,7 @@ package eu.telecomnancy.directdealing.database;
 
 import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.content.Equipment;
-import eu.telecomnancy.directdealing.model.content.Services;
+import eu.telecomnancy.directdealing.model.content.Service;
 import javafx.scene.image.Image;
 
 import java.sql.PreparedStatement;
@@ -10,37 +10,50 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
+
 public class ContentManager {
-    public static void addContent(Content content) throws SQLException {
+    public static int addContent(Content content) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
-            return; // or throw an exception if needed
+            return 0;
         }
 
         try (Statement statement = DatabaseAccess.connection.createStatement()) {
 
             // Insert new user into the ACCOUNT table
-            String query = "INSERT INTO CONTENT (idContent, title, category, description, image, price, isEquipment, localisation) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-            try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            String query = "INSERT INTO CONTENT (title, category, description, image, price, isEquipment) VALUES ( ?, ?, ?, ?, ?, ?);";
+            String queryGetLastId = "SELECT last_insert_rowid() AS id";
+
+            try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+                 PreparedStatement statementGetLastId = connection.prepareStatement(queryGetLastId)) {
                 // Set parameters for the prepared statement
-                preparedStatement.setInt(1, content.getId());
-                preparedStatement.setString(2, content.getTitle());
-                preparedStatement.setString(3, content.getCategory());
-                preparedStatement.setString(4, content.getDescription());
-                preparedStatement.setObject(5, content.getImage());
-                preparedStatement.setInt(6, content.getPrice());
-                preparedStatement.setBoolean(7, content.isEquipement());
-                preparedStatement.setString(8, content.getLocalisation());
+                preparedStatement.setString(1, content.getTitle());
+                preparedStatement.setString(2, content.getCategory());
+                preparedStatement.setString(3, content.getDescription());
+                preparedStatement.setObject(4, content.getImage());
+                preparedStatement.setDouble(5, content.getPrice());
+                preparedStatement.setBoolean(6, content.isEquipement());
 
                 // Execute the insertion query
                 int rowsAffected = preparedStatement.executeUpdate();
                 System.out.println("Rows affected: " + rowsAffected);
+                // Retrieve the last inserted ID
+                try (ResultSet resultSet = statementGetLastId.executeQuery()) {
+                    if (resultSet.next()) {
+                        int lastInsertId = resultSet.getInt("id");
+                        return lastInsertId;
+                    } else {
+                        throw new SQLException("Unable to retrieve last inserted ID");
+                    }
+                }
             }
         } catch (SQLException e) {
             // Handle SQL exceptions
             e.printStackTrace();
         }
+        return 0;
     }
 
     public static Content getContent(int id) throws SQLException {
@@ -59,14 +72,14 @@ public class ContentManager {
                 String description = resultSet.getString("description");
                 Image image = (Image) resultSet.getObject("image");
                 boolean isEquipment = resultSet.getBoolean("isEquipment");
-                String localisation = resultSet.getString("localisation");
+                double price = resultSet.getDouble("price");
 
                 // creation de l'objet
                 if (isEquipment) {
-                    return new Equipment(title, category, description, image) {
+                    return new Equipment(title, category, description, image, price) {
                     };
                 } else {
-                    return new Services(title, category, description, image);
+                    return new Service(title, category, description, image, price);
                 }
             }
         } finally {

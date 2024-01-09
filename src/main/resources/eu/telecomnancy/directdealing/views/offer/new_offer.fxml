@@ -55,7 +55,7 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <TextField promptText="Titre de l'annonce" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="titleTextField" promptText="Titre de l'annonce" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <RadioButton fx:id="request_button" mnemonicParsing="false" onAction="#pressRequest" selected="true" text="Request" />
@@ -74,8 +74,8 @@
                </font>
             </Label>
             <Button mnemonicParsing="false" text="Importer un fichier" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Description de l'annonce" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" text="Valider" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <TextArea fx:id="descriptionTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Description de l'annonce" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button onAction="#pressValiderNewOffer" mnemonicParsing="false" text="Valider" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
             <Label alignment="CENTER_RIGHT" text="Image" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <opaqueInsets>
                   <Insets />
@@ -100,8 +100,8 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
                <children>
-                  <DatePicker prefWidth="125.0" promptText="disponible" />
-                  <DatePicker maxWidth="125.0" promptText="jusqu'au" />
+                  <DatePicker fx:id="startDatePicker" prefWidth="125.0" promptText="disponible" />
+                  <DatePicker fx:id="endDatePicker" maxWidth="125.0" promptText="jusqu'au" />
                </children>
             </HBox>
             <Label alignment="CENTER_RIGHT" text="Catégorie" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
@@ -115,7 +115,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="categoryChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label alignment="CENTER_RIGHT" text="Prix" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
                <opaqueInsets>
                   <Insets />
@@ -127,7 +127,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Spinner editable="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <TextField fx:id="priceTextField" editable="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
          </children>
       </GridPane>
     </children>

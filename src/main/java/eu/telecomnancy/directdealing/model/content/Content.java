@@ -9,20 +9,21 @@ public abstract class Content {
     private String category;
     private String description;
     private Image image;
-    private Integer price;
+    private double price;
     protected int type;
 
     public boolean isEquipement;
 
     private String localisation;
 
-    public Content(String title, String category, String description, Image image) {
+    public Content(String title, String category, String description, Image image, double price) {
         this.id = currentId;
         currentId++;
         this.title = title;
         this.category = category;
         this.description = description;
         this.image = image;
+        this.price = price;
     }
 
     public int getId() {
@@ -61,11 +62,11 @@ public abstract class Content {
         this.image = image;
     }
 
-    public Integer getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -76,4 +77,10 @@ public abstract class Content {
     public boolean isEquipement() {
         return isEquipement;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 }

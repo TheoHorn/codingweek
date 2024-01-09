@@ -36,25 +36,26 @@ public class ReservationManager {
         }
     }
 
-    public static Reservation getReservation(int offerId, int slotId) throws SQLException {
-        // getting account from mail primary key
+    public static Reservation getReservation(int idOffer, int idSlot) throws SQLException {
+        // get reservation with primary_key (idOffer, idSlot)
+
         String query = "SELECT * FROM ACCOUNT WHERE idOffer = ? AND idSlot = ?";
         ResultSet resultSet = null;
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, offerId);
-            preparedStatement.setInt(2, slotId);
+            preparedStatement.setInt(1, idOffer);
+            preparedStatement.setInt(2, idSlot);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
-                // recup des infos
-                int offerId1 = resultSet.getInt("idOffer");
+                // extract infos from request result
+                int idOfferRes = resultSet.getInt("idOffer");
                 String mail = resultSet.getString("mail");
-                int slotId1 = resultSet.getInt("idSlot");
+                int idSlotRes = resultSet.getInt("idSlot");
                 Date date = resultSet.getDate("dateReservation");
 
-                // creation de l'objet
-                return new Reservation(OfferManager.getOffer(offerId1), mail, SlotManager.getSlotWithId(slotId1), date);
+                // creation of the reservation and return
+                return new Reservation(OfferManager.getOffer(idOfferRes), mail, SlotManager.getSlot(idSlotRes), date);
             }
         } finally {
             if (resultSet != null) {
