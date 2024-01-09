@@ -14,25 +14,21 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
-
 public class AccountCreatingController implements Observer {
     @FXML
-    public TextField mail_textfield;
+    private TextField mail_textfield;
     @FXML
-    public PasswordField password_textfield;
+    private PasswordField password_textfield;
     @FXML
-    public TextField firstname_textfield;
+    private TextField firstname_textfield;
     @FXML
-    public TextField lastname_textfield;
+    private TextField lastname_textfield;
     @FXML
-    public PasswordField password_confirm_textfield;
+    private PasswordField password_confirm_textfield;
     @FXML
-    public Button creationButton;
+    private Button creationButton;
     @FXML
-    public Label statusLabel;
+    private Label statusLabel;
     private Application app;
 
     public AccountCreatingController(Application app) {
@@ -47,7 +43,7 @@ public class AccountCreatingController implements Observer {
         String localFirstname = this.firstname_textfield.getText().toString();
         String localPasswordConfirm = this.password_confirm_textfield.getText().toString();
         System.out.println(localMail);
-        if (!localMail.equals("") && !localPassword.equals("") && !localLastname.equals("") && !localFirstname.equals("") && !localPasswordConfirm.equals("")){
+        if (!localMail.isEmpty() && !localPassword.isEmpty() && !localLastname.isEmpty() && !localFirstname.isEmpty() && !localPasswordConfirm.isEmpty()){
             System.out.println(!accountManager.isSave(localMail));
             if (!accountManager.isSave(localMail)){
                 User user = new User(localLastname,localFirstname,localMail,500.0, false,localPassword);

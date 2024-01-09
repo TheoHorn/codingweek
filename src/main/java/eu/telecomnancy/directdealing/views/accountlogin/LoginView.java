@@ -11,17 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
 
 public class LoginView implements Observer {
     @FXML
-    public TextField mail_TextField;
+    private TextField mail_TextField;
     @FXML
-    public PasswordField password_TextField;
+    private PasswordField password_TextField;
     @FXML
-    public Label statusLabel;
+    private Label statusLabel;
     private Application app;
 
     public LoginView(Application app) {
