@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing.views.logview;
 
+import eu.telecomnancy.directdealing.Main;
 import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
