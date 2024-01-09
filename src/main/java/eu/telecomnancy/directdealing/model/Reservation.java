@@ -1,5 +1,8 @@
 package eu.telecomnancy.directdealing.model;
 
+import eu.telecomnancy.directdealing.database.SlotManager;
+
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Reservation {
@@ -7,10 +10,10 @@ public class Reservation {
     private String emailReserver;
     private Slot slot;
     private Date reservationDate;
-    public Reservation(int idOffer, String emailReserver, int idSlot, Date reservationDate){
+    public Reservation(int idOffer, String emailReserver, Slot slot, Date reservationDate) throws SQLException {
         this.idOffer = idOffer;
         this.emailReserver = emailReserver;
-        // slot TODO
+        this.slot = slot;
         this.reservationDate = reservationDate;
     }
 }
