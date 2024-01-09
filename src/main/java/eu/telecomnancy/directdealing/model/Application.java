@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.model;
 
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.AccountManager;
+import eu.telecomnancy.directdealing.database.ContentManager;
 import eu.telecomnancy.directdealing.database.OfferManager;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
@@ -27,12 +28,14 @@ public class Application {
     private final List<Observer> observers;
     private SceneController sceneController;
     private AccountManager accountManager;
+    private ContentManager contentManager;
 
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.accountManager = new AccountManager();
+        this.contentManager = new ContentManager();
 //        test
         this.offers.add(new Proposal(null, null, null, false));
         this.offers.add(new Request(null, null, null, false));
@@ -92,6 +95,10 @@ public class Application {
 
     public AccountManager getAccountManager() {
         return accountManager;
+    }
+
+    public ContentManager getContentManager() {
+        return contentManager;
     }
 
     public boolean login(String mail, String password) throws Exception {

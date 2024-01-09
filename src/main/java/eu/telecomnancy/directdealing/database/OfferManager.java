@@ -115,7 +115,7 @@ public class OfferManager {
                 int idContent = resultSet.getInt("idOwner");
 
                 // creation de l'objet
-                Content content = ContentManager.getContent(idContent);
+                Content content = app.getContentManager().getContent(idContent);
 
                 return content;
             }
@@ -146,10 +146,10 @@ public class OfferManager {
 
                 if (request){
                     Slot slot =  SlotManager.getSlot(idSlot);
-                    return new Request((User) app.getAccountManager().getAccount(mail), ContentManager.getContent(idContent), slot, true);
+                    return new Request((User) app.getAccountManager().getAccount(mail), app.getContentManager().getContent(idContent), slot, true);
                 } else {
                     Slot slot =  SlotManager.getSlot(idSlot);
-                    return new Proposal((User) app.getAccountManager().getAccount(mail), ContentManager.getContent(idContent), slot,false);
+                    return new Proposal((User) app.getAccountManager().getAccount(mail), app.getContentManager().getContent(idContent), slot,false);
                 }
             }
         } finally {
