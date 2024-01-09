@@ -11,7 +11,7 @@ public class DatabaseAccess {
 
     public static void connectToDatabase() throws SQLException {
         // create a database connection
-        connection = DriverManager.getConnection("jdbc:sqlite:"+"src/main/resources/eu/telecomnancy/directdealing/database/database.db");
+        connection = DriverManager.getConnection("jdbc:sqlite::resource:" + DatabaseAccess.class.getResource("/eu/telecomnancy/directdealing/database/database.db"));
         connection.setAutoCommit(true);
         Statement statement = connection.createStatement();
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
