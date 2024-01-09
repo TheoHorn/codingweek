@@ -6,15 +6,18 @@ public abstract class Offer {
     private int id;
     private static int currentId;
     private boolean request;
-    private Creneau creneau;
+    private Slot slot;
 
-    public Offer(User owner, boolean request, Content content, Creneau creneau) {
+    public Offer(User owner, boolean request, Content content, Slot slot) {
         this.request = request;
-        this.creneau = creneau;
+        this.slot = slot;
         this.owner = owner;
         this.content = content;
         this.id = currentId;
         currentId++;
+    }
+
+    public Offer(User owner, Content content) {
     }
 
     public User getOwner() {
@@ -37,8 +40,8 @@ public abstract class Offer {
         return this.id;
     }
 
-    public Creneau getCreneau() {
-        return creneau;
+    public Slot getSlot() {
+        return this.slot;
     }
 
     public boolean isRequest(){

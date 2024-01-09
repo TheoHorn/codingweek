@@ -65,7 +65,4 @@ public abstract class Content {
         this.price = price;
     }
 
-    public int getType() {
-        return type;
-    }
 }

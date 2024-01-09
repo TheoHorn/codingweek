@@ -27,7 +27,7 @@ public class OfferManager {
                 preparedStatement.setString(2, offer.getOwner().getEmail());
                 preparedStatement.setBoolean(3, offer.isRequest());
                 preparedStatement.setInt(4, offer.getContent().getId());
-                preparedStatement.setInt(5, offer.getCreneau().getId());
+                preparedStatement.setInt(5, offer.getSlot().getId());
 
                 // Execute the insertion query
                 int rowsAffected = preparedStatement.executeUpdate();
