@@ -6,8 +6,13 @@ import java.util.Date;
 
 public class Equipment extends Content{
     private Date returnDate;
-    public Equipment(String id, String title, String category, String description, Image image, Date returnDate) {
-        super(id, title, category, description, image);
+    public Equipment(String title, String category, String description, Image image, Date returnDate) {
+        super(title, category, description, image);
         this.returnDate = returnDate;
+        super.type = 1;
+    }
+
+    public Date getReturnDate() {
+        return returnDate;
     }
 }

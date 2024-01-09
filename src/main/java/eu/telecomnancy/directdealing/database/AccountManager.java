@@ -12,7 +12,8 @@ import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword
 import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
 
 public class AccountManager {
-    public void addUser(User user) throws SQLException {
+
+    public static void addUser(User user) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -42,31 +43,32 @@ public class AccountManager {
             e.printStackTrace();
         }
     }
-    public void addAdmin(Admin admin) throws SQLException {
+    public static void addAdmin(Admin admin) throws SQLException {
         // adding account to the database
-        String query = "INSERT INTO ACCOUNT (mail, lastname, firstname, credit, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO ACCOUNT (id, mail, lastname, firstname, credit, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             // Préparation de la requête
-            preparedStatement.setString(1, admin.getEmail());
-            preparedStatement.setString(2, admin.getLastName());
-            preparedStatement.setString(3,admin.getFirstName());
-            preparedStatement.setFloat(4, 0);
-            preparedStatement.setBoolean(5, false);
-            preparedStatement.setInt(6,2);
-            preparedStatement.setString(7, admin.getPassword());
+            preparedStatement.setInt(1, admin.getId());
+            preparedStatement.setString(2, admin.getEmail());
+            preparedStatement.setString(3, admin.getLastName());
+            preparedStatement.setString(4,admin.getFirstName());
+            preparedStatement.setFloat(5, 0);
+            preparedStatement.setBoolean(6, false);
+            preparedStatement.setInt(7,2);
+            preparedStatement.setString(8, admin.getPassword());
 
             // Exécuter la requête d'insertion
             preparedStatement.executeUpdate();
         }
     }
 
-    public Account getAccount(String mail) throws SQLException {
+    public static Account getAccount(String mail) throws SQLException {
         // getting account from mail primary key
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setString(1, mail);
+            preparedStatement.setString(2, mail);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
@@ -97,7 +99,44 @@ public class AccountManager {
         return null;
     }
 
-    public boolean isSave(String mail) throws SQLException {
+    public static Account getAccount(int id) throws SQLException {
+        // getting account from mail primary key
+        String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // recup des infos
+                String mail1 = resultSet.getString("mail");
+                String lastname = resultSet.getString("lastname");
+                String firstname = resultSet.getString("firstname");
+                double credit = resultSet.getDouble("balance");
+                boolean sleep = resultSet.getBoolean("sleep");
+                int type = resultSet.getInt("type");
+                String password = resultSet.getString("password");
+
+                // creation de l'objet
+                if (type == 1) {
+                    return new User(lastname, firstname, mail1, credit, sleep, password);
+                } else if (type == 2) {
+                    return new Admin(lastname, firstname, mail1, password);
+                }
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+
+        return null;
+    }
+
+    public static boolean isSave(String mail) throws SQLException {
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
 
@@ -117,7 +156,7 @@ public class AccountManager {
         }
     }
 
-    public Account login(String mail, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+    public static Account login(String mail, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String query = "SELECT password FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
 
