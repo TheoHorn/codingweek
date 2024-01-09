@@ -20,11 +20,14 @@ public class OfferManager {
         try (Statement statement = DatabaseAccess.connection.createStatement()) {
 
             // Insert new user into the ACCOUNT table
-            String query = "INSERT INTO OFFER (idOwner, idContent) VALUES (?, ?);";
+            String query = "INSERT INTO OFFER (idOff, mail, isRequest, idContent, idCreneau) VALUES (?, ?, ?, ?, ?);";
             try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
                 // Set parameters for the prepared statement
-                preparedStatement.setInt(1, offer.getOwner().getId());
-                preparedStatement.setInt(2, offer.getContent().getId());
+                preparedStatement.setInt(1, offer.getId());
+                preparedStatement.setString(2, offer.getOwner().getEmail());
+                preparedStatement.setBoolean(3, offer.isRequest());
+                preparedStatement.setInt(4, offer.getContent().getId());
+                preparedStatement.setInt(5, offer.getCreneau().getId());
 
                 // Execute the insertion query
                 int rowsAffected = preparedStatement.executeUpdate();

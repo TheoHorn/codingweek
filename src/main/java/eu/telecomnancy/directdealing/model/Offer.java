@@ -3,10 +3,15 @@ package eu.telecomnancy.directdealing.model;
 public abstract class Offer {
     private User owner;
     private Content content;
+    private int id;
+    private static int currentId;
+    private boolean request;
 
     public Offer(User owner, Content content) {
         this.owner = owner;
         this.content = content;
+        this.id = currentId;
+        currentId++;
     }
 
     public User getOwner() {
@@ -23,5 +28,13 @@ public abstract class Offer {
 
     public void setContent(Content content) {
         this.content = content;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public boolean isRequest(){
+        return this.request;
     }
 }
