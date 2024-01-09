@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing.database;
 
+import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Content;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class OfferManager {
-    public static void addOffer(Offer offer) throws SQLException {
+    public static void addProposal(Proposal proposal) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -23,14 +24,41 @@ public class OfferManager {
         try (Statement statement = DatabaseAccess.connection.createStatement()) {
 
             // Insert new user into the ACCOUNT table
-            String query = "INSERT INTO OFFER (idOffer, mail, isRequest, idContent, idCreneau) VALUES (?, ?, ?, ?, ?);";
+            String query = "INSERT INTO OFFER (mail, isRequest, idContent, idSlot) VALUES (?, ?, ?, ?);";
             try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
                 // Set parameters for the prepared statement
-                preparedStatement.setInt(1, offer.getId());
-                preparedStatement.setString(2, offer.getOwner().getEmail());
-                preparedStatement.setBoolean(3, offer.isRequest());
-                preparedStatement.setInt(4, offer.getContent().getId());
-                preparedStatement.setInt(5, offer.getSlot().getId());
+                preparedStatement.setString(1, proposal.getOwner().getEmail());
+                preparedStatement.setBoolean(2, false);
+                preparedStatement.setInt(3, proposal.getContent().getId());
+                preparedStatement.setInt(4, proposal.getSlot().getId());
+
+                // Execute the insertion query
+                int rowsAffected = preparedStatement.executeUpdate();
+                System.out.println("Rows affected: " + rowsAffected);
+            }
+        } catch (SQLException e) {
+            // Handle SQL exceptions
+            e.printStackTrace();
+        }
+    }
+
+    public static void addRequest(Request request) throws SQLException {
+        // Check database connection
+        if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
+            System.err.println("Database connection is not open.");
+            return; // or throw an exception if needed
+        }
+
+        try (Statement statement = DatabaseAccess.connection.createStatement()) {
+
+            // Insert new user into the ACCOUNT table
+            String query = "INSERT INTO OFFER (mail, isRequest, idContent, idSlot) VALUES (?, ?, ?, ?);";
+            try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+                // Set parameters for the prepared statement
+                preparedStatement.setString(1, request.getOwner().getEmail());
+                preparedStatement.setBoolean(2, true);
+                preparedStatement.setInt(3, request.getContent().getId());
+                preparedStatement.setInt(4, request.getSlot().getId());
 
                 // Execute the insertion query
                 int rowsAffected = preparedStatement.executeUpdate();
@@ -112,12 +140,14 @@ public class OfferManager {
                 String mail = resultSet.getString("mail");
                 boolean request = resultSet.getBoolean("isRequest");
                 int idContent = resultSet.getInt("idContent");
-                int idCreneau = resultSet.getInt("idCreneau");
+                int idSlot = resultSet.getInt("idSlot");
 
                 if (request){
-                    return new Request((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent));
+                    Slot slot =  SlotManager.getSlot(idSlot);
+                    return new Request((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), slot, true);
                 } else {
-                    return new Proposal((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), 0);
+                    Slot slot =  SlotManager.getSlot(idSlot);
+                    return new Proposal((User) AccountManager.getAccount(mail), ContentManager.getContent(idContent), slot,false);
                 }
             }
         } finally {
