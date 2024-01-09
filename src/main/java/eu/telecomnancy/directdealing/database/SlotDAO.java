@@ -3,14 +3,12 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.Slot;
 
 import java.sql.*;
-import java.util.Date;
 
-import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
 
 public class SlotDAO {
-    public Slot getSlot(int idSlot) throws SQLException {
+    public Slot get(int idSlot) throws SQLException {
         // get slot from id
         String query = "SELECT * FROM SLOT WHERE idSlot = ?";
         ResultSet resultSet = null;

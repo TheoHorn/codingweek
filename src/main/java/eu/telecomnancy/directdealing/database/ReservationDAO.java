@@ -74,7 +74,7 @@ public class ReservationDAO {
                 Date date = resultSet.getDate("dateReservation");
 
                 // creation of the reservation and return
-                return new Reservation(app.getOfferManager().getOffer(idOfferRes), mail, app.getSlotDAO().getSlot(idSlotRes), date);
+                return new Reservation(app.getOfferDAO().get(idOfferRes), mail, app.getSlotDAO().get(idSlotRes), date);
             }
         } finally {
             if (resultSet != null) {

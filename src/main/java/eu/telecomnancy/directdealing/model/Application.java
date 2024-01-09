@@ -27,7 +27,7 @@ public class Application {
     private SceneController sceneController;
     private AccountDAO accountDAO;
     private ContentDAO contentDAO;
-    private OfferManager offerManager;
+    private OfferDAO offerDAO;
 
     private SlotDAO slotDAO;
     private ReservationDAO reservationDAO;
@@ -40,7 +40,7 @@ public class Application {
         this.observers = new ArrayList<>();
         this.accountDAO = new AccountDAO();
         this.contentDAO = new ContentDAO();
-        this.offerManager = new OfferManager();
+        this.offerDAO = new OfferDAO();
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
@@ -114,8 +114,8 @@ public class Application {
         return contentDAO;
     }
 
-    public OfferManager getOfferManager() {
-        return offerManager;
+    public OfferDAO getOfferDAO() {
+        return offerDAO;
     }
 
     public SlotDAO getSlotDAO() {
@@ -174,11 +174,11 @@ public class Application {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
                 Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
-                getOfferManager().addRequest(request);
+                getOfferDAO().addRequest(request);
             } else {
                 Service service = new Service(title, "", description, null, price);
                 Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
-                getOfferManager().addProposal(proposal);
+                getOfferDAO().save(proposal);
             }
             return true;
         }
