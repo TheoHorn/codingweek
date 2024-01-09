@@ -2,15 +2,22 @@ package eu.telecomnancy.directdealing.model;
 
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.AccountManager;
+import eu.telecomnancy.directdealing.database.OfferManager;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Application {
@@ -111,6 +118,28 @@ public class Application {
         } else {
             System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
             return false;
+        }
+    }
+
+    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws SQLException {
+        LocalDateTime startOfDay = startDate.atStartOfDay();
+        Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+        startOfDay = endDate.atStartOfDay();
+        Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null){
+            System.out.println("Veuillez remplir tous les champs");
+            return false;
+        } else {
+            if (isRequest) {
+                Service service = new Service(title, "", description, null, price);
+                Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
+                OfferManager.addRequest(request);
+            } else {
+                Service service = new Service(title, "", description, null, price);
+                Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
+                OfferManager.addProposal(proposal);
+            }
+            return true;
         }
     }
 }
