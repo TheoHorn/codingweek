@@ -6,6 +6,7 @@ import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Service;
+import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,7 +82,9 @@ public class NewOfferController implements Observer {
                 Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDate, endDate,0), true);
                 OfferManager.addRequest(request);
             } else {
-                // TODO
+                Service service = new Service(title, "", description, null, price);
+                Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDate, endDate,0), false);
+                OfferManager.addProposal(proposal);
             }
         }
     }
