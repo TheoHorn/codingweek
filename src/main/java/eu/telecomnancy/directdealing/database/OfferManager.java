@@ -145,10 +145,10 @@ public class OfferManager {
                 int idSlot = resultSet.getInt("idSlot");
 
                 if (request){
-                    Slot slot =  app.getSlotManager().getSlot(idSlot);
+                    Slot slot =  app.getSlotDAO().getSlot(idSlot);
                     return new Request((User) app.getAccountManager().getAccount(mail), app.getContentManager().getContent(idContent), slot, true);
                 } else {
-                    Slot slot =  app.getSlotManager().getSlot(idSlot);
+                    Slot slot =  app.getSlotDAO().getSlot(idSlot);
                     return new Proposal((User) app.getAccountManager().getAccount(mail), app.getContentManager().getContent(idContent), slot,false);
                 }
             }

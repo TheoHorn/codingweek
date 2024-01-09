@@ -9,7 +9,7 @@ import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 
-import java.sql.ResultSet;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,8 +17,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static eu.telecomnancy.directdealing.Main.app;
 
 public class Application {
     public static volatile Application instance = null;
@@ -31,7 +29,7 @@ public class Application {
     private ContentManager contentManager;
     private OfferManager offerManager;
 
-    private SlotManager slotManager;
+    private SlotDAO slotManager;
     private ReservationManager reservationManager;
 
     private Application() {
@@ -42,7 +40,7 @@ public class Application {
         this.accountManager = new AccountManager();
         this.contentManager = new ContentManager();
         this.offerManager = new OfferManager();
-        this.slotManager = new SlotManager();
+        this.slotManager = new SlotDAO();
         this.reservationManager = new ReservationManager();
 
 //        test
@@ -118,7 +116,7 @@ public class Application {
         return offerManager;
     }
 
-    public SlotManager getSlotManager() {
+    public SlotDAO getSlotDAO() {
         return slotManager;
     }
 
@@ -203,4 +201,5 @@ public class Application {
         }
         return isGood;
     }
+
 }

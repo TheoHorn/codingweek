@@ -222,8 +222,12 @@ public class AccountManager {
                     return null;
                 }
             }
-        }catch(SQLException e){
+        } catch(SQLException e){
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
         }
         return null;
     }

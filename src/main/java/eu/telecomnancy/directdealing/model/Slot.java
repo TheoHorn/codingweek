@@ -1,7 +1,5 @@
 package eu.telecomnancy.directdealing.model;
 
-import eu.telecomnancy.directdealing.database.SlotManager;
-
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -18,7 +16,7 @@ public class Slot {
         this.startTime = startTime;
         this.endTime = endTime;
         this.recurrence = recurrence;
-        this.id = app.getSlotManager().addSlot(startTime, endTime, recurrence);
+        this.id = app.getSlotDAO().save(this);
     }
 
     public Slot(int id, Date startTime, Date endTime, int recurrence){

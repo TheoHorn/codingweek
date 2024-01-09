@@ -57,7 +57,7 @@ public class ReservationManager {
                 Date date = resultSet.getDate("dateReservation");
 
                 // creation of the reservation and return
-                return new Reservation(app.getOfferManager().getOffer(idOfferRes), mail, app.getSlotManager().getSlot(idSlotRes), date);
+                return new Reservation(app.getOfferManager().getOffer(idOfferRes), mail, app.getSlotDAO().getSlot(idSlotRes), date);
             }
         } finally {
             if (resultSet != null) {
