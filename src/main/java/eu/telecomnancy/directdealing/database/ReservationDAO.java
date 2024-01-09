@@ -55,7 +55,7 @@ public class ReservationDAO {
         return false;
     }
 
-    public Reservation getReservation(int idOffer, int idSlot) throws SQLException {
+    public Reservation get(int idOffer, int idSlot) throws SQLException {
         // get reservation with primary_key (idOffer, idSlot)
 
         String query = "SELECT * FROM ACCOUNT WHERE idOffer = ? AND idSlot = ?";
