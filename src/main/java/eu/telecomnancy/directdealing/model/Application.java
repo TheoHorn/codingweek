@@ -8,8 +8,6 @@ import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
-import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -174,5 +172,29 @@ public class Application {
             }
             return true;
         }
+    }
+
+    public boolean updateCurrentAccount(String name, String surname) throws Exception {
+        boolean isGood = false;
+        if (!(name.isEmpty() || surname.isEmpty())) {
+            this.getCurrentUser().setFirstName(name);
+            this.getCurrentUser().setLastName(surname);
+            isGood = accountManager.updateAccountInfo(this.getCurrentUser());
+        }
+        if (isGood) {
+            sceneController.switchToHome();
+        }
+        return isGood;
+    }
+
+    public boolean updateCurrentPassword(String oldPassword, String newPassword, String confirmPassword) throws Exception {
+        boolean isGood = false;
+        if (newPassword.equals(confirmPassword)) {
+            isGood = accountManager.updatePasswordAccount(oldPassword, newPassword, this.getCurrentUser());
+        }
+        if (isGood) {
+           sceneController.switchToHome();
+        }
+        return isGood;
     }
 }

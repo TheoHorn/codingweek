@@ -98,7 +98,7 @@
       </GridPane>
       <VBox alignment="CENTER" prefHeight="91.0" prefWidth="901.0">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deconnexion" text="Se déconnecter" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Se déconnecter" textAlignment="CENTER" onAction="#disconnection">
                <font>
                   <Font size="14.0" />
                </font>
