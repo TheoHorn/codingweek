@@ -12,7 +12,7 @@ public abstract class Offer {
     private boolean request;
     private Slot slot;
 
-    public Offer(User owner, boolean request, Content content, Slot slot) {
+    public Offer(User owner, Content content, Slot slot, boolean request) {
         this.request = request;
         this.slot = slot;
         this.owner = owner;
