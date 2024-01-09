@@ -120,13 +120,22 @@ USAGE: ./mvnw clean javafx:run
 
 ## Roadmap
 
-1. Gestion des comptes
+1. **Gestion des comptes**
     - [x] Création des représentations
       - [x] Classes Account, User, Admin
       - [x] Table Account dans la DB
     - [x] Instanciation d'un compte
     - [x] Ajout d'un compte à la DB
     - [x] Connexion à un compte existant de la DB
+
+2. **Ajout d'offres**
+    - [ ] Représentation des offres
+      - [ ] Classes Java
+      - [ ] Table dans la DB
+    - [ ] FXML offres
+    - [ ] Création d'une offre
+      - [ ] FXML Création d'une offre
+      - [ ] Stockage en DB
 
 See the [open issues](https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12/-/issues) for a full list of proposed features (and known issues).
 
