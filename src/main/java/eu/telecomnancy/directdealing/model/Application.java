@@ -1,9 +1,7 @@
 package eu.telecomnancy.directdealing.model;
 
 import eu.telecomnancy.directdealing.SceneController;
-import eu.telecomnancy.directdealing.database.AccountManager;
-import eu.telecomnancy.directdealing.database.ContentManager;
-import eu.telecomnancy.directdealing.database.OfferManager;
+import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Service;
@@ -13,6 +11,7 @@ import eu.telecomnancy.directdealing.model.offer.Request;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,6 +32,9 @@ public class Application {
     private ContentManager contentManager;
     private OfferManager offerManager;
 
+    private SlotManager slotManager;
+    private ReservationManager reservationManager;
+
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
@@ -40,6 +42,9 @@ public class Application {
         this.accountManager = new AccountManager();
         this.contentManager = new ContentManager();
         this.offerManager = new OfferManager();
+        this.slotManager = new SlotManager();
+        this.reservationManager = new ReservationManager();
+
 //        test
         this.offers.add(new Proposal(null, null, null, false));
         this.offers.add(new Request(null, null, null, false));
@@ -107,6 +112,14 @@ public class Application {
 
     public OfferManager getOfferManager() {
         return offerManager;
+    }
+
+    public SlotManager getSlotManager() {
+        return slotManager;
+    }
+
+    public ReservationManager getReservationManager() {
+        return reservationManager;
     }
 
     public boolean login(String mail, String password) throws Exception {

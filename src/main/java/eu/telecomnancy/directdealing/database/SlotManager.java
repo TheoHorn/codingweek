@@ -9,7 +9,7 @@ import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
 
 public class SlotManager {
-    public static Slot getSlot(int idSlot) throws SQLException {
+    public Slot getSlot(int idSlot) throws SQLException {
         // get slot from id
         String query = "SELECT * FROM SLOT WHERE idSlot = ?";
         ResultSet resultSet = null;
@@ -40,7 +40,7 @@ public class SlotManager {
 
     }
 
-    public static int addSlot(Date startDate, Date endDate, int recurrence) throws SQLException {
+    public int addSlot(Date startDate, Date endDate, int recurrence) throws SQLException {
         // adding a new slot in the database
 
         String query = "INSERT INTO SLOT (startTime, endTime, recurrence) VALUES (?, ?, ?)";
