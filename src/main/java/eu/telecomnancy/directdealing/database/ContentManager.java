@@ -24,7 +24,7 @@ public class ContentManager {
         try (Statement statement = DatabaseAccess.connection.createStatement()) {
 
             // Insert new user into the ACCOUNT table
-            String query = "INSERT INTO CONTENT (id, title, category, description, imageUrl) VALUES (?, ?, ?, ?, ?);";
+            String query = "INSERT INTO CONTENT (id, title, category, description, image, price, isEquipment, localisation) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
                 // Set parameters for the prepared statement
                 preparedStatement.setInt(1, content.getId());
@@ -32,7 +32,9 @@ public class ContentManager {
                 preparedStatement.setString(3, content.getCategory());
                 preparedStatement.setString(4, content.getDescription());
                 preparedStatement.setObject(5, content.getImage());
-                preparedStatement.setInt(6, content.getType());
+                preparedStatement.setInt(6, content.getPrice());
+                preparedStatement.setBoolean(7, content.isEquipment());
+                preparedStatement.setObject(8, content.getLocalisation());
 
                 // Execute the insertion query
                 int rowsAffected = preparedStatement.executeUpdate();
@@ -59,54 +61,17 @@ public class ContentManager {
                 String category = resultSet.getString("category");
                 String description = resultSet.getString("description");
                 Image image = (Image) resultSet.getObject("image");
-                int type = resultSet.getInt("type");
-                Date date = resultSet.getDate("returnDate");
+                boolean isEquipment = resultSet.getBoolean("isEquipment");
+                Localisation localisation = resultSet.getDate("localisation");
 
                 // creation de l'objet
-                if (type == 1) {
-                    return new Equipment(title, category, description, image, date) {
+                if (isEquipment) {
+                    return new Equipment(title, category, description, image) {
                     };
-                } else if (type == 2) {
+                } else {
                     return new Services(title, category, description, image);
                 }
             }
-        } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-        }
-
-        return null;
-    }
-
-    public static Account getAccount(int id) throws SQLException {
-        // getting account from mail primary key
-        String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
-        ResultSet resultSet = null;
-
-        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
-            resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) { // Check if there are results
-                // recup des infos
-                String mail1 = resultSet.getString("mail");
-                String lastname = resultSet.getString("lastname");
-                String firstname = resultSet.getString("firstname");
-                double credit = resultSet.getDouble("balance");
-                boolean sleep = resultSet.getBoolean("sleep");
-                int type = resultSet.getInt("type");
-                String password = resultSet.getString("password");
-
-                // creation de l'objet
-                if (type == 1) {
-                    return new User(lastname, firstname, mail1, credit, sleep, password);
-                } else if (type == 2) {
-                    return new Admin(lastname, firstname, mail1, password);
-                }
-            }
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new RuntimeException(e);
         } finally {
             if (resultSet != null) {
                 resultSet.close();

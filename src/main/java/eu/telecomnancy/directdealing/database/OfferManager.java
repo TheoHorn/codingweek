@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class OfferManager {
-    public void addOffer(Offer offer) throws SQLException {
+    public static void addOffer(Offer offer) throws SQLException {
         // Check database connection
         if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
             System.err.println("Database connection is not open.");
@@ -39,7 +39,7 @@ public class OfferManager {
         }
     }
 
-    public Account getAccount(String idContent) throws SQLException {
+    public static Account getAccount(String idContent) throws SQLException {
 
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idContent = ?";
@@ -67,7 +67,7 @@ public class OfferManager {
         return null;
     }
 
-    public Content getContent(int idOwner) throws SQLException {
+    public static Content getContent(int idOwner) throws SQLException {
 
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idContent = ?";
@@ -95,7 +95,7 @@ public class OfferManager {
         return null;
     }
 
-    public Offer getOffer(int idOffer) throws SQLException{
+    public static Offer getOffer(int idOffer) throws SQLException{
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idOffer = ?";
         ResultSet resultSet = null;
