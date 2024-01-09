@@ -1,8 +1,8 @@
 package eu.telecomnancy.directdealing;
 
 import eu.telecomnancy.directdealing.model.Application;
-import eu.telecomnancy.directdealing.views.accountcreating.AccountCreatingController;
-import eu.telecomnancy.directdealing.views.accountlogin.LoginView;
+import eu.telecomnancy.directdealing.views.logview.SignInViewController;
+import eu.telecomnancy.directdealing.views.logview.LoginViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
