@@ -133,7 +133,7 @@ public class Application {
         return false;
     }
 
-    public boolean signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
+    public int signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
@@ -142,15 +142,15 @@ public class Application {
                 setCurrentUser(user);
                 sceneController.switchToHome();
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
-                return true;
+                return 0;
             }
             else {
                 System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
-                return false;
+                return 1;
             }
         } else {
             System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
-            return false;
+            return 2;
         }
     }
 
