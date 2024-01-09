@@ -68,7 +68,7 @@ public class UpdateProfileManager {
     }
 
     @FXML
-    public void updateProfile(ActionEvent event) throws Exception {
+    public void updateProfile() throws Exception {
         String name = this.name_field.getText();
         String surname = this.surname_field.getText();
         if (!(name.isEmpty() || surname.isEmpty())) {
@@ -76,35 +76,32 @@ public class UpdateProfileManager {
             this.app.getCurrentUser().setLastName(surname);
             isfailed = AccountManager.updateAccountInfo(this.app.getCurrentUser());
         }
-        SceneController sceneController = new SceneController();
         if (isfailed) {
-            sceneController.switchToProfile(event);
+            app.getSceneController().switchToProfile();
         } else {
-            sceneController.switchToHome(event);
+            app.getSceneController().switchToHome();
         }
     }
 
     @FXML
-    public void updatePassword(ActionEvent event) throws Exception {
+    public void updatePassword() throws Exception {
         String oldPassword = this.old_password_field.getText();
         String newPassword = this.new_password_field.getText();
         String confirmPassword = this.confirm_password_field.getText();
         if (newPassword.equals(confirmPassword)) {
                 isfailed = AccountManager.updatePasswordAccount(oldPassword, newPassword, this.app.getCurrentUser());
         }
-        SceneController sceneController = new SceneController();
         if (isfailed) {
-            sceneController.switchToProfile(event);
+            app.getSceneController().switchToProfile();
         } else {
-            sceneController.switchToHome(event);
+            app.getSceneController().switchToHome();
         }
     }
 
     @FXML
-    public void deconnexion(ActionEvent event) throws Exception {
+    public void deconnexion() throws Exception {
         this.app.deleteCurrentUser();
-        SceneController sceneController = new SceneController();
-        sceneController.switchToLoginViewWithAction(event);
+        app.getSceneController().switchToLoginView();
     }
 
 }

@@ -1,7 +1,7 @@
 package eu.telecomnancy.directdealing;
 
 import eu.telecomnancy.directdealing.database.DatabaseAccess;
-import eu.telecomnancy.directdealing.views.logview.LoginViewController;
+import eu.telecomnancy.directdealing.views.logview.LogInViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

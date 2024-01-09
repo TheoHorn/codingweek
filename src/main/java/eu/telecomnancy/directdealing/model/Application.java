@@ -26,8 +26,8 @@ public class Application {
         this.observers = new ArrayList<>();
         this.accountManager = new AccountManager();
 //        test
-        this.offers.add(new Proposal(null, null, null));
-        this.offers.add(new Request(null, null));
+        this.offers.add(new Proposal(null, null, null, false));
+        this.offers.add(new Request(null, null, null, false));
 //        test
     }
 

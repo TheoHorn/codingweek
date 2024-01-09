@@ -29,8 +29,7 @@ public class NavBarController {
     }
 
     @FXML
-    public void switchToProfile(ActionEvent event) throws Exception {
-        SceneController sceneController = new SceneController();
-        sceneController.switchToProfile(event);
+    public void switchToProfile() throws Exception {
+        app.getSceneController().switchToProfile();
     }
 }
