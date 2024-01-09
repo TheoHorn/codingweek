@@ -16,6 +16,7 @@ public class SceneController {
     private Scene scene;
 
     public void switchToLoginView(MouseEvent event) throws Exception {
+        Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("views/accountcreating/connexion_account.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
@@ -25,6 +26,7 @@ public class SceneController {
     }
 
     public void switchToSignView(MouseEvent event) throws Exception {
+        Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("views/accountcreating/create_account.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
@@ -34,6 +36,7 @@ public class SceneController {
     }
 
     public void switchToHome(ActionEvent event) throws Exception{
+        Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("views/home/home_view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());

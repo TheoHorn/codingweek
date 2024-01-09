@@ -31,8 +31,8 @@ public class AccountCreatingController implements Observer {
     private Label statusLabel;
     private Application app;
 
-    public AccountCreatingController(Application app) {
-        this.app = app;
+    public AccountCreatingController() {
+        this.app = Application.getInstance();
     }
 
     public void pressCreationButton(ActionEvent event) throws Exception {

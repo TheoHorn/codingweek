@@ -51,7 +51,7 @@
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@magnifying_glass.png" />
+                              <Image url="@../navbar/magnifying_glass.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -72,7 +72,7 @@
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@user_picture.png" />
+                        <Image url="@../navbar/user_picture.png" />
                      </image>
                   </ImageView>
                </graphic>
