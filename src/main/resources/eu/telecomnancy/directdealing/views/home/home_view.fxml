@@ -9,7 +9,7 @@
       <fx:include source="../navbar/navbar.fxml" />
       <Pane prefHeight="517.0" prefWidth="900.0">
          <children>
-            <ListView prefHeight="517.0" prefWidth="900.0" />
+            <ListView fx:id="offersListView" prefHeight="517.0" prefWidth="900.0" />
          </children>
       </Pane>
    </children>

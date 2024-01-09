@@ -8,53 +8,52 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class SceneController {
-    private Stage stage;
+    private final Stage stage;
     private Scene scene;
 
-    public void switchToLoginView(MouseEvent event) throws Exception {
+    public SceneController(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void switchToLoginView() throws Exception {
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Login");
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToSignView(MouseEvent event) throws Exception {
+    public void switchToSignView() throws Exception {
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/signin_view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Signin");
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToHome(ActionEvent event) throws Exception{
+    public void switchToHome() throws Exception{
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Login");
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToOffer(MouseEvent event) throws Exception{
+    public void switchToOffer() throws Exception{
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/new_offer.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToHomeWithMouse(MouseEvent event) throws Exception{
+    public void switchToHomeWithMouse() throws Exception{
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Login");
         stage.setScene(scene);
