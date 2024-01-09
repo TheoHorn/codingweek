@@ -25,7 +25,7 @@ public class Application {
     private final List<Observer> observers;
     private SceneController sceneController;
     private AccountManager accountManager;
-    private ContentManager contentManager;
+    private ContentDAO contentDAO;
     private OfferManager offerManager;
 
     private SlotDAO slotDAO;
@@ -37,7 +37,7 @@ public class Application {
         this.myProposals = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.accountManager = new AccountManager();
-        this.contentManager = new ContentManager();
+        this.contentDAO = new ContentDAO();
         this.offerManager = new OfferManager();
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
@@ -107,8 +107,8 @@ public class Application {
         return accountManager;
     }
 
-    public ContentManager getContentManager() {
-        return contentManager;
+    public ContentDAO getContentDAO() {
+        return contentDAO;
     }
 
     public OfferManager getOfferManager() {
