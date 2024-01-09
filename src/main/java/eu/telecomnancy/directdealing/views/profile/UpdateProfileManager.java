@@ -1,25 +1,13 @@
 package eu.telecomnancy.directdealing.views.profile;
 
-import eu.telecomnancy.directdealing.SceneController;
-import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.Application;
-import eu.telecomnancy.directdealing.model.account.User;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
+import eu.telecomnancy.directdealing.model.Observer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
-import java.util.EventListener;
-
-public class UpdateProfileManager {
+public class UpdateProfileManager implements Observer {
 
     @FXML
     private TextField name_field;
@@ -44,7 +32,7 @@ public class UpdateProfileManager {
     @FXML
     private Label modify_info_label;
 
-    private boolean isfailed;
+    private boolean isFailed;
 
     private Application app;
 
@@ -57,10 +45,15 @@ public class UpdateProfileManager {
         this.name_field.setText(this.app.getCurrentUser().getFirstName());
         this.surname_field.setText(this.app.getCurrentUser().getLastName());
         this.email_field.setText(this.app.getCurrentUser().getEmail());
-        if (isfailed){
+        this.modify_info_label.setVisible(false);
+        this.modify_password_label.setVisible(false);
+    }
+
+    public void updateField(){
+        if (!isFailed){
             this.modify_password_label.setVisible(true);
             this.modify_info_label.setVisible(true);
-            isfailed = false;
+            isFailed = false;
         }else{
             this.modify_password_label.setVisible(false);
             this.modify_info_label.setVisible(false);
@@ -69,39 +62,24 @@ public class UpdateProfileManager {
 
     @FXML
     public void updateProfile() throws Exception {
-        String name = this.name_field.getText();
-        String surname = this.surname_field.getText();
-        if (!(name.isEmpty() || surname.isEmpty())) {
-            this.app.getCurrentUser().setFirstName(name);
-            this.app.getCurrentUser().setLastName(surname);
-            isfailed = AccountManager.updateAccountInfo(this.app.getCurrentUser());
-        }
-        if (isfailed) {
-            app.getSceneController().switchToProfile();
-        } else {
-            app.getSceneController().switchToHome();
-        }
+        isFailed = this.app.updateCurrentAccount(this.name_field.getText(), this.surname_field.getText());
+        System.out.println(isFailed);
+        this.updateField();
     }
 
     @FXML
     public void updatePassword() throws Exception {
-        String oldPassword = this.old_password_field.getText();
-        String newPassword = this.new_password_field.getText();
-        String confirmPassword = this.confirm_password_field.getText();
-        if (newPassword.equals(confirmPassword)) {
-                isfailed = AccountManager.updatePasswordAccount(oldPassword, newPassword, this.app.getCurrentUser());
-        }
-        if (isfailed) {
-            app.getSceneController().switchToProfile();
-        } else {
-            app.getSceneController().switchToHome();
-        }
+        isFailed = this.app.updateCurrentPassword(this.old_password_field.getText(), this.new_password_field.getText(), this.confirm_password_field.getText());
+        System.out.println(isFailed);
+        this.updateField();
     }
 
     @FXML
-    public void deconnexion() throws Exception {
+    public void disconnection(){
         this.app.deleteCurrentUser();
-        app.getSceneController().switchToLoginView();
     }
 
+    @Override
+    public void update() {
+    }
 }
