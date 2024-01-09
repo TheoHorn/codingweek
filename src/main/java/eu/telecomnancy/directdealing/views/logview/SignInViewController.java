@@ -1,6 +1,5 @@
-package eu.telecomnancy.directdealing.views.accountcreating;
+package eu.telecomnancy.directdealing.views.logview;
 
-import eu.telecomnancy.directdealing.Main;
 import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
@@ -14,7 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class AccountCreatingController implements Observer {
+public class SignInViewController implements Observer {
     @FXML
     private TextField mail_textfield;
     @FXML
@@ -31,7 +30,7 @@ public class AccountCreatingController implements Observer {
     private Label statusLabel;
     private Application app;
 
-    public AccountCreatingController() {
+    public SignInViewController() {
         this.app = Application.getInstance();
     }
 

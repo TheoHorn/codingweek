@@ -1,7 +1,6 @@
 package eu.telecomnancy.directdealing;
 
 import eu.telecomnancy.directdealing.database.DatabaseAccess;
-import eu.telecomnancy.directdealing.views.accountlogin.LoginView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +23,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         app = eu.telecomnancy.directdealing.model.Application.getInstance();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/accountcreating/connexion_account.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/logview/login_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);

@@ -1,8 +1,7 @@
-package eu.telecomnancy.directdealing.views.accountlogin;
+package eu.telecomnancy.directdealing.views.logview;
 
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.AccountManager;
-import eu.telecomnancy.directdealing.Main;
 import javafx.event.ActionEvent;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
@@ -12,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class LoginView implements Observer {
+public class LoginViewController implements Observer {
     @FXML
     private TextField mail_TextField;
     @FXML
@@ -21,7 +20,7 @@ public class LoginView implements Observer {
     private Label statusLabel;
     private Application app;
 
-    public LoginView() {
+    public LoginViewController() {
         this.app = Application.getInstance();
     }
 
