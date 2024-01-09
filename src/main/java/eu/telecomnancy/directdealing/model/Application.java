@@ -3,6 +3,7 @@ package eu.telecomnancy.directdealing.model;
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
+import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
@@ -24,23 +25,25 @@ public class Application {
     private final List<Proposal> myProposals;
     private final List<Observer> observers;
     private SceneController sceneController;
-    private AccountManager accountManager;
+    private AccountDAO accountDAO;
     private ContentDAO contentDAO;
     private OfferManager offerManager;
 
     private SlotDAO slotDAO;
     private ReservationDAO reservationDAO;
+    private AccountManager accountManager;
 
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
         this.myProposals = new ArrayList<>();
         this.observers = new ArrayList<>();
-        this.accountManager = new AccountManager();
+        this.accountDAO = new AccountDAO();
         this.contentDAO = new ContentDAO();
         this.offerManager = new OfferManager();
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
+        this.accountManager = new AccountManager();
 
 //        test
         this.offers.add(new Proposal(null, null, null, false));
@@ -103,8 +106,8 @@ public class Application {
         this.sceneController = sceneController;
     }
 
-    public AccountManager getAccountManager() {
-        return accountManager;
+    public AccountDAO getAccountDAO() {
+        return accountDAO;
     }
 
     public ContentDAO getContentDAO() {
@@ -117,6 +120,10 @@ public class Application {
 
     public SlotDAO getSlotDAO() {
         return slotDAO;
+    }
+
+    public AccountManager getAccountManager() {
+        return accountManager;
     }
 
     public ReservationDAO getReservationDAO() {
@@ -139,7 +146,7 @@ public class Application {
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
                 User user = new User(lastname,firstname,mail,500.0, false,password);
-                accountManager.addUser(user);
+                accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
@@ -182,7 +189,7 @@ public class Application {
         if (!(name.isEmpty() || surname.isEmpty())) {
             this.getCurrentUser().setFirstName(name);
             this.getCurrentUser().setLastName(surname);
-            isGood = accountManager.updateAccountInfo(this.getCurrentUser());
+            isGood = accountDAO.save(this.getCurrentUser());
         }
         if (isGood) {
             sceneController.switchToHome();

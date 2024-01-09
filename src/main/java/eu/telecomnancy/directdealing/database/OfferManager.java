@@ -72,33 +72,6 @@ public class OfferManager {
         }
     }
 
-    public Account getAccount(String idContent) throws SQLException {
-
-        // getting account from mail primary key
-        String query = "SELECT * FROM OFFER WHERE idContent = ?";
-        ResultSet resultSet = null;
-
-        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setString(1, idContent);
-            resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) { // Check if there are results
-                // recup des infos
-                int idOwner = resultSet.getInt("idOwner");
-
-                // creation de l'objet
-                Account account = app.getAccountManager().getAccount(idOwner);
-
-                return account;
-            }
-        } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-        }
-
-        return null;
-    }
 
     public Content getContent(int idOwner) throws SQLException {
 
@@ -146,10 +119,10 @@ public class OfferManager {
 
                 if (request){
                     Slot slot =  app.getSlotDAO().getSlot(idSlot);
-                    return new Request((User) app.getAccountManager().getAccount(mail), app.getContentDAO().get(idContent), slot, true);
+                    return new Request((User) app.getAccountDAO().get(mail), app.getContentDAO().get(idContent), slot, true);
                 } else {
                     Slot slot =  app.getSlotDAO().getSlot(idSlot);
-                    return new Proposal((User) app.getAccountManager().getAccount(mail), app.getContentDAO().get(idContent), slot,false);
+                    return new Proposal((User) app.getAccountDAO().get(mail), app.getContentDAO().get(idContent), slot,false);
                 }
             }
         } finally {

@@ -3,7 +3,7 @@ package eu.telecomnancy.directdealing.database;
 import java.sql.*;
 
 public class DatabaseAccess {
-    static Connection connection;
+    public static Connection connection;
 
     private DatabaseAccess() throws SQLException {
         connectToDatabase();
