@@ -6,6 +6,7 @@ import eu.telecomnancy.directdealing.model.content.Content;
 
 public class Proposal extends Offer {
     public Proposal(User owner, Content content, Slot slot, boolean request) {
+
         super(owner, content, slot, request);
     }
 

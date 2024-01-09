@@ -4,25 +4,25 @@ import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Content;
 
+import java.sql.SQLException;
+
+import static eu.telecomnancy.directdealing.Main.app;
+
 public abstract class Offer {
     private User owner;
     private Content content;
-    private int id;
     private static int currentId;
     private boolean request;
     private Slot slot;
+    private int idOffer;
 
     public Offer(User owner, Content content, Slot slot, boolean request) {
         this.request = request;
         this.slot = slot;
         this.owner = owner;
         this.content = content;
-        this.id = currentId;
-        currentId++;
     }
 
-    public Offer(User owner, Content content) {
-    }
 
     public User getOwner() {
         return owner;
@@ -40,8 +40,8 @@ public abstract class Offer {
         this.content = content;
     }
 
-    public int getId(){
-        return this.id;
+    public int getIdOffer(){
+        return this.idOffer;
     }
 
     public Slot getSlot() {

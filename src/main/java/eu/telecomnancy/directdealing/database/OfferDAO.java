@@ -20,7 +20,7 @@ public class OfferDAO {
         ResultSet resultSet = null;
         boolean find = false;
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, offer.getId());
+            preparedStatement.setInt(1, offer.getIdOffer());
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
@@ -37,10 +37,10 @@ public class OfferDAO {
                     }
                     preparedStatementUpdate.setInt(3, offer.getContent().getId());
                     preparedStatementUpdate.setInt(4, offer.getSlot().getId());
-                    preparedStatementUpdate.setInt(5, offer.getId());
+                    preparedStatementUpdate.setInt(5, offer.getIdOffer());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
-                    return offer.getId();
+                    return offer.getIdOffer();
                 }
             }
         } finally {
