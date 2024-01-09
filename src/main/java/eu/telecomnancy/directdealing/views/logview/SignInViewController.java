@@ -37,7 +37,7 @@ public class SignInViewController implements Observer {
 
     public void pressCreationButton(ActionEvent event) throws Exception {
         boolean err = app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText());
-        if (err) {
+        if (!err) {
             statusLabel.setText("Une erreur est survenue");
         }
     }

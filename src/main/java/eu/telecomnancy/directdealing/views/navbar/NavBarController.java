@@ -22,7 +22,6 @@ public class NavBarController {
 
     @FXML
     public void backToHome(MouseEvent event) throws Exception {
-        System.out.println("hello");
         app.getSceneController().switchToHome();
     }
 
