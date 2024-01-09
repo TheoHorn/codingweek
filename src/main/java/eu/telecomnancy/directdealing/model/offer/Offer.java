@@ -1,4 +1,8 @@
-package eu.telecomnancy.directdealing.model;
+package eu.telecomnancy.directdealing.model.offer;
+
+import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.Content;
 
 public abstract class Offer {
     private User owner;

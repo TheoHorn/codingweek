@@ -1,11 +1,7 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.Admin;
 import eu.telecomnancy.directdealing.model.Slot;
-import eu.telecomnancy.directdealing.model.User;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 
 public class SlotManager {

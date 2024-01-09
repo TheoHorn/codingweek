@@ -1,9 +1,12 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.*;
+import eu.telecomnancy.directdealing.model.account.Account;
+import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.Content;
+import eu.telecomnancy.directdealing.model.offer.Offer;
+import eu.telecomnancy.directdealing.model.offer.Proposal;
+import eu.telecomnancy.directdealing.model.offer.Request;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

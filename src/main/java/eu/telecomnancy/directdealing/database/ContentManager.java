@@ -1,17 +1,14 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.*;
+import eu.telecomnancy.directdealing.model.content.Content;
+import eu.telecomnancy.directdealing.model.content.Equipment;
+import eu.telecomnancy.directdealing.model.content.Services;
 import javafx.scene.image.Image;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-
-import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
 
 public class ContentManager {
     public static void addContent(Content content) throws SQLException {

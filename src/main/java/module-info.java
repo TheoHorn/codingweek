@@ -9,4 +9,7 @@ module eu.telecomnancy.directdealing {
     exports eu.telecomnancy.directdealing;
     exports eu.telecomnancy.directdealing.views.logview;
     exports eu.telecomnancy.directdealing.model;
+    exports eu.telecomnancy.directdealing.model.account;
+    exports eu.telecomnancy.directdealing.model.content;
+    exports eu.telecomnancy.directdealing.model.offer;
 }

@@ -1,4 +1,4 @@
-package eu.telecomnancy.directdealing.model;
+package eu.telecomnancy.directdealing.model.content;
 
 import javafx.scene.image.Image;
 

@@ -1,14 +1,13 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.Account;
-import eu.telecomnancy.directdealing.model.Admin;
-import eu.telecomnancy.directdealing.model.User;
+import eu.telecomnancy.directdealing.model.account.Account;
+import eu.telecomnancy.directdealing.model.account.Admin;
+import eu.telecomnancy.directdealing.model.account.User;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 
-import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.generateStrongPasswordHash;
 import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
 
 public class AccountManager {

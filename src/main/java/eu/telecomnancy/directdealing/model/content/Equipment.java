@@ -1,8 +1,6 @@
-package eu.telecomnancy.directdealing.model;
+package eu.telecomnancy.directdealing.model.content;
 
 import javafx.scene.image.Image;
-
-import java.util.Date;
 
 public class Equipment extends Content{
     public Equipment(String title, String category, String description, Image image) {

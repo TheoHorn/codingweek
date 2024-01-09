@@ -1,4 +1,4 @@
-package eu.telecomnancy.directdealing.model;
+package eu.telecomnancy.directdealing.model.account;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;

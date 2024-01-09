@@ -1,5 +1,8 @@
 package eu.telecomnancy.directdealing.model;
 
+import eu.telecomnancy.directdealing.model.account.Account;
+import eu.telecomnancy.directdealing.model.offer.Offer;
+
 import java.util.ArrayList;
 import java.util.List;
 
