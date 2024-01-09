@@ -42,6 +42,51 @@ public class AccountManager {
             e.printStackTrace();
         }
     }
+
+    public static boolean updateAccountInfo(Account account) throws SQLException {
+        // Check database connection
+        if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
+            System.err.println("Database connection is not open.");
+            return false; // or throw an exception if needed
+        }
+
+        String query = "UPDATE ACCOUNT SET lastname = ?, firstname = ? WHERE mail = ?";
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setString(1, account.getLastName());
+            preparedStatement.setString(2, account.getFirstName());
+            preparedStatement.setString(5, account.getPassword());
+
+        } catch (SQLException e) {
+            // Handle SQL exceptions
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean updateAccountPassword(Account account) throws SQLException{
+        // Check database connection
+        if (DatabaseAccess.connection == null || DatabaseAccess.connection.isClosed()) {
+            System.err.println("Database connection is not open.");
+            return false; // or throw an exception if needed
+        }
+
+        String query = "UPDATE ACCOUNT SET password = ? WHERE mail = ?";
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setString(1, account.getPassword());
+            preparedStatement.setString(2, account.getEmail());
+
+        } catch (SQLException e) {
+            // Handle SQL exceptions
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+
     public static void addAdmin(Admin admin) throws SQLException {
         // adding account to the database
         String query = "INSERT INTO ACCOUNT (id, mail, lastname, firstname, credit, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -179,5 +224,13 @@ public class AccountManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean updatePasswordAccount(String old_password, String new_password, Account account) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+        if (login(account.getEmail(), old_password) != null) {
+            account.setPassword(new_password);
+            return updateAccountPassword(account);
+        }
+        return false;
     }
 }

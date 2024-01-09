@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class SceneController {
     private Stage stage;
     private Scene scene;
@@ -36,7 +38,7 @@ public class SceneController {
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
-        stage.setTitle("TELECOM Nancy DirectDealing - Login");
+        stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
         stage.show();
     }
@@ -62,4 +64,13 @@ public class SceneController {
     }
 
 
+    public void switchToProfile(ActionEvent event) throws IOException {
+        Main.app.removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/profil/profil_view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root.load());
+        stage.setTitle("TELECOM Nancy DirectDealing - Profil");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
