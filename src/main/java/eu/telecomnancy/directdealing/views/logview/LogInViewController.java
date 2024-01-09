@@ -11,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class LoginViewController implements Observer {
+public class LogInViewController implements Observer {
     @FXML
     private TextField mail_TextField;
     @FXML
@@ -20,7 +20,7 @@ public class LoginViewController implements Observer {
     private Label statusLabel;
     private Application app;
 
-    public LoginViewController() {
+    public LogInViewController() {
         this.app = Application.getInstance();
     }
 
