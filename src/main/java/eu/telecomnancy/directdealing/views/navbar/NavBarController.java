@@ -16,7 +16,7 @@ public class NavBarController {
     private Label add_offerLabel;
 
     @FXML
-    public void switchToNewOffer(MouseEvent event) throws Exception {
+    public void switchToNewOffer() throws Exception {
         app.getSceneController().switchToOffer();
     }
 

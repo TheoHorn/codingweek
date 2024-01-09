@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing;
 
+import eu.telecomnancy.directdealing.model.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +17,7 @@ public class SceneController {
     }
 
     public void switchToLoginView() throws Exception {
-        Main.app.removeAllObservers();
+        Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - LogIn");
@@ -37,6 +38,7 @@ public class SceneController {
         Main.app.removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
         scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
         stage.show();

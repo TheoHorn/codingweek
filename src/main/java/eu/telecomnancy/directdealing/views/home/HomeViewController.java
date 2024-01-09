@@ -14,10 +14,12 @@ public class HomeViewController implements Observer {
 
     public HomeViewController() {
         this.app = Application.getInstance();
+        this.app.addObserver(this);
     }
 
     @Override
     public void update() {
+        System.out.println("update");
         offersListView.getItems().clear();
         this.app.getOffers().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());
