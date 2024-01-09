@@ -16,9 +16,7 @@ public class SceneController {
     private Scene scene;
 
     public void switchToLoginView(MouseEvent event) throws Exception {
-        FXMLLoader root = new FXMLLoader();
-        root.setLocation(getClass().getResource("views/accountcreating/connexion_account.fxml"));
-        root.setControllerFactory(iC -> new LoginView(Main.app));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("views/accountcreating/connexion_account.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Login");
@@ -27,9 +25,7 @@ public class SceneController {
     }
 
     public void switchToSignView(MouseEvent event) throws Exception {
-        FXMLLoader root = new FXMLLoader();
-        root.setLocation(getClass().getResource("views/accountcreating/create_account.fxml"));
-        root.setControllerFactory(iC -> new AccountCreatingController(Main.app));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("views/accountcreating/create_account.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Signin");
@@ -38,9 +34,7 @@ public class SceneController {
     }
 
     public void switchToHome(ActionEvent event) throws Exception{
-        FXMLLoader root = new FXMLLoader();
-        root.setLocation(getClass().getResource("views/home/home_view.fxml"));
-//        root.setControllerFactory(iC -> new AccountCreatingController(Main.app));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("views/home/home_view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Login");

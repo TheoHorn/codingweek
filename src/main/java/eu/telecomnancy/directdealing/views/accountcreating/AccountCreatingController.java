@@ -48,7 +48,7 @@ public class AccountCreatingController implements Observer {
             if (!accountManager.isSave(localMail)){
                 User user = new User(localLastname,localFirstname,localMail,500.0, false,localPassword);
                 accountManager.addUser(user);
-                Main.currentUser = user;
+                app.setCurrentUser(user);
                 SceneController sceneController = new SceneController();
                 sceneController.switchToHome(event);
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
