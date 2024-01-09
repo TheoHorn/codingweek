@@ -174,7 +174,7 @@ public class Application {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
                 Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
-                getOfferDAO().addRequest(request);
+                getOfferDAO().save(request);
             } else {
                 Service service = new Service(title, "", description, null, price);
                 Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
