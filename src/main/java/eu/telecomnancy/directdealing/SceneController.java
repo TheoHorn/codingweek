@@ -61,4 +61,13 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void switchToMyProposal() throws Exception {
+        Main.app.removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/proposal/my_proposal_view.fxml"));
+        scene = new Scene(root.load());
+        stage.setTitle("TELECOM Nancy DirectDealing - My proposal");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

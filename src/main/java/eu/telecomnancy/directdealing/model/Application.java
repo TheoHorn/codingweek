@@ -24,6 +24,7 @@ public class Application {
     public static volatile Application instance = null;
     private Account currentUser;
     private final List<Offer> offers;
+    private final List<Proposal> myProposals;
     private final List<Observer> observers;
     private SceneController sceneController;
     private AccountManager accountManager;
@@ -36,6 +37,7 @@ public class Application {
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
+        this.myProposals = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.accountManager = new AccountManager();
         this.contentManager = new ContentManager();
@@ -90,6 +92,10 @@ public class Application {
 
     public List<Offer> getOffers() {
         return offers;
+    }
+
+    public List<Proposal> getMyProposals(){
+        return myProposals;
     }
 
     public SceneController getSceneController() {
