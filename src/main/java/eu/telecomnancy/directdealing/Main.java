@@ -23,6 +23,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         app = eu.telecomnancy.directdealing.model.Application.getInstance();
+        app.setSceneController(new SceneController(stage));
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

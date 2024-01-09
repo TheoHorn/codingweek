@@ -26,19 +26,25 @@ public class LogInViewController implements Observer {
 
     @FXML
     public void switchToSign(MouseEvent event) throws Exception {
-        SceneController sceneController = new SceneController();
-        sceneController.switchToSignView(event);
+//        SceneController sceneController = new SceneController();
+//        sceneController.switchToSignView(event);
+        app.getSceneController().switchToSignView();
     }
 
     @FXML
     public void loginButton(ActionEvent event) throws Exception {
-        String localMail = mail_TextField.getText();
-        String localPassword = password_TextField.getText();
-        app.setCurrentUser(AccountManager.login(localMail, localPassword));
-        if (app.getCurrentUser() != null) {
-            SceneController sceneController = new SceneController();
-            sceneController.switchToHome(event);
-        } else {
+//        String localMail = mail_TextField.getText();
+//        String localPassword = password_TextField.getText();
+//        app.setCurrentUser(AccountManager.login(localMail, localPassword));
+//        if (app.getCurrentUser() != null) {
+//            SceneController sceneController = new SceneController();
+//            sceneController.switchToHome(event);
+//        } else {
+//            statusLabel.setText("Mot de passe ou email incorrect");
+//            System.out.println("Login failed");
+//        }
+        boolean err = app.login(mail_TextField.getText(), password_TextField.getText());
+        if (err) {
             statusLabel.setText("Mot de passe ou email incorrect");
             System.out.println("Login failed");
         }
