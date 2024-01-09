@@ -147,6 +147,10 @@ public class Application {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
+                if (!password.equals(password_confirm)){
+                    System.out.println("[Debug:AccountCreatingController] Mot de passe non identique");
+                    throw new Exception("Les mots de passe sont différents");
+                }
                 User user = new User(lastname,firstname,mail,500.0, false,password);
                 accountManager.addUser(user);
                 setCurrentUser(user);
