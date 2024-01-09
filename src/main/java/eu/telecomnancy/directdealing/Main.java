@@ -24,7 +24,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         app = eu.telecomnancy.directdealing.model.Application.getInstance();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/accountcreating/connexion_account.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/eu/telecomnancy/directdealing/views/accountcreating/connexion_account.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
