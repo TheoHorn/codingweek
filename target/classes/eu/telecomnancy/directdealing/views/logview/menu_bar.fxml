@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
+<MenuBar prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.MenuBarController">
+   <menus>
+      <Menu mnemonicParsing="false" text="Fichier">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#newDB" text="Nouvelle BDD" />
+            <MenuItem mnemonicParsing="false" onAction="#openDB" text="Importer BDD" />
+         </items>
+      </Menu>
+   </menus>
+</MenuBar>
