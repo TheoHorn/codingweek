@@ -42,7 +42,16 @@ public abstract class Offer {
      * @param request Boolean to know if the offer is a request or a proposal
      * @throws SQLException if the offer is not save in the database
      */
-    public Offer(User owner, Content content, Slot slot, boolean request) {
+    public Offer(User owner, Content content, Slot slot, boolean request) throws SQLException {
+        this.request = request;
+        this.slot = slot;
+        this.owner = owner;
+        this.content = content;
+        this.idOffer = app.getOfferDAO().save(this);
+    }
+
+    public Offer(int idOffer, User owner, Content content, Slot slot, boolean request) {
+        this.idOffer = idOffer;
         this.request = request;
         this.slot = slot;
         this.owner = owner;

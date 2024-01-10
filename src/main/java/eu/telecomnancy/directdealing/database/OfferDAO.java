@@ -106,6 +106,7 @@ public class OfferDAO {
 
             if (resultSet.next()) { // Check if there are results
                 // recup des infos
+
                 String mail = resultSet.getString("mail");
                 boolean request = resultSet.getBoolean("isRequest");
                 int idContent = resultSet.getInt("idContent");
@@ -130,7 +131,7 @@ public class OfferDAO {
 
     public List<Offer> get() throws SQLException{
         // getting offers from idContent primary key
-        String query = "SELECT idContent FROM OFFER";
+        String query = "SELECT idOffer FROM OFFER";
         ResultSet resultSet = null;
 
         List<Offer> offers = new ArrayList<Offer>();
@@ -141,8 +142,8 @@ public class OfferDAO {
 
             while (resultSet.next()) { // Check if there are results
                 // recup des infos
-                int idContent = resultSet.getInt("idContent");
-                offers.add(get(idContent));
+                int idOffer = resultSet.getInt("idOffer");
+                offers.add(get(idOffer));
             }
         } finally {
             if (resultSet != null) {
@@ -154,7 +155,7 @@ public class OfferDAO {
 
     public List<Offer> get(User user) throws SQLException {
         // getting all offers from user
-        String query = "SELECT idContent FROM OFFER WHERE mail = ?";
+        String query = "SELECT idOffer FROM OFFER WHERE mail = ?";
         ResultSet resultSet = null;
         List<Offer> offers = new ArrayList<Offer>();
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
@@ -163,8 +164,8 @@ public class OfferDAO {
 
             if (resultSet.next()) { // Check if there are results
                 // recup des infos
-                int idContent = resultSet.getInt("idContent");
-                offers.add(get(idContent));
+                int idOffer = resultSet.getInt("idOffer");
+                offers.add(get(idOffer));
                 return offers;
             }
         } finally {

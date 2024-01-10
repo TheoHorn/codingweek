@@ -31,5 +31,6 @@ public class Service extends Content{
     public Service(int idService, String title, String category, String description, Image image, double price) {
         super(title, category, description, image, price);
         super.type = 2;
+        super.setIdContent(idService);
     }
 }

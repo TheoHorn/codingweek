@@ -117,10 +117,10 @@ public class ContentDAO {
 
                 // creation de l'objet
                 if (isEquipment) {
-                    return new Equipment(title, category, description, image, price) {
+                    return new Equipment(idContent, title, category, description, image, price) {
                     };
                 } else {
-                    return new Service(title, category, description, image, price);
+                    return new Service(idContent, title, category, description, image, price);
                 }
             }
         } finally {
