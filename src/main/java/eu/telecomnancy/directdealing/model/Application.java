@@ -3,12 +3,14 @@ package eu.telecomnancy.directdealing.model;
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
+import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -18,30 +20,33 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
+import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.generateStrongPasswordHash;
 
 public class Application {
     public static volatile Application instance = null;
     private Account currentUser;
     private final List<Offer> offers;
+    private final List<Proposal> myProposals;
     private final List<Observer> observers;
     private SceneController sceneController;
+    private AccountDAO accountDAO;
+    private ContentDAO contentDAO;
+    private OfferDAO offerDAO;
+    private SlotDAO slotDAO;
+    private ReservationDAO reservationDAO;
     private AccountManager accountManager;
-    private ContentManager contentManager;
-    private OfferManager offerManager;
-
-    private SlotManager slotManager;
-    private ReservationManager reservationManager;
 
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
+        this.myProposals = new ArrayList<>();
         this.observers = new ArrayList<>();
+        this.accountDAO = new AccountDAO();
+        this.contentDAO = new ContentDAO();
+        this.offerDAO = new OfferDAO();
+        this.slotDAO = new SlotDAO();
+        this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
-        this.contentManager = new ContentManager();
-        this.offerManager = new OfferManager();
-        this.slotManager = new SlotManager();
-        this.reservationManager = new ReservationManager();
 
 //        test
         this.offers.add(new Proposal(null, null, null, false));
@@ -92,6 +97,10 @@ public class Application {
         return offers;
     }
 
+    public List<Proposal> getMyProposals(){
+        return myProposals;
+    }
+
     public SceneController getSceneController() {
         return sceneController;
     }
@@ -100,24 +109,28 @@ public class Application {
         this.sceneController = sceneController;
     }
 
+    public AccountDAO getAccountDAO() {
+        return accountDAO;
+    }
+
+    public ContentDAO getContentDAO() {
+        return contentDAO;
+    }
+
+    public OfferDAO getOfferDAO() {
+        return offerDAO;
+    }
+
+    public SlotDAO getSlotDAO() {
+        return slotDAO;
+    }
+
     public AccountManager getAccountManager() {
         return accountManager;
     }
 
-    public ContentManager getContentManager() {
-        return contentManager;
-    }
-
-    public OfferManager getOfferManager() {
-        return offerManager;
-    }
-
-    public SlotManager getSlotManager() {
-        return slotManager;
-    }
-
-    public ReservationManager getReservationManager() {
-        return reservationManager;
+    public ReservationDAO getReservationDAO() {
+        return reservationDAO;
     }
 
     public boolean login(String mail, String password) throws Exception {
@@ -125,30 +138,35 @@ public class Application {
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
             notifyObservers();
-            return true;
+        } else {
+            throw new Exception("Mot de passe ou email incorrect");
         }
         System.out.println("Login failed");
         return false;
     }
 
-    public int signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
+    public void signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
-                User user = new User(lastname,firstname,mail,500.0, false,password);
-                accountManager.addUser(user);
+                if (!password.equals(password_confirm)){
+                    System.out.println("[Debug:AccountCreatingController] Mot de passe non identique");
+                    throw new Exception("Les mots de passe sont différents");
+                }
+                String generateStrongPasswordHash;
+                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password));
+                accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
-                return 0;
             }
             else {
                 System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
-                return 1;
+                throw new Exception("Email déjà utilisé");
             }
         } else {
             System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
-            return 2;
+            throw new Exception("Veuillez remplir tous les champs");
         }
     }
 
@@ -164,27 +182,25 @@ public class Application {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
                 Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
-                getOfferManager().addRequest(request);
+                getOfferDAO().save(request);
             } else {
                 Service service = new Service(title, "", description, null, price);
                 Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
-                getOfferManager().addProposal(proposal);
+                getOfferDAO().save(proposal);
             }
             return true;
         }
     }
 
     public boolean updateCurrentAccount(String name, String surname) throws Exception {
-        boolean isGood = false;
         if (!(name.isEmpty() || surname.isEmpty())) {
             this.getCurrentUser().setFirstName(name);
             this.getCurrentUser().setLastName(surname);
-            isGood = accountManager.updateAccountInfo(this.getCurrentUser());
+            accountDAO.save(this.getCurrentUser());;
+            notifyObservers();
+            return true;
         }
-        if (isGood) {
-            sceneController.switchToHome();
-        }
-        return isGood;
+        return false;
     }
 
     public boolean updateCurrentPassword(String oldPassword, String newPassword, String confirmPassword) throws Exception {
@@ -196,5 +212,14 @@ public class Application {
            sceneController.switchToHome();
         }
         return isGood;
+    }
+
+    public void createNewDatabaseFile(File file) throws SQLException {
+        DatabaseAccess.createDatabase(file);
+        DatabaseAccess.connectToDatabase(file.getAbsolutePath());
+    }
+
+    public void openDatabaseFile(File file) throws SQLException {
+        DatabaseAccess.connectToDatabase(file.getAbsolutePath());
     }
 }

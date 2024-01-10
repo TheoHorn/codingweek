@@ -99,10 +99,6 @@ Download and install the latest version of [JavaFX](https://openjfx.io/openjfx-d
    ```sh
    git clone https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12.git
    ```
-2. Build all
-   ```sh
-   ./mvnw clean install -DskipTest
-   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,8 +109,17 @@ Download and install the latest version of [JavaFX](https://openjfx.io/openjfx-d
 ### Launch the application
 
 ```sh
-USAGE: ./mvnw clean javafx:run
+cd codingweek-12/
 ```
+
+then
+
+```sh
+cd dist
+java --module-path ${JAVAFX_HOME}/lib --add-modules=javafx.base,javafx.controls,javafx.fxml -jar direct-dealing.jar
+```
+
+assuming `${JAVAFX_HOME}` is the path to your JavaFX installation.
 
 <!-- ROADMAP -->
 
@@ -129,13 +134,13 @@ USAGE: ./mvnw clean javafx:run
     - [x] Connexion à un compte existant de la DB
 
 2. **Ajout d'offres**
-    - [ ] Représentation des offres
-      - [ ] Classes Java
-      - [ ] Table dans la DB
-    - [ ] FXML offres
-    - [ ] Création d'une offre
-      - [ ] FXML Création d'une offre
-      - [ ] Stockage en DB
+    - [x] Représentation des offres
+      - [x] Classes Java
+      - [x] Table dans la DB
+    - [x] FXML offres
+    - [x] Création d'une offre
+      - [x] FXML Création d'une offre
+      - [x] Stockage en DB
 
 See the [open issues](https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12/-/issues) for a full list of proposed features (and known issues).
 

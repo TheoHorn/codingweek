@@ -26,6 +26,7 @@
 
 # Package Files #
 *.jar
+!direct-dealing.jar
 *.war
 *.nar
 *.ear

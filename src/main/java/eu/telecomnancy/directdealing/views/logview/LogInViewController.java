@@ -1,7 +1,5 @@
 package eu.telecomnancy.directdealing.views.logview;
 
-import eu.telecomnancy.directdealing.SceneController;
-import eu.telecomnancy.directdealing.database.AccountManager;
 import javafx.event.ActionEvent;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
@@ -43,9 +41,11 @@ public class LogInViewController implements Observer {
 //            statusLabel.setText("Mot de passe ou email incorrect");
 //            System.out.println("Login failed");
 //        }
-        boolean err = app.login(mail_TextField.getText(), password_TextField.getText());
-        if (!err) {
-            statusLabel.setText("Mot de passe ou email incorrect");
+        try {
+            app.login(mail_TextField.getText(), password_TextField.getText());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            statusLabel.setText(e.getMessage());
             System.out.println("Login failed");
         }
     }

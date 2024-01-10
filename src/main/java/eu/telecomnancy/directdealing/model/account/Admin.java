@@ -5,7 +5,7 @@ import java.security.spec.InvalidKeySpecException;
 
 public class Admin extends Account {
     public Admin(String lastName, String firstName, String email, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        super(lastName, firstName, email, password);
+        super(lastName, firstName, email, password, true);
     }
 
     @Override

@@ -29,4 +29,9 @@ public class NavBarController {
     public void switchToProfile() throws Exception {
         app.getSceneController().switchToProfile();
     }
+
+    @FXML
+    public void switchToMyProposal() throws Exception {
+        app.getSceneController().switchToMyProposal();
+    }
 }

@@ -1,11 +1,7 @@
 package eu.telecomnancy.directdealing.views.logview;
 
-import eu.telecomnancy.directdealing.Main;
-import eu.telecomnancy.directdealing.database.AccountManager;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
-import eu.telecomnancy.directdealing.model.account.User;
-import eu.telecomnancy.directdealing.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,20 +32,12 @@ public class SignInViewController implements Observer {
     }
 
     public void pressCreationButton(ActionEvent event) throws Exception {
-        int err = app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText());
-        switch (err){
-            case 0 :
-                app.getSceneController().switchToHome();
-                break;
-            case 1 :
-                statusLabel.setText("Email déjà utilisé");
-                System.out.println("SignIn failed");
-                break;
-            case 2 :
-                statusLabel.setText("Tous les champs doivent être remplis");
-                System.out.println("Login failed");
-                break;
+        try {
+            app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText());
+        } catch (Exception e) {
+            statusLabel.setText(e.getMessage());
         }
+
     }
 
     @FXML

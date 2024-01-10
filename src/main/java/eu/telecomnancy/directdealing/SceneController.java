@@ -16,6 +16,10 @@ public class SceneController {
         this.stage = stage;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public void switchToLoginView() throws Exception {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
@@ -26,7 +30,7 @@ public class SceneController {
     }
 
     public void switchToSignView() throws Exception {
-        Main.app.removeAllObservers();
+        Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/signin_view.fxml"));
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - SignIn");
@@ -35,7 +39,7 @@ public class SceneController {
     }
 
     public void switchToHome() throws Exception{
-        Main.app.removeAllObservers();
+        Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
         scene = new Scene(root.load());
         Application.getInstance().notifyObservers();
@@ -45,7 +49,7 @@ public class SceneController {
     }
 
     public void switchToOffer() throws Exception{
-        Main.app.removeAllObservers();
+        Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/new_offer.fxml"));
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
@@ -54,10 +58,20 @@ public class SceneController {
     }
 
     public void switchToProfile() throws Exception {
-        Main.app.removeAllObservers();
+        Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/profil/profil_view.fxml"));
         scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Profil");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToMyProposal() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/proposal/my_proposal_view.fxml"));
+        scene = new Scene(root.load());
+        stage.setTitle("TELECOM Nancy DirectDealing - My proposal");
         stage.setScene(scene);
         stage.show();
     }

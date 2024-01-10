@@ -1,24 +1,12 @@
 package eu.telecomnancy.directdealing.views.offer;
 
-import eu.telecomnancy.directdealing.database.OfferManager;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
-import eu.telecomnancy.directdealing.model.Slot;
-import eu.telecomnancy.directdealing.model.account.User;
-import eu.telecomnancy.directdealing.model.content.Service;
-import eu.telecomnancy.directdealing.model.offer.Proposal;
-import eu.telecomnancy.directdealing.model.offer.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.w3c.dom.Text;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
-import java.util.Date;
 
 public class NewOfferController implements Observer {
     @FXML
