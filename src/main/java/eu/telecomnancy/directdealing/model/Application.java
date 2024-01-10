@@ -76,6 +76,11 @@ public class Application {
     private AccountManager accountManager;
 
     /**
+     * the last offer used
+     */
+    private Offer lastOffer;
+
+    /**
      * Constructor of the application that initialize the lists
      */
     private Application() {
@@ -320,5 +325,17 @@ public class Application {
      */
     public void openDatabaseFile(File file) throws SQLException {
         DatabaseAccess.connectToDatabase(file.getAbsolutePath());
+    }
+
+    public Offer getLastOffer() {
+        if (lastOffer != null){
+            return lastOffer;
+        }else{
+            return offers.get(0);
+        }
+    }
+
+    public void setLastOffer(Offer item) {
+        this.lastOffer = item;
     }
 }
