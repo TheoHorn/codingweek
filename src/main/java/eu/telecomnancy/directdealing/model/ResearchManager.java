@@ -4,6 +4,7 @@ import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.content.Content;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,16 +94,26 @@ public class ResearchManager {
                 result.add(o);
             }
         }
-        System.out.println(result);
         this.filteredOffers= result;
     }
 
 
-    public void filterOffersByCategory(){
-        return ;
+    public void filterOffersByCategory(String text) throws SQLException {
+        List<Offer> result = new ArrayList<>();
+        for(Offer o: this.researchedOffers){
+            Content c = app.getContentDAO().get(o.getIdContent());
+            if(c.getCategory().equals(text)){
+                result.add(o);
+            }
+        }
+        this.filteredOffers= result;
     }
 
     public void filterOffersByLocation(){
+        return ;
+    }
+
+    public void filterOffersByEvaluation(){
         return ;
     }
 
