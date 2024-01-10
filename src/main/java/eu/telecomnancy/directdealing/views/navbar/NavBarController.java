@@ -5,12 +5,17 @@ import eu.telecomnancy.directdealing.model.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 /**
  * NavBarController class
  */
 public class NavBarController {
+    /**
+     * TextField for the search
+     */
+    public TextField search_text;
     /**
      * Label for the add offer
      */
@@ -85,6 +90,7 @@ public class NavBarController {
      */
     @FXML
     public void searchUpdate(ActionEvent event) throws Exception {
+        app.getResearchManager().searchOffer(search_text.getText());
         app.getSceneController().switchToHomeAfterResearch();
     }
 }

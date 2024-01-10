@@ -14,39 +14,56 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <MenuButton mnemonicParsing="false" text="Localisation">
+            <MenuButton mnemonicParsing="false" text="Localisation" fx:id="filter_location">
                <items>
-                  <CheckMenuItem mnemonicParsing="false" />
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 1km" />
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 2km" />
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 5km" />
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 10km" />
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 50km" />
                </items>
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Période">
+            <MenuButton mnemonicParsing="false" text="Période" fx:id="filter_date">
                <items>
-                  <CheckMenuItem mnemonicParsing="false" />
+                  <CheckMenuItem mnemonicParsing="false" text="Aujourd'hui" />
+                  <CheckMenuItem mnemonicParsing="false" text="Demain" />
+                  <CheckMenuItem mnemonicParsing="false" text="Cette semaine" />
+                  <CheckMenuItem mnemonicParsing="false" text="Ce mois-ci" />
+                  <CheckMenuItem mnemonicParsing="false" text="Cette année" />
                </items>
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Evaluation">
+            <MenuButton mnemonicParsing="false" text="Evaluation" fx:id="filter_evaluation">
                <items>
-                  <CheckMenuItem mnemonicParsing="false" />
+                 <CheckMenuItem mnemonicParsing="false" text="1 étoile" />
+                 <CheckMenuItem mnemonicParsing="false" text="2 étoiles" />
+                 <CheckMenuItem mnemonicParsing="false" text="3 étoiles" />
+                 <CheckMenuItem mnemonicParsing="false" text="4 étoiles" />
+                 <CheckMenuItem mnemonicParsing="false" text="5 étoiles" />
                </items>
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Price">
+            <MenuButton mnemonicParsing="false" text="Price" fx:id="filter_price">
                <items>
-                  <CheckMenuItem mnemonicParsing="false" />
+                  <CheckMenuItem mnemonicParsing="false" text="Gratuit"/>
+                    <CheckMenuItem mnemonicParsing="false" text="Moins de 5€"/>
+                    <CheckMenuItem mnemonicParsing="false" text="Moins de 10€"/>
+                    <CheckMenuItem mnemonicParsing="false" text="Moins de 20€"/>
+                    <CheckMenuItem mnemonicParsing="false" text="Moins de 50€"/>
+                    <CheckMenuItem mnemonicParsing="false" text="Moins de 100€"/>
                </items>
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <Button mnemonicParsing="false" onAction="#updateFiltersApply" prefHeight="28.0" prefWidth="114.0" text="Ajouter les filtres" />
+            <Button mnemonicParsing="false" onAction="#applyFilter" prefHeight="28.0" prefWidth="114.0" text="Ajouter les filtres" />
          </children>
       </HBox>
       <Pane prefHeight="517.0" prefWidth="900.0">

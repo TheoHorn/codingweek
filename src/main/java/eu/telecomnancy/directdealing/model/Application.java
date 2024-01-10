@@ -81,6 +81,11 @@ public class Application {
     private Offer lastOffer;
 
     /**
+     * the research manager
+     */
+    private ResearchManager researchManager;
+
+    /**
      * Constructor of the application that initialize the lists
      */
     private Application() {
@@ -94,6 +99,7 @@ public class Application {
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
+        this.researchManager = new ResearchManager();
     }
 
     /**
@@ -347,5 +353,13 @@ public class Application {
 
     public void setLastOffer(Offer item) {
         this.lastOffer = item;
+    }
+
+    public void researchOffer(String motRecherche) throws Exception {
+        researchManager.searchOffer(motRecherche);
+    }
+
+    public ResearchManager getResearchManager() {
+        return researchManager;
     }
 }
