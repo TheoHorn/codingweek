@@ -73,6 +73,7 @@ public class OfferDisplayController implements Observer {
         Account owner = app.getAccountDAO().get(offer.getMail());
         this.title_label.setText(content.getTitle());
         this.description_label.setText(content.getDescription());
+        this.image_view.setImage(new Image(content.getImage().toURI().toString()));
         this.price_label.setText(String.valueOf(content.getPrice()));
         this.category_label.setText(content.getCategory());
         // this.disponibility_label.setText(slot.getDisponibility());

@@ -5,10 +5,10 @@ import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
 import javafx.scene.image.Image;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.*;
 
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
@@ -40,13 +40,15 @@ public class ContentDAO {
                     preparedStatementUpdate.setString(1, content.getTitle());
                     preparedStatementUpdate.setString(2, content.getCategory());
                     preparedStatementUpdate.setString(3, content.getDescription());
-                    preparedStatementUpdate.setObject(4, content.getImage());
+                    preparedStatementUpdate.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
                     preparedStatementUpdate.setDouble(5, content.getPrice());
                     preparedStatementUpdate.setBoolean(6, content.isEquipment());
                     preparedStatementUpdate.setInt(7, content.getIdContent());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
                     return content.getIdContent();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             } else {
                 try (Statement statement = DatabaseAccess.connection.createStatement()) {
@@ -60,7 +62,7 @@ public class ContentDAO {
                         preparedStatementInsert.setString(1, content.getTitle());
                         preparedStatementInsert.setString(2, content.getCategory());
                         preparedStatementInsert.setString(3, content.getDescription());
-                        preparedStatementInsert.setObject(4, content.getImage());
+                        preparedStatementInsert.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
                         preparedStatementInsert.setDouble(5, content.getPrice());
                         preparedStatementInsert.setBoolean(6, content.isEquipment());
                         // Execute the insertion query
@@ -77,6 +79,8 @@ public class ContentDAO {
                             // Handle SQL exceptions
                             e.printStackTrace();
                         }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 } catch (SQLException e) {
                     // Handle SQL exceptions
@@ -111,7 +115,9 @@ public class ContentDAO {
                 String title = resultSet.getString("title");
                 String category = resultSet.getString("category");
                 String description = resultSet.getString("description");
-                Image image = (Image) resultSet.getObject("image");
+                byte[] imageBytes = resultSet.getBytes("image");
+                File image = Files.createTempFile("image" + idContent, ".png").toFile();
+                Files.write(image.toPath(), imageBytes);
                 boolean isEquipment = resultSet.getBoolean("isEquipment");
                 double price = resultSet.getDouble("price");
 
@@ -123,6 +129,8 @@ public class ContentDAO {
                     return new Service(idContent, title, category, description, image, price);
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } finally {
             if (resultSet != null) {
                 resultSet.close();
