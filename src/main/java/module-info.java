@@ -2,6 +2,7 @@ module eu.telecomnancy.directdealing {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires com.dlsc.gemsfx;
 
 
     opens eu.telecomnancy.directdealing to javafx.fxml;

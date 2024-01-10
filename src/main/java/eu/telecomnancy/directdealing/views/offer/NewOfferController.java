@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+import com.dlsc.gemsfx.DurationPicker;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -55,7 +56,7 @@ public class NewOfferController implements Observer {
     @FXML
     private Label serviceDurationLabel;
     @FXML
-    private DatePicker serviceDurationPicker;
+    private DurationPicker serviceDurationPicker;
     @FXML
     private RadioButton isRecurrent;
     @FXML

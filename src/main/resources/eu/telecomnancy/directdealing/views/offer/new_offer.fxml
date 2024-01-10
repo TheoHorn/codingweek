@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import com.dlsc.gemsfx.DurationPicker?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.offer.NewOfferController">
     <top>
         <fx:include source="../navbar/navbar.fxml" />
@@ -169,7 +170,7 @@
                         <Insets right="10.0" />
                     </padding>
                 </Label>
-                <DatePicker fx:id="serviceDurationPicker" promptText="Durée minimale du service" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                <DurationPicker fx:id="serviceDurationPicker" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <HBox alignment="CENTER" spacing="50.0" GridPane.columnIndex="2" GridPane.rowIndex="10">
                <children>
                   <RadioButton fx:id="isRecurrent" mnemonicParsing="false" onAction="#pressRecurrent" text="Récurrent" visible="false" />
