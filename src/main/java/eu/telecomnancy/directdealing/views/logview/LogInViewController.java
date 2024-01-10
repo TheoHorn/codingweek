@@ -44,6 +44,7 @@ public class LogInViewController implements Observer {
         try {
             app.login(mail_TextField.getText(), password_TextField.getText());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             statusLabel.setText(e.getMessage());
             System.out.println("Login failed");
         }

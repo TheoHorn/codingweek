@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.generateStrongPasswordHash;
+
 public class Application {
     public static volatile Application instance = null;
     private Account currentUser;
@@ -44,6 +46,7 @@ public class Application {
         this.offerDAO = new OfferDAO();
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
+        this.accountManager = new AccountManager();
 
 //        test
         this.offers.add(new Proposal(null, null, null, false));
@@ -153,7 +156,8 @@ public class Application {
                     System.out.println("[Debug:AccountCreatingController] Mot de passe non identique");
                     throw new Exception("Les mots de passe sont différents");
                 }
-                User user = new User(lastname,firstname,mail,500.0, false,password);
+                String generateStrongPasswordHash;
+                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password));
                 accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();

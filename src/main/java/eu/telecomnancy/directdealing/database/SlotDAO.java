@@ -24,7 +24,7 @@ public class SlotDAO {
                 java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
                 Timestamp tempEndTime = resultSet.getTimestamp("endTime");
                 java.util.Date endTime = new java.util.Date(tempEndTime.getTime());
-                int recurrence = resultSet.getInt("recurrence");
+                int recurrence = resultSet.getInt("recurring");
 
                 // creation of the slot and return
                 return new Slot(recupIdSlot, startTime, endTime, recurrence);
@@ -41,7 +41,7 @@ public class SlotDAO {
 
     public int save(Slot slot) throws SQLException {
         // check if slot already exists
-        String query = "SELECT * FROM SLOT WHERE startTime = ? AND endTime = ? AND recurrence = ?";
+        String query = "SELECT * FROM SLOT WHERE startTime = ? AND endTime = ? AND recurring = ?";
         ResultSet resultSet = null;
         boolean find = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -63,7 +63,7 @@ public class SlotDAO {
 
         // insert slot in database
         if (!find) {
-            String queryInsert = "INSERT INTO SLOT (startTime, endTime, recurrence) VALUES (?, ?, ?)";
+            String queryInsert = "INSERT INTO SLOT (startTime, endTime, recurring) VALUES (?, ?, ?)";
             String queryGetLastId = "SELECT last_insert_rowid() AS id";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryInsert);
