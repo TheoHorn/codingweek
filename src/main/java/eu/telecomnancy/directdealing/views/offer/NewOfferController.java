@@ -11,6 +11,7 @@ import com.dlsc.gemsfx.DurationPicker;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.time.temporal.ChronoUnit;
 
 /**
  * NewOfferController class
@@ -87,6 +88,11 @@ public class NewOfferController implements Observer {
     public NewOfferController() {
         this.app = Application.getInstance();
         this.app.addObserver(this);
+    }
+
+    @FXML
+    public void initialize() {
+        this.serviceDurationPicker.getFields().setAll(ChronoUnit.DAYS, ChronoUnit.HOURS, ChronoUnit.MINUTES);
     }
 
     /**
