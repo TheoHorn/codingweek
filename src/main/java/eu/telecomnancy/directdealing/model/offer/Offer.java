@@ -44,7 +44,6 @@ public abstract class Offer {
         this.isRequest = isRequest;
         this.idContent = idContent;
         this.idSlot = idSlot;
-        this.idOffer = app.getOfferDAO().save(this);
     }
 
 
