@@ -12,7 +12,7 @@ public class Reservation {
     /**
      * Offer of the reservation
      */
-    private Offer offer;
+    private int idOffer;
     /**
      * Email of the reserver
      */
@@ -20,7 +20,7 @@ public class Reservation {
     /**
      * Slot of the reservation
      */
-    private Slot slot;
+    private int idSlot;
     /**
      * Date of the reservation
      */
@@ -34,15 +34,15 @@ public class Reservation {
      * @param reservationDate Date of the reservation
      * @throws SQLException if the reservation is not save in the database
      */
-    public Reservation(Offer offer, String emailReserver, Slot slot, Date reservationDate) throws SQLException {
-        this.offer = offer;
+    public Reservation(int idOffer, String emailReserver, int idSlot, Date reservationDate) throws SQLException {
+        this.idOffer = idOffer;
         this.emailReserver = emailReserver;
-        this.slot = slot;
+        this.idSlot = idSlot;
         this.reservationDate = reservationDate;
     }
 
-    public Offer getOffer() {
-        return offer;
+    public int getIdOffer() {
+        return idOffer;
     }
 
     public String getEmailReserver() {
@@ -53,12 +53,12 @@ public class Reservation {
         this.emailReserver = emailReserver;
     }
 
-    public Slot getSlot() {
-        return slot;
+    public int getIdSlot() {
+        return idSlot;
     }
 
-    public void setSlot(Slot slot) {
-        this.slot = slot;
+    public void setIdSlot(int idSlot) {
+        this.idSlot = idSlot;
     }
 
     public Date getReservationDate() {

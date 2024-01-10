@@ -9,6 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 
+import java.sql.SQLException;
+
+import static eu.telecomnancy.directdealing.Main.app;
+
 /**
  * OfferCell class
  */
@@ -57,10 +61,29 @@ public class OfferCell extends ListCell<Offer> {
             } else {
                 type.setText("Demande");
             }
-            title.setText(offer.getContent().getTitle());
-            price.setText(String.valueOf(offer.getContent().getPrice()));
-            category.setText(offer.getContent().getCategory());
-            place.setText(offer.getContent().getLocalisation());
+
+            try {
+                title.setText(app.getContentDAO().get(offer.getIdContent()).getTitle());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                double priceSet = app.getContentDAO().get(offer.getIdContent()).getPrice();
+                price.setText(String.valueOf(priceSet));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                category.setText(app.getContentDAO().get(offer.getIdContent()).getCategory());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                place.setText(app.getContentDAO().get(offer.getIdContent()).getLocalisation());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
             setText(null);
             setGraphic(mLLoader.getRoot());

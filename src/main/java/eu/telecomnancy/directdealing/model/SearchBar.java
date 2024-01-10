@@ -4,7 +4,10 @@ import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.content.Content;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static eu.telecomnancy.directdealing.Main.app;
 
 /**
  * SearchBar class
@@ -43,12 +46,12 @@ public class SearchBar {
      * @param offers List of the offers
      * @return List of the offers which contains the string
      */
-    public ArrayList<Offer> search(ArrayList<Offer> offers){
+    public ArrayList<Offer> search(ArrayList<Offer> offers) throws SQLException {
         ArrayList<Offer> result = new ArrayList<>();
         for (Offer offer : offers){
             String info = "";
-            Content ctn = offer.getContent();
-            User user = offer.getOwner();
+            Content ctn = app.getContentDAO().get(offer.getIdContent());
+            User user = (User)app.getAccountDAO().get(offer.getMail());
             info += ctn.getTitle() + " " + ctn.getCategory() + " " + ctn.getLocalisation() + " " + ctn.getCategory() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getEmail();
             if (info.contains(motRecherche)){
                 result.add(offer);

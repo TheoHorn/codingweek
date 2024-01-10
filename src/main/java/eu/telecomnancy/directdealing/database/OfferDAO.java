@@ -5,6 +5,7 @@ import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
+import javafx.scene.SubScene;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,14 +40,14 @@ public class OfferDAO {
                 String queryUpdate = "UPDATE OFFER SET mail = ?, isRequest = ?, idContent = ?, idSlot = ? WHERE idOffer = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
-                    preparedStatementUpdate.setString(1, offer.getOwner().getEmail());
+                    preparedStatementUpdate.setString(1, offer.getMail());
                     if (offer.isRequest()) {
                         preparedStatementUpdate.setBoolean(2, true);
                     } else {
                         preparedStatementUpdate.setBoolean(2, false);
                     }
-                    preparedStatementUpdate.setInt(3, offer.getContent().getIdContent());
-                    preparedStatementUpdate.setInt(4, offer.getSlot().getId());
+                    preparedStatementUpdate.setInt(3, offer.getIdContent());
+                    preparedStatementUpdate.setInt(4, offer.getIdSlot());
                     preparedStatementUpdate.setInt(5, offer.getIdOffer());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
@@ -61,14 +62,14 @@ public class OfferDAO {
                 try (PreparedStatement preparedStatementInsert = connection.prepareStatement(queryInsert);
                      PreparedStatement statementGetLastId = connection.prepareStatement(queryGetLastId)) {
                     // Set parameters for the prepared statement
-                    preparedStatementInsert.setString(1, offer.getOwner().getEmail());
+                    preparedStatementInsert.setString(1, offer.getMail());
                     if (offer.isRequest()){
                         preparedStatementInsert.setBoolean(2, true);
                     } else {
                         preparedStatementInsert.setBoolean(2, false);
                     }
-                    preparedStatementInsert.setInt(3, offer.getContent().getIdContent());
-                    preparedStatementInsert.setInt(4, offer.getSlot().getId());
+                    preparedStatementInsert.setInt(3, offer.getIdContent());
+                    preparedStatementInsert.setInt(4, offer.getIdSlot());
                     // Execute the insertion query
                     preparedStatementInsert.executeUpdate();
                     // Retrieve the last inserted ID
@@ -113,11 +114,10 @@ public class OfferDAO {
                 int idSlot = resultSet.getInt("idSlot");
 
                 if (request){
-                    Slot slot =  app.getSlotDAO().get(idSlot);
-                    return new Request((User) app.getAccountDAO().get(mail), app.getContentDAO().get(idContent), slot, true);
+                    System.out.println(app.getContentDAO().get(idContent).getTitle());
+                    return new Request(mail, true, idContent, idSlot);
                 } else {
-                    Slot slot =  app.getSlotDAO().get(idSlot);
-                    return new Proposal((User) app.getAccountDAO().get(mail), app.getContentDAO().get(idContent), slot,false);
+                    return new Proposal(mail, false, idContent, idSlot);
                 }
             }
         } finally {

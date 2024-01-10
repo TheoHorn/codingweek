@@ -260,11 +260,13 @@ public class Application {
         } else {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
-                Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
+                Slot slot = new Slot(startDateCommit, endDateCommit,0);
+                Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent(), slot.getId());
                 getOfferDAO().save(request);
             } else {
                 Service service = new Service(title, "", description, null, price);
-                Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
+                Slot slot = new Slot(startDateCommit, endDateCommit,0);
+                Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent(), slot.getId());
                 getOfferDAO().save(proposal);
             }
             this.sceneController.switchToHome();

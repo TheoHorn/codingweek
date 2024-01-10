@@ -10,19 +10,13 @@ import java.sql.SQLException;
  * Request class
  */
 public class Request extends Offer {
-    /**
-     * Constructor of the request
-     * @param owner Owner of the request
-     * @param content Content of the request
-     * @param slot Slot of the request
-     * @param request Boolean to know if the request is a request or a proposal
-     */
-    public Request(int idOffer, User owner, Content content, Slot slot,  boolean request){
+
+    public Request(int idOffer, String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
         // Request is a subclass of Offer and inherits its constructor
-        super(idOffer, owner, content, slot, request);
+        super(idOffer, mail, isRequest, idContent, idSlot);
     }
-    public Request(User owner, Content content, Slot slot,  boolean request) throws SQLException {
+    public Request(String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
         // Request is a subclass of Offer and inherits its constructor
-        super(owner, content, slot, request);
+        super(mail, isRequest, idContent, idSlot);
     }
 }
