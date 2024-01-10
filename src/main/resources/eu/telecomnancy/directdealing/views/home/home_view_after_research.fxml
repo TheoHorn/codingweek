@@ -50,14 +50,28 @@
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Price" fx:id="filter_price">
+            <MenuButton mnemonicParsing="false" text="Prix" fx:id="filter_price">
                <items>
                   <CheckMenuItem mnemonicParsing="false" text="Gratuit"/>
-                    <CheckMenuItem mnemonicParsing="false" text="Moins de 5€"/>
-                    <CheckMenuItem mnemonicParsing="false" text="Moins de 10€"/>
-                    <CheckMenuItem mnemonicParsing="false" text="Moins de 20€"/>
-                    <CheckMenuItem mnemonicParsing="false" text="Moins de 50€"/>
-                    <CheckMenuItem mnemonicParsing="false" text="Moins de 100€"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 5€"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 10€"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 20€"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 50€"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Moins de 100€"/>
+               </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="Categorie" fx:id="filter_category">
+               <items>
+                  <CheckMenuItem mnemonicParsing="false" text="Véhicule"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Immobilier"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Multimédia"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Maison &amp; Jardin"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Mode"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Loisirs"/>
+                  <CheckMenuItem mnemonicParsing="false" text="Autres"/>
                </items>
                <font>
                   <Font size="14.0" />

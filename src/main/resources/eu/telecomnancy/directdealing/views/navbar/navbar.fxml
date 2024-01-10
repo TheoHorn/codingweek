@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -37,11 +38,14 @@
          <effect>
             <Blend />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Circle>
       <HBox alignment="CENTER" prefHeight="83.0" prefWidth="349.0" spacing="10.0">
          <children>
-            <TextField prefHeight="29.0" prefWidth="288.0" promptText="Rechercher" fx:id="search_text" />
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="42.0" onAction="#searchUpdate">
+            <TextField fx:id="search_text" prefHeight="29.0" prefWidth="288.0" promptText="Rechercher" />
+            <Button mnemonicParsing="false" onAction="#searchUpdate" prefHeight="29.0" prefWidth="42.0">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,23 +53,35 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>
-      <Label fx:id="my_proposalLabel" onMouseClicked="#switchToMyProposal" text="Proposal">
+      <Label fx:id="my_proposalLabel" onMouseClicked="#switchToMyProposal" text="Mes Propositions">
          <font>
             <Font size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
-      <Label text="Request">
+      <Label text="Mes requêtes">
          <font>
             <Font size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <Label fx:id="add_offerLabel" onMouseClicked="#switchToNewOffer" text="Ajouter">
          <font>
             <Font size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <MenuButton mnemonicParsing="false">
         <items>
@@ -80,6 +96,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </MenuButton>
    </children>
 </HBox>

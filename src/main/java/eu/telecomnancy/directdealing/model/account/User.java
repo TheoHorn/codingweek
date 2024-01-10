@@ -27,12 +27,13 @@ public class User extends Account{
      * @throws InvalidKeySpecException if the key is not correct
      */
     public User(String lastName, String firstName, String email, double balance, boolean isSleeping, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        super(lastName, firstName, email, password, false);
+        super(lastName, firstName, email, password);
         this.balance = balance;
         this.isSleeping = isSleeping;
         System.out.println("User created");
     }
 
+    @Override
     public double getBalance() {
         return balance;
     }
@@ -41,8 +42,14 @@ public class User extends Account{
         this.balance = balance;
     }
 
+    @Override
     public boolean isSleeping() {
         return isSleeping;
+    }
+
+    @Override
+    public void updateSleeping(boolean isSleeping) {
+        this.isSleeping = isSleeping;
     }
 
     public void setSleeping(boolean sleeping) {

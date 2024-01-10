@@ -19,6 +19,9 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
     @FXML
     private MenuButton filter_evaluation;
 
+    @FXML
+    private MenuButton filter_category;
+
     public HomeViewControllerAfterResearch(){
         super();
         this.app.addObserver(this);
@@ -33,30 +36,36 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
     @Override
     public void update() throws Exception {
         this.app.getResearchManager().resetFilter();
-       for (MenuItem item : this.filter_date.getItems()){
-              CheckMenuItem checkItem = (CheckMenuItem) item;
-              if (checkItem.isSelected()){
-                //this.app.filterOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), new Date(checkItem.getText())));
-              }
-         }
-          for (MenuItem item : this.filter_price.getItems()){
-                CheckMenuItem checkItem = (CheckMenuItem) item;
-                if (checkItem.isSelected()){
-                  this.app.getResearchManager().filterOffersByPrice(checkItem.getText());
-                }
-          }
-          for (MenuItem item : this.filter_evaluation.getItems()){
-                CheckMenuItem checkItem = (CheckMenuItem) item;
-                if (checkItem.isSelected()){
-                 //this.app.setOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), checkItem.getText()));
-                }
-          }
-          for (MenuItem item : this.filter_location.getItems()){
-                CheckMenuItem checkItem = (CheckMenuItem) item;
-                if (checkItem.isSelected()){
-                    //this.app.setOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), checkItem.getText()));
-                }
-       }
+        for (MenuItem item : this.filter_date.getItems()){
+            CheckMenuItem checkItem = (CheckMenuItem) item;
+            if (checkItem.isSelected()){
+            //this.app.filterOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), new Date(checkItem.getText())));
+            }
+        }
+        for (MenuItem item : this.filter_price.getItems()){
+            CheckMenuItem checkItem = (CheckMenuItem) item;
+            if (checkItem.isSelected()){
+              this.app.getResearchManager().filterOffersByPrice(checkItem.getText());
+            }
+        }
+        for (MenuItem item : this.filter_evaluation.getItems()){
+            CheckMenuItem checkItem = (CheckMenuItem) item;
+            if (checkItem.isSelected()){
+             //this.app.setOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), checkItem.getText()));
+            }
+        }
+        for (MenuItem item : this.filter_location.getItems()){
+            CheckMenuItem checkItem = (CheckMenuItem) item;
+            if (checkItem.isSelected()){
+                //this.app.setOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), checkItem.getText()));
+            }
+        }
+        for (MenuItem item : this.filter_category.getItems()){
+            CheckMenuItem checkItem = (CheckMenuItem) item;
+            if (checkItem.isSelected()){
+                this.app.getResearchManager().filterOffersByCategory(checkItem.getText());
+            }
+        }
         offersListView.getItems().clear();
         this.app.getResearchManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());

@@ -44,15 +44,8 @@ public class AccountDAO {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setString(1, account.getLastName());
                     preparedStatementUpdate.setString(2, account.getFirstName());
-                    if (account.isAdministrator()) {
-                        // if account is admin, balance and sleep are set to default values
-                        preparedStatementUpdate.setDouble(3, 0);
-                        preparedStatementUpdate.setBoolean(4, false);
-                    } else {
-                        // if account is user, balance and sleep are set to updated user values
-                        preparedStatementUpdate.setDouble(3, ((User) account).getBalance());
-                        preparedStatementUpdate.setBoolean(4, ((User) account).isSleeping());
-                    }
+                    preparedStatementUpdate.setDouble(3, account.getBalance());
+                    preparedStatementUpdate.setBoolean(4, account.isSleeping());
                     preparedStatementUpdate.setInt(5, 1);
                     preparedStatementUpdate.setString(6, account.getPassword());
                     preparedStatementUpdate.setString(7, account.getEmail());
@@ -70,15 +63,8 @@ public class AccountDAO {
                     preparedStatementInsert.setString(1, account.getEmail());
                     preparedStatementInsert.setString(2, account.getLastName());
                     preparedStatementInsert.setString(3, account.getFirstName());
-                    if (account.isAdministrator()) {
-                        // if account is admin, balance and sleep are set to default values
-                        preparedStatementInsert.setDouble(4, 0);
-                        preparedStatementInsert.setBoolean(5, false);
-                    } else {
-                        // if account is user, balance and sleep are set to updated user values
-                        preparedStatementInsert.setDouble(4, ((User) account).getBalance());
-                        preparedStatementInsert.setBoolean(5, ((User) account).isSleeping());
-                    }
+                    preparedStatementInsert.setDouble(3, account.getBalance());
+                    preparedStatementInsert.setBoolean(4, account.isSleeping());
                     preparedStatementInsert.setInt(6, 1);
                     preparedStatementInsert.setString(7, account.getPassword());
 

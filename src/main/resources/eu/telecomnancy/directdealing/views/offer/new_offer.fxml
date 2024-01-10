@@ -59,8 +59,8 @@
             <TextField fx:id="titleTextField" promptText="Titre de l'annonce" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <RadioButton fx:id="request_button" mnemonicParsing="false" onAction="#pressRequest" selected="true" text="Request" />
-                  <RadioButton fx:id="proposal_button" mnemonicParsing="false" onAction="#pressProposal" text="Proposal" />
+                  <RadioButton fx:id="request_button" mnemonicParsing="false" onAction="#pressRequest" selected="true" text="Requête" />
+                  <RadioButton fx:id="proposal_button" mnemonicParsing="false" onAction="#pressProposal" text="Proposition" />
                </children>
             </HBox>
             <Label alignment="CENTER_RIGHT" text="Description" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
