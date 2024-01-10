@@ -19,6 +19,6 @@ public class Equipment extends Content{
     public Equipment(String title, String category, String description, Image image, double price) throws SQLException {
         super(title, category, description, image, price);
         super.type = 1;
-        super.setId(app.getContentDAO().save(this));
+        super.setIdContent(app.getContentDAO().save(this));
     }
 }

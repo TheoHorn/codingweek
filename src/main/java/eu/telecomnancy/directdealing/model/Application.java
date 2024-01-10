@@ -37,7 +37,7 @@ public class Application {
     /**
      * list of the offers
      */
-    private final List<Offer> offers;
+    private List<Offer> offers;
     /**
      * list of the proposals
      */
@@ -89,11 +89,6 @@ public class Application {
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
-
-//        test
-        this.offers.add(new Proposal(null, null, null, false));
-        this.offers.add(new Request(null, null, null, false));
-//        test
     }
 
     /**
@@ -121,7 +116,7 @@ public class Application {
         this.observers.clear();
     }
 
-    public void notifyObservers() {
+    public void notifyObservers() throws Exception {
         for (Observer observer : observers) {
             observer.update();
         }
@@ -139,7 +134,9 @@ public class Application {
         this.currentUser = null;
     }
 
-    public List<Offer> getOffers() {
+    public List<Offer> getOffers() throws Exception {
+        offers = this.offerDAO.get();
+        System.out.println(offers);
         return offers;
     }
 
@@ -179,6 +176,11 @@ public class Application {
         return reservationDAO;
     }
 
+    public void addOffer(Offer offer) {
+        System.out.println("Add offer");
+        offers.add(offer);
+    }
+
     /**
      * login the user
      * @param mail Email of the user
@@ -186,7 +188,7 @@ public class Application {
      * @return true if the login is correct, false otherwise
      * @throws Exception if the login is not correct
      */
-    public boolean login(String mail, String password) throws Exception {
+    public void login(String mail, String password) throws Exception {
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
@@ -194,8 +196,6 @@ public class Application {
         } else {
             throw new Exception("Mot de passe ou email incorrect");
         }
-        System.out.println("Login failed");
-        return false;
     }
 
     /**

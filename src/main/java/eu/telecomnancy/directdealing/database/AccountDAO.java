@@ -59,43 +59,37 @@ public class AccountDAO {
                     preparedStatementUpdate.executeUpdate();
                     return true;
                 }
+            } else {
+                // account doesn't exist
+                // Insert new user into the ACCOUNT table
+                String queryInsert = "INSERT INTO ACCOUNT (mail, lastname, firstname, balance, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?);";
+                try (PreparedStatement preparedStatementInsert = DatabaseAccess.connection.prepareStatement(queryInsert)) {
+                    // Set parameters for the prepared statement
+                    preparedStatementInsert.setString(1, account.getEmail());
+                    preparedStatementInsert.setString(2, account.getLastName());
+                    preparedStatementInsert.setString(3, account.getFirstName());
+                    if (account.isAdministrator()) {
+                        // if account is admin, balance and sleep are set to default values
+                        preparedStatementInsert.setDouble(4, 0);
+                        preparedStatementInsert.setBoolean(5, false);
+                    } else {
+                        // if account is user, balance and sleep are set to updated user values
+                        preparedStatementInsert.setDouble(4, ((User) account).getBalance());
+                        preparedStatementInsert.setBoolean(5, ((User) account).isSleeping());
+                    }
+                    preparedStatementInsert.setInt(6, 1);
+                    preparedStatementInsert.setString(7, account.getPassword());
+
+                    // Execute the insertion query
+                    preparedStatementInsert.executeUpdate();
+                    return true;
             }
+        }
         } finally {
             if (resultSet != null) {
                 resultSet.close();
             }
         }
-        if (!find) {
-            // account doesn't exist
-            // Insert new user into the ACCOUNT table
-            String queryInsert = "INSERT INTO ACCOUNT (mail, lastname, firstname, balance, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?);";
-            try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(queryInsert)) {
-                // Set parameters for the prepared statement
-                preparedStatement.setString(1, account.getEmail());
-                preparedStatement.setString(2, account.getLastName());
-                preparedStatement.setString(3, account.getFirstName());
-                if (account.isAdministrator()) {
-                    // if account is admin, balance and sleep are set to default values
-                    preparedStatement.setDouble(4, 0);
-                    preparedStatement.setBoolean(5, false);
-                } else {
-                    // if account is user, balance and sleep are set to updated user values
-                    preparedStatement.setDouble(4, ((User) account).getBalance());
-                    preparedStatement.setBoolean(5, ((User) account).isSleeping());
-                }
-                preparedStatement.setInt(6, 1);
-                preparedStatement.setString(7, account.getPassword());
-
-                // Execute the insertion query
-                preparedStatement.executeUpdate();
-                return true;
-
-            } catch (SQLException e) {
-                // Handle SQL exceptions
-                e.printStackTrace();
-            }
-        }
-        return false;
     }
 
     /**

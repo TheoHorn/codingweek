@@ -33,8 +33,7 @@ public class HomeViewController implements Observer {
      * update method
      */
     @Override
-    public void update() {
-        System.out.println("update");
+    public void update() throws Exception {
         offersListView.getItems().clear();
         this.app.getOffers().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());
