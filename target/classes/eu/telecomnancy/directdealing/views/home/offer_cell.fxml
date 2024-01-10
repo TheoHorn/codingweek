@@ -20,25 +20,25 @@
     <RowConstraints vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <VBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1">
          <children>
-            <Label text="TYPE" textFill="#756ab6">
+            <Label fx:id="type" text="TYPE" textFill="#756ab6">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="Title">
+            <Label fx:id="title" text="Title">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label text="Price" textFill="#ff9843">
+            <Label fx:id="price" text="Price" textFill="#ff9843">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="Category">
+            <Label fx:id="category" text="Category">
                <font>
                   <Font size="14.0" />
                </font>
@@ -46,7 +46,7 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </Label>
-            <Label text="Place">
+            <Label fx:id="place" text="Place">
                <font>
                   <Font size="14.0" />
                </font>

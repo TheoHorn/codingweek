@@ -135,8 +135,9 @@ public class Application {
     }
 
     public List<Offer> getOffers() throws Exception {
-        System.out.println(offerDAO.get());
-        return offers = this.offerDAO.get();
+        offers = this.offerDAO.get();
+        System.out.println(offers);
+        return offers;
     }
 
     public List<Proposal> getMyProposals(){
