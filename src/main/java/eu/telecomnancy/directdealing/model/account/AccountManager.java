@@ -20,7 +20,7 @@ public class AccountManager {
             return true;
         }
     }
-    public Account login(String mail, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+    public Account login(String mail, String password) throws Exception {
         Account account = app.getAccountDAO().get(mail);
         if (account == null) {
             return null;
@@ -35,7 +35,7 @@ public class AccountManager {
         }
     }
 
-    public boolean updatePasswordAccount(String old_password, String new_password, Account account) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public boolean updatePasswordAccount(String old_password, String new_password, Account account) throws Exception {
         if (app.getAccountManager().login(account.getEmail(), old_password) != null) {
             account.setPassword(new_password);
             app.getAccountDAO().save(account);

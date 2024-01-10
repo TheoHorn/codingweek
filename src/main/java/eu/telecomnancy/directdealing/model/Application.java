@@ -146,9 +146,6 @@ public class Application {
     }
 
     public void signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
-        if (DatabaseAccess.connection == null) {
-            throw new Exception("Veuillez créer ou ouvrir une base de données (Fichier)");
-        }
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
