@@ -47,7 +47,7 @@ public abstract class Offer {
         this.slot = slot;
         this.owner = owner;
         this.content = content;
-        this.idOffer = app.getOfferDAO().save(this);
+//        this.idOffer = app.getOfferDAO().save(this);
     }
 
     public Offer(int idOffer, User owner, Content content, Slot slot, boolean request) {

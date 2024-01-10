@@ -30,6 +30,7 @@ public class User extends Account{
         super(lastName, firstName, email, password, false);
         this.balance = balance;
         this.isSleeping = isSleeping;
+        System.out.println("User created");
     }
 
     public double getBalance() {

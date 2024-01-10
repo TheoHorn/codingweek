@@ -244,7 +244,7 @@ public class Application {
      * @return true if the offer is validate, false otherwise
      * @throws SQLException if the offer is not validate
      */
-    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws SQLException {
+    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws Exception {
         LocalDateTime startOfDay = startDate.atStartOfDay();
         Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
         startOfDay = endDate.atStartOfDay();
@@ -262,6 +262,7 @@ public class Application {
                 Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
                 getOfferDAO().save(proposal);
             }
+            this.sceneController.switchToHome();
             return true;
         }
     }

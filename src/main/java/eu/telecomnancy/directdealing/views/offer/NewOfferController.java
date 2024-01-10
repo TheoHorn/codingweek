@@ -95,7 +95,7 @@ public class NewOfferController implements Observer {
      * @throws SQLException if the validation failed
      */
     @FXML
-    public void pressValiderNewOffer(ActionEvent actionEvent) throws SQLException {
+    public void pressValiderNewOffer(ActionEvent actionEvent) throws Exception {
         boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), " ", this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()));
         if (!err) {
             System.out.println("Une erreur est survenue");
