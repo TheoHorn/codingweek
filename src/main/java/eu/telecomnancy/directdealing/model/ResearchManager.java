@@ -65,7 +65,7 @@ public class ResearchManager {
             Content ctn = app.getContentDAO().get(offer.getIdContent());
             User user = (User)app.getAccountDAO().get(offer.getMail());
             info += ctn.getTitle() + " " + ctn.getCategory() + " " + ctn.getLocalisation() + " " + ctn.getCategory() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getEmail();
-            if (info.contains(motRecherche)){
+            if (info.toUpperCase().contains(motRecherche.toUpperCase())){
                 result.add(offer);
             }
         }
