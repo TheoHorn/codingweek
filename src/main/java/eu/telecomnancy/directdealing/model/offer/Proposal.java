@@ -11,12 +11,12 @@ import java.sql.SQLException;
  */
 public class Proposal extends Offer {
 
-    public Proposal(int idOffer, String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
-        super(idOffer, mail, isRequest, idContent, idSlot);
+    public Proposal(int idOffer, String mail, boolean isRequest, int idContent) throws SQLException {
+        super(idOffer, mail, isRequest, idContent);
     }
 
-    public Proposal(String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
-        super(mail, isRequest, idContent, idSlot);
+    public Proposal(String mail, boolean isRequest, int idContent) throws SQLException {
+        super(mail, isRequest, idContent);
     }
 
 }

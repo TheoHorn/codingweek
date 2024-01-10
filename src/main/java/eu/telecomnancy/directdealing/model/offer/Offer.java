@@ -16,7 +16,6 @@ public abstract class Offer {
     private String mail;
     private boolean isRequest;
     private int idContent;
-    private int idSlot;
     /**
      * Content of the offer
      */
@@ -31,19 +30,17 @@ public abstract class Offer {
      */
 
 
-    public Offer(int idOffer, String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
+    public Offer(int idOffer, String mail, boolean isRequest, int idContent) throws SQLException {
         this.idOffer = idOffer;
         this.mail = mail;
         this.isRequest = isRequest;
         this.idContent = idContent;
-        this.idSlot = idSlot;
     }
 
-    public Offer(String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
+    public Offer(String mail, boolean isRequest, int idContent) throws SQLException {
         this.mail = mail;
         this.isRequest = isRequest;
         this.idContent = idContent;
-        this.idSlot = idSlot;
     }
 
 
@@ -61,10 +58,6 @@ public abstract class Offer {
 
     public void setIdContent(int idContent) {
         this.idContent = idContent;
-    }
-
-    public int getIdSlot() {
-        return idSlot;
     }
 
     public boolean isRequest() {

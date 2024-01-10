@@ -11,12 +11,12 @@ import java.sql.SQLException;
  */
 public class Request extends Offer {
 
-    public Request(int idOffer, String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
+    public Request(int idOffer, String mail, boolean isRequest, int idContent) throws SQLException {
         // Request is a subclass of Offer and inherits its constructor
-        super(idOffer, mail, isRequest, idContent, idSlot);
+        super(idOffer, mail, isRequest, idContent);
     }
-    public Request(String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
+    public Request(String mail, boolean isRequest, int idContent) throws SQLException {
         // Request is a subclass of Offer and inherits its constructor
-        super(mail, isRequest, idContent, idSlot);
+        super(mail, isRequest, idContent);
     }
 }

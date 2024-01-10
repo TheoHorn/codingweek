@@ -10,10 +10,6 @@ import java.util.Date;
  */
 public class Reservation {
     /**
-     * Offer of the reservation
-     */
-    private int idOffer;
-    /**
      * Email of the reserver
      */
     private String emailReserver;
@@ -26,23 +22,11 @@ public class Reservation {
      */
     private Date reservationDate;
 
-    /**
-     * Constructor of the reservation
-     * @param offer Offer of the reservation
-     * @param emailReserver Email of the user who reserve
-     * @param slot Slot of the reservation
-     * @param reservationDate Date of the reservation
-     * @throws SQLException if the reservation is not save in the database
-     */
-    public Reservation(int idOffer, String emailReserver, int idSlot, Date reservationDate) throws SQLException {
-        this.idOffer = idOffer;
+
+    public Reservation(String emailReserver, int idSlot, Date reservationDate) throws SQLException {
         this.emailReserver = emailReserver;
         this.idSlot = idSlot;
         this.reservationDate = reservationDate;
-    }
-
-    public int getIdOffer() {
-        return idOffer;
     }
 
     public String getEmailReserver() {

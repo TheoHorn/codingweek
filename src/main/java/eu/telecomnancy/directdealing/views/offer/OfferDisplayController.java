@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.List;
+
 public class OfferDisplayController implements Observer {
 
     private Application app;
@@ -67,13 +69,13 @@ public class OfferDisplayController implements Observer {
     public void update() throws Exception {
         Offer offer = this.app.getLastOffer();
         Content content = app.getContentDAO().get(offer.getIdContent());
-        Slot slot = app.getSlotDAO().get(offer.getIdSlot());
+        List<Slot> slots = app.getSlotDAO().get(offer.getIdOffer());
         Account owner = app.getAccountDAO().get(offer.getMail());
         this.title_label.setText(content.getTitle());
         this.description_label.setText(content.getDescription());
         this.price_label.setText(String.valueOf(content.getPrice()));
         this.category_label.setText(content.getCategory());
-        this.disponibility_label.setText(slot.getDisponibility());
+        // this.disponibility_label.setText(slot.getDisponibility());
         this.owner_label.setText(owner.getFirstName()+" "+owner.getLastName());
         if (offer.isRequest()){
             this.type_label.setText("Request");

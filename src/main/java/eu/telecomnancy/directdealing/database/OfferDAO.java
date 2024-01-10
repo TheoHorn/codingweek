@@ -37,7 +37,7 @@ public class OfferDAO {
 
             if (resultSet.next()) { // Check if there are results
                 // update offer
-                String queryUpdate = "UPDATE OFFER SET mail = ?, isRequest = ?, idContent = ?, idSlot = ? WHERE idOffer = ?";
+                String queryUpdate = "UPDATE OFFER SET mail = ?, isRequest = ?, idContent = ? WHERE idOffer = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setString(1, offer.getMail());
@@ -47,8 +47,7 @@ public class OfferDAO {
                         preparedStatementUpdate.setBoolean(2, false);
                     }
                     preparedStatementUpdate.setInt(3, offer.getIdContent());
-                    preparedStatementUpdate.setInt(4, offer.getIdSlot());
-                    preparedStatementUpdate.setInt(5, offer.getIdOffer());
+                    preparedStatementUpdate.setInt(4, offer.getIdOffer());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
                     return offer.getIdOffer();
@@ -56,7 +55,7 @@ public class OfferDAO {
             } else {
                 // offer doesn't exist
                 // Insert new user into the ACCOUNT table
-                String queryInsert = "INSERT INTO OFFER (mail, isRequest, idContent, idSlot) VALUES (?, ?, ?, ?);";
+                String queryInsert = "INSERT INTO OFFER (mail, isRequest, idContent) VALUES (?, ?, ?);";
                 String queryGetLastId = "SELECT last_insert_rowid() AS id";
 
                 try (PreparedStatement preparedStatementInsert = connection.prepareStatement(queryInsert);
@@ -69,7 +68,6 @@ public class OfferDAO {
                         preparedStatementInsert.setBoolean(2, false);
                     }
                     preparedStatementInsert.setInt(3, offer.getIdContent());
-                    preparedStatementInsert.setInt(4, offer.getIdSlot());
                     // Execute the insertion query
                     preparedStatementInsert.executeUpdate();
                     // Retrieve the last inserted ID
@@ -111,13 +109,12 @@ public class OfferDAO {
                 String mail = resultSet.getString("mail");
                 boolean request = resultSet.getBoolean("isRequest");
                 int idContent = resultSet.getInt("idContent");
-                int idSlot = resultSet.getInt("idSlot");
 
                 if (request){
                     System.out.println(app.getContentDAO().get(idContent).getTitle());
-                    return new Request(mail, true, idContent, idSlot);
+                    return new Request(mail, true, idContent);
                 } else {
-                    return new Proposal(mail, false, idContent, idSlot);
+                    return new Proposal(mail, false, idContent);
                 }
             }
         } finally {

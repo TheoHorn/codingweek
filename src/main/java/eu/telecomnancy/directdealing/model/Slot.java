@@ -26,6 +26,8 @@ public class Slot {
      */
     private int recurrence;
 
+    private int idOffer;
+
     /**
      * Constructor of the slot
      * @param startTime start time of the slot
@@ -33,12 +35,13 @@ public class Slot {
      * @param recurrence recurrence of the slot
      * @throws SQLException if the slot is not save in the database
      */
-    public Slot(Date startTime, Date endTime, int recurrence) throws SQLException {
+    public Slot(Date startTime, Date endTime, int recurrence, int idOffer) throws SQLException {
         // constructor for a new slot
         this.startTime = startTime;
         this.endTime = endTime;
         this.recurrence = recurrence;
         this.id = app.getSlotDAO().save(this);
+        this.idOffer = idOffer;
     }
 
     /**
@@ -48,12 +51,13 @@ public class Slot {
      * @param endTime end time of the slot
      * @param recurrence recurrence of the slot
      */
-    public Slot(int id, Date startTime, Date endTime, int recurrence){
+    public Slot(int id, Date startTime, Date endTime, int recurrence, int idOffer){
         // constructor for a slot from the database
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.recurrence = recurrence;
+        this.idOffer = idOffer;
     }
 
     public int getId() {
@@ -90,5 +94,9 @@ public class Slot {
 
     public String getDisponibility() {
         return startTime.toString() + " - " + endTime.toString();
+    }
+
+    public int getIdOffer() {
+        return idOffer;
     }
 }

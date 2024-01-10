@@ -260,14 +260,21 @@ public class Application {
         } else {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
-                Slot slot = new Slot(startDateCommit, endDateCommit,0);
-                Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent(), slot.getId());
-                getOfferDAO().save(request);
+                Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
+                int idSlot = getSlotDAO().save(slot);
+                Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
+                int idOffer = getOfferDAO().save(request);
+                getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
+
             } else {
                 Service service = new Service(title, "", description, null, price);
-                Slot slot = new Slot(startDateCommit, endDateCommit,0);
-                Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent(), slot.getId());
+                Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
+                int idSlot = getSlotDAO().save(slot);
+                Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
+                int idOffer = getOfferDAO().save(proposal);
                 getOfferDAO().save(proposal);
+                getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
+
             }
             this.sceneController.switchToHome();
             return true;
