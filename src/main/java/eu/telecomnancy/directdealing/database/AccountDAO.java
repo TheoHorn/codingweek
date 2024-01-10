@@ -13,7 +13,11 @@ import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword
 
 public class AccountDAO {
 
-    public boolean save(Account account) throws SQLException {
+    public boolean save(Account account) throws Exception {
+        // check if connection is open
+        if (DatabaseAccess.connection == null) {
+            throw new Exception("Veuillez créer ou ouvrir une base de données (Fichier)");
+        }
         // check if account already exists
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
@@ -86,6 +90,10 @@ public class AccountDAO {
     }
 
     public Account get(String mail) throws SQLException {
+        // check if connection is open
+        if (DatabaseAccess.connection == null) {
+            throw new SQLException("Veuillez créer ou ouvrir une base de données (Fichier)");
+        }
         // getting account from mail primary key
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
