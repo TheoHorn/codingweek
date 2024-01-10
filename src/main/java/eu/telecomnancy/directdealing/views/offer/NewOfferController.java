@@ -43,17 +43,41 @@ public class NewOfferController implements Observer {
      * RadioButton for the proposal
      */
     @FXML
+    private RadioButton isService;
+    @FXML
+    private RadioButton isEquipment;
+    @FXML
     private RadioButton proposal_button;
-    /**
-     * DatePicker for the start date
-     */
     @FXML
-    private DatePicker startDatePicker;
-    /**
-     * DatePicker for the end date
-     */
+    private Label returnDateLabel;
     @FXML
-    private DatePicker endDatePicker;
+    private DatePicker returnDatePicker;
+    @FXML
+    private Label serviceDurationLabel;
+    @FXML
+    private DatePicker serviceDurationPicker;
+    @FXML
+    private RadioButton isRecurrent;
+    @FXML
+    private RadioButton isNotRecurrent;
+    @FXML
+    private Label everyLabel;
+    @FXML
+    private TextField recurrencyTextField;
+    @FXML
+    private Label linkLabel;
+    @FXML
+    private DatePicker firstDayPicker;
+    @FXML
+    private Label toLabel;
+    @FXML
+    private DatePicker lastDayPicker;
+    @FXML
+    private Button slotAddButton;
+    @FXML
+    private Label slotLabel;
+    @FXML
+    private ListView slotListView;
     /**
      * Label for errors
      */
@@ -114,12 +138,89 @@ public class NewOfferController implements Observer {
     public void pressValiderNewOffer(ActionEvent actionEvent) {
         System.out.println(this.categoryChoiceBox.getValue() == null);
         try {
-            app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String)this.categoryChoiceBox.getValue(), this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
+            app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String)this.categoryChoiceBox.getValue(), null, null,  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
         } catch(NumberFormatException e) {
+            this.errorLabel.setVisible(true);
             this.errorLabel.setText("Le prix doit être un nombre");
         }catch (Exception e) {
+            this.errorLabel.setVisible(true);
             this.errorLabel.setText(e.getMessage());
         }
+    }
+
+    @FXML
+    public void pressService() {
+        this.isService.setSelected(true);
+        this.isEquipment.setSelected(false);
+        this.returnDateLabel.setVisible(false);
+        this.returnDatePicker.setVisible(false);
+        this.serviceDurationLabel.setVisible(true);
+        this.serviceDurationPicker.setVisible(true);
+        this.isRecurrent.setVisible(true);
+        this.isRecurrent.setSelected(false);
+        this.isNotRecurrent.setVisible(true);
+        this.isNotRecurrent.setSelected(true);
+        this.everyLabel.setVisible(false);
+        this.recurrencyTextField.setVisible(false);
+        this.linkLabel.setVisible(true);
+        this.linkLabel.setText("du");
+        this.firstDayPicker.setVisible(true);
+        this.toLabel.setVisible(true);
+        this.lastDayPicker.setVisible(true);
+        this.slotAddButton.setVisible(false);
+        this.slotLabel.setVisible(false);
+        this.slotListView.setVisible(false);
+    }
+
+    @FXML
+    public void pressEquipment() {
+        this.isService.setSelected(false);
+        this.isEquipment.setSelected(true);
+        this.returnDateLabel.setVisible(true);
+        this.returnDatePicker.setVisible(true);
+        this.serviceDurationLabel.setVisible(false);
+        this.serviceDurationPicker.setVisible(false);
+        this.isRecurrent.setVisible(false);
+        this.isNotRecurrent.setVisible(false);
+        this.everyLabel.setVisible(false);
+        this.recurrencyTextField.setVisible(false);
+        this.linkLabel.setVisible(false);
+        this.firstDayPicker.setVisible(false);
+        this.toLabel.setVisible(false);
+        this.lastDayPicker.setVisible(false);
+        this.slotAddButton.setVisible(false);
+        this.slotLabel.setVisible(false);
+        this.slotListView.setVisible(false);
+    }
+
+    @FXML void pressRecurrent() {
+    	this.isRecurrent.setSelected(true);
+    	this.isNotRecurrent.setSelected(false);
+        this.everyLabel.setVisible(true);
+        this.recurrencyTextField.setVisible(true);
+        this.linkLabel.setVisible(true);
+        this.linkLabel.setText("jours du");
+        this.firstDayPicker.setVisible(true);
+        this.toLabel.setVisible(true);
+        this.lastDayPicker.setVisible(true);
+        this.slotAddButton.setVisible(true);
+        this.slotLabel.setVisible(true);
+        this.slotListView.setVisible(true);
+    }
+
+    @FXML void pressNotRecurrent() {
+    	this.isRecurrent.setSelected(false);
+    	this.isNotRecurrent.setSelected(true);
+        this.everyLabel.setVisible(false);
+        this.recurrencyTextField.setVisible(false);
+        this.linkLabel.setVisible(true);
+        this.linkLabel.setText("du");
+        this.firstDayPicker.setVisible(true);
+        this.toLabel.setVisible(true);
+        this.lastDayPicker.setVisible(true);
+        this.slotAddButton.setVisible(false);
+        this.slotLabel.setVisible(false);
+        this.slotListView.setVisible(false);
     }
 
     @Override
