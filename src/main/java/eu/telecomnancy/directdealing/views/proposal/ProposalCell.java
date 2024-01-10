@@ -5,8 +5,20 @@ import eu.telecomnancy.directdealing.model.offer.Proposal;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 
+/**
+ * ProposalCell class
+ */
 public class ProposalCell extends ListCell<Proposal>{
+    /**
+     * FXMLLoader
+     */
     private FXMLLoader mLLoader;
+
+    /**
+     * update the item of the cell
+     * @param proposal Proposal to update
+     * @param b Boolean to know if the proposal is null
+     */
     @Override
     protected void updateItem(Proposal proposal, boolean b) {
         super.updateItem(proposal, b);

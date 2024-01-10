@@ -10,12 +10,29 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Main class
+ */
 public class Main extends Application {
+    /**
+     * Application instance
+     */
     public static eu.telecomnancy.directdealing.model.Application app;
+
+    /**
+     * stop the application
+     * @throws SQLException
+     */
     @Override
     public void stop() throws SQLException {
         DatabaseAccess.disconnectFromDatabase();
     }
+
+    /**
+     * start the application
+     * @param stage the stage of the application
+     * @throws IOException if the application is not started
+     */
     @Override
     public void start(Stage stage) throws IOException {
         app = eu.telecomnancy.directdealing.model.Application.getInstance();
@@ -28,6 +45,10 @@ public class Main extends Application {
         stage.show();
     }
 
+    /**
+     * main function
+     * @param args arguments of the main function
+     */
     public static void main(String[] args) {
         launch();
     }
