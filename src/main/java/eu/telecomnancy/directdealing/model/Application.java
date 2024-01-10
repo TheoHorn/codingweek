@@ -76,6 +76,11 @@ public class Application {
     private AccountManager accountManager;
 
     /**
+     * the last offer used
+     */
+    private Offer lastOffer;
+
+    /**
      * Constructor of the application that initialize the lists
      */
     private Application() {
@@ -244,7 +249,7 @@ public class Application {
      * @return true if the offer is validate, false otherwise
      * @throws SQLException if the offer is not validate
      */
-    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws SQLException {
+    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws Exception {
         LocalDateTime startOfDay = startDate.atStartOfDay();
         Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
         startOfDay = endDate.atStartOfDay();
@@ -264,6 +269,7 @@ public class Application {
                 Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent(), slot.getId());
                 getOfferDAO().save(proposal);
             }
+            this.sceneController.switchToHome();
             return true;
         }
     }
@@ -322,5 +328,17 @@ public class Application {
      */
     public void openDatabaseFile(File file) throws SQLException {
         DatabaseAccess.connectToDatabase(file.getAbsolutePath());
+    }
+
+    public Offer getLastOffer() {
+        if (lastOffer != null){
+            return lastOffer;
+        }else{
+            return offers.get(0);
+        }
+    }
+
+    public void setLastOffer(Offer item) {
+        this.lastOffer = item;
     }
 }

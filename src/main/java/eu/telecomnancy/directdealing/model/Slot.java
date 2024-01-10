@@ -87,4 +87,8 @@ public class Slot {
     public void setRecurrence(int recurrence) {
         this.recurrence = recurrence;
     }
+
+    public String getDisponibility() {
+        return startTime.toString() + " - " + endTime.toString();
+    }
 }

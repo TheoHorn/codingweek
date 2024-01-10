@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing.views.home;
 
+import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import javafx.fxml.FXML;
@@ -47,7 +48,7 @@ public class OfferCell extends ListCell<Offer> {
         } else {
             if (mLLoader == null) {
                 mLLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/offer_cell.fxml"));
-                mLLoader.setController(this);
+
                 try {
                     mLLoader.load();
                 } catch (Exception e) {
@@ -87,5 +88,11 @@ public class OfferCell extends ListCell<Offer> {
             setText(null);
             setGraphic(mLLoader.getRoot());
         }
+    }
+
+    @FXML
+    public void displayOffer() throws Exception {
+        Application.getInstance().setLastOffer(getItem());
+        Application.getInstance().getSceneController().switchToOfferDisplay();
     }
 }

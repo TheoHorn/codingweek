@@ -112,4 +112,14 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void switchToOfferDisplay() throws Exception{
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/offer_display.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Offer");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

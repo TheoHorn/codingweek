@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.profile.ProfileViewController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.offer.OfferDisplayController">
    <children>
       <fx:include source="../navbar/navbar.fxml" />
       <VBox prefHeight="518.0" prefWidth="902.0">
@@ -35,7 +35,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="346.0">
                      <children>
-                        <Label prefHeight="64.0" prefWidth="258.0" text="Title" textAlignment="CENTER" underline="true" wrapText="true">
+                        <Label prefHeight="64.0" prefWidth="258.0" text="Title" textAlignment="CENTER" underline="true" wrapText="true" fx:id="title_label">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -55,7 +55,7 @@
                               <Insets left="60.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="64.0" prefWidth="121.0" textAlignment="CENTER" wrapText="true">
+                        <Label prefHeight="64.0" prefWidth="121.0" textAlignment="CENTER" wrapText="true" fx:id="category_label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -72,7 +72,7 @@
                               <Insets left="60.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="64.0" prefWidth="121.0" textAlignment="CENTER" wrapText="true">
+                        <Label prefHeight="64.0" prefWidth="121.0" textAlignment="CENTER" wrapText="true" fx:id="location_label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -89,7 +89,7 @@
                               <Insets left="60.0" />
                            </VBox.margin>
                         </Label>
-                        <Label alignment="TOP_LEFT" prefHeight="94.0" prefWidth="577.0" wrapText="true">
+                        <Label alignment="TOP_LEFT" prefHeight="94.0" prefWidth="577.0" wrapText="true" fx:id="description_label">
                            <VBox.margin>
                               <Insets left="60.0" />
                            </VBox.margin>
@@ -98,7 +98,7 @@
                   </VBox>
                   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="58.0" prefWidth="110.0" text="Réservation">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="58.0" prefWidth="110.0" text="Réservation" onAction="#reservation">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -110,7 +110,7 @@
                   </VBox>
                   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="58.0" prefWidth="110.0" text="Contacter">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="58.0" prefWidth="110.0" text="Contacter" onAction="#contact">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -131,7 +131,7 @@
                               <Insets left="60.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="64.0" prefWidth="121.0" textAlignment="CENTER" wrapText="true">
+                        <Label prefHeight="64.0" prefWidth="121.0" textAlignment="CENTER" wrapText="true" fx:id="disponibility_label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -148,7 +148,7 @@
                               <Insets left="60.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="73.0" prefWidth="236.0" textAlignment="CENTER" wrapText="true">
+                        <Label prefHeight="73.0" prefWidth="236.0" textAlignment="CENTER" wrapText="true" fx:id="owner_label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -157,12 +157,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="182.0" GridPane.columnIndex="2">
                      <children>
-                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="106.0" text="Type" textAlignment="CENTER">
+                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="106.0" text="Type" textAlignment="CENTER" fx:id="type_label">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="93.0" text="Prix" textAlignment="CENTER">
+                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="93.0" text="Prix" textAlignment="CENTER" fx:id="price_label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -174,7 +174,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
                      <children>
-                        <ImageView fitHeight="195.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="195.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true" fx:id="image_view">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -186,7 +186,7 @@
                   </HBox>
                   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="58.0" prefWidth="110.0" text="Proposer son service " textAlignment="CENTER" wrapText="true">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="58.0" prefWidth="110.0" text="Proposer son service " textAlignment="CENTER" wrapText="true" onAction="#proposeService">
                            <font>
                               <Font size="14.0" />
                            </font>
