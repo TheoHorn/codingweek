@@ -1,7 +1,11 @@
 package eu.telecomnancy.directdealing.model;
 
-import java.sql.SQLException;
-
+/**
+ * Observer interface
+ */
 public interface Observer {
-    void update() throws Exception;
+    /**
+     * Update method
+     */
+    void update();
 }

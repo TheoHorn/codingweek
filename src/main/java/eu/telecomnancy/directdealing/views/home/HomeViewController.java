@@ -7,18 +7,31 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
-import java.sql.SQLException;
-
+/**
+ * HomeViewController class
+ */
 public class HomeViewController implements Observer {
+    /**
+     * ListView of the offers
+     */
     @FXML
     private ListView<Offer> offersListView;
+    /**
+     * Application instance
+     */
     private Application app;
 
+    /**
+     * Constructor of the home view controller
+     */
     public HomeViewController() {
         this.app = Application.getInstance();
         this.app.addObserver(this);
     }
 
+    /**
+     * update method
+     */
     @Override
     public void update() throws Exception {
         offersListView.getItems().clear();

@@ -9,20 +9,45 @@ import java.sql.SQLException;
 import static eu.telecomnancy.directdealing.Main.app;
 
 public abstract class Offer {
+    /**
+     * Owner of the offer
+     */
     private User owner;
+    /**
+     * Content of the offer
+     */
     private Content content;
+    /**
+     * current id
+     */
     private static int currentId;
+    /**
+     * boolean to know if the offer is a request or a proposal
+     */
     private boolean request;
+    /**
+     * slot of the offer
+     */
     private Slot slot;
+    /**
+     * id of the offer
+     */
     private int idOffer;
 
+    /**
+     * Constructor of the offer
+     * @param owner Owner of the offer
+     * @param content Content of the offer
+     * @param slot Slot of the offer
+     * @param request Boolean to know if the offer is a request or a proposal
+     * @throws SQLException if the offer is not save in the database
+     */
     public Offer(User owner, Content content, Slot slot, boolean request) {
         this.request = request;
         this.slot = slot;
         this.owner = owner;
         this.content = content;
     }
-
 
     public User getOwner() {
         return owner;

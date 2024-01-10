@@ -5,13 +5,29 @@ import java.io.File;
 import java.io.FileReader;
 import java.sql.*;
 
+/**
+ * DatabaseAccess class is the class responsible for the connection to the database.
+ */
 public class DatabaseAccess {
+    /**
+     * The connection to the database.
+     */
     public static Connection connection;
 
+    /**
+     * The constructor of the class.
+     * @param dbPath the path to the database
+     * @throws SQLException if an error occurs
+     */
     private DatabaseAccess(String dbPath) throws SQLException {
         connectToDatabase(dbPath);
     }
 
+    /**
+     * Create a new database.
+     * @param file the file where the database will be created
+     * @throws SQLException if an error occurs
+     */
     public static void createDatabase(File file) throws SQLException {
         String databaseUrl = "jdbc:sqlite:" + file.getAbsolutePath();
 
@@ -29,6 +45,11 @@ public class DatabaseAccess {
         }
     }
 
+    /**
+     * Execute the schema file to create the database.
+     * @param conn the connection to the database
+     * @param schemaFilePath the path to the schema file
+     */
     private static void executeSchemaFile(Connection conn, String schemaFilePath) {
         StringBuilder schema = new StringBuilder();
 
@@ -46,6 +67,11 @@ public class DatabaseAccess {
         }
     }
 
+    /**
+     * Connect to the database.
+     * @param dbPath the path to the database
+     * @throws SQLException if an error occurs
+     */
     public static void connectToDatabase(String dbPath) throws SQLException {
         // create a database connection
         connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
@@ -55,6 +81,10 @@ public class DatabaseAccess {
     }
 
 
+    /**
+     * Disconnect from the database.
+     * @throws SQLException if an error occurs
+     */
     public static void disconnectFromDatabase() throws SQLException {
         if (connection != null){
             connection.close();

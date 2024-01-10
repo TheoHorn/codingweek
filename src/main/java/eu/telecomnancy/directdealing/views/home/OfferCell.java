@@ -8,7 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 
-
+/**
+ * OfferCell class
+ */
 public class OfferCell extends ListCell<Offer> {
     @FXML
     private ImageView image;
@@ -22,7 +24,16 @@ public class OfferCell extends ListCell<Offer> {
     private Label category;
     @FXML
     private Label place;
+    /**
+     * FXMLLoader
+     */
     private FXMLLoader mLLoader;
+
+    /**
+     * update the item of the cell
+     * @param offer Offer to update
+     * @param b Boolean to know if the offer is null
+     */
     @Override
     protected void updateItem(Offer offer, boolean b) {
         super.updateItem(offer, b);

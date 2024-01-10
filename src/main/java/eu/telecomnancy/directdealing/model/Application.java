@@ -22,20 +22,62 @@ import java.util.List;
 
 import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.generateStrongPasswordHash;
 
+/**
+ * Application class singleton
+ */
 public class Application {
+    /**
+     * instance of the application
+     */
     public static volatile Application instance = null;
+    /**
+     * current user
+     */
     private Account currentUser;
+    /**
+     * list of the offers
+     */
     private List<Offer> offers;
+    /**
+     * list of the proposals
+     */
     private final List<Proposal> myProposals;
+    /**
+     * list of the observers
+     */
     private final List<Observer> observers;
+    /**
+     * scene controller
+     */
     private SceneController sceneController;
+    /**
+     * account DAO
+     */
     private AccountDAO accountDAO;
+    /**
+     * content DAO
+     */
     private ContentDAO contentDAO;
+    /**
+     * offer DAO
+     */
     private OfferDAO offerDAO;
+    /**
+     * slot DAO
+     */
     private SlotDAO slotDAO;
+    /**
+     * reservation DAO
+     */
     private ReservationDAO reservationDAO;
+    /**
+     * account manager
+     */
     private AccountManager accountManager;
 
+    /**
+     * Constructor of the application that initialize the lists
+     */
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
@@ -49,6 +91,10 @@ public class Application {
         this.accountManager = new AccountManager();
     }
 
+    /**
+     * Get the instance of the application
+     * @return instance of the application
+     */
     public static Application getInstance() {
         Application result = instance;
         if (result != null) {
@@ -134,7 +180,14 @@ public class Application {
         offers.add(offer);
     }
 
-    public boolean login(String mail, String password) throws Exception {
+    /**
+     * login the user
+     * @param mail Email of the user
+     * @param password Password of the user
+     * @return true if the login is correct, false otherwise
+     * @throws Exception if the login is not correct
+     */
+    public void login(String mail, String password) throws Exception {
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
@@ -142,10 +195,17 @@ public class Application {
         } else {
             throw new Exception("Mot de passe ou email incorrect");
         }
-        System.out.println("Login failed");
-        return false;
     }
 
+    /**
+     * sign in the user
+     * @param mail Email of the user
+     * @param password Password of the user
+     * @param firstname First name of the user
+     * @param lastname Last name of the user
+     * @param password_confirm Password confirmation of the user
+     * @throws Exception
+     */
     public void signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
@@ -171,6 +231,18 @@ public class Application {
         }
     }
 
+    /**
+     * validate a new offer
+     * @param title Title of the offer
+     * @param description Description of the offer
+     * @param category Category of the offer
+     * @param startDate Start date of the offer
+     * @param endDate End date of the offer
+     * @param isRequest Boolean to know if the offer is a request or a proposal
+     * @param price Price of the offer
+     * @return true if the offer is validate, false otherwise
+     * @throws SQLException if the offer is not validate
+     */
     public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws SQLException {
         LocalDateTime startOfDay = startDate.atStartOfDay();
         Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
@@ -193,6 +265,13 @@ public class Application {
         }
     }
 
+    /**
+     * update the current account
+     * @param name First name
+     * @param surname Last name
+     * @return true if the account is updated, false otherwise
+     * @throws Exception if the account is not updated
+     */
     public boolean updateCurrentAccount(String name, String surname) throws Exception {
         if (!(name.isEmpty() || surname.isEmpty())) {
             this.getCurrentUser().setFirstName(name);
@@ -204,6 +283,14 @@ public class Application {
         return false;
     }
 
+    /**
+     * update the current password
+     * @param oldPassword Old password
+     * @param newPassword New password
+     * @param confirmPassword Password confirmation
+     * @return true if the password is updated, false otherwise
+     * @throws Exception if the password is not updated
+     */
     public boolean updateCurrentPassword(String oldPassword, String newPassword, String confirmPassword) throws Exception {
         boolean isGood = false;
         if (newPassword.equals(confirmPassword)) {
@@ -215,11 +302,21 @@ public class Application {
         return isGood;
     }
 
+    /**
+     * create a new database
+     * @param file File of the database
+     * @throws SQLException if the database is not created
+     */
     public void createNewDatabaseFile(File file) throws SQLException {
         DatabaseAccess.createDatabase(file);
         DatabaseAccess.connectToDatabase(file.getAbsolutePath());
     }
 
+    /**
+     * open a database from a file
+     * @param file File of the database
+     * @throws SQLException if the database is not opened
+     */
     public void openDatabaseFile(File file) throws SQLException {
         DatabaseAccess.connectToDatabase(file.getAbsolutePath());
     }
