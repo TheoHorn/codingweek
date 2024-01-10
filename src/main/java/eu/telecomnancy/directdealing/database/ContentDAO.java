@@ -43,7 +43,7 @@ public class ContentDAO {
                     preparedStatementUpdate.setString(3, content.getDescription());
                     preparedStatementUpdate.setObject(4, content.getImage());
                     preparedStatementUpdate.setDouble(5, content.getPrice());
-                    preparedStatementUpdate.setBoolean(6, content.isEquipement());
+                    preparedStatementUpdate.setBoolean(6, content.isEquipment());
                     preparedStatementUpdate.setInt(7, content.getId());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
@@ -70,7 +70,7 @@ public class ContentDAO {
                     preparedStatement.setString(3, content.getDescription());
                     preparedStatement.setObject(4, content.getImage());
                     preparedStatement.setDouble(5, content.getPrice());
-                    preparedStatement.setBoolean(6, content.isEquipement());
+                    preparedStatement.setBoolean(6, content.isEquipment());
                     // Execute the insertion query
                     int rowsAffected = preparedStatement.executeUpdate();
                     System.out.println("Rows affected: " + rowsAffected);
