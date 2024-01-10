@@ -16,7 +16,7 @@ public class Admin extends Account {
      * @param password Password of the admin
      */
     public Admin(String lastName, String firstName, String email, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        super(lastName, firstName, email, password, true);
+        super(lastName, firstName, email, password);
     }
 
     @Override
@@ -26,5 +26,22 @@ public class Admin extends Account {
                 ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean isSleeping() {
+        // Admins are never sleeping
+        return false;
+    }
+
+    @Override
+    public void updateSleeping(boolean isSleeping) {
+        // Admins can't sleep
+    }
+
+    @Override
+    public double getBalance() {
+        // Admins have no balance
+        return 0;
     }
 }

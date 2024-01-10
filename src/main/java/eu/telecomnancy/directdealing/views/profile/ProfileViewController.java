@@ -2,7 +2,9 @@ package eu.telecomnancy.directdealing.views.profile;
 
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -54,6 +56,9 @@ public class ProfileViewController implements Observer {
     @FXML
     private Label modify_info_label;
 
+    @FXML
+    private CheckBox is_sleeping;
+
     /**
      * boolean that indicates if the modification of the profile info is a failure
      */
@@ -100,6 +105,11 @@ public class ProfileViewController implements Observer {
     public void disconnection() throws Exception {
         this.app.deleteCurrentUser();
         this.app.getSceneController().switchToLoginView();
+    }
+
+    @FXML
+    public void sleeping_update(ActionEvent event) {
+        this.app.getCurrentUser().updateSleeping(this.is_sleeping.isSelected());
     }
 
     /**

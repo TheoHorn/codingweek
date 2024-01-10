@@ -28,7 +28,6 @@ public abstract class Account {
     /**
      * Boolean to know if the account is an administrator
      */
-    private boolean isAdministrator;
 
     /**
      * Constructor of the account
@@ -36,14 +35,12 @@ public abstract class Account {
      * @param firstName First name of the account
      * @param email Email of the account
      * @param password Password of the account
-     * @param isAdministrator Boolean to know if the account is an administrator
      */
-    public Account(String lastName, String firstName, String email,String password, boolean isAdministrator) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Account(String lastName, String firstName, String email,String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
         this.password = password;
-        this.isAdministrator = isAdministrator;
     }
 
     public String getLastName() {
@@ -78,7 +75,9 @@ public abstract class Account {
     	this.password = generateStrongPasswordHash(password);
     }
 
-    public boolean isAdministrator() {
-        return isAdministrator;
-    }
+    public abstract boolean isSleeping();
+
+    public abstract void updateSleeping(boolean isSleeping);
+
+    public abstract double getBalance();
 }
