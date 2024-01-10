@@ -69,8 +69,22 @@ public class NavBarController {
         app.getSceneController().switchToMyProposal();
     }
 
+    /**
+     * log out the user
+     * @throws Exception if the switch failed
+     */
     @FXML
     public void logout() throws Exception {
         app.getSceneController().switchToLoginView();
+    }
+
+/**
+     * perform the switch to the home view after research
+     * @param event the event that trigger the switch
+     * @throws Exception if the switch failed
+     */
+    @FXML
+    public void searchUpdate(ActionEvent event) throws Exception {
+        app.getSceneController().switchToHomeAfterResearch();
     }
 }
