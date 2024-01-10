@@ -5,9 +5,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 
-
+/**
+ * OfferCell class
+ */
 public class OfferCell extends ListCell<Offer> {
+    /**
+     * FXMLLoader
+     */
     private FXMLLoader mLLoader;
+
+    /**
+     * update the item of the cell
+     * @param offer Offer to update
+     * @param b Boolean to know if the offer is null
+     */
     @Override
     protected void updateItem(Offer offer, boolean b) {
         super.updateItem(offer, b);

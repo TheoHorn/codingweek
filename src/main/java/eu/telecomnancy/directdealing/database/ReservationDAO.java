@@ -8,7 +8,16 @@ import java.util.Date;
 import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
+/**
+ * ReservationDAO is the class that allows to access the RESERVATION table in the database
+ */
 public class ReservationDAO {
+    /**
+     * save method allows to save a reservation in the database
+     * @param reservation reservation to save
+     * @return true if the reservation has been saved, false if not
+     * @throws SQLException if the connection is not open
+     */
     public boolean save(Reservation reservation) throws SQLException {
         // check if reservation already exists
         String query = "SELECT * FROM SLOT WHERE idOffer = ? AND mail = ? AND idSlot = ?";
@@ -55,6 +64,13 @@ public class ReservationDAO {
         return false;
     }
 
+    /**
+     * get method allows to get a reservation from the database
+     * @param idOffer id of the offer of the reservation
+     * @param idSlot id of the slot of the reservation
+     * @return the reservation if it exists, null if not
+     * @throws SQLException if the connection is not open
+     */
     public Reservation get(int idOffer, int idSlot) throws SQLException {
         // get reservation with primary_key (idOffer, idSlot)
 

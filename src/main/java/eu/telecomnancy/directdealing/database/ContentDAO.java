@@ -12,7 +12,17 @@ import java.sql.Statement;
 
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
+/**
+ * ContentDAO is the class responsible for the management of the CONTENT table in the database.
+ */
 public class ContentDAO {
+
+    /**
+     * Save a content in the database
+     * @param content the content to save
+     * @return the id of the content saved
+     * @throws SQLException if an error occurs
+     */
     public int save(Content content) throws SQLException {
         // Check if content already exists
         String query = "SELECT * FROM CONTENT WHERE idContent = ?";
@@ -33,7 +43,7 @@ public class ContentDAO {
                     preparedStatementUpdate.setString(3, content.getDescription());
                     preparedStatementUpdate.setObject(4, content.getImage());
                     preparedStatementUpdate.setDouble(5, content.getPrice());
-                    preparedStatementUpdate.setBoolean(6, content.isEquipement());
+                    preparedStatementUpdate.setBoolean(6, content.isEquipment());
                     preparedStatementUpdate.setInt(7, content.getId());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
@@ -60,7 +70,7 @@ public class ContentDAO {
                     preparedStatement.setString(3, content.getDescription());
                     preparedStatement.setObject(4, content.getImage());
                     preparedStatement.setDouble(5, content.getPrice());
-                    preparedStatement.setBoolean(6, content.isEquipement());
+                    preparedStatement.setBoolean(6, content.isEquipment());
                     // Execute the insertion query
                     int rowsAffected = preparedStatement.executeUpdate();
                     System.out.println("Rows affected: " + rowsAffected);
@@ -82,6 +92,12 @@ public class ContentDAO {
         return -1;
     }
 
+    /**
+     * Get a content from the database
+     * @param idContent the id of the content to get
+     * @return the content
+     * @throws SQLException if an error occurs
+     */
     public Content get(int idContent) throws SQLException {
         // getting account from mail primary key
         String query = "SELECT * FROM CONTENT WHERE idContent = ?";

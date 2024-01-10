@@ -3,19 +3,55 @@ package eu.telecomnancy.directdealing.model.content;
 import javafx.scene.image.Image;
 
 public abstract class Content {
+    /**
+     * id of the content
+     */
     private int id;
+    /**
+     * current id of the content
+     */
     private static int currentId;
+    /**
+     * title of the content
+     */
     private String title;
+    /**
+     * category of the content
+     */
     private String category;
+    /**
+     * description of the content
+     */
     private String description;
+    /**
+     * image of the content
+     */
     private Image image;
+    /**
+     * price of the content
+     */
     private double price;
+    /**
+     * type of the content
+     */
     protected int type;
-
-    public boolean isEquipement;
-
+    /**
+     * boolean to know if the content is an equipment
+     */
+    public boolean isEquipment;
+    /**
+     * localisation of the content
+     */
     private String localisation;
 
+    /**
+     * Constructor of the content
+     * @param title Title of the content
+     * @param category Category of the content
+     * @param description Description of the content
+     * @param image Image of the content
+     * @param price Price of the content
+     */
     public Content(String title, String category, String description, Image image, double price) {
         this.id = currentId;
         currentId++;
@@ -74,8 +110,8 @@ public abstract class Content {
         return localisation;
     }
 
-    public boolean isEquipement() {
-        return isEquipement;
+    public boolean isEquipment() {
+        return isEquipment;
     }
 
     public void setId(int id) {

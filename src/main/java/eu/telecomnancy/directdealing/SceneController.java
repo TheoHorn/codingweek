@@ -8,10 +8,23 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * SceneController class
+ */
 public class SceneController {
+    /**
+     * Stage of the application
+     */
     private final Stage stage;
+    /**
+     * Scene of the application
+     */
     private Scene scene;
 
+    /**
+     * Constructor of the scene controller
+     * @param stage the stage of the application
+     */
     public SceneController(Stage stage) {
         this.stage = stage;
     }
@@ -20,6 +33,10 @@ public class SceneController {
         return stage;
     }
 
+    /**
+     * perform the switch to the login view
+     * @throws Exception if the switch failed
+     */
     public void switchToLoginView() throws Exception {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
@@ -29,6 +46,10 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * perform the switch to the sign in view
+     * @throws Exception if the switch failed
+     */
     public void switchToSignView() throws Exception {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/signin_view.fxml"));
@@ -38,6 +59,10 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * perform the switch to the home view
+     * @throws Exception if the switch failed
+     */
     public void switchToHome() throws Exception{
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
@@ -48,6 +73,10 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * perform the switch to the offer view
+     * @throws Exception if the switch failed
+     */
     public void switchToOffer() throws Exception{
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/new_offer.fxml"));
@@ -57,6 +86,10 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * perform the switch to the profile view
+     * @throws Exception if the switch failed
+     */
     public void switchToProfile() throws Exception {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/profil/profil_view.fxml"));
@@ -67,6 +100,10 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * perform the switch to my proposal view
+     * @throws Exception if the switch failed
+     */
     public void switchToMyProposal() throws Exception {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/proposal/my_proposal_view.fxml"));
