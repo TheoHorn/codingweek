@@ -3,6 +3,7 @@ package eu.telecomnancy.directdealing.model;
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
+import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
@@ -19,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
-
 public class Application {
     public static volatile Application instance = null;
     private Account currentUser;
@@ -28,23 +27,23 @@ public class Application {
     private final List<Proposal> myProposals;
     private final List<Observer> observers;
     private SceneController sceneController;
+    private AccountDAO accountDAO;
+    private ContentDAO contentDAO;
+    private OfferDAO offerDAO;
+    private SlotDAO slotDAO;
+    private ReservationDAO reservationDAO;
     private AccountManager accountManager;
-    private ContentManager contentManager;
-    private OfferManager offerManager;
-
-    private SlotManager slotManager;
-    private ReservationManager reservationManager;
 
     private Application() {
         this.currentUser = null;
         this.offers = new ArrayList<>();
         this.myProposals = new ArrayList<>();
         this.observers = new ArrayList<>();
-        this.accountManager = new AccountManager();
-        this.contentManager = new ContentManager();
-        this.offerManager = new OfferManager();
-        this.slotManager = new SlotManager();
-        this.reservationManager = new ReservationManager();
+        this.accountDAO = new AccountDAO();
+        this.contentDAO = new ContentDAO();
+        this.offerDAO = new OfferDAO();
+        this.slotDAO = new SlotDAO();
+        this.reservationDAO = new ReservationDAO();
 
 //        test
         this.offers.add(new Proposal(null, null, null, false));
@@ -107,30 +106,31 @@ public class Application {
         this.sceneController = sceneController;
     }
 
+    public AccountDAO getAccountDAO() {
+        return accountDAO;
+    }
+
+    public ContentDAO getContentDAO() {
+        return contentDAO;
+    }
+
+    public OfferDAO getOfferDAO() {
+        return offerDAO;
+    }
+
+    public SlotDAO getSlotDAO() {
+        return slotDAO;
+    }
+
     public AccountManager getAccountManager() {
         return accountManager;
     }
 
-    public ContentManager getContentManager() {
-        return contentManager;
+    public ReservationDAO getReservationDAO() {
+        return reservationDAO;
     }
 
-    public OfferManager getOfferManager() {
-        return offerManager;
-    }
-
-    public SlotManager getSlotManager() {
-        return slotManager;
-    }
-
-    public ReservationManager getReservationManager() {
-        return reservationManager;
-    }
-
-    public void login(String mail, String password) throws Exception {
-        if (DatabaseAccess.connection == null) {
-            throw new Exception("Veuillez créer ou ouvrir une base de données (Fichier)");
-        }
+    public boolean login(String mail, String password) throws Exception {
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
@@ -138,6 +138,8 @@ public class Application {
         } else {
             throw new Exception("Mot de passe ou email incorrect");
         }
+        System.out.println("Login failed");
+        return false;
     }
 
     public void signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
@@ -152,7 +154,7 @@ public class Application {
                     throw new Exception("Les mots de passe sont différents");
                 }
                 User user = new User(lastname,firstname,mail,500.0, false,password);
-                accountManager.addUser(user);
+                accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
                 System.out.println("[Debug:AccountCreatingController] Succesfull");
@@ -179,11 +181,11 @@ public class Application {
             if (isRequest) {
                 Service service = new Service(title, "", description, null, price);
                 Request request = new Request((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), true);
-                getOfferManager().addRequest(request);
+                getOfferDAO().save(request);
             } else {
                 Service service = new Service(title, "", description, null, price);
                 Proposal proposal = new Proposal((User) Application.getInstance().getCurrentUser(), service, new Slot(startDateCommit, endDateCommit,0), false);
-                getOfferManager().addProposal(proposal);
+                getOfferDAO().save(proposal);
             }
             return true;
         }
@@ -193,7 +195,7 @@ public class Application {
         if (!(name.isEmpty() || surname.isEmpty())) {
             this.getCurrentUser().setFirstName(name);
             this.getCurrentUser().setLastName(surname);
-            accountManager.updateAccountInfo(this.getCurrentUser());
+            accountDAO.save(this.getCurrentUser());;
             notifyObservers();
             return true;
         }

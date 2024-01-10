@@ -10,7 +10,7 @@ public class User extends Account{
     boolean isSleeping;
 
     public User(String lastName, String firstName, String email, double balance, boolean isSleeping, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        super(lastName, firstName, email, password);
+        super(lastName, firstName, email, password, false);
         this.balance = balance;
         this.isSleeping = isSleeping;
     }

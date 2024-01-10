@@ -1,7 +1,5 @@
 package eu.telecomnancy.directdealing.views.logview;
 
-import eu.telecomnancy.directdealing.SceneController;
-import eu.telecomnancy.directdealing.database.AccountManager;
 import javafx.event.ActionEvent;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;

@@ -1,7 +1,5 @@
 package eu.telecomnancy.directdealing.model.account;
 
-import eu.telecomnancy.directdealing.database.AccountManager;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -11,18 +9,15 @@ public abstract class Account {
     String lastName;
     String firstName;
     String email;
-
     String password;
-    static int currentId;
-    int id;
+    private boolean isAdministrator;
 
-    public Account(String lastName, String firstName, String email,String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Account(String lastName, String firstName, String email,String password, boolean isAdministrator) throws NoSuchAlgorithmException, InvalidKeySpecException {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
-        this.password = generateStrongPasswordHash(password);
-        this.id = currentId;
-        currentId ++;
+        this.password = password;
+        this.isAdministrator = isAdministrator;
     }
 
     public void login(){}
@@ -59,7 +54,10 @@ public abstract class Account {
     	this.password = generateStrongPasswordHash(password);
     }
 
-    public int getId(){
-        return this.id;
+    public boolean isAdministrator() {
+        return isAdministrator;
     }
+
+
+
 }
