@@ -22,7 +22,7 @@ public class OfferDAO {
     /**
      * save method allows to save an offer in the database
      * @param offer offer to save
-     * @return true if the offer has been saved, false if not
+     * @return the id of the offer saved
      * @throws SQLException if the connection is not open
      */
     public int save(Offer offer) throws SQLException {

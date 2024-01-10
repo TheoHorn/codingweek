@@ -50,7 +50,7 @@ public class SlotDAO {
     /**
      * save method allows to save a slot in the database
      * @param slot slot to save
-     * @return true if the slot has been saved, false if not
+     * @return the id of the slot saved
      * @throws SQLException if the connection is not open
      */
     public int save(Slot slot) throws SQLException {
