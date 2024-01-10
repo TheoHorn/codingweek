@@ -3,6 +3,7 @@ package eu.telecomnancy.directdealing.views.offer;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.offer.Offer;
@@ -65,9 +66,9 @@ public class OfferDisplayController implements Observer {
     @Override
     public void update() throws Exception {
         Offer offer = this.app.getLastOffer();
-        Content content = offer.getContent();
-        Slot slot = offer.getSlot();
-        User owner = offer.getOwner();
+        Content content = app.getContentDAO().get(offer.getIdContent());
+        Slot slot = app.getSlotDAO().get(offer.getIdSlot());
+        Account owner = app.getAccountDAO().get(offer.getMail());
         this.title_label.setText(content.getTitle());
         this.description_label.setText(content.getDescription());
         this.price_label.setText(String.valueOf(content.getPrice()));

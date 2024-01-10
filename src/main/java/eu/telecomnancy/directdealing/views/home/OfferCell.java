@@ -48,7 +48,7 @@ public class OfferCell extends ListCell<Offer> {
         } else {
             if (mLLoader == null) {
                 mLLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/offer_cell.fxml"));
-
+                mLLoader.setController(this);
                 try {
                     mLLoader.load();
                 } catch (Exception e) {
