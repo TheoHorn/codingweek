@@ -186,7 +186,7 @@ public class Application {
      * @return true if the login is correct, false otherwise
      * @throws Exception if the login is not correct
      */
-    public boolean login(String mail, String password) throws Exception {
+    public void login(String mail, String password) throws Exception {
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
             sceneController.switchToHome();
@@ -194,8 +194,6 @@ public class Application {
         } else {
             throw new Exception("Mot de passe ou email incorrect");
         }
-        System.out.println("Login failed");
-        return false;
     }
 
     /**
