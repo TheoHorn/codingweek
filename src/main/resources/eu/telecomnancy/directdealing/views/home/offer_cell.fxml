@@ -14,7 +14,7 @@
 
 <GridPane alignment="CENTER" minWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="400.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" />
       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="150.0" />
   </columnConstraints>
