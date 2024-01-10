@@ -11,8 +11,17 @@ import java.sql.*;
 import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
 
+/**
+ * AccountDAO is the class that allows to access the ACCOUNT table in the database
+ */
 public class AccountDAO {
 
+    /**
+     * save method allows to save an account in the database
+     * @param account account to save
+     * @return true if the account has been saved, false if not
+     * @throws Exception if the connection is not open
+     */
     public boolean save(Account account) throws Exception {
         // check if connection is open
         if (DatabaseAccess.connection == null) {
@@ -89,6 +98,12 @@ public class AccountDAO {
         return false;
     }
 
+    /**
+     * get method allows to get an account from the database
+     * @param mail mail of the account to get
+     * @return the account if it exists, null if not
+     * @throws SQLException if the connection is not open
+     */
     public Account get(String mail) throws SQLException {
         // check if connection is open
         if (DatabaseAccess.connection == null) {

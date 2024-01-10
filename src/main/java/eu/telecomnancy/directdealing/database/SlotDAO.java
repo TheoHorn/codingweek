@@ -6,8 +6,16 @@ import java.sql.*;
 
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
-
+/**
+ * SlotDAO is the class that allows to access the SLOT table in the database
+ */
 public class SlotDAO {
+    /**
+     * get method allows to get a slot from the database
+     * @param idSlot id of the slot to get
+     * @return the slot if it exists, null if not
+     * @throws SQLException if the connection is not open
+     */
     public Slot get(int idSlot) throws SQLException {
         // get slot from id
         String query = "SELECT * FROM SLOT WHERE idSlot = ?";
@@ -39,6 +47,12 @@ public class SlotDAO {
 
     }
 
+    /**
+     * save method allows to save a slot in the database
+     * @param slot slot to save
+     * @return true if the slot has been saved, false if not
+     * @throws SQLException if the connection is not open
+     */
     public int save(Slot slot) throws SQLException {
         // check if slot already exists
         String query = "SELECT * FROM SLOT WHERE startTime = ? AND endTime = ? AND recurring = ?";

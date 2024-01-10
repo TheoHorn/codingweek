@@ -13,7 +13,16 @@ import java.sql.SQLException;
 import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
+/**
+ * OfferDAO is the class that allows to access the OFFER table in the database
+ */
 public class OfferDAO {
+    /**
+     * save method allows to save an offer in the database
+     * @param offer offer to save
+     * @return true if the offer has been saved, false if not
+     * @throws SQLException if the connection is not open
+     */
     public int save(Offer offer) throws SQLException {
         // check if the offer exist
         String query = "SELECT * FROM OFFER WHERE idOffer = ?";
@@ -81,6 +90,12 @@ public class OfferDAO {
         return -1;
     }
 
+    /**
+     * get method allows to get an offer from the database
+     * @param idOffer id of the offer to get
+     * @return the offer if it exists, null if not
+     * @throws SQLException if the connection is not open
+     */
     public Offer get(int idOffer) throws SQLException{
         // getting account from mail primary key
         String query = "SELECT * FROM OFFER WHERE idOffer = ?";
