@@ -150,27 +150,27 @@ public class OfferDAO {
         return offers;
     }
 
-    public List<Offer> get(User user) throws SQLException {
+    public List<Offer> get(String mail) throws SQLException {
         // getting all offers from user
         String query = "SELECT idOffer FROM OFFER WHERE mail = ?";
         ResultSet resultSet = null;
         List<Offer> offers = new ArrayList<Offer>();
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(1, mail);
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) { // Check if there are results
+            while (resultSet.next()) { // Check if there are results
                 // recup des infos
                 int idOffer = resultSet.getInt("idOffer");
                 offers.add(get(idOffer));
-                return offers;
             }
+            return offers;
+
         } finally {
             if (resultSet != null) {
                 resultSet.close();
             }
         }
-        return null;
     }
 
 
