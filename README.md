@@ -141,6 +141,13 @@ assuming `${JAVAFX_HOME}` is the path to your JavaFX installation.
     - [x] Création d'une offre
       - [x] FXML Création d'une offre
       - [x] Stockage en DB
+3. **Visualisation des Offres**
+   - [x] Voir les détails d'une offre
+   - [x] Page d'accueil
+       - [x] Rechercher une offre
+       - [x] Filtrage des offres
+   - [x] Page Mes offres
+   - [x] Page Réservation
 
 See the [open issues](https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12/-/issues) for a full list of proposed features (and known issues).
 
