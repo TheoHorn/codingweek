@@ -254,12 +254,12 @@ public class Application {
         Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
         startOfDay = endDate.atStartOfDay();
         Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null || image == null) {
+        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null || image == null || category.isEmpty()) {
             System.out.println("Veuillez remplir tous les champs");
             return false;
         } else {
             if (isRequest) {
-                Service service = new Service(title, "", description, image, price);
+                Service service = new Service(title, category, description, image, price);
                 Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
                 int idSlot = getSlotDAO().save(slot);
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
@@ -267,7 +267,7 @@ public class Application {
                 getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
 
             } else {
-                Service service = new Service(title, "", description, image, price);
+                Service service = new Service(title, category, description, image, price);
                 Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
                 int idSlot = getSlotDAO().save(slot);
                 Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());

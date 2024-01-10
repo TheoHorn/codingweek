@@ -3,6 +3,8 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 import java.io.File;
@@ -16,7 +18,6 @@ import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
  * ContentDAO is the class responsible for the management of the CONTENT table in the database.
  */
 public class ContentDAO {
-
     /**
      * Save a content in the database
      * @param content the content to save

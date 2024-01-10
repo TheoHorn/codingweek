@@ -65,11 +65,7 @@ public class NewOfferController implements Observer {
      */
     public NewOfferController() {
         this.app = Application.getInstance();
-    }
-
-    @Override
-    public void update() {
-        // TODO
+        this.app.addObserver(this);
     }
 
     /**
@@ -112,9 +108,14 @@ public class NewOfferController implements Observer {
     @FXML
     public void pressValiderNewOffer(ActionEvent actionEvent) throws Exception {
         System.out.println(this.image);
-        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), " ", this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
+        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), this.categoryChoiceBox.getValue().toString(), this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
         if (!err) {
             System.out.println("Une erreur est survenue");
         }
+    }
+
+    @Override
+    public void update() {
+        // TODO
     }
 }
