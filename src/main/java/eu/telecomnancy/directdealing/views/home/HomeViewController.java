@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
+import java.sql.SQLException;
+
 public class HomeViewController implements Observer {
     @FXML
     private ListView<Offer> offersListView;
@@ -18,8 +20,7 @@ public class HomeViewController implements Observer {
     }
 
     @Override
-    public void update() {
-        System.out.println("update");
+    public void update() throws Exception {
         offersListView.getItems().clear();
         this.app.getOffers().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());

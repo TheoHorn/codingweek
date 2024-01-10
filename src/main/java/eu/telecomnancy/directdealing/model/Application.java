@@ -25,7 +25,7 @@ import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword
 public class Application {
     public static volatile Application instance = null;
     private Account currentUser;
-    private final List<Offer> offers;
+    private List<Offer> offers;
     private final List<Proposal> myProposals;
     private final List<Observer> observers;
     private SceneController sceneController;
@@ -47,11 +47,6 @@ public class Application {
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
-
-//        test
-        this.offers.add(new Proposal(null, null, null, false));
-        this.offers.add(new Request(null, null, null, false));
-//        test
     }
 
     public static Application getInstance() {
@@ -75,7 +70,7 @@ public class Application {
         this.observers.clear();
     }
 
-    public void notifyObservers() {
+    public void notifyObservers() throws Exception {
         for (Observer observer : observers) {
             observer.update();
         }
@@ -93,8 +88,9 @@ public class Application {
         this.currentUser = null;
     }
 
-    public List<Offer> getOffers() {
-        return offers;
+    public List<Offer> getOffers() throws Exception {
+        System.out.println(offerDAO.get());
+        return offers = this.offerDAO.get();
     }
 
     public List<Proposal> getMyProposals(){
@@ -131,6 +127,11 @@ public class Application {
 
     public ReservationDAO getReservationDAO() {
         return reservationDAO;
+    }
+
+    public void addOffer(Offer offer) {
+        System.out.println("Add offer");
+        offers.add(offer);
     }
 
     public boolean login(String mail, String password) throws Exception {
