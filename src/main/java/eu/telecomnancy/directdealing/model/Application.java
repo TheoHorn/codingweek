@@ -272,7 +272,6 @@ public class Application {
                 int idSlot = getSlotDAO().save(slot);
                 Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
                 int idOffer = getOfferDAO().save(proposal);
-                getOfferDAO().save(proposal);
                 getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
 
             }
