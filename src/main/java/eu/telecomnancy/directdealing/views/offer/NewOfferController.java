@@ -55,6 +55,11 @@ public class NewOfferController implements Observer {
     @FXML
     private DatePicker endDatePicker;
     /**
+     * Label for errors
+     */
+    @FXML
+    private Label errorLabel;
+    /**
      * Application instance
      */
     private Application app;
@@ -106,11 +111,14 @@ public class NewOfferController implements Observer {
      * @throws SQLException if the validation failed
      */
     @FXML
-    public void pressValiderNewOffer(ActionEvent actionEvent) throws Exception {
-        System.out.println(this.image);
-        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), this.categoryChoiceBox.getValue().toString(), this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
-        if (!err) {
-            System.out.println("Une erreur est survenue");
+    public void pressValiderNewOffer(ActionEvent actionEvent) {
+        System.out.println(this.categoryChoiceBox.getValue() == null);
+        try {
+            app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String)this.categoryChoiceBox.getValue(), this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
+        } catch(NumberFormatException e) {
+            this.errorLabel.setText("Le prix doit être un nombre");
+        }catch (Exception e) {
+            this.errorLabel.setText(e.getMessage());
         }
     }
 

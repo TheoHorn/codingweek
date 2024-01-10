@@ -255,15 +255,16 @@ public class Application {
      * @return true if the offer is validated, false otherwise
      * @throws SQLException if the offer is not validate
      */
-    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price, File image) throws Exception {
-        LocalDateTime startOfDay = startDate.atStartOfDay();
-        Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-        startOfDay = endDate.atStartOfDay();
-        Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null || image == null || category.isEmpty()) {
+    public void validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price, File image) throws Exception {
+        System.out.println("category is:" + category);
+        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null || image == null || category == null) {
             System.out.println("Veuillez remplir tous les champs");
-            return false;
+            throw new Exception("Veuillez remplir tous les champs");
         } else {
+            LocalDateTime startOfDay = startDate.atStartOfDay();
+            Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+            startOfDay = endDate.atStartOfDay();
+            Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
             if (isRequest) {
                 Service service = new Service(title, category, description, image, price);
                 Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
@@ -282,7 +283,6 @@ public class Application {
 
             }
             this.sceneController.switchToHome();
-            return true;
         }
     }
 
