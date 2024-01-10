@@ -24,9 +24,9 @@ public class ReservationDAO {
         ResultSet resultSet = null;
         boolean find = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, reservation.getOffer().getIdOffer());
+            preparedStatement.setInt(1, reservation.getIdOffer());
             preparedStatement.setString(2, reservation.getEmailReserver());
-            preparedStatement.setInt(3, reservation.getSlot().getId());
+            preparedStatement.setInt(3, reservation.getIdSlot());
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
@@ -44,9 +44,9 @@ public class ReservationDAO {
                 String queryAdding = "INSERT INTO CONTENT (idOffer, mail, idSlot, dateReservation) VALUES (?, ?, ?, ?);";
                 try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
                     // Set parameters for the prepared statement
-                    preparedStatement.setInt(1, reservation.getOffer().getIdOffer());
+                    preparedStatement.setInt(1, reservation.getIdOffer());
                     preparedStatement.setString(2, reservation.getEmailReserver());
-                    preparedStatement.setInt(3, reservation.getSlot().getId());
+                    preparedStatement.setInt(3, reservation.getIdSlot());
                     Timestamp timestamp = new Timestamp(reservation.getReservationDate().getTime());
                     preparedStatement.setTimestamp(4, timestamp);
 
@@ -90,7 +90,7 @@ public class ReservationDAO {
                 Date date = resultSet.getDate("dateReservation");
 
                 // creation of the reservation and return
-                return new Reservation(app.getOfferDAO().get(idOfferRes), mail, app.getSlotDAO().get(idSlotRes), date);
+                return new Reservation(idOfferRes, mail, idSlotRes, date);
             }
         } finally {
             if (resultSet != null) {

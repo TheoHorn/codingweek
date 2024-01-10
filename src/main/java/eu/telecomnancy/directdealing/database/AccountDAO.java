@@ -36,6 +36,7 @@ public class AccountDAO {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
+
                 find = true;
                 // update account
                 String queryUpdate = "UPDATE ACCOUNT SET lastname = ?, firstname = ?, balance = ?, sleep = ?, type = ?, password = ? WHERE mail = ?";
@@ -62,6 +63,7 @@ public class AccountDAO {
             } else {
                 // account doesn't exist
                 // Insert new user into the ACCOUNT table
+
                 String queryInsert = "INSERT INTO ACCOUNT (mail, lastname, firstname, balance, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?);";
                 try (PreparedStatement preparedStatementInsert = DatabaseAccess.connection.prepareStatement(queryInsert)) {
                     // Set parameters for the prepared statement
@@ -120,7 +122,6 @@ public class AccountDAO {
                 boolean sleep = resultSet.getBoolean("sleep");
                 int type = resultSet.getInt("type");
                 String password = resultSet.getString("password");
-
                 // creation de l'objet
                 if (type == 1) {
                     return new User(lastname, firstname, mail1, credit, sleep, password);

@@ -12,77 +12,69 @@ public abstract class Offer {
     /**
      * Owner of the offer
      */
-    private User owner;
+    private int idOffer;
+    private String mail;
+    private boolean isRequest;
+    private int idContent;
+    private int idSlot;
     /**
      * Content of the offer
      */
-    private Content content;
-    /**
-     * current id
-     */
-    private static int currentId;
     /**
      * boolean to know if the offer is a request or a proposal
      */
-    private boolean request;
     /**
      * slot of the offer
      */
-    private Slot slot;
     /**
      * id of the offer
      */
-    private int idOffer;
 
-    /**
-     * Constructor of the offer
-     * @param owner Owner of the offer
-     * @param content Content of the offer
-     * @param slot Slot of the offer
-     * @param request Boolean to know if the offer is a request or a proposal
-     * @throws SQLException if the offer is not save in the database
-     */
-    public Offer(User owner, Content content, Slot slot, boolean request) throws SQLException {
-        this.request = request;
-        this.slot = slot;
-        this.owner = owner;
-        this.content = content;
+
+    public Offer(int idOffer, String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
+        this.idOffer = idOffer;
+        this.mail = mail;
+        this.isRequest = isRequest;
+        this.idContent = idContent;
+        this.idSlot = idSlot;
+    }
+
+    public Offer(String mail, boolean isRequest, int idContent, int idSlot) throws SQLException {
+        this.mail = mail;
+        this.isRequest = isRequest;
+        this.idContent = idContent;
+        this.idSlot = idSlot;
         this.idOffer = app.getOfferDAO().save(this);
     }
 
-    public Offer(int idOffer, User owner, Content content, Slot slot, boolean request) {
-        this.idOffer = idOffer;
-        this.request = request;
-        this.slot = slot;
-        this.owner = owner;
-        this.content = content;
+
+    public String getMail() {
+        return mail;
     }
 
-    public User getOwner() {
-        return owner;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public int getIdContent() {
+        return idContent;
     }
 
-    public Content getContent() {
-        return content;
+    public void setIdContent(int idContent) {
+        this.idContent = idContent;
     }
 
-    public void setContent(Content content) {
-        this.content = content;
+    public int getIdSlot() {
+        return idSlot;
     }
+
+    public boolean isRequest() {
+        return isRequest;
+    }
+
 
     public int getIdOffer(){
         return this.idOffer;
     }
 
-    public Slot getSlot() {
-        return this.slot;
-    }
-
-    public boolean isRequest(){
-        return this.request;
-    }
 }
