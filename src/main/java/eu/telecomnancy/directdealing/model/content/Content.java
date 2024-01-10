@@ -2,6 +2,8 @@ package eu.telecomnancy.directdealing.model.content;
 
 import javafx.scene.image.Image;
 
+import java.io.File;
+
 public abstract class Content {
     /**
      * id of the content
@@ -23,9 +25,9 @@ public abstract class Content {
      */
     private String description;
     /**
-     * image of the content
+     * file of the content
      */
-    private Image image;
+    private File image;
     /**
      * price of the content
      */
@@ -51,16 +53,7 @@ public abstract class Content {
      * @param image Image of the content
      * @param price Price of the content
      */
-    public Content(String title, String category, String description, Image image, double price) {
-        this.title = title;
-        this.category = category;
-        this.description = description;
-        this.image = image;
-        this.price = price;
-    }
-
-    public Content(int idContent, String title, String category, String description, Image image, double price) {
-        this.idContent = idContent;
+    public Content(String title, String category, String description, File image, double price) {
         this.title = title;
         this.category = category;
         this.description = description;
@@ -97,11 +90,11 @@ public abstract class Content {
         this.description = description;
     }
 
-    public Image getImage() {
+    public File getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(File image) {
         this.image = image;
     }
 

@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.model.content;
 
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.sql.SQLException;
 
 import static eu.telecomnancy.directdealing.Main.app;
@@ -16,12 +17,12 @@ public class Equipment extends Content{
      * @param price Price of the equipment
      * @throws SQLException if the equipment is not save in the database
      */
-    public Equipment(String title, String category, String description, Image image, double price) throws SQLException {
+    public Equipment(String title, String category, String description, File image, double price) throws SQLException {
         super(title, category, description, image, price);
         super.type = 1;
         super.setIdContent(app.getContentDAO().save(this));
     }
-    public Equipment(int idContent, String title, String category, String description, Image image, double price) throws SQLException {
+    public Equipment(int idContent, String title, String category, String description, File image, double price) throws SQLException {
         super(title, category, description, image, price);
         super.type = 1;
         super.setIdContent(idContent);

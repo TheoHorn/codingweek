@@ -5,7 +5,9 @@ import eu.telecomnancy.directdealing.model.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.sql.SQLException;
 
 /**
@@ -56,6 +58,7 @@ public class NewOfferController implements Observer {
      * Application instance
      */
     private Application app;
+    private File image;
 
     /**
      * Constructor of the new offer view controller
@@ -89,6 +92,18 @@ public class NewOfferController implements Observer {
         this.proposal_button.setSelected(true);
     }
 
+    @FXML
+    public void pickImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(app.getSceneController().getStage());
+        if (selectedFile != null) {
+            this.image = selectedFile;
+        }
+    }
+
     /**
      * allows to validate the new offer
      * @param actionEvent the event that trigger the validation
@@ -96,7 +111,8 @@ public class NewOfferController implements Observer {
      */
     @FXML
     public void pressValiderNewOffer(ActionEvent actionEvent) throws Exception {
-        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), " ", this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()));
+        System.out.println(this.image);
+        boolean err = app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), " ", this.startDatePicker.getValue(), this.endDatePicker.getValue(),  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
         if (!err) {
             System.out.println("Une erreur est survenue");
         }

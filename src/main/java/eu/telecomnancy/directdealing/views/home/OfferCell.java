@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.sql.SQLException;
@@ -54,6 +55,12 @@ public class OfferCell extends ListCell<Offer> {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+
+            try {
+                image.setImage(new Image(app.getContentDAO().get(offer.getIdContent()).getImage().toURI().toString()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
             if (offer instanceof Proposal) {

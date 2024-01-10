@@ -246,25 +246,25 @@ public class Application {
      * @param endDate End date of the offer
      * @param isRequest Boolean to know if the offer is a request or a proposal
      * @param price Price of the offer
-     * @return true if the offer is validate, false otherwise
+     * @return true if the offer is validated, false otherwise
      * @throws SQLException if the offer is not validate
      */
-    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price) throws Exception {
+    public boolean validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price, File image) throws Exception {
         LocalDateTime startOfDay = startDate.atStartOfDay();
         Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
         startOfDay = endDate.atStartOfDay();
         Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null){
+        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null || image == null) {
             System.out.println("Veuillez remplir tous les champs");
             return false;
         } else {
             if (isRequest) {
-                Service service = new Service(title, "", description, null, price);
+                Service service = new Service(title, "", description, image, price);
                 Slot slot = new Slot(startDateCommit, endDateCommit,0);
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent(), slot.getId());
                 getOfferDAO().save(request);
             } else {
-                Service service = new Service(title, "", description, null, price);
+                Service service = new Service(title, "", description, image, price);
                 Slot slot = new Slot(startDateCommit, endDateCommit,0);
                 Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent(), slot.getId());
                 getOfferDAO().save(proposal);
