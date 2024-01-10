@@ -8,6 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+//from https://github.com/lokeshgupta1981/Core-Java/tree/master/src/main/java/com/howtodoinjava/hashing/password/demo
 public class ReallyStrongSecuredPassword {
 
     public static boolean validatePassword(String originalPassword, String storedPassword)
