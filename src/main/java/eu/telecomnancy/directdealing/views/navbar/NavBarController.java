@@ -34,4 +34,9 @@ public class NavBarController {
     public void switchToMyProposal() throws Exception {
         app.getSceneController().switchToMyProposal();
     }
+
+    @FXML
+    public void logout() throws Exception {
+        app.getSceneController().switchToLoginView();
+    }
 }
