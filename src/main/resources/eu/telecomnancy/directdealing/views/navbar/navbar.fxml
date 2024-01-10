@@ -41,9 +41,9 @@
       <HBox alignment="CENTER" prefHeight="83.0" prefWidth="349.0" spacing="10.0">
          <children>
             <TextField prefHeight="29.0" prefWidth="288.0" promptText="Rechercher" />
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="42.0">
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="42.0" onAction="#searchUpdate">
                <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="14.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="18.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@magnifying_glass.png" />
                      </image>

@@ -15,11 +15,11 @@ public class HomeViewController implements Observer {
      * ListView of the offers
      */
     @FXML
-    private ListView<Offer> offersListView;
+    protected ListView<Offer> offersListView;
     /**
      * Application instance
      */
-    private Application app;
+    protected Application app;
 
     /**
      * Constructor of the home view controller

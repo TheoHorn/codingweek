@@ -46,7 +46,7 @@ public class SearchBar {
      * @param offers List of the offers
      * @return List of the offers which contains the string
      */
-    public ArrayList<Offer> search(ArrayList<Offer> offers) throws SQLException {
+    public ArrayList<Offer> searchOffer(ArrayList<Offer> offers) throws SQLException {
         ArrayList<Offer> result = new ArrayList<>();
         for (Offer offer : offers){
             String info = "";
@@ -59,5 +59,7 @@ public class SearchBar {
         }
         return result;
     }
+
+
 
 }

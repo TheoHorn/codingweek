@@ -122,4 +122,14 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void switchToHomeAfterResearch() throws Exception{
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view_after_research.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Home");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
