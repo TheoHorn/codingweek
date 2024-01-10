@@ -62,9 +62,12 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
         }
         for (MenuItem item : this.filter_category.getItems()){
             CheckMenuItem checkItem = (CheckMenuItem) item;
+            //we can have multiple category that we want to filter
+            String category_available = "";
             if (checkItem.isSelected()){
-                this.app.getResearchManager().filterOffersByCategory(checkItem.getText());
+                category_available += checkItem.getText();
             }
+            this.app.getResearchManager().filterOffersByCategory(category_available);
         }
         offersListView.getItems().clear();
         this.app.getResearchManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));

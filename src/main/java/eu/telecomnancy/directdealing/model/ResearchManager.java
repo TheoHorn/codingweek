@@ -102,7 +102,7 @@ public class ResearchManager {
         List<Offer> result = new ArrayList<>();
         for(Offer o: this.researchedOffers){
             Content c = app.getContentDAO().get(o.getIdContent());
-            if(c.getCategory().equals(text)){
+            if(text.contains(c.getCategory())){
                 result.add(o);
             }
         }
