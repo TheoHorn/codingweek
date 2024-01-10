@@ -6,11 +6,10 @@ public abstract class Content {
     /**
      * id of the content
      */
-    private int id;
+    private int idContent;
     /**
      * current id of the content
      */
-    private static int currentId;
     /**
      * title of the content
      */
@@ -53,8 +52,6 @@ public abstract class Content {
      * @param price Price of the content
      */
     public Content(String title, String category, String description, Image image, double price) {
-        this.id = currentId;
-        currentId++;
         this.title = title;
         this.category = category;
         this.description = description;
@@ -62,8 +59,18 @@ public abstract class Content {
         this.price = price;
     }
 
-    public int getId() {
-        return id;
+    public Content(int idContent, String title, String category, String description, Image image, double price) {
+        this.idContent = idContent;
+        this.title = title;
+        this.category = category;
+        this.description = description;
+        this.image = image;
+        this.price = price;
+    }
+
+
+    public int getIdContent() {
+        return idContent;
     }
 
     public String getTitle() {
@@ -114,8 +121,8 @@ public abstract class Content {
         return isEquipment;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdContent(int idContent) {
+        this.idContent = idContent;
     }
 
 

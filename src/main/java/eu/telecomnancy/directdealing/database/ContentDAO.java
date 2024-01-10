@@ -29,7 +29,7 @@ public class ContentDAO {
         ResultSet resultSet = null;
         boolean find = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, content.getId());
+            preparedStatement.setInt(1, content.getIdContent());
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
@@ -43,10 +43,10 @@ public class ContentDAO {
                     preparedStatementUpdate.setObject(4, content.getImage());
                     preparedStatementUpdate.setDouble(5, content.getPrice());
                     preparedStatementUpdate.setBoolean(6, content.isEquipment());
-                    preparedStatementUpdate.setInt(7, content.getId());
+                    preparedStatementUpdate.setInt(7, content.getIdContent());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
-                    return content.getId();
+                    return content.getIdContent();
                 }
             } else {
                 try (Statement statement = DatabaseAccess.connection.createStatement()) {

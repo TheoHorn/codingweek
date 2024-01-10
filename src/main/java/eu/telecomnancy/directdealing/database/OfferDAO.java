@@ -45,7 +45,7 @@ public class OfferDAO {
                     } else {
                         preparedStatementUpdate.setBoolean(2, false);
                     }
-                    preparedStatementUpdate.setInt(3, offer.getContent().getId());
+                    preparedStatementUpdate.setInt(3, offer.getContent().getIdContent());
                     preparedStatementUpdate.setInt(4, offer.getSlot().getId());
                     preparedStatementUpdate.setInt(5, offer.getIdOffer());
                     // Execute the updated query
@@ -67,7 +67,7 @@ public class OfferDAO {
                     } else {
                         preparedStatementInsert.setBoolean(2, false);
                     }
-                    preparedStatementInsert.setInt(3, offer.getContent().getId());
+                    preparedStatementInsert.setInt(3, offer.getContent().getIdContent());
                     preparedStatementInsert.setInt(4, offer.getSlot().getId());
                     // Execute the insertion query
                     preparedStatementInsert.executeUpdate();
