@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -15,16 +16,18 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.SignInViewController">
-   <children>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.SignInViewController">
+   <top>
       <fx:include source="menu_bar.fxml" />
-      <GridPane alignment="CENTER" prefHeight="358.0" prefWidth="600.0">
+   </top>
+   <center>
+      <GridPane alignment="CENTER" prefHeight="358.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.20001220703125" minWidth="10.0" prefWidth="62.4000244140625" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.20001220703125" minWidth="10.0" prefWidth="161.5999755859375" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="151.0" minWidth="10.0" prefWidth="149.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="209.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="276.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="262.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="38.599981689453124" minHeight="10.0" prefHeight="23.4" vgrow="SOMETIMES" />
@@ -36,6 +39,7 @@
             <RowConstraints maxHeight="105.19998168945314" minHeight="10.0" prefHeight="31.600021362304716" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
@@ -64,21 +68,40 @@
                   </Circle>
                </children>
             </HBox>
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="173.0" text="Email : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="170.0" text="Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="mail_textfield" prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <TextField fx:id="firstname_textfield" prefHeight="26.0" prefWidth="214.0" promptText="Votre prénom" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextField fx:id="lastname_textfield" prefHeight="26.0" prefWidth="214.0" promptText="Votre nom" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <PasswordField fx:id="password_textfield" prefHeight="26.0" prefWidth="253.0" promptText="Votre Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <PasswordField fx:id="password_confirm_textfield" prefHeight="26.0" prefWidth="239.0" promptText="Confirmez le Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <Button fx:id="creationButton" alignment="CENTER" mnemonicParsing="false" onAction="#pressCreationButton" prefHeight="29.0" prefWidth="147.0" text="Créer votre compte" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-            <Label alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="170.0" text="Prénom :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="169.0" text="Nom : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="170.0" text="Confirmez le Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label onMouseClicked="#switchToLoginPage" prefHeight="16.0" prefWidth="145.0" text="Déjà un compte ?" textFill="RED" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
-            <Label fx:id="statusLabel" prefHeight="16.0" prefWidth="355.0" textAlignment="CENTER" textFill="indianred" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+            <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" text="Email : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" text="Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="mail_textfield" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="firstname_textfield" prefHeight="26.0" promptText="Votre prénom" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="lastname_textfield" prefHeight="26.0" prefWidth="214.0" promptText="Votre nom" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <PasswordField fx:id="password_textfield" prefHeight="26.0" prefWidth="253.0" promptText="Votre Mot de Passe" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <PasswordField fx:id="password_confirm_textfield" prefHeight="26.0" prefWidth="239.0" promptText="Confirmez le Mot de Passe" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Button fx:id="creationButton" alignment="CENTER" mnemonicParsing="false" onAction="#pressCreationButton" prefHeight="29.0" text="Créer votre compte" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="38.0" text="Prénom :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" text="Nom : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" text="Confirmez le Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <Label contentDisplay="CENTER" onMouseClicked="#switchToLoginPage" prefHeight="16.0" text="Déjà un compte ?" textFill="RED" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+            <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="424.0" textAlignment="CENTER" textFill="indianred" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8" />
          </children>
       </GridPane>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="72.0" prefWidth="601.0" />
-   </children>
-</FlowPane>
+   </center>
+</BorderPane>

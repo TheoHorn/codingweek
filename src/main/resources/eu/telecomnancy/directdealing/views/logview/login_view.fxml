@@ -5,8 +5,8 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -15,10 +15,12 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.LogInViewController">
-   <children>
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.LogInViewController">
+   <top>
       <fx:include source="menu_bar.fxml" />
-      <GridPane alignment="CENTER" prefHeight="304.0" prefWidth="600.0">
+   </top>
+   <center>
+      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -27,16 +29,15 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="38.599981689453124" minHeight="10.0" prefHeight="23.4" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="105.19998168945314" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="132.40001525878904" minHeight="3.600018310546858" prefHeight="52.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="132.40001525878904" minHeight="3.600018310546858" prefHeight="23.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="42.399990844726574" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="80.0" prefHeight="50.0" />
+            <RowConstraints maxHeight="105.19998168945314" minHeight="10.0" prefHeight="45.0" />
+          <RowConstraints maxHeight="132.40001525878904" minHeight="3.600018310546858" prefHeight="52.0" />
+            <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="42.399990844726574" vgrow="NEVER" />
+            <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="42.399990844726574" vgrow="NEVER" />
         </rowConstraints>
          <children>
-            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="601.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="601.0" GridPane.columnIndex="2">
                <children>
                   <Circle radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <fill>
@@ -61,15 +62,14 @@
                   </Circle>
                </children>
             </HBox>
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="143.0" text="Email : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="143.0" text="Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="mail_TextField" prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <PasswordField fx:id="password_TextField" prefHeight="26.0" prefWidth="239.0" promptText="Votre Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#loginButton" prefHeight="26.0" prefWidth="146.0" text="Connexion" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSign" prefHeight="18.0" prefWidth="139.0" text="Pas de compte ?" textAlignment="CENTER" textFill="#e54012" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="351.0" textAlignment="CENTER" textFill="indianred" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="143.0" text="Email : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="143.0" text="Mot de Passe : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="mail_TextField" prefHeight="26.0" prefWidth="214.0" promptText="Votre adresse mail" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <PasswordField fx:id="password_TextField" prefHeight="26.0" prefWidth="239.0" promptText="Votre Mot de Passe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#loginButton" prefHeight="26.0" prefWidth="146.0" text="Connexion" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSign" prefHeight="18.0" prefWidth="139.0" text="Pas de compte ?" textAlignment="CENTER" textFill="#e54012" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSign" prefHeight="18.0" prefWidth="139.0" textAlignment="CENTER" textFill="#e54012" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="84.0" prefWidth="601.0" />
-   </children>
-</FlowPane>
+   </center>
+</BorderPane>

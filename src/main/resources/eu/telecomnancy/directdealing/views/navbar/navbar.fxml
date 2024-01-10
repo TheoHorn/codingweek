@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="83.0" prefWidth="900.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.navbar.NavBarController">
+<HBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.navbar.NavBarController">
    <children>
       <Circle onMouseClicked="#backToHome" radius="27.0" stroke="BLACK" strokeType="INSIDE">
          <fill>
@@ -37,11 +38,14 @@
          <effect>
             <Blend />
          </effect>
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin>
       </Circle>
       <HBox alignment="CENTER" prefHeight="83.0" prefWidth="349.0" spacing="10.0">
          <children>
-            <TextField prefHeight="29.0" prefWidth="288.0" promptText="Rechercher" fx:id="search_text" />
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="42.0" onAction="#searchUpdate">
+            <TextField fx:id="search_text" maxWidth="900.0" minHeight="29.0" minWidth="288.0" promptText="Rechercher" />
+            <Button mnemonicParsing="false" onAction="#searchUpdate" prefHeight="29.0" prefWidth="42.0">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -80,6 +84,9 @@
                </image>
             </ImageView>
          </graphic>
+         <HBox.margin>
+            <Insets right="20.0" />
+         </HBox.margin>
       </MenuButton>
    </children>
 </HBox>
