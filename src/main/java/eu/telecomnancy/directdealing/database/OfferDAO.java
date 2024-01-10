@@ -139,19 +139,17 @@ public class OfferDAO {
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) { // Check if there are results
+            while (resultSet.next()) { // Check if there are results
                 // recup des infos
                 int idContent = resultSet.getInt("idContent");
                 offers.add(get(idContent));
-                return offers;
             }
         } finally {
             if (resultSet != null) {
                 resultSet.close();
             }
         }
-
-        return null;
+        return offers;
     }
 
     public List<Offer> get(User user) throws SQLException {

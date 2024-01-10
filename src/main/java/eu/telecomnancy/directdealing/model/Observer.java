@@ -7,5 +7,5 @@ public interface Observer {
     /**
      * Update method
      */
-    void update();
+    void update() throws Exception;
 }
