@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing.views.offer;
 
+import com.dlsc.gemsfx.daterange.DateRangePicker;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import javafx.event.ActionEvent;
@@ -62,17 +63,7 @@ public class NewOfferController implements Observer {
     @FXML
     private RadioButton isNotRecurrent;
     @FXML
-    private Label everyLabel;
-    @FXML
-    private TextField recurrencyTextField;
-    @FXML
-    private Label linkLabel;
-    @FXML
-    private DatePicker firstDayPicker;
-    @FXML
-    private Label toLabel;
-    @FXML
-    private DatePicker lastDayPicker;
+    private DateRangePicker dateRangePicker;
     @FXML
     private Button slotAddButton;
     @FXML
@@ -161,13 +152,7 @@ public class NewOfferController implements Observer {
         this.isRecurrent.setSelected(false);
         this.isNotRecurrent.setVisible(true);
         this.isNotRecurrent.setSelected(true);
-        this.everyLabel.setVisible(false);
-        this.recurrencyTextField.setVisible(false);
-        this.linkLabel.setVisible(true);
-        this.linkLabel.setText("du");
-        this.firstDayPicker.setVisible(true);
-        this.toLabel.setVisible(true);
-        this.lastDayPicker.setVisible(true);
+        this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(false);
         this.slotLabel.setVisible(false);
         this.slotListView.setVisible(false);
@@ -183,12 +168,7 @@ public class NewOfferController implements Observer {
         this.serviceDurationPicker.setVisible(false);
         this.isRecurrent.setVisible(false);
         this.isNotRecurrent.setVisible(false);
-        this.everyLabel.setVisible(false);
-        this.recurrencyTextField.setVisible(false);
-        this.linkLabel.setVisible(false);
-        this.firstDayPicker.setVisible(false);
-        this.toLabel.setVisible(false);
-        this.lastDayPicker.setVisible(false);
+        this.dateRangePicker.setVisible(false);
         this.slotAddButton.setVisible(false);
         this.slotLabel.setVisible(false);
         this.slotListView.setVisible(false);
@@ -197,13 +177,7 @@ public class NewOfferController implements Observer {
     @FXML void pressRecurrent() {
     	this.isRecurrent.setSelected(true);
     	this.isNotRecurrent.setSelected(false);
-        this.everyLabel.setVisible(true);
-        this.recurrencyTextField.setVisible(true);
-        this.linkLabel.setVisible(true);
-        this.linkLabel.setText("jours du");
-        this.firstDayPicker.setVisible(true);
-        this.toLabel.setVisible(true);
-        this.lastDayPicker.setVisible(true);
+        this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(true);
         this.slotLabel.setVisible(true);
         this.slotListView.setVisible(true);
@@ -212,13 +186,7 @@ public class NewOfferController implements Observer {
     @FXML void pressNotRecurrent() {
     	this.isRecurrent.setSelected(false);
     	this.isNotRecurrent.setSelected(true);
-        this.everyLabel.setVisible(false);
-        this.recurrencyTextField.setVisible(false);
-        this.linkLabel.setVisible(true);
-        this.linkLabel.setText("du");
-        this.firstDayPicker.setVisible(true);
-        this.toLabel.setVisible(true);
-        this.lastDayPicker.setVisible(true);
+        this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(false);
         this.slotLabel.setVisible(false);
         this.slotListView.setVisible(false);
