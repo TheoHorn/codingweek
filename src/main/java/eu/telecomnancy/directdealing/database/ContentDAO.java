@@ -84,7 +84,7 @@ public class ContentDAO {
 
     public Content get(int idContent) throws SQLException {
         // getting account from mail primary key
-        String query = "SELECT * FROM ACCOUNT WHERE id = ?";
+        String query = "SELECT * FROM CONTENT WHERE idContent = ?";
         ResultSet resultSet = null;
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {

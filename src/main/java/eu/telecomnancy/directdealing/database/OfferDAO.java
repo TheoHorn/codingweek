@@ -9,6 +9,8 @@ import eu.telecomnancy.directdealing.model.offer.Request;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
@@ -113,4 +115,55 @@ public class OfferDAO {
 
         return null;
     }
+
+    public List<Offer> get() throws SQLException{
+        // getting offers from idContent primary key
+        String query = "SELECT idContent FROM OFFER";
+        ResultSet resultSet = null;
+
+        List<Offer> offers = new ArrayList<Offer>();
+
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // recup des infos
+                int idContent = resultSet.getInt("idContent");
+                offers.add(get(idContent));
+                return offers;
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+
+        return null;
+    }
+
+    public List<Offer> get(User user) throws SQLException {
+        // getting all offers from user
+        String query = "SELECT idContent FROM OFFER WHERE mail = ?";
+        ResultSet resultSet = null;
+        List<Offer> offers = new ArrayList<Offer>();
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setString(1, user.getEmail());
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // recup des infos
+                int idContent = resultSet.getInt("idContent");
+                offers.add(get(idContent));
+                return offers;
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+        return null;
+    }
+
+
 }
