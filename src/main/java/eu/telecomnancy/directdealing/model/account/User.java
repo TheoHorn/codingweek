@@ -10,10 +10,7 @@ public class User extends Account{
      */
     double balance;
 
-    /**
-     * boolean to know if the user is sleeping
-     */
-    boolean isSleeping;
+
 
     /**
      * Constructor of the user
@@ -27,9 +24,7 @@ public class User extends Account{
      * @throws InvalidKeySpecException if the key is not correct
      */
     public User(String lastName, String firstName, String email, double balance, boolean isSleeping, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        super(lastName, firstName, email, password);
-        this.balance = balance;
-        this.isSleeping = isSleeping;
+        super(lastName, firstName, email, password, isSleeping,balance);
         System.out.println("User created");
     }
 

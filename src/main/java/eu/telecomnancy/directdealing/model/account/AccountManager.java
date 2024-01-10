@@ -68,4 +68,14 @@ public class AccountManager {
         }
         return false;
     }
+
+    public boolean updateSleeping(Account account, boolean isSleeping) throws Exception {
+        if (account == null) {
+            return false;
+        } else {
+            account.updateSleeping(isSleeping);
+            app.getAccountDAO().save(account);
+            return true;
+        }
+    }
 }

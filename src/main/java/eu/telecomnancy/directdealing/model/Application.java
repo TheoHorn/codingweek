@@ -361,4 +361,10 @@ public class Application {
     public ResearchManager getResearchManager() {
         return researchManager;
     }
+
+    public boolean updateCurrentUserSleeping(boolean isSleeping) throws Exception {
+        boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
+        notifyObservers();
+        return b;
+    }
 }

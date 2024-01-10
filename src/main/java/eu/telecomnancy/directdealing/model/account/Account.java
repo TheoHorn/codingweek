@@ -30,17 +30,25 @@ public abstract class Account {
      */
 
     /**
+     * boolean to know if the user is sleeping
+     */
+    boolean isSleeping;
+    double balance;
+
+    /**
      * Constructor of the account
      * @param lastName Last name of the account
      * @param firstName First name of the account
      * @param email Email of the account
      * @param password Password of the account
      */
-    public Account(String lastName, String firstName, String email,String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Account(String lastName, String firstName, String email,String password,Boolean isSleeping, double balance) throws NoSuchAlgorithmException, InvalidKeySpecException {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
         this.password = password;
+        this.isSleeping = isSleeping;
+        this.balance = balance;
     }
 
     public String getLastName() {

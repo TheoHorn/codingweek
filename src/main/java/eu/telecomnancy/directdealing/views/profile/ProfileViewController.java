@@ -4,10 +4,7 @@ import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 /**
  * ProfileViewController class
@@ -56,8 +53,18 @@ public class ProfileViewController implements Observer {
     @FXML
     private Label modify_info_label;
 
+    /**
+     * Label that indicates if the user is sleeping
+     */
     @FXML
-    private CheckBox is_sleeping;
+    private Label sleeping_label;
+
+    /**
+     * Button that allows to update the sleeping status
+     */
+    @FXML
+    private Button sleeping_button;
+
 
     /**
      * boolean that indicates if the modification of the profile info is a failure
@@ -94,7 +101,6 @@ public class ProfileViewController implements Observer {
     @FXML
     public void updatePassword() throws Exception {
         isFailed = this.app.updateCurrentPassword(this.old_password_field.getText(), this.new_password_field.getText(), this.confirm_password_field.getText());
-        System.out.println(isFailed);
     }
 
     /**
@@ -108,8 +114,10 @@ public class ProfileViewController implements Observer {
     }
 
     @FXML
-    public void sleeping_update(ActionEvent event) {
-        this.app.getCurrentUser().updateSleeping(this.is_sleeping.isSelected());
+    public void sleeping_update(ActionEvent event) throws Exception {
+        boolean b = this.app.updateCurrentUserSleeping(!this.app.getCurrentUser().isSleeping());
+        System.out.println("sleeping update : " + b);
+        this.update();
     }
 
     /**
@@ -125,10 +133,12 @@ public class ProfileViewController implements Observer {
             this.modify_password_label.setVisible(false);
             this.modify_info_label.setVisible(false);
         }
+        this.sleeping_button.setText(this.app.getCurrentUser().isSleeping() ? "Désactiver" : "Activer");
         this.name_field.setText(this.app.getCurrentUser().getFirstName());
         this.surname_field.setText(this.app.getCurrentUser().getLastName());
         this.email_field.setText(this.app.getCurrentUser().getEmail());
         this.modify_info_label.setVisible(false);
         this.modify_password_label.setVisible(false);
+        this.sleeping_label.setText(this.app.getCurrentUser().isSleeping() ? "Actif" : "Inactif");
     }
 }
