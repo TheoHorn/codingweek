@@ -5,6 +5,7 @@ import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.content.ContentManager;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
@@ -21,8 +22,11 @@ import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 import eu.telecomnancy.directdealing.model.reservation.ReservationManager;
 import eu.telecomnancy.directdealing.model.slot.SlotManager;
+import eu.telecomnancy.directdealing.views.messaging.MessagingController;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -365,8 +369,6 @@ public class Application {
      * @param title Title of the offer
      * @param description Description of the offer
      * @param category Category of the offer
-     * @param startDate Start date of the offer
-     * @param endDate End date of the offer
      * @param isRequest Boolean to know if the offer is a request or a proposal
      * @param price Price of the offer
      * @return true if the offer is validated, false otherwise
@@ -510,5 +512,44 @@ public class Application {
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
+    }
+
+    public Account getLastAccount() {
+        return lastAccount;
+    }
+
+    public boolean sendEvaluation(String mailEvaluator, String mailEvaluated, String note) throws Exception {
+        int noteInt = evaluationManager.convert(note);
+        Evaluation evaluation = new Evaluation(mailEvaluator, mailEvaluated, noteInt);
+        evaluationDAO.save(evaluation);
+        notifyObservers();
+        return true;
+    }
+
+    public void setLastAccount(Account lastAccount) {
+        this.lastAccount = lastAccount;
+    }
+
+    public MessagingManager getMessagingManager() {
+        return messagingManager;
+    }
+
+    public MessagingDAO getMessagingDAO() {
+        return messagingDAO;
+    }
+
+    public void deleteUser(Account account) throws Exception {
+        if (account.equals(this.getCurrentUser())){
+            // The admin delete himself
+            this.deleteCurrentUser();
+            this.sceneController.switchToHome();
+        }
+        this.accountManager.delete(account);
+        this.notifyObservers();
+    }
+
+    public void deleteOffer(Offer offer) throws Exception {
+        this.offerManager.delete(offer);
+        this.notifyObservers();
     }
 }

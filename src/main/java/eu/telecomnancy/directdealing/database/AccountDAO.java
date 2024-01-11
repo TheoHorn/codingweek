@@ -153,9 +153,10 @@ public class AccountDAO {
                 double credit = resultSet.getDouble("balance");
                 boolean sleep = resultSet.getBoolean("sleep");
                 String password = resultSet.getString("password");
+                String localisation = resultSet.getString("localisation");
 
                 // creation de l'objet
-                User user = new User(lastname, firstname, mail1, credit, sleep, password);
+                User user = new User(lastname, firstname, mail1, credit, sleep, password, localisation);
                 users.add(user);
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
@@ -173,8 +174,10 @@ public class AccountDAO {
 
         String query = "DELETE FROM ACCOUNT WHERE mail = ?;";
 
+        ResultSet resultSet = null;
+
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setString(1, mail);
-        preparedStatement.executeQuery();
+        preparedStatement.execute();
     }
 }

@@ -132,7 +132,9 @@ public class OfferCell extends ListCell<Offer> {
 
     @FXML
     public void displayForeignProfil() throws Exception {
-        Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
-        Application.getInstance().getSceneController().switchToProfileDisplay();
+        if (app.getCurrentUser() instanceof User) {
+            Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
+            Application.getInstance().getSceneController().switchToProfileDisplay();
+        }
     }
 }

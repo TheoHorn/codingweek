@@ -108,9 +108,12 @@ public class OfferDAO {
 
                 if (request){
                     System.out.println(app.getContentDAO().get(idContent).getTitle());
-                    return new Request(mail, true, idContent);
+                    Request req = new Request(mail, true, idContent);
+                    req.setIdOffer(idOffer);
+
                 } else {
-                    return new Proposal(mail, false, idContent);
+                    Proposal proposal = new Proposal(mail, false, idContent);
+                    proposal.setIdOffer(idOffer);
                 }
             }
         } finally {
@@ -175,6 +178,6 @@ public class OfferDAO {
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idOffer);
-        preparedStatement.executeQuery();
+        preparedStatement.execute();
     }
 }

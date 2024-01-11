@@ -201,6 +201,6 @@ public class SlotDAO {
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idSlot);
-        preparedStatement.executeQuery();
+        preparedStatement.execute();
     }
 }

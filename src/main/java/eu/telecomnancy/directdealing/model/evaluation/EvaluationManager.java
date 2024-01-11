@@ -43,4 +43,7 @@ public class EvaluationManager {
         }
     }
 
+    public void delete(Evaluation evaluation) throws SQLException {
+        app.getEvaluationDAO().delete(evaluation.getMailEvaluator(), evaluation.getMailEvaluated());
+    }
 }

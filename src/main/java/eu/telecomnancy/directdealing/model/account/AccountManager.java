@@ -1,7 +1,10 @@
 package eu.telecomnancy.directdealing.model.account;
 
 import eu.telecomnancy.directdealing.database.DatabaseAccess;
+import eu.telecomnancy.directdealing.database.EvaluationDAO;
 import eu.telecomnancy.directdealing.model.Reservation;
+import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
+import eu.telecomnancy.directdealing.model.offer.Offer;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -84,10 +87,39 @@ public class AccountManager {
     public void delete(Account account) throws SQLException {
 
         // Delete all reservation to the account
+        List<Offer> offers = app.getOfferDAO().get(account.getEmail());
+        offers.forEach((offer) -> {
+            try {
+                app.getOfferManager().delete(offer);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Delete all reservation to the account
         List<Reservation> reservations = app.getReservationDAO().get(account.getEmail());
         reservations.forEach((reservation) -> {
             try {
                 app.getReservationManager().delete(reservation);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Delete all reservation to the account
+        List<Evaluation> evaluations = app.getEvaluationDAO().get(account.getEmail()); // For the evaluated
+        evaluations.forEach((evaluation) -> {
+            try {
+                app.getEvaluationManager().delete(evaluation);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        evaluations = app.getEvaluationDAO().getEvaluator(account.getEmail()); // For the evaluator
+        evaluations.forEach((evaluation) -> {
+            try {
+                app.getEvaluationManager().delete(evaluation);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

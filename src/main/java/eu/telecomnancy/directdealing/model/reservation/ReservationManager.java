@@ -13,6 +13,6 @@ public class ReservationManager {
     }
 
     public void delete(Reservation reservation) throws SQLException {
-        app.getReservationDAO().delete(reservation.getIdSlot());
+        app.getReservationDAO().delete(reservation.getIdSlot(), reservation.getEmailReserver());
     }
 }

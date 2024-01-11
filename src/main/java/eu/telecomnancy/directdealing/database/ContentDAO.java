@@ -147,6 +147,6 @@ public class ContentDAO {
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idContent);
-        preparedStatement.executeQuery();
+        preparedStatement.execute();
     }
 }

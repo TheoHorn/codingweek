@@ -3,6 +3,7 @@ package eu.telecomnancy.directdealing.model.slot;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Reservation;
 import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.demande.Demande;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -23,6 +24,10 @@ public class SlotManager {
                 throw new RuntimeException(e);
             }
         });
+
+        // Delete all demande related to slot
+        Demande demandes = app.getDemandeDAO().get(slot.getId());
+        app.getDemandeManager().delete(demandes);
 
         // Delete the slot
         app.getSlotDAO().delete(slot.getId());

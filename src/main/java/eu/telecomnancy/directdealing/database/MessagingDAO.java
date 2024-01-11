@@ -4,6 +4,7 @@ import eu.telecomnancy.directdealing.model.messaging.Messaging;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,5 +133,15 @@ public class MessagingDAO {
             e.printStackTrace();
         }
         return messages;
+    }
+
+
+    public void delete(int idMessage) throws SQLException {
+
+        String query = "DELETE FROM ACCOUNT WHERE idMessage = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setInt(1, idMessage);
+        preparedStatement.execute();
     }
 }

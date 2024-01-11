@@ -123,12 +123,13 @@ public class ReservationDAO {
         return reservations;
     }
 
-    public void delete(int idSlot) throws SQLException {
+    public void delete(int idSlot, String mail) throws SQLException {
 
-        String query = "DELETE FROM RESERVATION WHERE idSlot = ?;";
+        String query = "DELETE FROM RESERVATION WHERE idSlot = ? AND mail = ?;";
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idSlot);
-        preparedStatement.executeQuery();
+        preparedStatement.setString(2, mail);
+        preparedStatement.execute();
     }
 }
