@@ -88,4 +88,8 @@ public abstract class Account {
     public abstract void updateSleeping(boolean isSleeping);
 
     public abstract double getBalance();
+
+    public boolean equals(Account account){
+        return this.getEmail().equals(account.getEmail());
+    }
 }
