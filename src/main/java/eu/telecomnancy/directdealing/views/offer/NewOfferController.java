@@ -1,8 +1,12 @@
 package eu.telecomnancy.directdealing.views.offer;
 
+import com.dlsc.gemsfx.daterange.DateRange;
 import com.dlsc.gemsfx.daterange.DateRangePicker;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
+import eu.telecomnancy.directdealing.model.Slot;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,7 +15,10 @@ import com.dlsc.gemsfx.DurationPicker;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 /**
  * NewOfferController class
@@ -64,6 +71,8 @@ public class NewOfferController implements Observer {
     @FXML
     private RadioButton isNotRecurrent;
     @FXML
+    private TextField recurrency;
+    @FXML
     private DateRangePicker dateRangePicker;
     @FXML
     private Button slotAddButton;
@@ -81,6 +90,7 @@ public class NewOfferController implements Observer {
      */
     private Application app;
     private File image;
+    private final ObservableList<Slot> tempSlots;
 
     /**
      * Constructor of the new offer view controller
@@ -88,11 +98,14 @@ public class NewOfferController implements Observer {
     public NewOfferController() {
         this.app = Application.getInstance();
         this.app.addObserver(this);
+        this.tempSlots = FXCollections.observableArrayList();
     }
 
     @FXML
     public void initialize() {
         this.serviceDurationPicker.getFields().setAll(ChronoUnit.DAYS, ChronoUnit.HOURS, ChronoUnit.MINUTES);
+        this.tempSlots.clear();
+        this.slotListView.setItems(this.tempSlots);
     }
 
     /**
@@ -158,6 +171,7 @@ public class NewOfferController implements Observer {
         this.isRecurrent.setSelected(false);
         this.isNotRecurrent.setVisible(true);
         this.isNotRecurrent.setSelected(true);
+        this.recurrency.setVisible(false);
         this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(false);
         this.slotLabel.setVisible(false);
@@ -174,6 +188,7 @@ public class NewOfferController implements Observer {
         this.serviceDurationPicker.setVisible(false);
         this.isRecurrent.setVisible(false);
         this.isNotRecurrent.setVisible(false);
+        this.recurrency.setVisible(false);
         this.dateRangePicker.setVisible(false);
         this.slotAddButton.setVisible(false);
         this.slotLabel.setVisible(false);
@@ -183,6 +198,7 @@ public class NewOfferController implements Observer {
     @FXML void pressRecurrent() {
         this.isRecurrent.setSelected(true);
         this.isNotRecurrent.setSelected(false);
+        this.recurrency.setVisible(true);
         this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(true);
         this.slotLabel.setVisible(true);
@@ -192,10 +208,20 @@ public class NewOfferController implements Observer {
     @FXML void pressNotRecurrent() {
         this.isRecurrent.setSelected(false);
         this.isNotRecurrent.setSelected(true);
+        this.recurrency.setVisible(false);
         this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(false);
         this.slotLabel.setVisible(false);
         this.slotListView.setVisible(false);
+    }
+
+    @FXML void addSlot() throws SQLException {
+        DateRange dateRange = this.dateRangePicker.getValue();
+        LocalDateTime tmp = dateRange.getStartDate().atStartOfDay();
+        Date startDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
+        tmp = dateRange.getEndDate().atStartOfDay();
+        Date endDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
+        this.tempSlots.add(new Slot(startDate, endDate, Integer.parseInt(this.recurrency.getText()), -1));
     }
 
     @Override
