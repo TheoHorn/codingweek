@@ -472,13 +472,16 @@ public class Application {
         return true;
     }
 
-    public void validateNewDemand(Offer offer, Slot newSlot) throws Exception {
+    public void validateNewDemand(Offer offer, List<Slot> newSlots) throws Exception {
         if (offer == null) {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            int idSlot = this.getSlotDAO().save(newSlot);
-            this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+            int idSlot;
+            for (Slot newSlot : newSlots) {
+                idSlot = this.getSlotDAO().save(newSlot);
+                this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+            }
             this.sceneController.switchToHome();
         }
     }

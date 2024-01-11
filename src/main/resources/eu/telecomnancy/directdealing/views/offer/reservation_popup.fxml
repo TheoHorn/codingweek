@@ -8,6 +8,6 @@
       <fx:include source="../navbar/navbar.fxml" />
    </top>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#save" text="Réserver" BorderPane.alignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#save" text="Demander" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
