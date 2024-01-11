@@ -53,4 +53,9 @@ public class ForeignProfilViewController implements Observer {
     public void sendEvaluation() throws Exception {
         app.sendEvaluation(app.getCurrentUser().getEmail(), app.getLastAccount().getEmail(), this.valueEvaluation.getValue().toString());
     }
+
+    @FXML
+    public void goMessage() throws Exception {
+        app.getSceneController().switchtoMessaging();
+    }
 }

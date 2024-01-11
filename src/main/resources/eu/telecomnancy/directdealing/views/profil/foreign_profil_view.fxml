@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -13,7 +14,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import java.lang.String?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.profile.ForeignProfilViewController">
     <top>
         <fx:include source="../navbar/navbar.fxml" />
@@ -109,12 +109,25 @@
                             <String fx:value="4/5" />
                             <String fx:value="5/5" />
                         </ChoiceBox>
-                        <Button fx:id="evaluateButton" mnemonicParsing="false" text="Evaluer" onAction="#sendEvaluation" />
+                        <Button fx:id="evaluateButton" mnemonicParsing="false" onAction="#sendEvaluation" text="Evaluer" />
                      </children>
                   </HBox>
                   <Label fx:id="moyenneLabel" text="Moyenne" GridPane.columnIndex="1" />
                </children>
             </GridPane>
+            <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+               <children>
+                  <Button mnemonicParsing="false" text="Contacter" HBox.hgrow="NEVER" onAction="#goMessage">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@chat-bulle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets left="20.0" right="20.0" />

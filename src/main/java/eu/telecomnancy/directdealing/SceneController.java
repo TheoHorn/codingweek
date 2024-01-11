@@ -166,4 +166,14 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void switchtoMessaging() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/messaging/messaging_view.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Messagerie");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

@@ -41,7 +41,7 @@ public class MessagingCell extends ListCell<Messaging>{
                 Account sender = app.getAccountDAO().get(messaging.getSender());
                 Account current = app.getAccountDAO().get(app.getCurrentUser().getEmail());
                 if (sender.getEmail().equals(current.getEmail())) {
-                    message.setStyle("-fx-background-color: #00bfff; -fx-text-fill: white; -fx-background-radius: 10px;");
+                    message.setStyle("-fx-background-color: #6565FF; -fx-text-fill: white; -fx-background-radius: 10px;");
                 } else {
                     message.setStyle("-fx-background-color: #f0f0f0; -fx-text-fill: black; -fx-background-radius: 10px;");
                 }

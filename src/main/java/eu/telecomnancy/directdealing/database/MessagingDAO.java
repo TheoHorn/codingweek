@@ -27,7 +27,7 @@ public class MessagingDAO {
             if (resultSet.next()) { // Check if there are results
                 // message already exists
                 // update message
-                String queryUpdate = "UPDATE MESSAGING SET content = ?, sender = ?, receiver = ?, date = ? WHERE idMessage = ?";
+                String queryUpdate = "UPDATE MESSAGING SET content = ?, sender = ?, receiver = ?, timestamp = ? WHERE idMessage = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setString(1, messaging.getContent());
@@ -43,7 +43,7 @@ public class MessagingDAO {
             } else {
                 // message doesn't exist
                 // Insert new user into the MESSAGING table
-                String queryInsert = "INSERT INTO MESSAGING (content, sender, receiver, date) VALUES (?, ?, ?, ?);";
+                String queryInsert = "INSERT INTO MESSAGING (content, sender, receiver, timestamp) VALUES (?, ?, ?, ?);";
                 try (PreparedStatement preparedStatementInsert = DatabaseAccess.connection.prepareStatement(queryInsert)) {
                     // Set parameters for the prepared statement
                     preparedStatementInsert.setString(1, messaging.getContent());
@@ -60,7 +60,7 @@ public class MessagingDAO {
                     try (PreparedStatement statementGetLastId = DatabaseAccess.connection.prepareStatement(queryGetLastId)) {
                         ResultSet resultSetGetLastId = statementGetLastId.executeQuery();
                         if (resultSetGetLastId.next()) {
-                            return resultSetGetLastId.getInt("idMessage");
+                            return resultSetGetLastId.getInt("id");
                         }
                     }
                 }
@@ -93,7 +93,7 @@ public class MessagingDAO {
                 String content = resultSet.getString("content");
                 String sender = resultSet.getString("sender");
                 String receiver = resultSet.getString("receiver");
-                Timestamp timestamp = resultSet.getTimestamp("date");
+                Timestamp timestamp = resultSet.getTimestamp("timestamp");
                 return new Messaging(idMessage, content, sender, receiver, timestamp);
             } else {
                 // message doesn't exist
@@ -125,7 +125,7 @@ public class MessagingDAO {
                 String content = resultSet.getString("content");
                 String sender = resultSet.getString("sender");
                 String receiver = resultSet.getString("receiver");
-                Timestamp timestamp = resultSet.getTimestamp("date");
+                Timestamp timestamp = resultSet.getTimestamp("timestamp");
                 messages.add(new Messaging(idMessage, content, sender, receiver, timestamp));
             }
         } catch (Exception e) {

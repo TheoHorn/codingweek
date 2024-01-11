@@ -29,14 +29,17 @@ public class MessagingController implements Observer {
     @FXML
     public void sendMessage() throws Exception {
         if (!messageTextArea.getText().isEmpty()){
-            //app.getMessagingManager().sendMessage(messageTextArea.getText(), app.getLastUser());
+            app.getMessagingManager().sendMessage(messageTextArea.getText(), app.getLastAccount().getEmail());
         }
+        messageTextArea.clear();
     }
 
     @Override
     public void update() throws Exception {
+        messageLabel.setText(app.getLastAccount().getFirstName() + " " + app.getLastAccount().getLastName());
         messagingListView.getItems().clear();
         this.app.getMessagingManager().getMessaging().forEach(messaging -> messagingListView.getItems().add(messaging));
         messagingListView.setCellFactory(lv -> new MessagingCell());
+        messagingListView.scrollTo(messagingListView.getItems().size()-1);
     }
 }

@@ -10,6 +10,7 @@ public class MessagingManager {
 
     public void sendMessage(String content, String receiver) throws Exception {
         app.getMessagingDAO().save(new Messaging(content, app.getCurrentUser().getEmail(), receiver, new Date()));
+        app.notifyObservers();
     }
 
     public List<Messaging> getMessaging() throws Exception {
