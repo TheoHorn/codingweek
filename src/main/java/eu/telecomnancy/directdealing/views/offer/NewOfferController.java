@@ -181,8 +181,8 @@ public class NewOfferController implements Observer {
     }
 
     @FXML void pressRecurrent() {
-    	this.isRecurrent.setSelected(true);
-    	this.isNotRecurrent.setSelected(false);
+        this.isRecurrent.setSelected(true);
+        this.isNotRecurrent.setSelected(false);
         this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(true);
         this.slotLabel.setVisible(true);
@@ -190,8 +190,8 @@ public class NewOfferController implements Observer {
     }
 
     @FXML void pressNotRecurrent() {
-    	this.isRecurrent.setSelected(false);
-    	this.isNotRecurrent.setSelected(true);
+        this.isRecurrent.setSelected(false);
+        this.isNotRecurrent.setSelected(true);
         this.dateRangePicker.setVisible(true);
         this.slotAddButton.setVisible(false);
         this.slotLabel.setVisible(false);
