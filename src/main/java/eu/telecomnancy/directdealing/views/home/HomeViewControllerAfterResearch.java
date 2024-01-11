@@ -35,7 +35,7 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
 
     @Override
     public void update() throws Exception {
-        this.app.getResearchManager().resetFilter();
+        this.app.getResearchFilterManager().resetFilter();
         for (MenuItem item : this.filter_date.getItems()){
             CheckMenuItem checkItem = (CheckMenuItem) item;
             if (checkItem.isSelected()){
@@ -45,7 +45,7 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
         for (MenuItem item : this.filter_price.getItems()){
             CheckMenuItem checkItem = (CheckMenuItem) item;
             if (checkItem.isSelected()){
-              this.app.getResearchManager().filterOffersByPrice(checkItem.getText());
+              this.app.getResearchFilterManager().filterOffersByPrice(checkItem.getText());
             }
         }
         for (MenuItem item : this.filter_evaluation.getItems()){
@@ -70,10 +70,10 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
             }
         }
         if (!category_available.toString().isEmpty()){
-            this.app.getResearchManager().filterOffersByCategory(category_available.toString());
+            this.app.getResearchFilterManager().filterOffersByCategory(category_available.toString());
         }
         offersListView.getItems().clear();
-        this.app.getResearchManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));
+        this.app.getResearchFilterManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());
     }
 
