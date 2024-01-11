@@ -3,6 +3,7 @@ module eu.telecomnancy.directdealing {
     requires javafx.fxml;
     requires java.sql;
     requires com.dlsc.gemsfx;
+    requires com.calendarfx.view;
 
 
     opens eu.telecomnancy.directdealing to javafx.fxml;

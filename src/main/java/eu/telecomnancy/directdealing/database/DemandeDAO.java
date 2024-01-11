@@ -53,7 +53,7 @@ public class DemandeDAO {
                     try (PreparedStatement statementGetLastId = DatabaseAccess.connection.prepareStatement(queryGetLastId)) {
                         ResultSet resultSetGetLastId = statementGetLastId.executeQuery();
                         if (resultSetGetLastId.next()) {
-                            return resultSetGetLastId.getInt("idDemande");
+                            return resultSetGetLastId.getInt("id");
                         }
                     }
                 }

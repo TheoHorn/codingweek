@@ -72,6 +72,7 @@ public class Application {
      * reservation DAO
      */
     private ReservationDAO reservationDAO;
+    private DemandeDAO demandeDAO;
     /**
      * account manager
      */
@@ -98,6 +99,7 @@ public class Application {
         this.accountDAO = new AccountDAO();
         this.contentDAO = new ContentDAO();
         this.offerDAO = new OfferDAO();
+        this.demandeDAO = new DemandeDAO();
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
@@ -186,6 +188,10 @@ public class Application {
 
     public ReservationDAO getReservationDAO() {
         return reservationDAO;
+    }
+
+    public DemandeDAO getDemandeDAO() {
+        return demandeDAO;
     }
 
     public void addOffer(Offer offer) {
@@ -394,5 +400,16 @@ public class Application {
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
+    }
+
+    public void validateNewDemand(Offer offer, Slot newSlot) throws Exception {
+        if (offer == null) {
+            System.out.println("Veuillez remplir tous les champs");
+            throw new Exception("Veuillez remplir tous les champs");
+        } else {
+            int idSlot = this.getSlotDAO().save(newSlot);
+            this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+            this.sceneController.switchToHome();
+        }
     }
 }

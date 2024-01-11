@@ -108,9 +108,13 @@ public class OfferDAO {
 
                 if (request){
                     System.out.println(app.getContentDAO().get(idContent).getTitle());
-                    return new Request(mail, true, idContent);
+                    Request res =  new Request(mail, true, idContent);
+                    res.setIdOffer(idOffer);
+                    return res;
                 } else {
-                    return new Proposal(mail, false, idContent);
+                    Proposal res =  new Proposal(mail, false, idContent);
+                    res.setIdOffer(idOffer);
+                    return res;
                 }
             }
         } finally {

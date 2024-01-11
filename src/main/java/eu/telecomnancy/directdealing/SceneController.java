@@ -43,6 +43,7 @@ public class SceneController {
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - LogIn");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -56,6 +57,7 @@ public class SceneController {
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - SignIn");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -70,6 +72,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -83,6 +86,7 @@ public class SceneController {
         scene = new Scene(root.load());
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -97,6 +101,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Profil");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -111,6 +116,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - My proposal");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -121,6 +127,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -131,6 +138,17 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
+     public void openReservationPopup() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/reservation_popup.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Reservation");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+     }
 }
