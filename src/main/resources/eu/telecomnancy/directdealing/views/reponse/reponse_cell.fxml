@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
@@ -149,19 +148,26 @@
             <Label fx:id="answerType" alignment="CENTER" contentDisplay="CENTER" text="Label" wrapText="true" />
             <GridPane GridPane.rowIndex="1">
               <rowConstraints>
-                <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                <RowConstraints prefHeight="80.0" vgrow="ALWAYS" />
+                <RowConstraints valignment="TOP" vgrow="ALWAYS" />
               </rowConstraints>
                <columnConstraints>
                   <ColumnConstraints hgrow="ALWAYS" />
                </columnConstraints>
                <children>
-                  <ListView fx:id="slotsListView" GridPane.rowIndex="1" />
-                  <Label text="Créneau(x) :">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
+                  <VBox GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Créneau(x) :">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="slotLabel" text="Label">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
             </GridPane>
          </children>
