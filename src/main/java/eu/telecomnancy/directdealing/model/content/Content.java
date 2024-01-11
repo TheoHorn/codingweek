@@ -33,10 +33,6 @@ public abstract class Content {
      */
     private double price;
     /**
-     * type of the content
-     */
-    protected int type;
-    /**
      * boolean to know if the content is an equipment
      */
     public boolean isEquipment;

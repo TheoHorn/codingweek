@@ -24,6 +24,8 @@ public class OfferCell extends ListCell<Offer> {
     @FXML
     private Label type;
     @FXML
+    private Label service;
+    @FXML
     private Label title;
     @FXML
     private Label price;
@@ -31,6 +33,8 @@ public class OfferCell extends ListCell<Offer> {
     private Label category;
     @FXML
     private Label place;
+    @FXML
+    private Label avisLabel;
     /**
      * FXMLLoader
      */
@@ -77,6 +81,12 @@ public class OfferCell extends ListCell<Offer> {
             }
 
             try {
+                service.setText(app.getContentDAO().get(offer.getIdContent()).isEquipment() ? "Bien" : "Service");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
                 title.setText(app.getContentDAO().get(offer.getIdContent()).getTitle());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -99,6 +109,12 @@ public class OfferCell extends ListCell<Offer> {
                 throw new RuntimeException(e);
             }
 
+            try {
+                avisLabel.setText("Avis sur l'utilisateur : "+ String.valueOf(app.getEvaluationManager().getAverage(offer.getMail()))+"/5 ("+app.getEvaluationManager().getEvaluationCount(offer.getMail())+")");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
             setText(null);
             setGraphic(mLLoader.getRoot());
         }
@@ -112,5 +128,11 @@ public class OfferCell extends ListCell<Offer> {
         } else {
             app.deleteOffer(getItem());
         }
+    }
+
+    @FXML
+    public void displayForeignProfil() throws Exception {
+        Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
+        Application.getInstance().getSceneController().switchToProfileDisplay();
     }
 }

@@ -60,14 +60,17 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
                 //this.app.setOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), checkItem.getText()));
             }
         }
+        StringBuilder category_available = new StringBuilder();
         for (MenuItem item : this.filter_category.getItems()){
             CheckMenuItem checkItem = (CheckMenuItem) item;
             //we can have multiple category that we want to filter
-            String category_available = "";
+
             if (checkItem.isSelected()){
-                category_available += checkItem.getText();
+                category_available.append(checkItem.getText());
             }
-            this.app.getResearchManager().filterOffersByCategory(category_available);
+        }
+        if (!category_available.toString().isEmpty()){
+            this.app.getResearchManager().filterOffersByCategory(category_available.toString());
         }
         offersListView.getItems().clear();
         this.app.getResearchManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));

@@ -35,7 +35,10 @@ public class SlotDAO {
                 Timestamp tempStartTime = resultSet.getTimestamp("startTime");
                 java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
                 Timestamp tempEndTime = resultSet.getTimestamp("endTime");
-                java.util.Date endTime = new java.util.Date(tempEndTime.getTime());
+                java.util.Date endTime = null;
+                if (tempEndTime != null) {
+                    endTime = new java.util.Date(tempEndTime.getTime());
+                }
                 int recurrence = resultSet.getInt("recurring");
                 int idOfferRes = resultSet.getInt("idOffer");
 
@@ -69,7 +72,10 @@ public class SlotDAO {
                 Timestamp tempStartTime = resultSet.getTimestamp("startTime");
                 java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
                 Timestamp tempEndTime = resultSet.getTimestamp("endTime");
-                java.util.Date endTime = new java.util.Date(tempEndTime.getTime());
+                java.util.Date endTime = null;
+                if (tempEndTime != null) {
+                    endTime = new java.util.Date(tempEndTime.getTime());
+                }
                 int recurrence = resultSet.getInt("recurring");
 
                 Slot addingSlot = new Slot(recupIdSlot, startTime, endTime, recurrence, idOffer);
@@ -108,7 +114,11 @@ public class SlotDAO {
                 String queryUpdate = "UPDATE SLOT SET startTime = ?, endTime = ?, recurring = ?, idOffer = ? WHERE idSlot = ?";
                 try (PreparedStatement preparedStatementUpdate = connection.prepareStatement(queryUpdate)) {
                     preparedStatementUpdate.setTimestamp(1, new Timestamp(slot.getStartTime().getTime()));
-                    preparedStatementUpdate.setTimestamp(2, new Timestamp(slot.getEndTime().getTime()));
+                    if (slot.getEndTime() != null) {
+                        preparedStatementUpdate.setTimestamp(2, new Timestamp(slot.getEndTime().getTime()));
+                    } else {
+                        preparedStatementUpdate.setTimestamp(2, null);
+                    }
                     preparedStatementUpdate.setInt(3, slot.getRecurrence());
                     preparedStatementUpdate.setInt(4, slot.getIdOffer());
                     preparedStatementUpdate.setInt(5, slot.getId());
@@ -123,7 +133,11 @@ public class SlotDAO {
                      PreparedStatement statementGetLastId = connection.prepareStatement(queryGetLastId)) {
                     // Set parameters for the prepared statement
                     preparedStatementInsert.setTimestamp(1, new Timestamp(slot.getStartTime().getTime()));
-                    preparedStatementInsert.setTimestamp(2, new Timestamp(slot.getEndTime().getTime()));
+                    if (slot.getEndTime() != null) {
+                        preparedStatementInsert.setTimestamp(2, new Timestamp(slot.getEndTime().getTime()));
+                    } else {
+                        preparedStatementInsert.setTimestamp(2, null);
+                    }
                     preparedStatementInsert.setInt(3, slot.getRecurrence());
                     preparedStatementInsert.setInt(4, slot.getIdOffer());
 
@@ -146,6 +160,39 @@ public class SlotDAO {
                 resultSet.close();
             }
         }
+    }
+
+    public Slot get(int idSlot, boolean preciseSlot) throws SQLException {
+        // get slot from idOffer
+        String query = "SELECT * FROM SLOT WHERE idSlot = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idSlot);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // extract infos from request result
+                Timestamp tempStartTime = resultSet.getTimestamp("startTime");
+                java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
+                Timestamp tempEndTime = resultSet.getTimestamp("endTime");
+                java.util.Date endTime = new java.util.Date(tempEndTime.getTime());
+                int recurrence = resultSet.getInt("recurring");
+                int idOffer = resultSet.getInt("idOffer");
+
+                return new Slot(idSlot, startTime, endTime, recurrence, idOffer);
+
+                // creation of the slot and return
+
+            }
+            return null;
+
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+
     }
 
     public void delete(int idSlot) throws SQLException {

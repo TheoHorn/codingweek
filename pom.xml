@@ -54,6 +54,11 @@
             <artifactId>logback-classic</artifactId>
             <version>1.4.12</version>
         </dependency>
+        <dependency>
+            <groupId>com.dlsc.gemsfx</groupId>
+            <artifactId>gemsfx</artifactId>
+            <version>1.90.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -23,12 +23,12 @@ public class Service extends Content{
      */
     public Service(String title, String category, String description, File image, double price) throws SQLException {
         super(title, category, description, image, price);
-        super.type = 2;
+        super.isEquipment = false;
         super.setIdContent(app.getContentDAO().save(this));
     }
     public Service(int idService, String title, String category, String description, File image, double price) {
         super(title, category, description, image, price);
-        super.type = 2;
+        super.isEquipment = false;
         super.setIdContent(idService);
     }
 }

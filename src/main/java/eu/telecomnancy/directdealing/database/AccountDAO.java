@@ -42,7 +42,7 @@ public class AccountDAO {
 
                 find = true;
                 // update account
-                String queryUpdate = "UPDATE ACCOUNT SET lastname = ?, firstname = ?, balance = ?, sleep = ?, type = ?, password = ? WHERE mail = ?";
+                String queryUpdate = "UPDATE ACCOUNT SET lastname = ?, firstname = ?, balance = ?, sleep = ?, type = ?, password = ?, localisation = ? WHERE mail = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setString(1, account.getLastName());
@@ -51,7 +51,9 @@ public class AccountDAO {
                     preparedStatementUpdate.setBoolean(4, account.isSleeping());
                     preparedStatementUpdate.setInt(5, 1);
                     preparedStatementUpdate.setString(6, account.getPassword());
-                    preparedStatementUpdate.setString(7, account.getEmail());
+                    preparedStatementUpdate.setString(7, "Nancy");
+                    preparedStatementUpdate.setString(8, account.getEmail());
+
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
                     return true;
@@ -60,16 +62,17 @@ public class AccountDAO {
                 // account doesn't exist
                 // Insert new user into the ACCOUNT table
 
-                String queryInsert = "INSERT INTO ACCOUNT (mail, lastname, firstname, balance, sleep, type, password) VALUES (?, ?, ?, ?, ?, ?, ?);";
+                String queryInsert = "INSERT INTO ACCOUNT (mail, lastname, firstname, balance, sleep, type, password, localisation) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
                 try (PreparedStatement preparedStatementInsert = DatabaseAccess.connection.prepareStatement(queryInsert)) {
                     // Set parameters for the prepared statement
                     preparedStatementInsert.setString(1, account.getEmail());
                     preparedStatementInsert.setString(2, account.getLastName());
                     preparedStatementInsert.setString(3, account.getFirstName());
-                    preparedStatementInsert.setDouble(3, account.getBalance());
-                    preparedStatementInsert.setBoolean(4, account.isSleeping());
+                    preparedStatementInsert.setDouble(4, account.getBalance());
+                    preparedStatementInsert.setBoolean(5, account.isSleeping());
                     preparedStatementInsert.setInt(6, 1);
                     preparedStatementInsert.setString(7, account.getPassword());
+                    preparedStatementInsert.setString(8,"Nancy");
 
                     // Execute the insertion query
                     preparedStatementInsert.executeUpdate();
@@ -112,11 +115,12 @@ public class AccountDAO {
                 boolean sleep = resultSet.getBoolean("sleep");
                 int type = resultSet.getInt("type");
                 String password = resultSet.getString("password");
+                String localisation = resultSet.getString("localisation");
                 // creation de l'objet
                 if (type == 1) {
-                    return new User(lastname, firstname, mail1, credit, sleep, password);
+                    return new User(lastname, firstname, mail1, credit, sleep, password, localisation);
                 } else if (type == 2) {
-                    return new Admin(lastname, firstname, mail1, password);
+                    return new Admin(lastname, firstname, mail1, password, localisation);
                 }
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {

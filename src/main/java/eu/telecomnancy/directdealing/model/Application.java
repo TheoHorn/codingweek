@@ -6,9 +6,15 @@ import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.ContentManager;
+import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.dispute.Dispute;
 import eu.telecomnancy.directdealing.model.dispute.DisputeManager;
+import eu.telecomnancy.directdealing.model.demande.DemandeManager;
+import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
+import eu.telecomnancy.directdealing.model.evaluation.EvaluationManager;
+import eu.telecomnancy.directdealing.model.messaging.Messaging;
+import eu.telecomnancy.directdealing.model.messaging.MessagingManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.OfferManager;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
@@ -17,7 +23,6 @@ import eu.telecomnancy.directdealing.model.reservation.ReservationManager;
 import eu.telecomnancy.directdealing.model.slot.SlotManager;
 
 import java.io.File;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -116,10 +121,32 @@ public class Application {
      */
     private Offer lastOffer;
 
+    private Account lastAccount;
+
     /**
      * the research manager
      */
     private ResearchManager researchManager;
+    /**
+     * demande DAO
+     */
+    private DemandeDAO demandeDAO;
+    /**
+     * demande manager
+     */
+    private DemandeManager demandeManager;
+    private EvaluationDAO evaluationDAO;
+    private EvaluationManager evaluationManager;
+
+    /**
+     * messaging DAO
+     */
+    private MessagingDAO messagingDAO;
+
+    /**
+     * messaging manager
+     */
+    private MessagingManager messagingManager;
 
     /**
      * Constructor of the application that initialize the lists
@@ -136,6 +163,13 @@ public class Application {
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
         this.researchManager = new ResearchManager();
+        this.demandeDAO = new DemandeDAO();
+        this.demandeManager = new DemandeManager();
+        this.evaluationDAO = new EvaluationDAO();
+        this.evaluationManager = new EvaluationManager();
+
+        this.messagingDAO = new MessagingDAO();
+        this.messagingManager = new MessagingManager();
     }
 
     /**
@@ -186,7 +220,7 @@ public class Application {
         System.out.println(offers);
         return offers;
     }
-    
+
     public List<User> getUsers() throws Exception {
         List<User> users = this.accountDAO.getUsers();
         System.out.println(users);
@@ -221,6 +255,14 @@ public class Application {
         return slotDAO;
     }
 
+    public DemandeDAO getDemandeDAO() {
+        return demandeDAO;
+    }
+
+    public DemandeManager getDemandeManager() {
+        return demandeManager;
+    }
+
     public AccountManager getAccountManager() {
         return accountManager;
     }
@@ -249,6 +291,14 @@ public class Application {
         return reservationDAO;
     }
 
+    public EvaluationDAO getEvaluationDAO() {
+        return evaluationDAO;
+    }
+
+    public EvaluationManager getEvaluationManager() {
+        return evaluationManager;
+    }
+
     public void addOffer(Offer offer) {
         System.out.println("Add offer");
         offers.add(offer);
@@ -258,6 +308,7 @@ public class Application {
      * login the user
      * @param mail Email of the user
      * @param password Password of the user
+     * @return true if the login is correct, false otherwise
      * @throws Exception if the login is not correct
      */
     public void login(String mail, String password) throws Exception {
@@ -293,7 +344,7 @@ public class Application {
                     throw new Exception("Les mots de passe sont différents");
                 }
                 String generateStrongPasswordHash;
-                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password));
+                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password), "Nancy");
                 accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
@@ -321,32 +372,59 @@ public class Application {
      * @return true if the offer is validated, false otherwise
      * @throws SQLException if the offer is not validate
      */
-    public void validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price, File image) throws Exception {
+    public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, List<Slot> slots) throws Exception {
         System.out.println("category is:" + category);
-        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null || image == null || category == null) {
+        if (title.isEmpty() || description.isEmpty() || price == 0 || slots.isEmpty() || image == null || category == null) {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            LocalDateTime startOfDay = startDate.atStartOfDay();
-            Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-            startOfDay = endDate.atStartOfDay();
-            Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+            Service service = new Service(title, category, description, image, price);
+            int idOffer;
             if (isRequest) {
-                Service service = new Service(title, category, description, image, price);
-                Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
-                int idSlot = getSlotDAO().save(slot);
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
-                int idOffer = getOfferDAO().save(request);
-                getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
-
+                idOffer = getOfferDAO().save(request);
             } else {
-                Service service = new Service(title, category, description, image, price);
-                Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
-                int idSlot = getSlotDAO().save(slot);
                 Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
-                int idOffer = getOfferDAO().save(proposal);
-                getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
+                idOffer = getOfferDAO().save(proposal);
+            }
+            for (Slot slot : slots) {
+                getSlotDAO().save(new Slot(slot.getId(), slot.getStartTime(), slot.getEndTime(), slot.getRecurrence(), idOffer));
+            }
+            this.sceneController.switchToHome();
+        }
+    }
 
+    /**
+     * validate a new offer
+     * @param title Title of the offer
+     * @param description Description of the offer
+     * @param category Category of the offer
+     * @param isRequest Boolean to know if the offer is a request or a proposal
+     * @param price Price of the offer
+     * @param returnDate Return date of the offer
+     * @return true if the offer is validated, false otherwise
+     * @throws SQLException if the offer is not validate
+     */
+    public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, LocalDate returnDate) throws Exception {
+        System.out.println("category is:" + category);
+        if (title.isEmpty() || description.isEmpty() || price == 0 || image == null || category == null) {
+            System.out.println("Veuillez remplir tous les champs");
+            throw new Exception("Veuillez remplir tous les champs");
+        } else {
+            Equipment service = new Equipment(title, category, description, image, price);
+            int idOffer;
+            if (isRequest) {
+                Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
+                idOffer = getOfferDAO().save(request);
+            } else {
+                Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
+                idOffer = getOfferDAO().save(proposal);
+            }
+            if (returnDate != null) {
+                System.out.println(returnDate);
+                LocalDateTime tmp = returnDate.atStartOfDay();
+                Date returnDateDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
+                getSlotDAO().save(new Slot(0, returnDateDate, null, 0, idOffer));
             }
             this.sceneController.switchToHome();
         }
@@ -432,18 +510,5 @@ public class Application {
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
-    }
-
-    public void deleteUser(Account account) throws Exception {
-        /* if (account.equals(currentUser)){
-            // The admin delete his own account
-            deleteCurrentUser();
-            sceneController.switchToLoginView();
-        }
-        this.accountManager.delete(account); */
-    }
-
-    public void deleteOffer(Offer offer) throws SQLException {
-        // this.offerManager.delete(offer);
     }
 }
