@@ -34,7 +34,7 @@ public class HomeViewController implements Observer {
     @Override
     public void update() throws Exception {
         offersListView.getItems().clear();
-        this.app.getResearchFilterManager().filtersHomeOffers().forEach(offer -> offersListView.getItems().add(offer));
+        this.app.getResearchFilterManager().getAllOffersVisible().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());
     }
 }
