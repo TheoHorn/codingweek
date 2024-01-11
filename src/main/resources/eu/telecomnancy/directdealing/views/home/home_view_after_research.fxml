@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.RadioMenuItem?>
 <BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.home.HomeViewControllerAfterResearch">
    <top>
       <fx:include source="../navbar/navbar.fxml" />
@@ -27,11 +28,11 @@
                   </Label>
                   <MenuButton fx:id="filter_location" mnemonicParsing="false" text="Localisation">
                      <items>
-                        <CheckMenuItem mnemonicParsing="false" text="Moins de 1km" />
-                        <CheckMenuItem mnemonicParsing="false" text="Moins de 2km" />
-                        <CheckMenuItem mnemonicParsing="false" text="Moins de 5km" />
-                        <CheckMenuItem mnemonicParsing="false" text="Moins de 10km" />
-                        <CheckMenuItem mnemonicParsing="false" text="Moins de 50km" />
+                        <RadioMenuItem mnemonicParsing="false" text="Moins de 1km" />
+                        <RadioMenuItem mnemonicParsing="false" text="Moins de 2km" />
+                        <RadioMenuItem mnemonicParsing="false" text="Moins de 5km" />
+                        <RadioMenuItem mnemonicParsing="false" text="Moins de 10km" />
+                        <RadioMenuItem mnemonicParsing="false" text="Moins de 50km" />
                      </items>
                      <font>
                         <Font size="14.0" />
@@ -51,11 +52,11 @@
                   </MenuButton>
                   <MenuButton fx:id="filter_evaluation" mnemonicParsing="false" text="Evaluation">
                      <items>
-                       <CheckMenuItem mnemonicParsing="false" text="1 étoile" />
-                       <CheckMenuItem mnemonicParsing="false" text="2 étoiles" />
-                       <CheckMenuItem mnemonicParsing="false" text="3 étoiles" />
-                       <CheckMenuItem mnemonicParsing="false" text="4 étoiles" />
-                       <CheckMenuItem mnemonicParsing="false" text="5 étoiles" />
+                       <RadioMenuItem mnemonicParsing="false" text="Tout" />
+                       <RadioMenuItem mnemonicParsing="false" text="Plus de 1 étoile" />
+                       <RadioMenuItem mnemonicParsing="false" text="Plus de 2 étoiles" />
+                       <RadioMenuItem mnemonicParsing="false" text="Plus de 3 étoiles" />
+                       <RadioMenuItem mnemonicParsing="false" text="Plus de 4 étoiles" />
                      </items>
                      <font>
                         <Font size="14.0" />
@@ -63,12 +64,12 @@
                   </MenuButton>
                   <MenuButton fx:id="filter_price" mnemonicParsing="false" text="Prix">
                <items>
-                  <CheckMenuItem mnemonicParsing="false" text="Gratuit"/>
-                  <CheckMenuItem mnemonicParsing="false" text="Moins de 5€"/>
-                  <CheckMenuItem mnemonicParsing="false" text="Moins de 10€"/>
-                  <CheckMenuItem mnemonicParsing="false" text="Moins de 20€"/>
-                  <CheckMenuItem mnemonicParsing="false" text="Moins de 50€"/>
-                  <CheckMenuItem mnemonicParsing="false" text="Moins de 100€"/>
+                  <RadioMenuItem mnemonicParsing="false" text="Gratuit"/>
+                  <RadioMenuItem mnemonicParsing="false" text="Moins de 5€"/>
+                  <RadioMenuItem mnemonicParsing="false" text="Moins de 10€"/>
+                  <RadioMenuItem mnemonicParsing="false" text="Moins de 20€"/>
+                  <RadioMenuItem mnemonicParsing="false" text="Moins de 50€"/>
+                  <RadioMenuItem mnemonicParsing="false" text="Moins de 100€"/>
                </items>
                <font>
                   <Font size="14.0" />
