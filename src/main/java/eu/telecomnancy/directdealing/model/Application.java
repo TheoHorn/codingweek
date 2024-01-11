@@ -88,8 +88,19 @@ public class Application {
      * the research manager
      */
     private ResearchManager researchManager;
+    /**
+     * demande DAO
+     */
     private DemandeDAO demandeDAO;
+    /**
+     * demande manager
+     */
     private DemandeManager demandeManager;
+
+    /**
+     * messaging DAO
+     */
+    private MessagingDAO messagingDAO;
 
     /**
      * Constructor of the application that initialize the lists
@@ -108,6 +119,7 @@ public class Application {
         this.researchManager = new ResearchManager();
         this.demandeDAO = new DemandeDAO();
         this.demandeManager = new DemandeManager();
+        this.messagingDAO = new MessagingDAO();
     }
 
     /**
