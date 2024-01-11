@@ -15,8 +15,8 @@ public class Admin extends Account {
      * @param email Email of the admin
      * @param password Password of the admin
      */
-    public Admin(String lastName, String firstName, String email, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        super(lastName, firstName, email, password, false, 0);
+    public Admin(String lastName, String firstName, String email, String password, String localisation) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        super(lastName, firstName, email, password, false, 0, localisation);
     }
 
     @Override

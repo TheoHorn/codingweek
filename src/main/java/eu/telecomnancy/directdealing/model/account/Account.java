@@ -34,6 +34,7 @@ public abstract class Account {
      */
     boolean isSleeping;
     double balance;
+    private String localisation;
 
     /**
      * Constructor of the account
@@ -42,13 +43,14 @@ public abstract class Account {
      * @param email Email of the account
      * @param password Password of the account
      */
-    public Account(String lastName, String firstName, String email,String password,Boolean isSleeping, double balance) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Account(String lastName, String firstName, String email,String password,Boolean isSleeping, double balance, String localisation) throws NoSuchAlgorithmException, InvalidKeySpecException {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
         this.password = password;
         this.isSleeping = isSleeping;
         this.balance = balance;
+        this.localisation = localisation;
     }
 
     public String getLastName() {
@@ -88,4 +90,8 @@ public abstract class Account {
     public abstract void updateSleeping(boolean isSleeping);
 
     public abstract double getBalance();
+
+    public String getLocalisation() {
+        return localisation;
+    }
 }

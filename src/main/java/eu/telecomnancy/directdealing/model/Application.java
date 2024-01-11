@@ -227,7 +227,7 @@ public class Application {
                     throw new Exception("Les mots de passe sont différents");
                 }
                 String generateStrongPasswordHash;
-                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password));
+                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password), "Nancy");
                 accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
