@@ -3,7 +3,9 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.*;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
@@ -62,32 +64,25 @@ public class ReservationDAO {
         return false;
     }
 
-    /**
-     * get method allows to get a reservation from the database
-     * @param idSlot id of the slot of the reservation
-     * @param mail mail of the account of the reservation
-     * @return the reservation if it exists, null if not
-     * @throws SQLException if the connection is not open
-     */
-    public Reservation get(int idSlot, String mail) throws SQLException {
+    public List<Reservation> get(String mail) throws SQLException {
         // get reservation with primary_key (mail, idSlot)
 
-        String query = "SELECT * FROM ACCOUNT WHERE mail = ? AND idSlot = ?";
+        String query = "SELECT * FROM RESERVATION WHERE mail = ?";
         ResultSet resultSet = null;
+        List<Reservation> reservations = new ArrayList<>();
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             preparedStatement.setString(1, mail);
-            preparedStatement.setInt(2, idSlot);
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) { // Check if there are results
+            while (resultSet.next()) { // Check if there are results
                 // extract infos from request result
                 String mailRes = resultSet.getString("mail");
                 int idSlotRes = resultSet.getInt("idSlot");
                 Date date = resultSet.getDate("dateReservation");
 
                 // creation of the reservation and return
-                return new Reservation(mailRes, idSlotRes, date);
+                reservations.add(new Reservation(mailRes, idSlotRes, date));
             }
         } finally {
             if (resultSet != null) {
@@ -95,7 +90,37 @@ public class ReservationDAO {
             }
         }
 
-        return null;
+        return reservations;
+    }
+
+
+    public List<Reservation> get(int idSlot) throws SQLException {
+        // get reservation with primary_key (mail, idSlot)
+
+        String query = "SELECT * FROM RESERVATION WHERE idSlot = ?";
+        ResultSet resultSet = null;
+        List<Reservation> reservations = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idSlot);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) { // Check if there are results
+                // extract infos from request result
+                String mailRes = resultSet.getString("mail");
+                int idSlotRes = resultSet.getInt("idSlot");
+                Date date = resultSet.getDate("dateReservation");
+
+                // creation of the reservation and return
+                reservations.add(new Reservation(mailRes, idSlotRes, date));
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+
+        return reservations;
     }
 
     public void delete(int idSlot) throws SQLException {

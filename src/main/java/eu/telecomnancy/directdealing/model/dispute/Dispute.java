@@ -1,4 +1,4 @@
-package eu.telecomnancy.directdealing.model;
+package eu.telecomnancy.directdealing.model.dispute;
 
 import eu.telecomnancy.directdealing.model.account.User;
 

@@ -64,6 +64,6 @@ public class UserCell extends ListCell<User> {
 
     @FXML
     public void pressDelete() throws Exception {
-        app.deleteUser(getItem().getEmail());
+        app.deleteUser(getItem());
     }
 }

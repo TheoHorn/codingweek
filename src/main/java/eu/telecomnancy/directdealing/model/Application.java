@@ -5,10 +5,16 @@ import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.ContentManager;
 import eu.telecomnancy.directdealing.model.content.Service;
+import eu.telecomnancy.directdealing.model.dispute.Dispute;
+import eu.telecomnancy.directdealing.model.dispute.DisputeManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
+import eu.telecomnancy.directdealing.model.offer.OfferManager;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
+import eu.telecomnancy.directdealing.model.reservation.ReservationManager;
+import eu.telecomnancy.directdealing.model.slot.SlotManager;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -74,6 +80,36 @@ public class Application {
      * account manager
      */
     private AccountManager accountManager;
+
+
+    /**
+     * offer manager
+     */
+    private OfferManager offerManager;
+
+
+    /**
+     * content manager
+     */
+    private ContentManager contentManager;
+
+
+    /**
+     * dispute manager
+     */
+    private DisputeManager disputeManager;
+
+
+    /**
+     * reservation manager
+     */
+    private ReservationManager reservationManager;
+
+
+    /**
+     * slot manager
+     */
+    private SlotManager slotManager;
 
     /**
      * the last offer used
@@ -187,6 +223,26 @@ public class Application {
 
     public AccountManager getAccountManager() {
         return accountManager;
+    }
+
+    public OfferManager getOfferManager() {
+        return offerManager;
+    }
+
+    public ContentManager getContentManager() {
+        return contentManager;
+    }
+
+    public DisputeManager getDisputeManager() {
+        return disputeManager;
+    }
+
+    public ReservationManager getReservationManager() {
+        return reservationManager;
+    }
+
+    public SlotManager getSlotManager() {
+        return slotManager;
     }
 
     public ReservationDAO getReservationDAO() {
@@ -378,16 +434,16 @@ public class Application {
         return b;
     }
 
-    public void deleteUser(String mail) throws Exception {
-        if (mail.equals(currentUser.getEmail())){
+    public void deleteUser(Account account) throws Exception {
+        /* if (account.equals(currentUser)){
             // The admin delete his own account
             deleteCurrentUser();
             sceneController.switchToLoginView();
         }
-        //this.accountDAO.delete(mail);
+        this.accountManager.delete(account); */
     }
 
-    public void deleteOffer(int idOffer){
-        //this.offerDAO.delete(id);
+    public void deleteOffer(Offer offer) throws SQLException {
+        // this.offerManager.delete(offer);
     }
 }

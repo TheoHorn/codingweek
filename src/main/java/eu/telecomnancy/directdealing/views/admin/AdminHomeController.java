@@ -1,7 +1,7 @@
 package eu.telecomnancy.directdealing.views.admin;
 
 import eu.telecomnancy.directdealing.model.Application;
-import eu.telecomnancy.directdealing.model.Dispute;
+import eu.telecomnancy.directdealing.model.dispute.Dispute;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.views.admin.dispute.AdminDisputeController;

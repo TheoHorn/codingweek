@@ -37,6 +37,11 @@ public class OfferCell extends ListCell<Offer> {
     private FXMLLoader mLLoader;
     private Application app;
 
+    public OfferCell(){
+        super();
+        this.app = Application.getInstance();
+    }
+
     /**
      * update the item of the cell
      * @param offer Offer to update
@@ -105,7 +110,7 @@ public class OfferCell extends ListCell<Offer> {
             app.setLastOffer(getItem());
             app.getSceneController().switchToOfferDisplay();
         } else {
-            app.deleteOffer(getItem().getIdOffer());
+            app.deleteOffer(getItem());
         }
     }
 }
