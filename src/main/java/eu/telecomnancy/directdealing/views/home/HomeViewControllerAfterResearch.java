@@ -1,9 +1,7 @@
 package eu.telecomnancy.directdealing.views.home;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 
 public class HomeViewControllerAfterResearch extends HomeViewController{
 
@@ -28,6 +26,25 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
     }
 
 
+    public void handleRadioMenuButton(){
+        ToggleGroup group = new ToggleGroup();
+        for (MenuItem item : this.filter_evaluation.getItems()){
+            RadioMenuItem checkItem = (RadioMenuItem) item;
+            checkItem.setToggleGroup(group);
+        }
+        ToggleGroup group2 = new ToggleGroup();
+        for (MenuItem item : this.filter_location.getItems()){
+            RadioMenuItem checkItem = (RadioMenuItem) item;
+            checkItem.setToggleGroup(group2);
+        }
+        ToggleGroup group3 = new ToggleGroup();
+        for (MenuItem item : this.filter_price.getItems()){
+            RadioMenuItem checkItem = (RadioMenuItem) item;
+            checkItem.setToggleGroup(group3);
+        }
+    }
+
+
     @FXML
     public void applyFilter() throws Exception {
         this.app.notifyObservers();
@@ -35,36 +52,34 @@ public class HomeViewControllerAfterResearch extends HomeViewController{
 
     @Override
     public void update() throws Exception {
+        this.handleRadioMenuButton();
         this.app.getResearchFilterManager().resetFilter();
         for (MenuItem item : this.filter_date.getItems()){
             CheckMenuItem checkItem = (CheckMenuItem) item;
-            if (checkItem.isSelected()){
-            //this.app.filterOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), new Date(checkItem.getText())));
-            }
+            //TODO
         }
         for (MenuItem item : this.filter_price.getItems()){
-            CheckMenuItem checkItem = (CheckMenuItem) item;
+            RadioMenuItem checkItem = (RadioMenuItem) item;
             if (checkItem.isSelected()){
               this.app.getResearchFilterManager().filterOffersByPrice(checkItem.getText());
             }
         }
         for (MenuItem item : this.filter_evaluation.getItems()){
-            CheckMenuItem checkItem = (CheckMenuItem) item;
+            RadioMenuItem checkItem = (RadioMenuItem) item;
             if (checkItem.isSelected()){
-             //this.app.setOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), checkItem.getText()));
+                this.app.getResearchFilterManager().filterOffersByEvaluation(checkItem.getText());
             }
         }
         for (MenuItem item : this.filter_location.getItems()){
-            CheckMenuItem checkItem = (CheckMenuItem) item;
+            RadioMenuItem checkItem = (RadioMenuItem) item;
             if (checkItem.isSelected()){
-                //this.app.setOffers(this.app.getSearchBar().searchOffer(this.app.getOffers(), checkItem.getText()));
+                this.app.getResearchFilterManager().filterOffersByLocation(checkItem.getText());
             }
         }
         StringBuilder category_available = new StringBuilder();
         for (MenuItem item : this.filter_category.getItems()){
             CheckMenuItem checkItem = (CheckMenuItem) item;
             //we can have multiple category that we want to filter
-
             if (checkItem.isSelected()){
                 category_available.append(checkItem.getText());
             }

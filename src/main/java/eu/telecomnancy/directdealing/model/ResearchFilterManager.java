@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.model;
 
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.evaluation.EvaluationManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.content.Content;
 
@@ -16,17 +17,37 @@ import static eu.telecomnancy.directdealing.Main.app;
  */
 public class ResearchFilterManager {
 
+    List<Offer> all_offers_visible;
     List<Offer> researchedOffers;
     List<Offer> filteredOffers;
 
-    public ResearchFilterManager(){
+    public ResearchFilterManager() {
         this.researchedOffers = new ArrayList<>();
         this.filteredOffers = new ArrayList<>();
     }
 
+    public void initialize_visible_offers() throws Exception {
+        List<Offer> all_offers = app.getOffers();
+        this.all_offers_visible = new ArrayList<>();
+        for (Offer offer : all_offers) {
+            if (!offer.getMail().equals(app.getCurrentUser().getEmail())) {
+                Account account = app.getAccountDAO().get(offer.getMail());
+                if(!account.isSleeping()){
+                    this.all_offers_visible.add(offer);
+                }
+            }
+        }
+    }
+
+    public List<Offer> getAllOffersVisible() throws Exception {
+        resetOffers();
+        return all_offers_visible;
+    }
+
     public void resetOffers() throws Exception {
-        this.researchedOffers = app.getOffers();
-        this.filteredOffers = app.getOffers();
+        initialize_visible_offers();
+        this.researchedOffers = this.all_offers_visible;
+        this.filteredOffers = this.all_offers_visible;
     }
     public List<Offer> getResearchedOffers() {
         if (this.researchedOffers == null){
@@ -50,13 +71,10 @@ public class ResearchFilterManager {
         return filteredOffers;
     }
 
-    public void setResearchedOffers(List<Offer> researchedOffers) {
-        this.researchedOffers = researchedOffers;
-    }
 
     /**
      * Search the string in the offers
-     * @param offers List of the offers
+     * @param motRecherche String to search
      * @return List of the offers which contains the string
      */
     public void searchOffer(String motRecherche) throws Exception {
@@ -89,7 +107,7 @@ public class ResearchFilterManager {
             default -> 0.0;
         };
         List<Offer> result = new ArrayList<>();
-        for(Offer o: this.researchedOffers){
+        for(Offer o: this.filteredOffers){
             Content c = app.getContentDAO().get(o.getIdContent());
             if(c.getPrice() <= price_value){
                 result.add(o);
@@ -101,7 +119,7 @@ public class ResearchFilterManager {
 
     public void filterOffersByCategory(String text) throws SQLException {
         List<Offer> result = new ArrayList<>();
-        for(Offer o: this.researchedOffers){
+        for(Offer o: this.filteredOffers){
             Content c = app.getContentDAO().get(o.getIdContent());
             if(text.contains(c.getCategory())){
                 result.add(o);
@@ -110,12 +128,31 @@ public class ResearchFilterManager {
         this.filteredOffers= result;
     }
 
-    public void filterOffersByLocation(){
+    public void filterOffersByLocation(String text){
         return ;
     }
 
-    public void filterOffersByEvaluation(){
-        return ;
+    public void filterOffersByEvaluation(String text){
+        List<Offer> result = new ArrayList<>();
+        EvaluationManager evaluationManager = new EvaluationManager();
+        double note_voulu = switch (text){
+            case "Tout" -> 0.0;
+            case "Plus de 1 étoile" -> 1.0;
+            case "Plus de 2 étoiles" -> 2.0;
+            case "Plus de 3 étoiles" -> 3.0;
+            case "Plus de 4 étoiles" -> 4.0;
+            default -> throw new IllegalStateException("Unexpected value: " + text);
+        };
+        for(Offer o: this.filteredOffers){
+            try {
+                if(evaluationManager.getAverage(o.getMail()) >= note_voulu){
+                    result.add(o);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        this.filteredOffers = result;
     }
 
 
@@ -123,22 +160,4 @@ public class ResearchFilterManager {
         this.filteredOffers = this.researchedOffers;
     }
 
-    /**
-     * Filters the offers to display by only the ones that are not from the user and user that are not sleeping
-     * @return List of the offers to display
-     * @throws Exception Exception
-     */
-    public List<Offer> filtersHomeOffers() throws Exception{
-        List<Offer> all_offers = app.getOffers();
-        List<Offer> home_offers = new ArrayList<>();
-        for (Offer offer : all_offers) {
-            if (!offer.getMail().equals(app.getCurrentUser().getEmail())) {
-                Account account = app.getAccountDAO().get(offer.getMail());
-                if(!account.isSleeping()){
-                    home_offers.add(offer);
-                }
-            }
-        }
-        return home_offers;
-    }
 }
