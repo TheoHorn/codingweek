@@ -93,4 +93,9 @@ public class NavBarController {
         app.getResearchManager().searchOffer(search_text.getText());
         app.getSceneController().switchToHomeAfterResearch();
     }
+
+    public void switchToReponse() throws Exception {
+        app.getSceneController().switchToReponse();
+    }
+
 }
