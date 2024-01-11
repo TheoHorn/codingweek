@@ -32,6 +32,8 @@ public class OfferCell extends ListCell<Offer> {
     private Label category;
     @FXML
     private Label place;
+    @FXML
+    private Label avisLabel;
     /**
      * FXMLLoader
      */
@@ -100,6 +102,12 @@ public class OfferCell extends ListCell<Offer> {
                 throw new RuntimeException(e);
             }
 
+            try {
+                avisLabel.setText("Avis sur l'utilisateur : "+ String.valueOf(app.getEvaluationManager().getAverage(offer.getMail()))+"/5 ("+app.getEvaluationManager().getEvaluationCount(offer.getMail())+")");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
             setText(null);
             setGraphic(mLLoader.getRoot());
         }
@@ -109,5 +117,11 @@ public class OfferCell extends ListCell<Offer> {
     public void displayOffer() throws Exception {
         Application.getInstance().setLastOffer(getItem());
         Application.getInstance().getSceneController().switchToOfferDisplay();
+    }
+
+    @FXML
+    public void displayForeignProfil() throws Exception {
+        Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
+        Application.getInstance().getSceneController().switchToProfileDisplay();
     }
 }
