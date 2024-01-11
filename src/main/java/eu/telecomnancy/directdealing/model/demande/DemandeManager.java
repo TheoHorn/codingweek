@@ -40,4 +40,8 @@ public class DemandeManager {
         }
         return myDemands;
     }
+
+    public void delete(Demande demandes) throws SQLException {
+        app.getDemandeDAO().delete(demandes.getIdSlot());
+    }
 }

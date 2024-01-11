@@ -150,4 +150,13 @@ public class DemandeDAO {
     }
 
 
+    public void delete(int idDemande) throws SQLException {
+
+        String query = "DELETE FROM ACCOUNT WHERE idDemande = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setInt(1, idDemande);
+        preparedStatement.execute();
+    }
+
 }

@@ -159,8 +159,7 @@ public class SlotDAO {
             if (resultSet != null) {
                 resultSet.close();
             }
-
-            }
+        }
     }
 
     public Slot get(int idSlot, boolean preciseSlot) throws SQLException {
@@ -196,5 +195,12 @@ public class SlotDAO {
 
     }
 
+    public void delete(int idSlot) throws SQLException {
 
+        String query = "DELETE FROM SLOT WHERE idSlot = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setInt(1, idSlot);
+        preparedStatement.execute();
+    }
 }

@@ -202,4 +202,14 @@ public class SceneController {
         stage.centerOnScreen();
         stage.show();
     }
+
+    public void switchToAdminHome() throws Exception{
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/admin/admin_home.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Administrateur");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

@@ -98,6 +98,13 @@ public abstract class Account {
 
     public abstract double getBalance();
 
+    public boolean equals(Account account){
+        if (account ==null){
+            return false;
+        }
+        return this.getEmail().equals(account.getEmail());
+    }
+
     public String getLocalisation() {
         return localisation;
     }

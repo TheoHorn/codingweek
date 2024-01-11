@@ -3,10 +3,13 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.Admin;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.offer.Offer;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
@@ -130,6 +133,51 @@ public class AccountDAO {
         return null;
     }
 
+    public List<User> getUsers() throws SQLException {
+        // getting offers from idContent primary key
+        String query = "SELECT * FROM ACCOUNT";
+        ResultSet resultSet = null;
+
+        List<User> users = new ArrayList<User>();
 
 
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) { // Check if there are results
+
+                // recup des infos
+                String mail1 = resultSet.getString("mail");
+                String lastname = resultSet.getString("lastname");
+                String firstname = resultSet.getString("firstname");
+                double credit = resultSet.getDouble("balance");
+                boolean sleep = resultSet.getBoolean("sleep");
+                String password = resultSet.getString("password");
+                String localisation = resultSet.getString("localisation");
+
+                // creation de l'objet
+                User user = new User(lastname, firstname, mail1, credit, sleep, password, localisation);
+                users.add(user);
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+        return users;
+    }
+
+    public void delete(String mail) throws SQLException {
+
+        String query = "DELETE FROM ACCOUNT WHERE mail = ?;";
+
+        ResultSet resultSet = null;
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setString(1, mail);
+        preparedStatement.execute();
+    }
 }

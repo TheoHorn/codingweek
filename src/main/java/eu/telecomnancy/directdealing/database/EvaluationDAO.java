@@ -67,6 +67,25 @@ public class EvaluationDAO {
         return evaluations;
     }
 
+    public List<Evaluation> getEvaluator(String mailEvaluator) throws SQLException {
+        // get all evaluations of a user
+        String query = "SELECT * FROM evaluation WHERE mailEvaluator = ?";
+        ResultSet result = null;
+        List<Evaluation> evaluations = new ArrayList<Evaluation>();
+
+        try(PreparedStatement statement = DatabaseAccess.connection.prepareStatement(query)){
+            statement.setString(1, mailEvaluator);
+            result = statement.executeQuery();
+            while(result.next()){
+                evaluations.add(new Evaluation(result.getString("mailEvaluator"), result.getString("mailEvaluated"), result.getInt("note")));
+            }
+            return evaluations;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return evaluations;
+    }
+
     public Evaluation get(String mailEvaluator, String mailEvaluated){
         // get an evaluation of a user
         String query = "SELECT * FROM evaluation WHERE mailEvaluator = ? AND mailEvaluated = ?";
@@ -85,5 +104,16 @@ public class EvaluationDAO {
             e.getMessage();
         }
         return evaluation;
+    }
+
+
+    public void delete(String mailEvaluator, String mailEvaluated) throws SQLException {
+
+        String query = "DELETE FROM ACCOUNT WHERE mailEvaluator = ? AND mailEvaluated = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setString(1, mailEvaluator);
+        preparedStatement.setString(2, mailEvaluated);
+        preparedStatement.execute();
     }
 }

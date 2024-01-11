@@ -140,4 +140,13 @@ public class ContentDAO {
 
         return null;
     }
+
+    public void delete(int idContent) throws SQLException {
+
+        String query = "DELETE FROM CONTENT WHERE idContent = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setInt(1, idContent);
+        preparedStatement.execute();
+    }
 }

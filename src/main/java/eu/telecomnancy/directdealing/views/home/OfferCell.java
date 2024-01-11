@@ -1,6 +1,7 @@
 package eu.telecomnancy.directdealing.views.home;
 
 import eu.telecomnancy.directdealing.model.Application;
+import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import javafx.fxml.FXML;
@@ -38,6 +39,12 @@ public class OfferCell extends ListCell<Offer> {
      * FXMLLoader
      */
     private FXMLLoader mLLoader;
+    private Application app;
+
+    public OfferCell(){
+        super();
+        this.app = Application.getInstance();
+    }
 
     /**
      * update the item of the cell
@@ -115,13 +122,19 @@ public class OfferCell extends ListCell<Offer> {
 
     @FXML
     public void displayOffer() throws Exception {
-        Application.getInstance().setLastOffer(getItem());
-        Application.getInstance().getSceneController().switchToOfferDisplay();
+        if (app.getCurrentUser() instanceof User){
+            app.setLastOffer(getItem());
+            app.getSceneController().switchToOfferDisplay();
+        } else {
+            app.deleteOffer(getItem());
+        }
     }
 
     @FXML
     public void displayForeignProfil() throws Exception {
-        Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
-        Application.getInstance().getSceneController().switchToProfileDisplay();
+        if (app.getCurrentUser() instanceof User) {
+            Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
+            Application.getInstance().getSceneController().switchToProfileDisplay();
+        }
     }
 }

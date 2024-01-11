@@ -5,18 +5,28 @@ import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.Content;
+import eu.telecomnancy.directdealing.model.content.ContentManager;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
+import eu.telecomnancy.directdealing.model.dispute.Dispute;
+import eu.telecomnancy.directdealing.model.dispute.DisputeManager;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
 import eu.telecomnancy.directdealing.model.evaluation.EvaluationManager;
 import eu.telecomnancy.directdealing.model.messaging.MessagingManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
+import eu.telecomnancy.directdealing.model.offer.OfferManager;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
+import eu.telecomnancy.directdealing.model.reservation.ReservationManager;
+import eu.telecomnancy.directdealing.model.slot.SlotManager;
+import eu.telecomnancy.directdealing.views.messaging.MessagingController;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -79,6 +89,36 @@ public class Application {
      * account manager
      */
     private AccountManager accountManager;
+
+
+    /**
+     * offer manager
+     */
+    private OfferManager offerManager;
+
+
+    /**
+     * content manager
+     */
+    private ContentManager contentManager;
+
+
+    /**
+     * dispute manager
+     */
+    private DisputeManager disputeManager;
+
+
+    /**
+     * reservation manager
+     */
+    private ReservationManager reservationManager;
+
+
+    /**
+     * slot manager
+     */
+    private SlotManager slotManager;
 
     /**
      * the last offer used
@@ -183,7 +223,14 @@ public class Application {
 
     public List<Offer> getOffers() throws Exception {
         offers = this.offerDAO.get();
+        System.out.println(offers);
         return offers;
+    }
+
+    public List<User> getUsers() throws Exception {
+        List<User> users = this.accountDAO.getUsers();
+        System.out.println(users);
+        return users;
     }
 
     public List<Proposal> getMyProposals(){
@@ -226,6 +273,26 @@ public class Application {
         return accountManager;
     }
 
+    public OfferManager getOfferManager() {
+        return offerManager;
+    }
+
+    public ContentManager getContentManager() {
+        return contentManager;
+    }
+
+    public DisputeManager getDisputeManager() {
+        return disputeManager;
+    }
+
+    public ReservationManager getReservationManager() {
+        return reservationManager;
+    }
+
+    public SlotManager getSlotManager() {
+        return slotManager;
+    }
+
     public ReservationDAO getReservationDAO() {
         return reservationDAO;
     }
@@ -253,7 +320,12 @@ public class Application {
     public void login(String mail, String password) throws Exception {
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
-            sceneController.switchToHome();
+            if (getCurrentUser() instanceof User){
+                sceneController.switchToHome();
+            }
+            else {
+                sceneController.switchToAdminHome();
+            }
             notifyObservers();
         } else {
             throw new Exception("Mot de passe ou email incorrect");
@@ -301,7 +373,6 @@ public class Application {
      * @param category Category of the offer
      * @param isRequest Boolean to know if the offer is a request or a proposal
      * @param price Price of the offer
-     * @param slots slots List of the slots of the offer
      * @return true if the offer is validated, false otherwise
      * @throws SQLException if the offer is not validate
      */
@@ -440,23 +511,9 @@ public class Application {
     }
 
     public boolean updateCurrentUserSleeping(boolean isSleeping) throws Exception {
-        System.out.println(isSleeping);
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
-    }
-
-
-    public MessagingDAO getMessagingDAO() {
-        return messagingDAO;
-    }
-
-    public MessagingManager getMessagingManager() {
-        return messagingManager;
-    }
-
-    public void setLastAccount(Account lastAccount) {
-        this.lastAccount = lastAccount;
     }
 
     public Account getLastAccount() {
@@ -469,6 +526,33 @@ public class Application {
         evaluationDAO.save(evaluation);
         notifyObservers();
         return true;
+    }
+
+    public void setLastAccount(Account lastAccount) {
+        this.lastAccount = lastAccount;
+    }
+
+    public MessagingManager getMessagingManager() {
+        return messagingManager;
+    }
+
+    public MessagingDAO getMessagingDAO() {
+        return messagingDAO;
+    }
+
+    public void deleteUser(Account account) throws Exception {
+        if (account.equals(this.getCurrentUser())){
+            // The admin delete himself
+            this.deleteCurrentUser();
+            this.sceneController.switchToHome();
+        }
+        this.accountManager.delete(account);
+        this.notifyObservers();
+    }
+
+    public void deleteOffer(Offer offer) throws Exception {
+        this.offerManager.delete(offer);
+        this.notifyObservers();
     }
 
     public void validateNewDemand(Offer offer, Slot newSlot) throws Exception {
