@@ -1,6 +1,5 @@
 package eu.telecomnancy.directdealing.views.navbar;
 
-import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import javafx.event.ActionEvent;
@@ -95,7 +94,7 @@ public class NavBarController implements Observer {
      */
     @FXML
     public void searchUpdate(ActionEvent event) throws Exception {
-        app.getResearchManager().searchOffer(search_text.getText());
+        app.getResearchFilterManager().searchOffer(search_text.getText());
         app.getSceneController().switchToHomeAfterResearch();
     }
 
