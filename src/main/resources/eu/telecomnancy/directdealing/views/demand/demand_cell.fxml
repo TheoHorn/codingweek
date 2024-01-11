@@ -131,7 +131,7 @@
             </StackPane>
             <StackPane>
                <children>
-                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#e4264c" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" StackPane.alignment="CENTER" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#e4264c" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" StackPane.alignment="CENTER" fx:id="rec_status"/>
                   <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="90.0" text="STATUS" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="14.0" />

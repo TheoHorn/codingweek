@@ -23,4 +23,15 @@ public class DemandeManager {
         }
         return myAnswers;
     }
+
+    public List<Demande> getAllMyDemand() throws SQLException {
+        String myMail = app.getCurrentUser().getEmail();
+        List<Demande> myDemands = new ArrayList<>();
+        for (Demande demande : app.getDemandeDAO().get()){
+            if (demande.getMail().equals(myMail)){
+                myDemands.add(demande);
+            }
+        }
+        return myDemands;
+    }
 }

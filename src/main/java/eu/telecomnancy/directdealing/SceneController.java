@@ -138,7 +138,7 @@ public class SceneController {
 
     public void switchToMyDemands() throws Exception {
         Application.getInstance().removeAllObservers();
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/demand/mes_demandes.fxml"));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/demand/demand_view.fxml"));
         scene = new Scene(root.load());
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Mes demandes");
