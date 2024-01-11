@@ -142,7 +142,7 @@
                   </Label>
                </children>
             </StackPane>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelReservation" styleClass="seeMore_button" text="Annuler Ma Demande" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelReservation" styleClass="seeMore_button" text="Annuler Ma Demande" fx:id="cancelButton"/>
          </children>
       </VBox>
    </children>

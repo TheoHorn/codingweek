@@ -506,4 +506,13 @@ public class Application {
         System.out.println(this.lastDemand.getStatus());
         notifyObservers();
     }
+
+    public void deleteDemande() {
+        try {
+            getDemandeDAO().delete(this.lastDemand.getIdDemande());
+            notifyObservers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

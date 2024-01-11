@@ -119,5 +119,35 @@ public class DemandeDAO {
         }
     }
 
+    public boolean delete(int idDemande) {
+        // check if the demande is already in the database
+        String query = "SELECT * FROM DEMANDE WHERE idDemande = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idDemande);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // demande already exists
+                // update demande
+                String queryDelete = "DELETE FROM DEMANDE WHERE idDemande = ?";
+                try (PreparedStatement preparedStatementDelete = DatabaseAccess.connection.prepareStatement(queryDelete)) {
+                    // Set parameters for the prepared statement
+                    preparedStatementDelete.setInt(1, idDemande);
+                    // Execute the updated query
+                    preparedStatementDelete.executeUpdate();
+                    return true;
+                }
+            } else {
+                // demande doesn't exist
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }

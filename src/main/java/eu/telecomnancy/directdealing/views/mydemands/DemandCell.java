@@ -8,6 +8,7 @@ import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -42,6 +43,8 @@ public class DemandCell extends ListCell<Demande> {
 
     @FXML
     private Label status;
+    @FXML
+    private Button cancelButton;
     /**
      * FXMLLoader
      */
@@ -93,11 +96,15 @@ public class DemandCell extends ListCell<Demande> {
                     this.status.setText("En attente");
                     this.rec_status.setStyle("-fx-fill: #FFC107");
                 } else if (status == 1) {
-                    this.status.setText("Accepter");
+                    this.status.setText("Acceptée");
                     this.rec_status.setStyle("-fx-fill: #4CAF50");
+                    this.cancelButton.setVisible(false);
+
                 } else {
                     this.status.setText("Refusée");
                     this.rec_status.setStyle("-fx-fill: #F44336");
+                    this.cancelButton.setVisible(false);
+
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -112,6 +119,7 @@ public class DemandCell extends ListCell<Demande> {
 
     @FXML
     public void cancelReservation() throws Exception {
-       //TODO
+        Application.getInstance().setLastDemand(getItem());
+        app.deleteDemande();
     }
 }
