@@ -114,6 +114,8 @@ public class Application {
      */
     private MessagingManager messagingManager;
 
+    private Demande lastDemand;
+
     /**
      * Constructor of the application that initialize the lists
      */
@@ -134,7 +136,6 @@ public class Application {
         this.demandeManager = new DemandeManager();
         this.evaluationDAO = new EvaluationDAO();
         this.evaluationManager = new EvaluationManager();
-
         this.messagingDAO = new MessagingDAO();
         this.messagingManager = new MessagingManager();
     }
@@ -481,5 +482,30 @@ public class Application {
             this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
             this.sceneController.switchToHome();
         }
+    }
+
+    public void setLastDemand(Demande lastDemand) {
+        this.lastDemand = lastDemand;
+    }
+
+    public Demande getLastDemand() {
+        return lastDemand;
+    }
+
+    public void saveDemandeStatus(String string) throws Exception {
+        switch (string) {
+            case "En attente":
+                this.lastDemand.setStatus(0);
+                break;
+            case "Accepter":
+                this.lastDemand.setStatus(1);
+                break;
+            case "Refuser":
+                this.lastDemand.setStatus(2);
+                break;
+        }
+        getDemandeDAO().save(this.lastDemand);
+        System.out.println(this.lastDemand.getStatus());
+        notifyObservers();
     }
 }
