@@ -17,7 +17,7 @@ public class MessagingManager {
          List<Messaging> all_messages = app.getMessagingDAO().get();
          List<Messaging> messages = new ArrayList<>();
          for (Messaging message : all_messages) {
-             if (app.getAccountDAO().get(message.getSender()).getEmail().equals(app.getCurrentUser().getEmail()) || app.getAccountDAO().get(message.getReceiver()).getEmail().equals(app.getCurrentUser().getEmail())) {
+             if (message.getSender().equals(app.getCurrentUser().getEmail()) && message.getReceiver().equals(app.getLastAccount().getEmail()) || message.getSender().equals(app.getLastAccount().getEmail()) && message.getReceiver().equals(app.getCurrentUser().getEmail())) {
                  messages.add(message);
              }
          }

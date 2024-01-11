@@ -4,8 +4,11 @@ import eu.telecomnancy.directdealing.model.messaging.Messaging;
 import eu.telecomnancy.directdealing.model.account.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 
 import java.sql.SQLException;
 
@@ -18,6 +21,12 @@ public class MessagingCell extends ListCell<Messaging>{
 
     @FXML
     private Label date;
+
+    @FXML
+    private GridPane gridPane;
+
+    @FXML
+    private HBox hbox;
 
     private FXMLLoader mLLoader;
 
@@ -41,9 +50,11 @@ public class MessagingCell extends ListCell<Messaging>{
                 Account sender = app.getAccountDAO().get(messaging.getSender());
                 Account current = app.getAccountDAO().get(app.getCurrentUser().getEmail());
                 if (sender.getEmail().equals(current.getEmail())) {
-                    message.setStyle("-fx-background-color: #6565FF; -fx-text-fill: white; -fx-background-radius: 10px;");
+                    message.setStyle("-fx-background-color: #6565FF; -fx-text-fill: white; -fx-background-radius: 10px; -fx-content-display: left; ");
+                    hbox.setAlignment(Pos.TOP_RIGHT);
                 } else {
-                    message.setStyle("-fx-background-color: #f0f0f0; -fx-text-fill: black; -fx-background-radius: 10px;");
+                    message.setStyle("-fx-background-color: #f0f0f0; -fx-text-fill: black; -fx-background-radius: 10px; -fx-content-display: left; ");
+                    hbox.setAlignment(Pos.TOP_LEFT);
                 }
                 message.setText(messaging.getContent());
                 date.setText(messaging.getDate().toString());
@@ -51,7 +62,7 @@ public class MessagingCell extends ListCell<Messaging>{
                 throw new RuntimeException(e);
             }
             setText(null);
-            setGraphic(message);
+            setGraphic(gridPane);
         }
     }
 }
