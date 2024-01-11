@@ -16,7 +16,7 @@ public class SlotManager {
     }
     public void delete(Slot slot) throws SQLException {
         // Delete all reservation related to slot
-        List<Reservation> reservations = app.getReservationDAO().get(slot.getId());
+        List<Reservation> reservations = app.getReservationDAO().getList(slot.getId());
         reservations.forEach((reservation) -> {
             try {
                 app.getSlotManager().delete(slot);

@@ -71,8 +71,4 @@ public abstract class Offer {
     public int getIdOffer(){
         return this.idOffer;
     }
-
-    public void setIdOffer(int idOffer) {
-        this.idOffer = idOffer;
-    }
 }

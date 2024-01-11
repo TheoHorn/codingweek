@@ -119,7 +119,7 @@ public class DemandeDAO {
         }
     }
 
-    public boolean delete(int idDemande) {
+    /*public boolean delete(int idDemande) {
         // check if the demande is already in the database
         String query = "SELECT * FROM DEMANDE WHERE idDemande = ?";
         ResultSet resultSet = null;
@@ -147,7 +147,7 @@ public class DemandeDAO {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
 
 
     public void delete(int idDemande) throws SQLException {
