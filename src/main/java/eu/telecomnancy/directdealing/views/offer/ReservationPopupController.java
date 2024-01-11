@@ -77,7 +77,7 @@ public class ReservationPopupController {
                     }
                 } else {
                     start = slot.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                    end = slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                    end =  slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                     interval = new Interval(start, end);
                     if (app.getReservationDAO().get(slot.getId()) != null) {
                         booked.addEntry(new Entry<>("Réservé", interval));

@@ -177,7 +177,12 @@ public class SlotDAO {
                 Timestamp tempStartTime = resultSet.getTimestamp("startTime");
                 java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
                 Timestamp tempEndTime = resultSet.getTimestamp("endTime");
-                java.util.Date endTime = new java.util.Date(tempEndTime.getTime());
+                Date endTime;
+                if (tempEndTime == null) {
+                    endTime = null;
+                } else {
+                    endTime = new java.util.Date(tempEndTime.getTime());
+                }
                 int recurrence = resultSet.getInt("recurring");
                 int idOffer = resultSet.getInt("idOffer");
 
