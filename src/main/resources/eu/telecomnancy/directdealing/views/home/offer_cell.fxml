@@ -9,13 +9,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<?import java.net.URL?>
 <GridPane alignment="CENTER" minWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
-    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="400.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" />
+   <stylesheets>
+      <URL value="@offer_cell.css" />
+   </stylesheets>
+   <columnConstraints>
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="394.0" minWidth="281.0" prefWidth="309.0" />
+    <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="150.0" />
   </columnConstraints>
   <rowConstraints>
@@ -26,13 +32,38 @@
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin></ImageView>
-      <VBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
+      <VBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS">
          <children>
-            <Label fx:id="type" text="TYPE" textFill="#756ab6">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
+            <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+               <children>
+                  <StackPane alignment="TOP_RIGHT">
+                     <children>
+                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#756ab6" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" StackPane.alignment="CENTER_LEFT" />
+                        <Label fx:id="type" alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="TYPE" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER_LEFT">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="108.0">
+                     <children>
+                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#d08b00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" StackPane.alignment="CENTER_LEFT">
+                           <StackPane.margin>
+                              <Insets left="5.0" />
+                           </StackPane.margin>
+                        </Rectangle>
+                        <Label fx:id="type1" alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="SERVICE" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER_LEFT">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </children></HBox>
             <Label fx:id="title" text="Title">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -55,14 +86,23 @@
                   </ImageView>
                </children>
             </HBox>
-            <Label fx:id="category" text="Category">
-               <font>
-                  <Font size="14.0" />
-               </font>
+            <HBox>
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>
-            </Label>
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Catégorie : ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="category" text="Category">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <Label fx:id="place" text="Place">
                <font>
                   <Font size="14.0" />
@@ -70,12 +110,15 @@
             </Label>
          </children>
          <padding>
-            <Insets left="15.0" />
+            <Insets bottom="5.0" left="15.0" top="5.0" />
          </padding>
          <GridPane.margin>
             <Insets left="30.0" right="30.0" />
          </GridPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </VBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#displayOffer" text="voir +" GridPane.columnIndex="2" />
+      <Button styleClass="seeMore_button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#displayOffer" text="voir +" GridPane.columnIndex="2" />
    </children>
 </GridPane>
