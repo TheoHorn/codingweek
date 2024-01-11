@@ -53,7 +53,8 @@ public class OfferDisplayController implements Observer {
 
     @FXML
     public void reservation() throws Exception {
-        // TODO
+        System.out.println("in OfferDisplay: " + Application.getInstance().getLastOffer().getIdOffer());
+        this.app.getSceneController().openReservationPopup();
     }
 
     @FXML

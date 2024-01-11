@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing.model;
 
+import com.dlsc.gemsfx.daterange.DateRange;
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
@@ -123,6 +124,7 @@ public class Application {
         this.accountDAO = new AccountDAO();
         this.contentDAO = new ContentDAO();
         this.offerDAO = new OfferDAO();
+        this.demandeDAO = new DemandeDAO();
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
@@ -467,5 +469,16 @@ public class Application {
         evaluationDAO.save(evaluation);
         notifyObservers();
         return true;
+    }
+
+    public void validateNewDemand(Offer offer, Slot newSlot) throws Exception {
+        if (offer == null) {
+            System.out.println("Veuillez remplir tous les champs");
+            throw new Exception("Veuillez remplir tous les champs");
+        } else {
+            int idSlot = this.getSlotDAO().save(newSlot);
+            this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+            this.sceneController.switchToHome();
+        }
     }
 }

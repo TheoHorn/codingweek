@@ -64,6 +64,9 @@ public abstract class Offer {
         return isRequest;
     }
 
+    public void setIdOffer(int idOffer) {
+        this.idOffer = idOffer;
+    }
 
     public int getIdOffer(){
         return this.idOffer;

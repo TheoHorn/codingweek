@@ -133,6 +133,17 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+     public void openReservationPopup() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/reservation_popup.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Reservation");
+        stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -143,6 +154,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Mes demandes");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
 
     }
@@ -154,6 +166,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Mes réponses");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -164,6 +177,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Profil Utilisateur");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -173,6 +187,7 @@ public class SceneController {
         scene = new Scene(root.load());
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Messagerie");
+        stage.centerOnScreen();
         stage.setScene(scene);
         stage.show();
     }
@@ -184,6 +199,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Mes conversations");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 }

@@ -65,19 +65,17 @@ public class ReservationDAO {
     /**
      * get method allows to get a reservation from the database
      * @param idSlot id of the slot of the reservation
-     * @param mail mail of the account of the reservation
      * @return the reservation if it exists, null if not
      * @throws SQLException if the connection is not open
      */
-    public Reservation get(int idSlot, String mail) throws SQLException {
-        // get reservation with primary_key (mail, idSlot)
+    public Reservation get(int idSlot) throws SQLException {
+        // get reservation with primary_key idSlot
 
-        String query = "SELECT * FROM ACCOUNT WHERE mail = ? AND idSlot = ?";
+        String query = "SELECT * FROM RESERVATION WHERE idSlot = ?";
         ResultSet resultSet = null;
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setString(1, mail);
-            preparedStatement.setInt(2, idSlot);
+            preparedStatement.setInt(1, idSlot);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
@@ -98,3 +96,4 @@ public class ReservationDAO {
         return null;
     }
 }
+
