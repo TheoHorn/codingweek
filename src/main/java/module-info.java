@@ -11,6 +11,10 @@ module eu.telecomnancy.directdealing {
     opens eu.telecomnancy.directdealing.views.offer to javafx.fxml;
     opens eu.telecomnancy.directdealing.views.home to javafx.fxml;
     opens eu.telecomnancy.directdealing.views.proposal to javafx.fxml;
+    opens eu.telecomnancy.directdealing.views.admin.user to javafx.fxml;
+    opens eu.telecomnancy.directdealing.views.admin.dispute to javafx.fxml;
+    opens eu.telecomnancy.directdealing.views.admin.offer to javafx.fxml;
+    opens eu.telecomnancy.directdealing.views.admin to javafx.fxml;
     exports eu.telecomnancy.directdealing.views.offer to javafx.fxml;
     exports eu.telecomnancy.directdealing.views.home to javafx.fxml;
     exports eu.telecomnancy.directdealing;

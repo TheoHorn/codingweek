@@ -59,7 +59,7 @@
             </Button>
          </children>
       </HBox>
-      <Label fx:id="my_proposalLabel" onMouseClicked="#switchToMyProposal" text="Mes Propositions">
+      <Label fx:id="proposal_Label" onMouseClicked="#switchToMyProposal" text="Mes Propositions">
          <font>
             <Font size="18.0" />
          </font>
@@ -67,7 +67,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label text="Mes requêtes">
+      <Label fx:id="request_label" onMouseClicked="#switchToRequest" text="Mes requêtes">
          <font>
             <Font size="18.0" />
          </font>

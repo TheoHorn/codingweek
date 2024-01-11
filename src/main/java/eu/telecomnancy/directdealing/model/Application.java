@@ -150,6 +150,12 @@ public class Application {
         System.out.println(offers);
         return offers;
     }
+    
+    public List<User> getUsers() throws Exception {
+        List<User> users = this.accountDAO.getUsers();
+        System.out.println(users);
+        return users;
+    }
 
     public List<Proposal> getMyProposals(){
         return myProposals;
@@ -196,13 +202,17 @@ public class Application {
      * login the user
      * @param mail Email of the user
      * @param password Password of the user
-     * @return true if the login is correct, false otherwise
      * @throws Exception if the login is not correct
      */
     public void login(String mail, String password) throws Exception {
         setCurrentUser(accountManager.login(mail, password));
         if (getCurrentUser() != null) {
-            sceneController.switchToHome();
+            if (getCurrentUser() instanceof User){
+                sceneController.switchToHome();
+            }
+            else {
+                sceneController.switchToAdminHome();
+            }
             notifyObservers();
         } else {
             throw new Exception("Mot de passe ou email incorrect");

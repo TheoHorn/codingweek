@@ -38,7 +38,7 @@ public class Main extends Application {
         app = eu.telecomnancy.directdealing.model.Application.getInstance();
         app.setSceneController(new SceneController(stage));
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/eu/telecomnancy/directdealing/views/admin/admin_home.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);

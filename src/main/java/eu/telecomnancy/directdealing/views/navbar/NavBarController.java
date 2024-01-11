@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.views.navbar;
 
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.model.Application;
+import eu.telecomnancy.directdealing.model.account.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,12 +16,19 @@ public class NavBarController {
     /**
      * TextField for the search
      */
+    @FXML
     public TextField search_text;
+    @FXML
+    public Label proposal_Label;
     /**
      * Label for the add offer
      */
     @FXML
     private Label add_offerLabel;
+
+
+    @FXML
+    private Label request_label;
 
     /**
      * Application instance
@@ -36,12 +44,17 @@ public class NavBarController {
 
     /**
      * perform the switch to the offer view
-     * @param event the event that trigger the switch
      * @throws Exception if the switch failed
      */
     @FXML
     public void switchToNewOffer() throws Exception {
         app.getSceneController().switchToOffer();
+
+    }
+
+    @FXML
+    public void switchToRequest() throws Exception {
+        // TODO
     }
 
     /**
@@ -66,7 +79,6 @@ public class NavBarController {
 
     /**
      * perform the switch to my proposal view
-     * @param event the event that trigger the switch
      * @throws Exception if the switch failed
      */
     @FXML
