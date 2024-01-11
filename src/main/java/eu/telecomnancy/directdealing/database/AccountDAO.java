@@ -48,8 +48,9 @@ public class AccountDAO {
                     preparedStatementUpdate.setBoolean(4, account.isSleeping());
                     preparedStatementUpdate.setInt(5, 1);
                     preparedStatementUpdate.setString(6, account.getPassword());
-                    preparedStatementUpdate.setString(7, account.getEmail());
-                    preparedStatementUpdate.setString(8, "Nancy");
+                    preparedStatementUpdate.setString(7, "Nancy");
+                    preparedStatementUpdate.setString(8, account.getEmail());
+
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
                     return true;

@@ -6,13 +6,6 @@ import java.security.spec.InvalidKeySpecException;
 public class User extends Account{
 
     /**
-     * balance of the user
-     */
-    double balance;
-
-
-
-    /**
      * Constructor of the user
      * @param lastName Last name of the user
      * @param firstName First name of the user
@@ -45,10 +38,6 @@ public class User extends Account{
     @Override
     public void updateSleeping(boolean isSleeping) {
         this.isSleeping = isSleeping;
-    }
-
-    public void setSleeping(boolean sleeping) {
-        isSleeping = sleeping;
     }
 
     @Override

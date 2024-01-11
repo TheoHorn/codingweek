@@ -149,7 +149,6 @@ public class Application {
 
     public List<Offer> getOffers() throws Exception {
         offers = this.offerDAO.get();
-        System.out.println(offers);
         return offers;
     }
 
@@ -391,6 +390,7 @@ public class Application {
     }
 
     public boolean updateCurrentUserSleeping(boolean isSleeping) throws Exception {
+        System.out.println(isSleeping);
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;

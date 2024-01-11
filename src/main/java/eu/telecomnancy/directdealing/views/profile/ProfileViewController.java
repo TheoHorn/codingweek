@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.sql.SQLException;
+
 /**
  * ProfileViewController class
  */
@@ -124,7 +126,7 @@ public class ProfileViewController implements Observer {
      * update the view
      */
     @Override
-    public void update() {
+    public void update() throws SQLException {
         if (!isFailed){
             this.modify_password_label.setVisible(true);
             this.modify_info_label.setVisible(true);

@@ -33,7 +33,14 @@ public abstract class Account {
      * boolean to know if the user is sleeping
      */
     boolean isSleeping;
+
+    /**
+     * Balance of the account
+     */
     double balance;
+    /**
+     * Localisation of the account
+     */
     private String localisation;
 
     /**
