@@ -26,9 +26,9 @@
             <Insets left="20.0" />
          </HBox.margin>
       </ImageView>
-      <HBox alignment="CENTER" prefHeight="83.0" prefWidth="349.0" spacing="10.0">
+      <HBox alignment="CENTER" prefHeight="83.0" prefWidth="324.0" spacing="10.0">
          <children>
-            <TextField fx:id="search_text" maxWidth="900.0" minHeight="29.0" minWidth="288.0" promptText="Rechercher" />
+            <TextField fx:id="search_text" maxWidth="900.0" minHeight="29.0" minWidth="241.0" prefHeight="30.0" prefWidth="241.0" promptText="Rechercher" />
             <Button mnemonicParsing="false" onAction="#searchUpdate" prefHeight="29.0" prefWidth="42.0">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
@@ -71,7 +71,7 @@
         <items>
            <MenuItem mnemonicParsing="false" onAction="#switchToMyProposal" text="Mes Annonces" />
            <MenuItem mnemonicParsing="false" onAction="#switchToProfile" text="Mon Profil" />
-           <MenuItem mnemonicParsing="false" onAction="#switchToConversation" text=" Mes Conversations"/>
+           <MenuItem mnemonicParsing="false" onAction="#switchToConversation" text=" Mes Conversations" />
            <MenuItem mnemonicParsing="false" onAction="#logout" text="Deconnexion" />
         </items>
          <graphic>
@@ -88,5 +88,25 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MenuButton>
+      <HBox alignment="CENTER" prefHeight="83.0" prefWidth="95.0">
+         <children>
+            <Label fx:id="florain" textOverrun="CLIP">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../florain.png" />
+                  </image>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
    </children>
 </HBox>
