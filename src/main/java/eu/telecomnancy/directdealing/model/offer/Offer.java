@@ -68,5 +68,4 @@ public abstract class Offer {
     public int getIdOffer(){
         return this.idOffer;
     }
-
 }

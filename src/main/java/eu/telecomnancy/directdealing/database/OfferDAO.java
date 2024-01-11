@@ -41,11 +41,7 @@ public class OfferDAO {
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setString(1, offer.getMail());
-                    if (offer.isRequest()) {
-                        preparedStatementUpdate.setBoolean(2, true);
-                    } else {
-                        preparedStatementUpdate.setBoolean(2, false);
-                    }
+                    preparedStatementUpdate.setBoolean(2, offer.isRequest());
                     preparedStatementUpdate.setInt(3, offer.getIdContent());
                     preparedStatementUpdate.setInt(4, offer.getIdOffer());
                     // Execute the updated query

@@ -1,7 +1,10 @@
 package eu.telecomnancy.directdealing.model;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static eu.telecomnancy.directdealing.Main.app;
 
@@ -98,5 +101,11 @@ public class Slot {
 
     public int getIdOffer() {
         return idOffer;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+        return "Tous les " + recurrence + " jours du " + formatter.format(startTime) + " au " + formatter.format(endTime);
     }
 }

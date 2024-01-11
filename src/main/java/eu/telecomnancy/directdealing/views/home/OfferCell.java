@@ -23,6 +23,8 @@ public class OfferCell extends ListCell<Offer> {
     @FXML
     private Label type;
     @FXML
+    private Label service;
+    @FXML
     private Label title;
     @FXML
     private Label price;
@@ -67,6 +69,12 @@ public class OfferCell extends ListCell<Offer> {
                 type.setText("Offre");
             } else {
                 type.setText("Demande");
+            }
+
+            try {
+                service.setText(app.getContentDAO().get(offer.getIdContent()).isEquipment() ? "Bien" : "Service");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
             try {
