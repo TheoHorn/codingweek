@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing.model;
 
+import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.content.Content;
@@ -13,12 +14,12 @@ import static eu.telecomnancy.directdealing.Main.app;
 /**
  * SearchBar class
  */
-public class ResearchManager {
+public class ResearchFilterManager {
 
     List<Offer> researchedOffers;
     List<Offer> filteredOffers;
 
-    public ResearchManager(){
+    public ResearchFilterManager(){
         this.researchedOffers = new ArrayList<>();
         this.filteredOffers = new ArrayList<>();
     }
@@ -120,5 +121,24 @@ public class ResearchManager {
 
     public void resetFilter() {
         this.filteredOffers = this.researchedOffers;
+    }
+
+    /**
+     * Filters the offers to display by only the ones that are not from the user and user that are not sleeping
+     * @return List of the offers to display
+     * @throws Exception Exception
+     */
+    public List<Offer> filtersHomeOffers() throws Exception{
+        List<Offer> all_offers = app.getOffers();
+        List<Offer> home_offers = new ArrayList<>();
+        for (Offer offer : all_offers) {
+            if (!offer.getMail().equals(app.getCurrentUser().getEmail())) {
+                Account account = app.getAccountDAO().get(offer.getMail());
+                if(!account.isSleeping()){
+                    home_offers.add(offer);
+                }
+            }
+        }
+        return home_offers;
     }
 }

@@ -1,5 +1,6 @@
 package eu.telecomnancy.directdealing.views.reponse;
 
+import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.content.Content;
@@ -7,10 +8,7 @@ import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,7 +32,7 @@ public class ReponseCell extends ListCell<Demande> {
     @FXML
     private Label slotLabel;
     @FXML
-    private MenuButton statusButton;
+    private ChoiceBox statusChoiceBox;
     @FXML
     private Button validateButton;
     /**
@@ -81,19 +79,31 @@ public class ReponseCell extends ListCell<Demande> {
                 slotLabel.setText(slot.toString());
                 switch (demande.getStatus()) {
                     case 0:
-                        statusButton.setText("En attente");
+                        statusChoiceBox.setValue("En attente");
                         break;
                     case 1:
-                        statusButton.setText("Accepté");
+                        statusChoiceBox.setValue("Accepter");
+                        validateButton.setVisible(false);
+                        validateButton.setDisable(true);
                         break;
                     case 2:
-                        statusButton.setText("Refusé");
+                        statusChoiceBox.setValue("Refuser");
+                        validateButton.setVisible(false);
+                        validateButton.setDisable(true);
                         break;
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            setText(null);
+            setGraphic(mLLoader.getRoot());
         }
+
+    }
+
+    public void saveStatus() throws Exception {
+        Application.getInstance().setLastDemand(getItem());
+        app.saveDemandeStatus(statusChoiceBox.getValue().toString());
     }
 
 

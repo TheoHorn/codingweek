@@ -14,7 +14,7 @@
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" />
-    <ColumnConstraints halignment="CENTER" hgrow="NEVER" prefWidth="300.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" prefWidth="300.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints vgrow="SOMETIMES" />
@@ -29,10 +29,10 @@
                         <Image url="@../navbar/user_picture.png" />
                      </image>
                   </ImageView>
-                  <VBox>
+                  <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="idLabel" alignment="TOP_LEFT" text="id" />
-                        <Label fx:id="messagingLabel" text="lastMessage" />
+                        <Label fx:id="messagingLabel" maxHeight="-Infinity" maxWidth="400.0" prefHeight="50.0" text="lastMessage" wrapText="true" VBox.vgrow="NEVER" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -48,6 +48,6 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </GridPane.margin>
       </VBox>
-      <Button contentDisplay="CENTER" mnemonicParsing="false" text="Ouvrir la conversation" GridPane.columnIndex="1" onAction="#displayConversation"/>
+      <Button contentDisplay="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#displayConversation" prefWidth="175.0" text="Ouvrir la conversation" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" />
    </children>
 </GridPane>

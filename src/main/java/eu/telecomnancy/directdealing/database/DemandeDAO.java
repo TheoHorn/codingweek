@@ -23,7 +23,7 @@ public class DemandeDAO {
             if (resultSet.next()) { // Check if there are results
                 // demande already exists
                 // update demande
-                String queryUpdate = "UPDATE DEMANDE SET idSlot = ?, mail = ?, dateDemnde = ?, status = ? WHERE idDemande = ?";
+                String queryUpdate = "UPDATE DEMANDE SET idSlot = ?, mail = ?, dateDemande = ?, status = ? WHERE idDemande = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setInt(1, demande.getIdSlot());

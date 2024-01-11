@@ -1,6 +1,5 @@
 package eu.telecomnancy.directdealing.model;
 
-import com.dlsc.gemsfx.daterange.DateRange;
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
@@ -12,7 +11,6 @@ import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
 import eu.telecomnancy.directdealing.model.evaluation.EvaluationManager;
-import eu.telecomnancy.directdealing.model.messaging.Messaging;
 import eu.telecomnancy.directdealing.model.messaging.MessagingManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
@@ -92,7 +90,7 @@ public class Application {
     /**
      * the research manager
      */
-    private ResearchManager researchManager;
+    private ResearchFilterManager researchFilterManager;
     /**
      * demande DAO
      */
@@ -114,6 +112,8 @@ public class Application {
      */
     private MessagingManager messagingManager;
 
+    private Demande lastDemand;
+
     /**
      * Constructor of the application that initialize the lists
      */
@@ -129,12 +129,11 @@ public class Application {
         this.slotDAO = new SlotDAO();
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
-        this.researchManager = new ResearchManager();
+        this.researchFilterManager = new ResearchFilterManager();
         this.demandeDAO = new DemandeDAO();
         this.demandeManager = new DemandeManager();
         this.evaluationDAO = new EvaluationDAO();
         this.evaluationManager = new EvaluationManager();
-
         this.messagingDAO = new MessagingDAO();
         this.messagingManager = new MessagingManager();
     }
@@ -433,11 +432,11 @@ public class Application {
     }
 
     public void researchOffer(String motRecherche) throws Exception {
-        researchManager.searchOffer(motRecherche);
+        researchFilterManager.searchOffer(motRecherche);
     }
 
-    public ResearchManager getResearchManager() {
-        return researchManager;
+    public ResearchFilterManager getResearchFilterManager() {
+        return researchFilterManager;
     }
 
     public boolean updateCurrentUserSleeping(boolean isSleeping) throws Exception {
@@ -484,5 +483,30 @@ public class Application {
             }
             this.sceneController.switchToHome();
         }
+    }
+
+    public void setLastDemand(Demande lastDemand) {
+        this.lastDemand = lastDemand;
+    }
+
+    public Demande getLastDemand() {
+        return lastDemand;
+    }
+
+    public void saveDemandeStatus(String string) throws Exception {
+        switch (string) {
+            case "En attente":
+                this.lastDemand.setStatus(0);
+                break;
+            case "Accepter":
+                this.lastDemand.setStatus(1);
+                break;
+            case "Refuser":
+                this.lastDemand.setStatus(2);
+                break;
+        }
+        getDemandeDAO().save(this.lastDemand);
+        System.out.println(this.lastDemand.getStatus());
+        notifyObservers();
     }
 }

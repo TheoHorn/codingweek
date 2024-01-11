@@ -93,7 +93,7 @@ public class DemandCell extends ListCell<Demande> {
                     this.status.setText("En attente");
                     this.rec_status.setStyle("-fx-fill: #FFC107");
                 } else if (status == 1) {
-                    this.status.setText("Acceptée");
+                    this.status.setText("Accepter");
                     this.rec_status.setStyle("-fx-fill: #4CAF50");
                 } else {
                     this.status.setText("Refusée");
