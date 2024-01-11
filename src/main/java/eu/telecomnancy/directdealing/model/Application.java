@@ -1,6 +1,5 @@
 package eu.telecomnancy.directdealing.model;
 
-import com.dlsc.gemsfx.daterange.DateRange;
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
@@ -8,14 +7,14 @@ import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
-import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;
+import eu.telecomnancy.directdealing.model.messaging.Messaging;
+import eu.telecomnancy.directdealing.model.messaging.MessagingManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 
 import java.io.File;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -103,6 +102,11 @@ public class Application {
     private MessagingDAO messagingDAO;
 
     /**
+     * messaging manager
+     */
+    private MessagingManager messagingManager;
+
+    /**
      * Constructor of the application that initialize the lists
      */
     private Application() {
@@ -120,6 +124,7 @@ public class Application {
         this.demandeDAO = new DemandeDAO();
         this.demandeManager = new DemandeManager();
         this.messagingDAO = new MessagingDAO();
+        this.messagingManager = new MessagingManager();
     }
 
     /**
@@ -420,5 +425,14 @@ public class Application {
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
+    }
+
+
+    public MessagingDAO getMessagingDAO() {
+        return messagingDAO;
+    }
+
+    public MessagingManager getMessagingManager() {
+        return messagingManager;
     }
 }

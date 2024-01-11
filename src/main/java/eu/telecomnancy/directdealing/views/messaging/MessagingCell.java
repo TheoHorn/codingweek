@@ -1,8 +1,7 @@
 package eu.telecomnancy.directdealing.views.messaging;
 
-import eu.telecomnancy.directdealing.model.Messaging;
+import eu.telecomnancy.directdealing.model.messaging.Messaging;
 import eu.telecomnancy.directdealing.model.account.Account;
-import eu.telecomnancy.directdealing.model.account.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;

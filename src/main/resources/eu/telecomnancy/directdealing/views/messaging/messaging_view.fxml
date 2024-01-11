@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.mydemands.MyDemandsController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.messaging.MessagingController">
    <top>
       <fx:include source="../navbar/navbar.fxml" />
    </top>
@@ -29,7 +29,7 @@
                </Label>
             </children>
          </HBox>
-         <ListView fx:id="myDemandsListView" BorderPane.alignment="CENTER" />
+         <ListView fx:id="messagingListView" BorderPane.alignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
                   <TextArea prefHeight="82.0" prefWidth="708.0">
@@ -37,7 +37,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </TextArea>
-                  <Button mnemonicParsing="false" text="Envoyer" />
+                  <Button mnemonicParsing="false" text="Envoyer" onAction="#sendMessage"/>
                </children>
             </HBox>
          </children>

@@ -1,8 +1,7 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.Messaging;
+import eu.telecomnancy.directdealing.model.messaging.Messaging;
 
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
