@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.views.navbar;
 
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.model.Application;
+import eu.telecomnancy.directdealing.model.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * NavBarController class
  */
-public class NavBarController {
+public class NavBarController implements Observer {
     /**
      * TextField for the search
      */
@@ -21,6 +22,9 @@ public class NavBarController {
      */
     @FXML
     private Label add_offerLabel;
+
+    @FXML
+    private Label florain;
 
     /**
      * Application instance
@@ -32,6 +36,7 @@ public class NavBarController {
      */
     public NavBarController(){
         this.app = Application.getInstance();
+        this.app.addObserver(this);
     }
 
     /**
@@ -105,5 +110,10 @@ public class NavBarController {
     @FXML
     public void switchToConversation() throws Exception {
         app.getSceneController().swicthToConversation();
+    }
+
+    @Override
+    public void update() throws Exception {
+        florain.setText(String.valueOf(app.getCurrentUser().getBalance()));
     }
 }
