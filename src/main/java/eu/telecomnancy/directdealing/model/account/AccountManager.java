@@ -78,4 +78,8 @@ public class AccountManager {
             return true;
         }
     }
+
+    public void delete(String mail){
+        // TODO
+    }
 }

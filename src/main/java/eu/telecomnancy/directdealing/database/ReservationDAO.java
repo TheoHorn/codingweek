@@ -97,4 +97,13 @@ public class ReservationDAO {
 
         return null;
     }
+
+    public void delete(int idSlot) throws SQLException {
+
+        String query = "DELETE FROM RESERVATION WHERE idSlot = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setInt(1, idSlot);
+        preparedStatement.executeQuery();
+    }
 }

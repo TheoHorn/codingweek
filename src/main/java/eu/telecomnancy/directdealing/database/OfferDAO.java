@@ -173,5 +173,12 @@ public class OfferDAO {
         }
     }
 
+    public void delete(int idOffer) throws SQLException {
 
+        String query = "DELETE FROM OFFER WHERE idOffer = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setInt(1, idOffer);
+        preparedStatement.executeQuery();
+    }
 }

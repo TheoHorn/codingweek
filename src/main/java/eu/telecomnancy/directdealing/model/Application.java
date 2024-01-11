@@ -377,4 +377,17 @@ public class Application {
         notifyObservers();
         return b;
     }
+
+    public void deleteUser(String mail) throws Exception {
+        if (mail.equals(currentUser.getEmail())){
+            // The admin delete his own account
+            deleteCurrentUser();
+            sceneController.switchToLoginView();
+        }
+        //this.accountDAO.delete(mail);
+    }
+
+    public void deleteOffer(int idOffer){
+        //this.offerDAO.delete(id);
+    }
 }

@@ -63,7 +63,7 @@ public class UserCell extends ListCell<User> {
 
 
     @FXML
-    public void pressDelete(){
-        System.out.println("Cheh");
+    public void pressDelete() throws Exception {
+        app.deleteUser(getItem().getEmail());
     }
 }

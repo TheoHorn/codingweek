@@ -165,4 +165,12 @@ public class AccountDAO {
         return users;
     }
 
+    public void delete(String mail) throws SQLException {
+
+        String query = "DELETE FROM ACCOUNT WHERE mail = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setString(1, mail);
+        preparedStatement.executeQuery();
+    }
 }

@@ -5,7 +5,6 @@ import eu.telecomnancy.directdealing.model.Dispute;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.views.admin.dispute.AdminDisputeController;
-import eu.telecomnancy.directdealing.views.admin.offer.AdminOfferController;
 import eu.telecomnancy.directdealing.views.admin.user.AdminUserController;
 import eu.telecomnancy.directdealing.views.home.HomeViewController;
 import javafx.fxml.FXML;
@@ -44,7 +43,7 @@ public class AdminHomeController {
                     } else if (newTab.getText().equals("Utilisateurs")) {
                         mLLoader.setController(new AdminUserController(usersListView));
                     } else if (newTab.getText().equals("Offres")) {
-                        mLLoader.setController(new AdminOfferController(offersListView));
+                        mLLoader.setController(new HomeViewController(offersListView));
                     }
                     app.notifyObservers();
                 } catch (Exception e) {

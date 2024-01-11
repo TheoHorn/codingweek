@@ -29,6 +29,12 @@ public class HomeViewController implements Observer {
         this.app.addObserver(this);
     }
 
+    public HomeViewController(ListView<Offer> offersListView) {
+        this.offersListView = offersListView;
+        this.app = Application.getInstance();
+        this.app.addObserver(this);
+    }
+
     /**
      * update method
      */
