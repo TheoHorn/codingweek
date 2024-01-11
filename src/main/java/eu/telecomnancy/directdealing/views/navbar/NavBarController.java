@@ -102,5 +102,8 @@ public class NavBarController {
     public void switchToReponse() throws Exception {
         app.getSceneController().switchToReponse();
     }
-
+    @FXML
+    public void switchToConversation() throws Exception {
+        app.getSceneController().swicthToConversation();
+    }
 }
