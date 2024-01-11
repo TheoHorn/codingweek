@@ -176,4 +176,14 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void swicthToConversation() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/conversations/conversations_view.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Mes conversations");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
