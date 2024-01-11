@@ -18,7 +18,8 @@ public class AdminDisputeController implements Observer {
      */
     private Application app;
 
-    public AdminDisputeController(){
+    public AdminDisputeController(ListView<Dispute> disputesListView){
+        this.disputesListView = disputesListView;
         this.app = Application.getInstance();
         app.addObserver(this);
     }

@@ -5,6 +5,6 @@
 
 <FlowPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ListView fx:id="offersListView" prefHeight="517.0" prefWidth="900.0" />
+        <ListView fx:id="usersListView" prefHeight="517.0" prefWidth="900.0" />
     </children>
 </FlowPane>

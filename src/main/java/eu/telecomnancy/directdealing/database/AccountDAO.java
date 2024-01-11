@@ -131,7 +131,7 @@ public class AccountDAO {
 
     public List<User> getUsers() throws SQLException {
         // getting offers from idContent primary key
-        String query = "SELECT idOffer FROM OFFER";
+        String query = "SELECT * FROM ACCOUNT";
         ResultSet resultSet = null;
 
         List<User> users = new ArrayList<User>();

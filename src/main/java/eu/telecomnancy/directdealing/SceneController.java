@@ -81,6 +81,7 @@ public class SceneController {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/new_offer.fxml"));
         scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
         stage.setScene(scene);
         stage.show();

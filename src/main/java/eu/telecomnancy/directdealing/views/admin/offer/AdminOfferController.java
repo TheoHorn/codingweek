@@ -10,14 +10,14 @@ public class AdminOfferController implements Observer {
     /**
      * ListView of the offers
      */
-    @FXML
     protected ListView<Offer> offersListView;
     /**
      * Application instance
      */
     private Application app;
 
-    public AdminOfferController(){
+    public AdminOfferController(ListView<Offer> offersListView){
+        this.offersListView = offersListView;
         this.app = Application.getInstance();
         app.addObserver(this);
     }

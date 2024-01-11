@@ -42,7 +42,7 @@ public class UserCell extends ListCell<User> {
             setGraphic(null);
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/offer_cell.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/admin/user/user_cell.fxml"));
                 mLLoader.setController(this);
                 try {
                     mLLoader.load();
@@ -52,15 +52,18 @@ public class UserCell extends ListCell<User> {
             }
 
             this.mail_label.setText(user.getEmail());
-            this.last_name_label.setText(user.getLastName());
             this.first_name_label.setText(user.getFirstName());
+            this.last_name_label.setText(user.getLastName());
 
+
+            setText(null);
+            setGraphic(mLLoader.getRoot());
         }
     }
 
 
     @FXML
-    public void pressDelete(MouseEvent mouseEvent){
-        // TODO
+    public void pressDelete(){
+        System.out.println("Cheh");
     }
 }

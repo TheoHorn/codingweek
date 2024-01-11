@@ -42,12 +42,10 @@
                 <Insets left="15.0" />
             </padding>
         </VBox>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="2">
+            <Label fx:id="first_name_label" text="Prénom"/>
+            <Label fx:id="last_name_label" text="nom"/>
+        </VBox>
         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#pressDelete" text="supprimer" GridPane.columnIndex="3" />
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="2">
-         <children>
-            <Label fx:id="first_name_label" text="Prénom" />
-            <Label fx:id="last_name_label" text="nom" />
-         </children>
-      </VBox>
     </children>
 </GridPane>
