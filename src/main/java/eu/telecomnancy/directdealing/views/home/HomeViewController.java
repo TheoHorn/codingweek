@@ -5,7 +5,6 @@ import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 
 /**
  * HomeViewController class
@@ -35,7 +34,7 @@ public class HomeViewController implements Observer {
     @Override
     public void update() throws Exception {
         offersListView.getItems().clear();
-        this.app.getOffers().forEach(offer -> offersListView.getItems().add(offer));
+        this.app.getResearchFilterManager().filtersHomeOffers().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());
     }
 }
