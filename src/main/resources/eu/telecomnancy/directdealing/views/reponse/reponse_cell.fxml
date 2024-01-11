@@ -70,7 +70,7 @@
                               <Insets left="5.0" />
                            </StackPane.margin>
                         </Rectangle>
-                        <Label fx:id="type1" alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="SERVICE" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER_LEFT">
+                        <Label fx:id="bien_serviceLabel" alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="SERVICE" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER_LEFT">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -113,7 +113,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="categoryLabel" text="Category">
+                  <Label fx:id="category" text="Category">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>

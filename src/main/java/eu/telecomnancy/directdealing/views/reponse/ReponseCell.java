@@ -93,7 +93,10 @@ public class ReponseCell extends ListCell<Demande> {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            setText(null);
+            setGraphic(mLLoader.getRoot());
         }
+
     }
 
 
