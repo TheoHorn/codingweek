@@ -98,4 +98,9 @@ public class NavBarController {
     public void switchToMyDemands(MouseEvent mouseEvent) throws Exception {
         app.getSceneController().switchToMyDemands();
     }
+
+    public void switchToReponse() throws Exception {
+        app.getSceneController().switchToReponse();
+    }
+
 }

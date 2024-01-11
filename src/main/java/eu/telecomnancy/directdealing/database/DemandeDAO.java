@@ -1,11 +1,14 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.Demande;
+import eu.telecomnancy.directdealing.model.demande.Demande;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DemandeDAO {
     public int save(Demande demande) {
@@ -92,5 +95,29 @@ public class DemandeDAO {
         }
         return null;
     }
+
+    public List<Demande> get() throws SQLException {
+        // get all demands
+        List<Demande> demands = new ArrayList<Demande>();
+
+        String query = "SELECT * FROM DEMANDE";
+        ResultSet resultSet = null;
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) { // Check if there are results
+                // recup des infos
+                int idDemande = resultSet.getInt("idDemande");
+                demands.add(get(idDemande));
+            }
+            return demands;
+
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+    }
+
 
 }

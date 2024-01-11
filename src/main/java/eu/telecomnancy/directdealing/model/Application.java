@@ -8,6 +8,8 @@ import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
+import eu.telecomnancy.directdealing.model.demande.Demande;
+import eu.telecomnancy.directdealing.model.demande.DemandeManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
@@ -86,6 +88,8 @@ public class Application {
      * the research manager
      */
     private ResearchManager researchManager;
+    private DemandeDAO demandeDAO;
+    private DemandeManager demandeManager;
 
     /**
      * Constructor of the application that initialize the lists
@@ -102,6 +106,8 @@ public class Application {
         this.reservationDAO = new ReservationDAO();
         this.accountManager = new AccountManager();
         this.researchManager = new ResearchManager();
+        this.demandeDAO = new DemandeDAO();
+        this.demandeManager = new DemandeManager();
     }
 
     /**
@@ -178,6 +184,14 @@ public class Application {
 
     public SlotDAO getSlotDAO() {
         return slotDAO;
+    }
+
+    public DemandeDAO getDemandeDAO() {
+        return demandeDAO;
+    }
+
+    public DemandeManager getDemandeManager() {
+        return demandeManager;
     }
 
     public AccountManager getAccountManager() {

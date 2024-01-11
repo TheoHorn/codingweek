@@ -65,8 +65,6 @@ public class NewOfferController implements Observer {
     @FXML
     private DatePicker returnDatePicker;
     @FXML
-    private Label serviceDurationLabel;
-    @FXML
     private RadioButton isRecurrent;
     @FXML
     private RadioButton isNotRecurrent;
@@ -177,7 +175,6 @@ public class NewOfferController implements Observer {
         this.isEquipment.setSelected(false);
         this.returnDateLabel.setVisible(false);
         this.returnDatePicker.setVisible(false);
-        this.serviceDurationLabel.setVisible(true);
         this.isRecurrent.setVisible(true);
         this.isRecurrent.setSelected(false);
         this.isNotRecurrent.setVisible(true);
@@ -195,7 +192,6 @@ public class NewOfferController implements Observer {
         this.isEquipment.setSelected(true);
         this.returnDateLabel.setVisible(true);
         this.returnDatePicker.setVisible(true);
-        this.serviceDurationLabel.setVisible(false);
         this.isRecurrent.setVisible(false);
         this.isNotRecurrent.setVisible(false);
         this.recurrency.setVisible(false);

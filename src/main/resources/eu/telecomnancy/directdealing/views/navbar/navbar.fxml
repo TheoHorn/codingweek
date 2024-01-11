@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -13,8 +14,11 @@
 <?import javafx.scene.text.Font?>
 
 <HBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.navbar.NavBarController">
+   <stylesheets>
+   <URL value="@nav_bar.css" />
+</stylesheets>
    <children>
-      <ImageView onMouseClicked="#backToHome" fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="60.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../logoDD.png" />
          </image>
@@ -39,7 +43,7 @@
             </Button>
          </children>
       </HBox>
-      <Label onMouseClicked="#switchToMyDemands" text="Mes Demandes">
+      <Label onMouseClicked="#switchToMyDemands" styleClass="linkBar" text="Demandes">
          <font>
             <Font size="18.0" />
          </font>
@@ -47,7 +51,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label text="Mes Réponses">
+      <Label onMouseClicked="#switchToReponse" styleClass="linkBar" text="Réponses">
          <font>
             <Font size="18.0" />
          </font>
@@ -55,7 +59,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="add_offerLabel" onMouseClicked="#switchToNewOffer" text="Ajouter">
+      <Label fx:id="add_offerLabel" onMouseClicked="#switchToNewOffer" styleClass="linkBar" text="Ajouter">
          <font>
             <Font size="18.0" />
          </font>

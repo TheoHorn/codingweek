@@ -1,4 +1,4 @@
-package eu.telecomnancy.directdealing.model;
+package eu.telecomnancy.directdealing.model.demande;
 
 import java.util.Date;
 

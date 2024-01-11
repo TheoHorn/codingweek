@@ -1,0 +1,9 @@
+.linkBar {
+    -fx-border-color: transparent transparent transparent transparent; /* Couleur de la bordure (noir dans cet exemple) */
+    -fx-border-width: 0 0 1 0; /* Épaisseur de la bordure et position (1 pixel en bas dans cet exemple) */
+    -fx-padding: 0 0 5 0; /* Ajoutez de l'espace entre le texte et la bordure (par exemple, 5 pixels en bas) */
+}
+
+.linkBar:hover {
+    -fx-border-color: transparent transparent #000000 transparent; /* Couleur de la bordure au survol (noir dans cet exemple) */
+}

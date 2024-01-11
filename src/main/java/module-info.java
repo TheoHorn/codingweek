@@ -25,4 +25,5 @@ module eu.telecomnancy.directdealing {
     exports eu.telecomnancy.directdealing.views.profile;
     exports eu.telecomnancy.directdealing.views.proposal;
     exports eu.telecomnancy.directdealing.views.mydemands;
+    exports eu.telecomnancy.directdealing.model.demande;
 }
