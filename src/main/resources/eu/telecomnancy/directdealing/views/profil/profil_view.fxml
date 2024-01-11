@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.HBox?>
 <BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.profile.ProfileViewController">
    <top>
       <fx:include source="../navbar/navbar.fxml" />
@@ -118,10 +119,32 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </GridPane>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="902.0">
+               <children>
+                  <Label text="Mode Sommeil">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="2.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Label" fx:id="sleeping_label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Button" fx:id="sleeping_button" onAction="#sleeping_update"/>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </center>
    <bottom>
+
       <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#disconnection" text="Se déconnecter" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font size="14.0" />
