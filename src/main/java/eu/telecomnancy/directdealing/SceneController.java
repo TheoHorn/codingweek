@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * SceneController class
  */
@@ -132,5 +134,16 @@ public class SceneController {
         stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void switchToMyDemands() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/demand/mes_demandes.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Mes demandes");
+        stage.setScene(scene);
+        stage.show();
+
     }
 }

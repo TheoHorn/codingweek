@@ -56,7 +56,7 @@ public class DemandCell extends ListCell<Offer> {
             setGraphic(null);
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/offer_cell.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/demand/demand_cell.fxml"));
                 mLLoader.setController(this);
                 try {
                     mLLoader.load();

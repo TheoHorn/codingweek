@@ -93,4 +93,9 @@ public class NavBarController {
         app.getResearchManager().searchOffer(search_text.getText());
         app.getSceneController().switchToHomeAfterResearch();
     }
+
+    @FXML
+    public void switchToMyDemands(MouseEvent mouseEvent) throws Exception {
+        app.getSceneController().switchToMyDemands();
+    }
 }
