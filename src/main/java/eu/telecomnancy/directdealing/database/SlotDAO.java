@@ -149,5 +149,38 @@ public class SlotDAO {
             }
     }
 
+    public Slot get(int idSlot, boolean preciseSlot) throws SQLException {
+        // get slot from idOffer
+        String query = "SELECT * FROM SLOT WHERE idSlot = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idSlot);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // extract infos from request result
+                Timestamp tempStartTime = resultSet.getTimestamp("startTime");
+                java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
+                Timestamp tempEndTime = resultSet.getTimestamp("endTime");
+                java.util.Date endTime = new java.util.Date(tempEndTime.getTime());
+                int recurrence = resultSet.getInt("recurring");
+                int idOffer = resultSet.getInt("idOffer");
+
+                return new Slot(idSlot, startTime, endTime, recurrence, idOffer);
+
+                // creation of the slot and return
+
+            }
+            return null;
+
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+
+    }
+
 
 }

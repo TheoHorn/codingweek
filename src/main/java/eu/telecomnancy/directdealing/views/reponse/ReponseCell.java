@@ -1,19 +1,12 @@
 package eu.telecomnancy.directdealing.views.reponse;
 
-import eu.telecomnancy.directdealing.model.Demande;
-import eu.telecomnancy.directdealing.model.offer.Offer;
-import eu.telecomnancy.directdealing.model.offer.Proposal;
+import eu.telecomnancy.directdealing.model.demande.Demande;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.MenuButton;
-import javafx.scene.image.Image;
-
-import java.sql.SQLException;
-
-import static eu.telecomnancy.directdealing.Main.app;
 
 public class ReponseCell extends ListCell<Demande> {
     @FXML
