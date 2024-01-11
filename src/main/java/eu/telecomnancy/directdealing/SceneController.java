@@ -152,7 +152,17 @@ public class SceneController {
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/reponse/reponse_view.fxml"));
         scene = new Scene(root.load());
         Application.getInstance().notifyObservers();
-        stage.setTitle("TELECOM Nancy DirectDealing - Home");
+        stage.setTitle("TELECOM Nancy DirectDealing - Mes réponses");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToProfileDisplay() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/profil/foreign_profil_view.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Profil Utilisateur");
         stage.setScene(scene);
         stage.show();
     }

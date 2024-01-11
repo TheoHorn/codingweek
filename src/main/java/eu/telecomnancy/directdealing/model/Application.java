@@ -10,6 +10,8 @@ import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;
+import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
+import eu.telecomnancy.directdealing.model.evaluation.EvaluationManager;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
@@ -84,12 +86,16 @@ public class Application {
      */
     private Offer lastOffer;
 
+    private Account lastAccount;
+
     /**
      * the research manager
      */
     private ResearchManager researchManager;
     private DemandeDAO demandeDAO;
     private DemandeManager demandeManager;
+    private EvaluationDAO evaluationDAO;
+    private EvaluationManager evaluationManager;
 
     /**
      * Constructor of the application that initialize the lists
@@ -108,6 +114,9 @@ public class Application {
         this.researchManager = new ResearchManager();
         this.demandeDAO = new DemandeDAO();
         this.demandeManager = new DemandeManager();
+        this.evaluationDAO = new EvaluationDAO();
+        this.evaluationManager = new EvaluationManager();
+
     }
 
     /**
@@ -200,6 +209,14 @@ public class Application {
 
     public ReservationDAO getReservationDAO() {
         return reservationDAO;
+    }
+
+    public EvaluationDAO getEvaluationDAO() {
+        return evaluationDAO;
+    }
+
+    public EvaluationManager getEvaluationManager() {
+        return evaluationManager;
     }
 
     public void addOffer(Offer offer) {
@@ -408,5 +425,21 @@ public class Application {
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
+    }
+
+    public void setLastAccount(Account lastAccount) {
+        this.lastAccount = lastAccount;
+    }
+
+    public Account getLastAccount() {
+        return lastAccount;
+    }
+
+    public boolean sendEvaluation(String mailEvaluator, String mailEvaluated, String note) throws Exception {
+        int noteInt = evaluationManager.convert(note);
+        Evaluation evaluation = new Evaluation(mailEvaluator, mailEvaluated, noteInt);
+        evaluationDAO.save(evaluation);
+        notifyObservers();
+        return true;
     }
 }

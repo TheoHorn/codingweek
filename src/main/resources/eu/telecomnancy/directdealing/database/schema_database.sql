@@ -55,3 +55,13 @@ CREATE TABLE DEMANDE (
     FOREIGN KEY (mail) REFERENCES ACCOUNT(mail),
     FOREIGN KEY (idSlot) REFERENCES SLOT(idSlot)
 );
+
+CREATE TABLE EVALUATION (
+    mailEvaluator TEXT NOT NULL,
+    mailEvaluated TEXT NOT NULL,
+    note INTEGER NOT NULL,
+    PRIMARY KEY (mailEvaluator, mailEvaluated),
+    FOREIGN KEY (mailEvaluator) REFERENCES ACCOUNT(mail),
+    FOREIGN KEY (mailEvaluated) REFERENCES ACCOUNT(mail)
+);
+
