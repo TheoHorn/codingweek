@@ -20,7 +20,7 @@ public class DemandeDAO {
             if (resultSet.next()) { // Check if there are results
                 // demande already exists
                 // update demande
-                String queryUpdate = "UPDATE DEMANDE SET idSlot = ?, mail = ?, demande = ?, status = ? WHERE idDemande = ?";
+                String queryUpdate = "UPDATE DEMANDE SET idSlot = ?, mail = ?, dateDemnde = ?, status = ? WHERE idDemande = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setInt(1, demande.getIdSlot());
@@ -36,7 +36,7 @@ public class DemandeDAO {
             } else {
                 // demande doesn't exist
                 // Insert new user into the DEMANDE table
-                String queryInsert = "INSERT INTO DEMANDE (idSlot, mail, demande, status) VALUES (?, ?, ?, ?);";
+                String queryInsert = "INSERT INTO DEMANDE (idSlot, mail, dateDemande, status) VALUES (?, ?, ?, ?);";
                 try (PreparedStatement preparedStatementInsert = DatabaseAccess.connection.prepareStatement(queryInsert)) {
                     // Set parameters for the prepared statement
                     preparedStatementInsert.setInt(1, demande.getIdSlot());
@@ -79,7 +79,7 @@ public class DemandeDAO {
                 // update demande
                 int idSlot = resultSet.getInt("idSlot");
                 String mail = resultSet.getString("mail");
-                Timestamp timestamp = resultSet.getTimestamp("demande");
+                Timestamp timestamp = resultSet.getTimestamp("dateDemande");
                 Date demande = new Date(timestamp.getTime());
                 int status = resultSet.getInt("status");
                 return new Demande(idDemande, idSlot, mail, demande, status);
