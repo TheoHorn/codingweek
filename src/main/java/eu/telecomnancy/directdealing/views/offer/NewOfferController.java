@@ -11,14 +11,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import com.dlsc.gemsfx.DurationPicker;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * NewOfferController class
@@ -65,8 +67,6 @@ public class NewOfferController implements Observer {
     @FXML
     private Label serviceDurationLabel;
     @FXML
-    private DurationPicker serviceDurationPicker;
-    @FXML
     private RadioButton isRecurrent;
     @FXML
     private RadioButton isNotRecurrent;
@@ -103,7 +103,6 @@ public class NewOfferController implements Observer {
 
     @FXML
     public void initialize() {
-        this.serviceDurationPicker.getFields().setAll(ChronoUnit.DAYS, ChronoUnit.HOURS, ChronoUnit.MINUTES);
         this.tempSlots.clear();
         this.slotListView.setItems(this.tempSlots);
     }
@@ -147,9 +146,22 @@ public class NewOfferController implements Observer {
      */
     @FXML
     public void pressValiderNewOffer(ActionEvent actionEvent) {
-        System.out.println(this.categoryChoiceBox.getValue() == null);
         try {
-            app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String)this.categoryChoiceBox.getValue(), null, null,  this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image);
+            if (this.isService.isSelected() && this.isRecurrent.isSelected()) {
+                app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String) this.categoryChoiceBox.getValue(), this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image, new ArrayList<>(this.tempSlots));
+                this.tempSlots.clear();
+            } else if (this.isService.isSelected()) {
+                DateRange dateRange = this.dateRangePicker.getValue();
+                LocalDateTime tmp = dateRange.getStartDate().atStartOfDay();
+                Date startDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
+                tmp = dateRange.getEndDate().atStartOfDay();
+                Date endDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
+                List<Slot> slots = new ArrayList<>();
+                slots.add(new Slot(startDate, endDate, 0, -1));
+                app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String) this.categoryChoiceBox.getValue(), this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image, slots);
+            } else {
+                app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String) this.categoryChoiceBox.getValue(), this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image, this.returnDatePicker.getValue());
+            }
         } catch(NumberFormatException e) {
             this.errorLabel.setVisible(true);
             this.errorLabel.setText("Le prix doit être un nombre");
@@ -166,7 +178,6 @@ public class NewOfferController implements Observer {
         this.returnDateLabel.setVisible(false);
         this.returnDatePicker.setVisible(false);
         this.serviceDurationLabel.setVisible(true);
-        this.serviceDurationPicker.setVisible(true);
         this.isRecurrent.setVisible(true);
         this.isRecurrent.setSelected(false);
         this.isNotRecurrent.setVisible(true);
@@ -185,7 +196,6 @@ public class NewOfferController implements Observer {
         this.returnDateLabel.setVisible(true);
         this.returnDatePicker.setVisible(true);
         this.serviceDurationLabel.setVisible(false);
-        this.serviceDurationPicker.setVisible(false);
         this.isRecurrent.setVisible(false);
         this.isNotRecurrent.setVisible(false);
         this.recurrency.setVisible(false);
@@ -217,6 +227,11 @@ public class NewOfferController implements Observer {
 
     @FXML void addSlot() throws SQLException {
         DateRange dateRange = this.dateRangePicker.getValue();
+        if (this.recurrency.getText().isEmpty()) {
+            this.errorLabel.setVisible(true);
+            this.errorLabel.setText("Veuillez sélectionner une date ET une récurrence");
+            return;
+        }
         LocalDateTime tmp = dateRange.getStartDate().atStartOfDay();
         Date startDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
         tmp = dateRange.getEndDate().atStartOfDay();

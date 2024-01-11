@@ -1,10 +1,12 @@
 package eu.telecomnancy.directdealing.model;
 
+import com.dlsc.gemsfx.daterange.DateRange;
 import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.database.*;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
+import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
@@ -248,39 +250,65 @@ public class Application {
      * @param title Title of the offer
      * @param description Description of the offer
      * @param category Category of the offer
-     * @param startDate Start date of the offer
-     * @param endDate End date of the offer
      * @param isRequest Boolean to know if the offer is a request or a proposal
      * @param price Price of the offer
+     * @param slots slots List of the slots of the offer
      * @return true if the offer is validated, false otherwise
      * @throws SQLException if the offer is not validate
      */
-    public void validateNewOffer(String title, String description, String category, LocalDate startDate, LocalDate endDate, boolean isRequest, double price, File image) throws Exception {
+    public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, List<Slot> slots) throws Exception {
         System.out.println("category is:" + category);
-        if (title.isEmpty() || description.isEmpty() || price == 0 || startDate == null || endDate == null || image == null || category == null) {
+        if (title.isEmpty() || description.isEmpty() || price == 0 || slots.isEmpty() || image == null || category == null) {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            LocalDateTime startOfDay = startDate.atStartOfDay();
-            Date startDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-            startOfDay = endDate.atStartOfDay();
-            Date endDateCommit = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+            Service service = new Service(title, category, description, image, price);
+            int idOffer;
             if (isRequest) {
-                Service service = new Service(title, category, description, image, price);
-                Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
-                int idSlot = getSlotDAO().save(slot);
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
-                int idOffer = getOfferDAO().save(request);
-                getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
-
+                idOffer = getOfferDAO().save(request);
             } else {
-                Service service = new Service(title, category, description, image, price);
-                Slot slot = new Slot(startDateCommit, endDateCommit,0, 0);
-                int idSlot = getSlotDAO().save(slot);
                 Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
-                int idOffer = getOfferDAO().save(proposal);
-                getSlotDAO().save(new Slot(idSlot, startDateCommit, endDateCommit,0,idOffer));
+                idOffer = getOfferDAO().save(proposal);
+            }
+            for (Slot slot : slots) {
+                getSlotDAO().save(new Slot(slot.getId(), slot.getStartTime(), slot.getEndTime(), slot.getRecurrence(), idOffer));
+            }
+            this.sceneController.switchToHome();
+        }
+    }
 
+    /**
+     * validate a new offer
+     * @param title Title of the offer
+     * @param description Description of the offer
+     * @param category Category of the offer
+     * @param isRequest Boolean to know if the offer is a request or a proposal
+     * @param price Price of the offer
+     * @param returnDate Return date of the offer
+     * @return true if the offer is validated, false otherwise
+     * @throws SQLException if the offer is not validate
+     */
+    public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, LocalDate returnDate) throws Exception {
+        System.out.println("category is:" + category);
+        if (title.isEmpty() || description.isEmpty() || price == 0 || image == null || category == null) {
+            System.out.println("Veuillez remplir tous les champs");
+            throw new Exception("Veuillez remplir tous les champs");
+        } else {
+            Equipment service = new Equipment(title, category, description, image, price);
+            int idOffer;
+            if (isRequest) {
+                Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
+                idOffer = getOfferDAO().save(request);
+            } else {
+                Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
+                idOffer = getOfferDAO().save(proposal);
+            }
+            if (returnDate != null) {
+                System.out.println(returnDate);
+                LocalDateTime tmp = returnDate.atStartOfDay();
+                Date returnDateDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
+                getSlotDAO().save(new Slot(0, returnDateDate, null, 0, idOffer));
             }
             this.sceneController.switchToHome();
         }

@@ -46,7 +46,6 @@
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
@@ -171,7 +170,6 @@
                         <Insets right="10.0" />
                     </padding>
                 </Label>
-                <DurationPicker fx:id="serviceDurationPicker" promptText="Durée minimale du service" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                 <HBox alignment="CENTER" spacing="50.0" GridPane.columnIndex="2" GridPane.rowIndex="10">
                     <children>
                         <RadioButton fx:id="isRecurrent" mnemonicParsing="false" onAction="#pressRecurrent" text="Récurrent" visible="false" />

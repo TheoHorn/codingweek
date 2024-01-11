@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -14,7 +15,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<?import java.net.URL?>
 <GridPane alignment="CENTER" minWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@offer_cell.css" />
@@ -53,7 +53,7 @@
                               <Insets left="5.0" />
                            </StackPane.margin>
                         </Rectangle>
-                        <Label fx:id="type1" alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="SERVICE" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER_LEFT">
+                        <Label fx:id="service" alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="SERVICE" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER_LEFT">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -119,6 +119,6 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button styleClass="seeMore_button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#displayOffer" text="voir +" GridPane.columnIndex="2" />
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#displayOffer" styleClass="seeMore_button" text="voir +" GridPane.columnIndex="2" />
    </children>
 </GridPane>
