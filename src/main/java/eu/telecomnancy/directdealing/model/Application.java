@@ -8,6 +8,7 @@ import eu.telecomnancy.directdealing.model.account.AccountManager;
 import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
+import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
 import eu.telecomnancy.directdealing.model.evaluation.EvaluationManager;
