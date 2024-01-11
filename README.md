@@ -148,6 +148,21 @@ assuming `${JAVAFX_HOME}` is the path to your JavaFX installation.
        - [x] Filtrage des offres
    - [x] Page Mes offres
    - [x] Page Réservation
+4. **Implémentation de plusieurs features**
+   -  [x] Messagerie
+       - [x] Création d'une conversation
+       - [x] Envoi de messages
+   - [x] Page Mes Demandes
+   - [x] Page Mes Réponses
+   - [x] Page Nouvelle Offre améliorée
+   - [x] Evaluations
+     - [x] Possibilité d'évaluer un utilisateur
+     - [x] Affichage de la moyenne des évaluations
+   - [x] Page d'administration
+     - [x] Gestion des litiges 
+     - [x] Suppression d'une offre ou d'un utilisateur
+   - [x] CSS et Style
+
 
 See the [open issues](https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12/-/issues) for a full list of proposed features (and known issues).
 
