@@ -69,7 +69,6 @@ public class NavBarController {
 
     /**
      * perform the switch to the profile view
-     * @param event the event that trigger the switch
      * @throws Exception if the switch failed
      */
     @FXML
