@@ -148,9 +148,14 @@ public class AccountManager {
         });
 
         // Delete all demande related to slot
-        Demande demandes = app.getDemandeDAO().get(account.getEmail());
-        if (demandes != null)
-            app.getDemandeManager().delete(demandes);
+        List<Demande> demandes = app.getDemandeDAO().get(account.getEmail());
+        demandes.forEach((demande) -> {
+            try {
+                app.getDemandeManager().delete(demande);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         // Delete the account
         app.getAccountDAO().delete(account.getEmail());

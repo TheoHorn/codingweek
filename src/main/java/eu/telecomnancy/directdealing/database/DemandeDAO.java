@@ -96,16 +96,17 @@ public class DemandeDAO {
         return null;
     }
 
-    public Demande get(String mail) {
+    public List<Demande> get(String mail) {
         // check if the demande is already in the database
         String query = "SELECT * FROM DEMANDE WHERE mail = ?";
         ResultSet resultSet = null;
+        List<Demande> demandes = new ArrayList<>();
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, mail);
+            preparedStatement.setString(1, mail);
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) { // Check if there are results
+            while (resultSet.next()) { // Check if there are results
                 // demande already exists
                 // update demande
                 int idSlot = resultSet.getInt("idSlot");
@@ -113,15 +114,40 @@ public class DemandeDAO {
                 Timestamp timestamp = resultSet.getTimestamp("dateDemande");
                 Date demande = new Date(timestamp.getTime());
                 int status = resultSet.getInt("status");
-                return new Demande(idDemande, idSlot, mail, demande, status);
-            } else {
-                // demande doesn't exist
-                return null;
+
+                demandes.add(new Demande(idDemande, idSlot, mail, demande, status));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return demandes;
+    }
+
+    public List<Demande> getBySlot(int idSlot) {
+        // check if the demande is already in the database
+        String query = "SELECT * FROM DEMANDE WHERE mail = ?";
+        ResultSet resultSet = null;
+        List<Demande> demandes = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idSlot);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) { // Check if there are results
+                // demande already exists
+                // update demande
+                String mail = resultSet.getString("mail");
+                int idDemande = resultSet.getInt("idDemande");
+                Timestamp timestamp = resultSet.getTimestamp("dateDemande");
+                Date demande = new Date(timestamp.getTime());
+                int status = resultSet.getInt("status");
+
+                demandes.add(new Demande(idDemande, idSlot, mail, demande, status));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return demandes;
     }
 
     public List<Demande> get() throws SQLException {

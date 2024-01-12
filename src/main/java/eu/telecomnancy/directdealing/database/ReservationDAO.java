@@ -163,7 +163,7 @@ public class ReservationDAO {
 
     public void delete(int idSlot) throws SQLException {
 
-        String query = "DELETE FROM RESERVATION WHERE idSlot = ? AND mail = ?;";
+        String query = "DELETE FROM RESERVATION WHERE idSlot = ?;";
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idSlot);
