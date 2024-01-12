@@ -434,11 +434,9 @@ public class Application {
                 Proposal proposal = new Proposal(Application.getInstance().getCurrentUser().getEmail(), false, service.getIdContent());
                 idOffer = getOfferDAO().save(proposal);
             }
-            if (returnDate != null) {
-                LocalDateTime tmp = returnDate.atStartOfDay();
-                Date returnDateDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
-                getSlotDAO().save(new Slot(0, returnDateDate, null, 0, idOffer));
-            }
+            LocalDateTime tmp = returnDate != null ? returnDate.atStartOfDay() : null;
+            Date returnDateDate = tmp != null ? Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant()) : null;
+            getSlotDAO().save(new Slot(0, returnDateDate, null, 0, idOffer));
             this.sceneController.switchToHome();
         }
     }
