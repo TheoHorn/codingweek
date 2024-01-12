@@ -105,9 +105,13 @@ public class Slot {
 
     @Override
     public String toString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy hh:mm");
         if (this.recurrence != 0) {
             return "Tous les " + recurrence + " jours du " + startTime.toString() + " au " + endTime.toString();
+        } else if (this.startTime == null) {
+            return "Null";
+        } else if (this.endTime == null) {
+            return "Le " + formatter.format(startTime);
         } else {
             return "Du " + formatter.format(startTime) + " au " + formatter.format(endTime);
         }

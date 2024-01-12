@@ -569,19 +569,22 @@ public class Application {
         this.notifyObservers();
     }
 
-    public void validateNewDemand(Offer offer, Slot newSlot) throws Exception {
+    public void validateNewDemand(Offer offer, List<Slot> newSlots) throws Exception {
         if (offer == null) {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            int idSlot = this.getSlotDAO().save(newSlot);
-            this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
-            int idOffer = this.slotDAO.get(idSlot,false).getIdOffer();
-            Offer temp = this.offerDAO.get(idOffer);
-            if (!temp.isRequest()){
-                Content content = this.contentDAO.get(this.offerDAO.get(idOffer).getIdContent());
-                currentUser.setBalance(currentUser.getBalance() - content.getPrice());
-                getAccountDAO().save(currentUser);
+            int idSlot;
+            for (Slot newSlot : newSlots) {
+                idSlot = this.getSlotDAO().save(newSlot);
+                this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+                int idOffer = this.slotDAO.get(idSlot,false).getIdOffer();
+                Offer temp = this.offerDAO.get(idOffer);
+                if (!temp.isRequest()){
+                    Content content = this.contentDAO.get(this.offerDAO.get(idOffer).getIdContent());
+                    currentUser.setBalance(currentUser.getBalance() - content.getPrice());
+                    getAccountDAO().save(currentUser);
+                }
             }
             this.sceneController.switchToHome();
         }

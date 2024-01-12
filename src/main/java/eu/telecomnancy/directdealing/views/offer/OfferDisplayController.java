@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OfferDisplayController implements Observer {
@@ -53,10 +54,16 @@ public class OfferDisplayController implements Observer {
 
     @FXML
     public void reservation() throws Exception {
-        System.out.println("in OfferDisplay: " + Application.getInstance().getLastOffer().getIdOffer());
+        Content content = this.app.getContentDAO().get(this.app.getLastOffer().getIdContent());
+        List<Slot> slots = this.app.getSlotDAO().get(this.app.getLastOffer().getIdOffer());
         double balance = app.getAccountDAO().get(app.getCurrentUser().getEmail()).getBalance();
         if (balance >= app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice()) {
-            this.app.getSceneController().openReservationPopup();
+            if (content.isEquipment() && slots.get(0).getStartTime() != null) {
+                this.app.validateNewDemand(this.app.getLastOffer(), slots);
+                this.app.getSceneController().switchToHome();
+            } else {
+                this.app.getSceneController().openReservationPopup();
+            }
         } else {
             // TODO : display message
         }

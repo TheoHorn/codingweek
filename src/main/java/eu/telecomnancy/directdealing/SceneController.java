@@ -46,6 +46,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - LogIn");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -60,6 +61,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - SignIn");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -74,6 +76,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -88,6 +91,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -102,6 +106,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Profil");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -116,6 +121,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - My proposal");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -126,6 +132,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
