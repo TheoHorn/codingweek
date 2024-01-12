@@ -387,13 +387,13 @@ public class Application {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            System.out.println(app.getCurrentUser().getBalance());
-            if (app.getCurrentUser().getBalance() < price) {
-                throw new Exception("Vous n'avez pas assez de florains");
-            }
             Service service = new Service(title, category, description, image, price);
             int idOffer;
             if (isRequest) {
+                System.out.println(app.getCurrentUser().getBalance());
+                if (app.getCurrentUser().getBalance() < price) {
+                    throw new Exception("Vous n'avez pas assez de florains");
+                }
                 app.getCurrentUser().setBalance(app.getCurrentUser().getBalance() - service.getPrice());
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
@@ -425,13 +425,13 @@ public class Application {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            System.out.println(app.getCurrentUser().getBalance());
-            if (app.getCurrentUser().getBalance() < price) {
-                throw new Exception("Vous n'avez pas assez de florains");
-            }
             Equipment service = new Equipment(title, category, description, image, price);
             int idOffer;
             if (isRequest) {
+                System.out.println(app.getCurrentUser().getBalance());
+                if (app.getCurrentUser().getBalance() < price) {
+                    throw new Exception("Vous n'avez pas assez de florains");
+                }
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
             } else {
