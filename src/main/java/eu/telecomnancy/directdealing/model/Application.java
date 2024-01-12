@@ -227,7 +227,6 @@ public class Application {
 
     public List<Offer> getOffers() throws Exception {
         offers = this.offerDAO.get();
-        System.out.println(offers);
         return offers;
     }
 
@@ -515,6 +514,7 @@ public class Application {
     }
 
     public boolean updateCurrentUserSleeping(boolean isSleeping) throws Exception {
+        System.out.println(isSleeping);
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
@@ -559,13 +559,16 @@ public class Application {
         this.notifyObservers();
     }
 
-    public void validateNewDemand(Offer offer, Slot newSlot) throws Exception {
+    public void validateNewDemand(Offer offer, List<Slot> newSlots) throws Exception {
         if (offer == null) {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            int idSlot = this.getSlotDAO().save(newSlot);
-            this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+            int idSlot;
+            for (Slot newSlot : newSlots) {
+                idSlot = this.getSlotDAO().save(newSlot);
+                this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+            }
             this.sceneController.switchToHome();
         }
     }

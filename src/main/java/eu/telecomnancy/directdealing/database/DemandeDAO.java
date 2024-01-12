@@ -68,13 +68,13 @@ public class DemandeDAO {
         return -1;
     }
 
-    public Demande get(int idDemande) {
+    public Demande get(String column, int id) {
         // check if the demande is already in the database
-        String query = "SELECT * FROM DEMANDE WHERE idDemande = ?";
+        String query = "SELECT * FROM DEMANDE WHERE " + column + " = ?";
         ResultSet resultSet = null;
 
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, idDemande);
+            preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
@@ -85,7 +85,7 @@ public class DemandeDAO {
                 Timestamp timestamp = resultSet.getTimestamp("dateDemande");
                 Date demande = new Date(timestamp.getTime());
                 int status = resultSet.getInt("status");
-                return new Demande(idDemande, idSlot, mail, demande, status);
+                return new Demande(id, idSlot, mail, demande, status);
             } else {
                 // demande doesn't exist
                 return null;
@@ -160,8 +160,7 @@ public class DemandeDAO {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) { // Check if there are results
-                // demande already exists
-                // update demande
+                // recup des infos
                 int idDemande = resultSet.getInt("idDemande");
                 int idSlot = resultSet.getInt("idSlot");
                 String mail = resultSet.getString("mail");
