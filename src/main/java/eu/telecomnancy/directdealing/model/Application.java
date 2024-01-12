@@ -585,6 +585,9 @@ public class Application {
                 break;
             case "Accepter":
                 this.lastDemand.setStatus(1);
+                // Change demand into reservation
+                Reservation reservation = this.reservationManager.getFromDemand(this.lastDemand);
+                this.reservationDAO.save(reservation);
                 break;
             case "Refuser":
                 this.lastDemand.setStatus(2);

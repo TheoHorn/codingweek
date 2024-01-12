@@ -23,7 +23,7 @@ public class Reservation {
     private Date reservationDate;
 
 
-    public Reservation(String emailReserver, int idSlot, Date reservationDate) throws SQLException {
+    public Reservation(String emailReserver, int idSlot, Date reservationDate) {
         this.emailReserver = emailReserver;
         this.idSlot = idSlot;
         this.reservationDate = reservationDate;
