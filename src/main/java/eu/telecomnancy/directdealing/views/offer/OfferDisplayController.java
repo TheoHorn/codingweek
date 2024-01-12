@@ -90,12 +90,13 @@ public class OfferDisplayController implements Observer {
         this.image_view.setImage(new Image(content.getImage().toURI().toString()));
         this.price_label.setText(String.valueOf(content.getPrice()));
         this.category_label.setText(content.getCategory());
+        this.location_label.setText(content.getLocalisation());
         // this.disponibility_label.setText(slot.getDisponibility());
         this.owner_label.setText(owner.getFirstName()+" "+owner.getLastName());
         if (offer.isRequest()){
-            this.type_label.setText("Request");
+            this.type_label.setText("Requête :");
         } else {
-            this.type_label.setText("Proposal");
+            this.type_label.setText("Proposition :");
         }
         //this.image_view.setImage(new Image(content.getImage().impl_getUrl()));
         //this.location_label.setText();
