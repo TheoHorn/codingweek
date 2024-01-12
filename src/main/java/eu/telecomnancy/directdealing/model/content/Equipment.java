@@ -17,13 +17,13 @@ public class Equipment extends Content{
      * @param price Price of the equipment
      * @throws SQLException if the equipment is not save in the database
      */
-    public Equipment(String title, String category, String description, File image, double price) throws SQLException {
-        super(title, category, description, image, price);
+    public Equipment(String title, String category, String description, File image, double price, String localisation) throws SQLException {
+        super(title, category, description, image, price, localisation);
         super.isEquipment = true;
         super.setIdContent(app.getContentDAO().save(this));
     }
-    public Equipment(int idContent, String title, String category, String description, File image, double price) throws SQLException {
-        super(title, category, description, image, price);
+    public Equipment(int idContent, String title, String category, String description, File image, double price, String localisation) throws SQLException {
+        super(title, category, description, image, price, localisation);
         super.isEquipment = true;
         super.setIdContent(idContent);
     }

@@ -21,13 +21,13 @@ public class Service extends Content{
      * @param price Price of the service
      * @throws SQLException if the service is not saved in the database
      */
-    public Service(String title, String category, String description, File image, double price) throws SQLException {
-        super(title, category, description, image, price);
+    public Service(String title, String category, String description, File image, double price, String localisation) throws SQLException {
+        super(title, category, description, image, price, localisation);
         super.isEquipment = false;
         super.setIdContent(app.getContentDAO().save(this));
     }
-    public Service(int idService, String title, String category, String description, File image, double price) {
-        super(title, category, description, image, price);
+    public Service(int idService, String title, String category, String description, File image, double price, String localisation) {
+        super(title, category, description, image, price, localisation);
         super.isEquipment = false;
         super.setIdContent(idService);
     }

@@ -387,7 +387,7 @@ public class Application {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            Service service = new Service(title, category, description, image, price);
+            Service service = new Service(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
                 System.out.println(app.getCurrentUser().getBalance());
@@ -425,7 +425,7 @@ public class Application {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            Equipment service = new Equipment(title, category, description, image, price);
+            Equipment service = new Equipment(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
                 System.out.println(app.getCurrentUser().getBalance());

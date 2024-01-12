@@ -17,7 +17,8 @@ CREATE TABLE CONTENT (
     category TEXT NOT NULL,
     image BLOB,
     price REAL,
-    isEquipment INTEGER NOT NULL
+    isEquipment INTEGER NOT NULL,
+    localisation TEXT
 );
 
 CREATE TABLE OFFER (

@@ -49,12 +49,13 @@ public abstract class Content {
      * @param image Image of the content
      * @param price Price of the content
      */
-    public Content(String title, String category, String description, File image, double price) {
+    public Content(String title, String category, String description, File image, double price, String localisation) {
         this.title = title;
         this.category = category;
         this.description = description;
         this.image = image;
         this.price = price;
+        this.localisation = localisation;
     }
 
 
