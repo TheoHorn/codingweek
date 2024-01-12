@@ -8,6 +8,7 @@ import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,6 +47,12 @@ public class OfferDisplayController implements Observer {
     @FXML
     private Label location_label;
 
+    @FXML
+    private Button resa_button;
+
+    @FXML
+    private Label resa_label;
+
 
     public OfferDisplayController() {
         this.app = Application.getInstance();
@@ -64,10 +71,7 @@ public class OfferDisplayController implements Observer {
             } else {
                 this.app.getSceneController().openReservationPopup();
             }
-        } else {
-            // TODO : display message
         }
-
     }
 
     @FXML
@@ -100,6 +104,18 @@ public class OfferDisplayController implements Observer {
         }
         //this.image_view.setImage(new Image(content.getImage().impl_getUrl()));
         //this.location_label.setText();
+        double balance = app.getAccountDAO().get(app.getCurrentUser().getEmail()).getBalance();
+        double prix = app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice();
+        if (balance >= prix){
+            this.resa_button.setDisable(false);
+            this.resa_label.setVisible(false);
+        } else {
+            this.resa_button.setDisable(true);
+            this.resa_label.setVisible(true);
+            double diff = prix - balance;
+            this.resa_label.setText("Il vous manque "+diff+" florains pour pouvoir réserver.");
+        }
+
 
     }
 }
