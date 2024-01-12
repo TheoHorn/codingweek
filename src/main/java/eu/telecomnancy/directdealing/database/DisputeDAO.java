@@ -3,6 +3,7 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.dispute.Dispute;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +84,15 @@ public class DisputeDAO {
             e.printStackTrace();
         }
         return disputes;
-        }
+    }
+
+    public void delete(int idDispute) throws SQLException {
+
+        String query = "DELETE FROM DISPUTE WHERE idDispute = ?;";
+
+        PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
+        preparedStatement.setInt(1, idDispute);
+        preparedStatement.execute();
+    }
 
 }

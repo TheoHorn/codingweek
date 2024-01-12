@@ -207,6 +207,7 @@ public class SceneController {
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Administrateur");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 

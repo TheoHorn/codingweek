@@ -39,7 +39,7 @@ public class Main extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("TELECOM Nancy DirectDealing - LogIn");
         stage.setScene(scene);
         stage.show();
     }

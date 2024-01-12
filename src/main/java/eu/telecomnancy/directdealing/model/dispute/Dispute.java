@@ -1,5 +1,14 @@
 package eu.telecomnancy.directdealing.model.dispute;
 
+import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.content.Content;
+import eu.telecomnancy.directdealing.model.demande.Demande;
+import eu.telecomnancy.directdealing.model.offer.Offer;
+
+import java.sql.SQLException;
+
+import static eu.telecomnancy.directdealing.Main.app;
+
 public class Dispute {
     private int idDispute;
     private int idDemande;
@@ -38,5 +47,24 @@ public class Dispute {
 
     public String getDefender() {
         return defender;
+    }
+
+    public Demande getDemande(){
+        return app.getDemandeDAO().get(this.getIdDemande());
+    }
+
+    public Slot getSlot() throws SQLException {
+        return app.getSlotDAO().get(this.getDemande().getIdSlot(), false);
+    }
+    public Offer getOffer() throws SQLException {
+        return app.getOfferDAO().get(this.getSlot().getIdOffer());
+    }
+
+    public boolean isOwner(String mail) throws SQLException {
+        return this.getOffer().getMail().equals(mail);
+    }
+
+    public Content getContentObject() throws SQLException {
+        return app.getContentDAO().get(this.getOffer().getIdContent());
     }
 }
