@@ -154,6 +154,7 @@ public class Application {
     private MessagingManager messagingManager;
 
     private Demande lastDemand;
+    private DisputeDAO disputeDAO;
 
     /**
      * Constructor of the application that initialize the lists
@@ -181,6 +182,7 @@ public class Application {
         this.evaluationManager = new EvaluationManager();
         this.messagingDAO = new MessagingDAO();
         this.messagingManager = new MessagingManager();
+        this.disputeDAO = new DisputeDAO();
     }
 
     /**
@@ -308,6 +310,10 @@ public class Application {
 
     public EvaluationManager getEvaluationManager() {
         return evaluationManager;
+    }
+
+    public DisputeDAO getDisputeDAO() {
+        return disputeDAO;
     }
 
     public void addOffer(Offer offer) {
@@ -644,5 +650,10 @@ public class Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendNewReclamation(String attacker, String defender, String content) {
+        Dispute dispute = new Dispute(getLastDemand().getIdDemande(), content, attacker, defender);
+        getDisputeDAO().save(dispute);
     }
 }
