@@ -120,6 +120,6 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#displayOffer" styleClass="seeMore_button" text="voir +" GridPane.columnIndex="2" />
+      <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#displayOffer" styleClass="seeMore_button" text="voir +" GridPane.columnIndex="2" />
    </children>
 </GridPane>

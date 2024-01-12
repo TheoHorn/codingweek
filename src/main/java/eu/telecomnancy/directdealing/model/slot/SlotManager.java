@@ -9,13 +9,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class SlotManager {
-    private Application app;
-
-    public SlotManager(){
-        this.app = Application.getInstance();
-    }
     public void delete(Slot slot) throws SQLException {
         // Delete all reservation related to slot
+        Application app = Application.getInstance();
         List<Reservation> reservations = app.getReservationDAO().getList(slot.getId());
         reservations.forEach((reservation) -> {
             try {
@@ -27,7 +23,8 @@ public class SlotManager {
 
         // Delete all demande related to slot
         Demande demandes = app.getDemandeDAO().get(slot.getId());
-        app.getDemandeManager().delete(demandes);
+        if (demandes != null)
+            app.getDemandeManager().delete(demandes);
 
         // Delete the slot
         app.getSlotDAO().delete(slot.getId());

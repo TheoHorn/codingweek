@@ -6,12 +6,9 @@ import eu.telecomnancy.directdealing.model.Slot;
 import java.sql.SQLException;
 import java.util.List;
 
-public class OfferManager {
-    private final Application app;
+import static eu.telecomnancy.directdealing.Main.app;
 
-    public OfferManager(){
-        this.app = Application.getInstance();
-    }
+public class OfferManager {
 
     public void delete(Offer offer) throws SQLException {
         // Delete all slots related to the offer

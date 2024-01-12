@@ -165,9 +165,12 @@ public class Application {
         this.accountDAO = new AccountDAO();
         this.contentDAO = new ContentDAO();
         this.offerDAO = new OfferDAO();
+        this.offerManager = new OfferManager();
         this.demandeDAO = new DemandeDAO();
         this.slotDAO = new SlotDAO();
+        this.slotManager = new SlotManager();
         this.reservationDAO = new ReservationDAO();
+        this.reservationManager = new ReservationManager();
         this.accountManager = new AccountManager();
         this.researchFilterManager = new ResearchFilterManager();
         this.demandeDAO = new DemandeDAO();
@@ -544,7 +547,7 @@ public class Application {
         if (account.equals(this.getCurrentUser())){
             // The admin delete himself
             this.deleteCurrentUser();
-            this.sceneController.switchToHome();
+            this.sceneController.switchToLoginView();
         }
         this.accountManager.delete(account);
         this.notifyObservers();

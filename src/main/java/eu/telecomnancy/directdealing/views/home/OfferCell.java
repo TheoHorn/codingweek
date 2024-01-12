@@ -6,6 +6,7 @@ import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -33,6 +34,8 @@ public class OfferCell extends ListCell<Offer> {
     private Label category;
     @FXML
     private Label place;
+    @FXML
+    private Button button;
     @FXML
     private Label avisLabel;
     /**
@@ -66,6 +69,13 @@ public class OfferCell extends ListCell<Offer> {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+
+            if (app.getCurrentUser() instanceof User){
+                this.button.setText("voir +");
+            }
+            else {
+                this.button.setText("supprimer");
             }
 
             try {
