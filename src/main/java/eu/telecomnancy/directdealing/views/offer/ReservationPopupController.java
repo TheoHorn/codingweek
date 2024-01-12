@@ -89,7 +89,7 @@ public class ReservationPopupController {
                     start = slot.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                     end =   slot.getEndTime() != null ? slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
                     interval = slot.getEndTime() != null ? new Interval(start, end) : new Interval(start, start);
-                    if (app.getReservationDAO().get(slot.getId()) != null) {
+                    if (demande == null) {
                         if (slot.getEndTime() != null) {
                             booked.addEntry(new Entry<>("Réservé", interval));
                         } else {
@@ -97,7 +97,7 @@ public class ReservationPopupController {
                             entry.fullDayProperty().setValue(true);
                             booked.addEntry(entry);
                         }
-                    } else if (app.getDemandeDAO().get("idSlot", slot.getId()) != null) {
+                    } else if (demande.getStatus() == 0) {
                         if (slot.getEndTime() != null) {
                             requested.addEntry(new Entry<>("Demandé", interval));
                         } else {

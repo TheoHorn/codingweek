@@ -1,8 +1,6 @@
 package eu.telecomnancy.directdealing.database;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.sql.*;
 
 /**
@@ -33,7 +31,7 @@ public class DatabaseAccess {
         try (Connection conn = DriverManager.getConnection(databaseUrl)) {
 
             String schemaFilePath = DatabaseAccess.class.getResource("/eu/telecomnancy/directdealing/database/schema_database.sql").getPath();
-            executeSchemaFile(conn, schemaFilePath);
+            executeSchemaFile(conn, "/eu/telecomnancy/directdealing/database/schema_database.sql");
 
 
         } catch (SQLException e) {
@@ -49,7 +47,9 @@ public class DatabaseAccess {
     private static void executeSchemaFile(Connection conn, String schemaFilePath) {
         StringBuilder schema = new StringBuilder();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(schemaFilePath))) {
+        try (InputStream in = DatabaseAccess.class.getResourceAsStream(schemaFilePath);
+             BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -59,7 +59,7 @@ public class DatabaseAccess {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(schema.toString());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
