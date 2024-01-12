@@ -9,7 +9,6 @@ import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.content.ContentManager;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
-import eu.telecomnancy.directdealing.model.dispute.Dispute;
 import eu.telecomnancy.directdealing.model.dispute.DisputeManager;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;
@@ -22,11 +21,8 @@ import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 import eu.telecomnancy.directdealing.model.reservation.ReservationManager;
 import eu.telecomnancy.directdealing.model.slot.SlotManager;
-import eu.telecomnancy.directdealing.views.messaging.MessagingController;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -353,7 +349,7 @@ public class Application {
      * @param password_confirm Password confirmation of the user
      * @throws Exception
      */
-    public void signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
+    public void signin(String mail, String password, String firstname, String lastname, String password_confirm, String city, String address) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
@@ -362,7 +358,7 @@ public class Application {
                     throw new Exception("Les mots de passe sont différents");
                 }
                 String generateStrongPasswordHash;
-                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password), "Nancy");
+                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password), city, address);
                 accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
@@ -394,7 +390,7 @@ public class Application {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            Service service = new Service(title, category, description, image, price);
+            Service service = new Service(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
                 System.out.println(app.getCurrentUser().getBalance());
@@ -432,7 +428,7 @@ public class Application {
             System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
-            Equipment service = new Equipment(title, category, description, image, price);
+            Equipment service = new Equipment(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
                 System.out.println(app.getCurrentUser().getBalance());
@@ -456,16 +452,21 @@ public class Application {
     }
 
     /**
-     * update the current account
-     * @param name First name
-     * @param surname Last name
+     * update the current account with the new information
+     *
+     * @param name the new name
+     * @param surname the new surname
+     * @param city  the new city
+     * @param address the new address
      * @return true if the account is updated, false otherwise
      * @throws Exception if the account is not updated
      */
-    public boolean updateCurrentAccount(String name, String surname) throws Exception {
-        if (!(name.isEmpty() || surname.isEmpty())) {
+    public boolean updateCurrentAccount(String name, String surname, String city, String address) throws Exception {
+        if (!(name.isEmpty() || surname.isEmpty() || city.isEmpty() || address.isEmpty())) {
             this.getCurrentUser().setFirstName(name);
             this.getCurrentUser().setLastName(surname);
+            this.getCurrentUser().setCity(city);
+            this.getCurrentUser().setAddress(address);
             accountDAO.save(this.getCurrentUser());;
             notifyObservers();
             return true;

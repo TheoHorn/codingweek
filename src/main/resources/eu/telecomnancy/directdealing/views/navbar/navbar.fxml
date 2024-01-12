@@ -73,6 +73,7 @@
            <MenuItem mnemonicParsing="false" onAction="#switchToProfile" text="Mon Profil" />
            <MenuItem mnemonicParsing="false" onAction="#switchToConversation" text="Mes Conversations" />
             <MenuItem mnemonicParsing="false" onAction="#swicthToReclamations" text="Mes réclamations" />
+           <MenuItem mnemonicParsing="false" onAction="#switchToConversation" text="Mes Conversations" />
            <MenuItem mnemonicParsing="false" onAction="#logout" text="Deconnexion" />
         </items>
          <graphic>

@@ -217,8 +217,15 @@ public class ResearchFilterManager {
         this.filteredOffers= result;
     }
 
-    public void filterOffersByLocation(String text){
-        return;
+    public void filterOffersByLocation(String text) throws SQLException {
+        List<Offer> result = new ArrayList<>();
+        for(Offer o: this.filteredOffers){
+            Account account = app.getAccountDAO().get(o.getMail());
+            if (account.getCity() != null && account.getCity().toUpperCase().contains(text.toUpperCase())){
+                result.add(o);
+            }
+        }
+        this.filteredOffers= result;
     }
 
     public void filterOffersByEvaluation(String text){

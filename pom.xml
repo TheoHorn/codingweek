@@ -70,7 +70,6 @@
             <artifactId>view</artifactId>
             <version>11.12.6</version>
         </dependency>
-
     </dependencies>
 
     <build>

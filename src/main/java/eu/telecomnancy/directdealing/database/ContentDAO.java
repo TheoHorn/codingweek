@@ -35,7 +35,7 @@ public class ContentDAO {
 
             if (resultSet.next()) { // Check if there are results
                 // update content
-                String queryUpdate = "UPDATE CONTENT SET title = ?, category = ?, description = ?, image = ?, price = ?, isEquipment = ? WHERE idContent = ?";
+                String queryUpdate = "UPDATE CONTENT SET title = ?, category = ?, description = ?, image = ?, price = ?, isEquipment = ?, localisation = ? WHERE idContent = ?";
                 try (PreparedStatement preparedStatementUpdate = connection.prepareStatement(queryUpdate)) {
                     // Set parameters for the prepared statement
                     preparedStatementUpdate.setString(1, content.getTitle());
@@ -44,7 +44,8 @@ public class ContentDAO {
                     preparedStatementUpdate.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
                     preparedStatementUpdate.setDouble(5, content.getPrice());
                     preparedStatementUpdate.setBoolean(6, content.isEquipment());
-                    preparedStatementUpdate.setInt(7, content.getIdContent());
+                    preparedStatementUpdate.setString(7, content.getLocalisation());
+                    preparedStatementUpdate.setInt(8, content.getIdContent());
                     // Execute the updated query
                     preparedStatementUpdate.executeUpdate();
                     return content.getIdContent();
@@ -54,7 +55,7 @@ public class ContentDAO {
             } else {
                 try (Statement statement = DatabaseAccess.connection.createStatement()) {
                     // Insert new user into the ACCOUNT table
-                    String queryInsert = "INSERT INTO CONTENT (title, category, description, image, price, isEquipment) VALUES ( ?, ?, ?, ?, ?, ?);";
+                    String queryInsert = "INSERT INTO CONTENT (title, category, description, image, price, isEquipment, localisation) VALUES ( ?, ?, ?, ?, ?, ?, ?);";
                     String queryGetLastId = "SELECT last_insert_rowid() AS id";
 
                     try (PreparedStatement preparedStatementInsert = DatabaseAccess.connection.prepareStatement(queryInsert);
@@ -66,6 +67,7 @@ public class ContentDAO {
                         preparedStatementInsert.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
                         preparedStatementInsert.setDouble(5, content.getPrice());
                         preparedStatementInsert.setBoolean(6, content.isEquipment());
+                        preparedStatementInsert.setString(7, content.getLocalisation());
                         // Execute the insertion query
                         preparedStatementInsert.executeUpdate();
                         // Retrieve the last inserted ID
@@ -121,13 +123,14 @@ public class ContentDAO {
                 Files.write(image.toPath(), imageBytes);
                 boolean isEquipment = resultSet.getBoolean("isEquipment");
                 double price = resultSet.getDouble("price");
+                String localisation = resultSet.getString("localisation");
 
                 // creation de l'objet
                 if (isEquipment) {
-                    return new Equipment(idContent, title, category, description, image, price) {
+                    return new Equipment(idContent, title, category, description, image, price, localisation) {
                     };
                 } else {
-                    return new Service(idContent, title, category, description, image, price);
+                    return new Service(idContent, title, category, description, image, price, localisation);
                 }
             }
         } catch (IOException e) {
