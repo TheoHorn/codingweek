@@ -249,7 +249,6 @@ public class Application {
 
     public List<Dispute> getDisputes() {
         List<Dispute> disputes = this.disputeDAO.get();
-        System.out.println(disputes);
         return disputes;
     }
 
@@ -403,6 +402,7 @@ public class Application {
                 app.getCurrentUser().setBalance(app.getCurrentUser().getBalance() - service.getPrice());
                 Request request = new Request(Application.getInstance().getCurrentUser().getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
+                getAccountDAO().save(getCurrentUser());
             } else {
                 Proposal proposal = new Proposal(Application.getInstance().getCurrentUser().getEmail(), false, service.getIdContent());
                 idOffer = getOfferDAO().save(proposal);
@@ -436,6 +436,8 @@ public class Application {
                 }
                 Request request = new Request(Application.getInstance().getCurrentUser().getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
+                getCurrentUser().setBalance(getCurrentUser().getBalance() - service.getPrice());
+                getAccountDAO().save(getCurrentUser());
             } else {
                 Proposal proposal = new Proposal(Application.getInstance().getCurrentUser().getEmail(), false, service.getIdContent());
                 idOffer = getOfferDAO().save(proposal);

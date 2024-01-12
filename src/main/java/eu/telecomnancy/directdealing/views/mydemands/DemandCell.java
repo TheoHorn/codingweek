@@ -79,7 +79,11 @@ public class DemandCell extends ListCell<Demande> {
                 Slot slot = app.getSlotDAO().get(demande.getIdSlot(),false);
                 Offer offer = app.getOfferDAO().get(slot.getIdOffer());
 
-                image.setImage(new Image(app.getContentDAO().get(offer.getIdContent()).getImage().toURI().toString()));
+                if (app.getContentDAO().get(offer.getIdContent()).getImage() == null) {
+                    image.setImage(null);
+                } else {
+                    image.setImage(new Image(app.getContentDAO().get(offer.getIdContent()).getImage().toURI().toString()));
+                }
                 if (offer instanceof Proposal) {
                     type.setText("Offre");
                 } else {
