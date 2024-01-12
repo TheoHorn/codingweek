@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
+<MenuBar xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.admin.navBarController">
+   <menus>
+      <Menu mnemonicParsing="false" text="Système">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#switchToLogin" text="Se déconnecter" />
+         </items>
+      </Menu>
+   </menus>
+</MenuBar>
