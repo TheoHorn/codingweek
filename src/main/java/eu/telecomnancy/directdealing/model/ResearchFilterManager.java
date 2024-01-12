@@ -28,6 +28,7 @@ public class ResearchFilterManager {
     public ResearchFilterManager() {
         this.researchedOffers = new ArrayList<>();
         this.filteredOffers = new ArrayList<>();
+        this.search_text = "";
     }
 
     public void initialize_visible_offers() throws Exception {
@@ -87,6 +88,9 @@ public class ResearchFilterManager {
             return;
         }
         this.search_text = motRecherche;
+    }
+
+    public void doResearch() throws Exception {
         this.resetOffers();
         List<Offer> result = new ArrayList<>();
         for (Offer offer : this.researchedOffers){
@@ -99,6 +103,7 @@ public class ResearchFilterManager {
             }
         }
         this.researchedOffers = result;
+        this.filteredOffers = result;
     }
 
     public void filterOffersByDate(String date) throws SQLException {

@@ -62,6 +62,7 @@ public class HomeViewController implements Observer {
     @Override
     public void update() throws Exception {
         this.app.getResearchFilterManager().resetOffers();
+        this.app.getResearchFilterManager().doResearch();
         if (this.filter_date.getValue() != null){
             this.app.getResearchFilterManager().filterOffersByDate(this.filter_date.getValue().toString());
         }
