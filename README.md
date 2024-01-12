@@ -162,7 +162,13 @@ assuming `${JAVAFX_HOME}` is the path to your JavaFX installation.
      - [x] Gestion des litiges 
      - [x] Suppression d'une offre ou d'un utilisateur
    - [x] CSS et Style
-
+5. **Finitions de l'application**
+    - [x] Gestion des florains
+    - [x] Gestion de la localisation
+    - [x] Conséquence du boutton "sleep"
+    - [x] Amélioration de la page de consultation d'offre
+    - [x] Transformer les réservations en demande
+    - [x] Gestion des litiges
 
 See the [open issues](https://gitlab.telecomnancy.univ-lorraine.fr/pcd2k24/codingweek-12/-/issues) for a full list of proposed features (and known issues).
 
