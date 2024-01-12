@@ -110,9 +110,9 @@ public class ReponseCell extends ListCell<Demande> {
         app.saveDemandeStatus(statusChoiceBox.getValue().toString());
     }
 
-    public void porterReclamantion(){
+    public void porterReclamantion() throws Exception {
         Application.getInstance().setLastDemand(getItem());
-        app.sendNewReclamation(app.getCurrentUser().getEmail(), getItem().getMail(), "content");
+        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), getItem().getMail());
     }
 
 

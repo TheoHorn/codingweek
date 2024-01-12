@@ -138,11 +138,11 @@ public class DemandCell extends ListCell<Demande> {
     }
 
     @FXML
-    public void porterReclamation() throws SQLException {
+    public void porterReclamation() throws Exception {
         Application.getInstance().setLastDemand(getItem());
         Slot slot = app.getSlotDAO().get(getItem().getIdSlot(),false);
         int idOffer = slot.getIdOffer();
         Offer offer = app.getOfferDAO().get(idOffer);
-        app.sendNewReclamation(app.getCurrentUser().getEmail(), offer.getMail(), "content");
+        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), offer.getMail());;
     }
 }
