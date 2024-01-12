@@ -41,6 +41,8 @@ public class NewOfferController implements Observer {
      */
     @FXML
     private TextArea descriptionTextArea;
+    @FXML
+    private Button imagePicker;
     /**
      * TextField for the title
      */
@@ -134,6 +136,7 @@ public class NewOfferController implements Observer {
         File selectedFile = fileChooser.showOpenDialog(app.getSceneController().getStage());
         if (selectedFile != null) {
             this.image = selectedFile;
+            this.imagePicker.setText(selectedFile.getName());
         }
     }
 
