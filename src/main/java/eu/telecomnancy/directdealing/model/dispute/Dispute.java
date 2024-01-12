@@ -1,5 +1,14 @@
 package eu.telecomnancy.directdealing.model.dispute;
 
+import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.content.Content;
+import eu.telecomnancy.directdealing.model.demande.Demande;
+import eu.telecomnancy.directdealing.model.offer.Offer;
+
+import java.sql.SQLException;
+
+import static eu.telecomnancy.directdealing.Main.app;
+
 public class Dispute {
     private int idDispute;
     private int idDemande;

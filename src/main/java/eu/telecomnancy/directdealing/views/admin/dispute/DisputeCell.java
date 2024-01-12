@@ -96,9 +96,11 @@ public class DisputeCell extends ListCell<Dispute> {
                 app.getAccountDAO().save(attacker);
             }
         }
+        app.deleteDispute(getItem());
     }
 
-    public void pressDefender(){
+    public void pressDefender() throws Exception {
         System.out.println("Attaquant, C'est mal !");
+        app.deleteDispute(getItem());
     }
 }

@@ -567,6 +567,11 @@ public class Application {
         this.notifyObservers();
     }
 
+    public void deleteDispute(Dispute dispute) throws Exception {
+        app.getDisputeDAO().delete(dispute.getIdDispute());
+        this.notifyObservers();
+    }
+
     public void deleteOffer(Offer offer) throws Exception {
         this.offerManager.delete(offer);
         this.notifyObservers();
