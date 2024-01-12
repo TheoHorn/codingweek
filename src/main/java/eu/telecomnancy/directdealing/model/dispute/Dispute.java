@@ -21,4 +21,24 @@ public class Dispute {
         this.attacker = attacker;
         this.defender = defender;
     }
+
+    public int getIdDispute() {
+        return idDispute;
+    }
+
+    public int getIdDemande() {
+        return idDemande;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getAttacker() {
+        return attacker;
+    }
+
+    public String getDefender() {
+        return defender;
+    }
 }
