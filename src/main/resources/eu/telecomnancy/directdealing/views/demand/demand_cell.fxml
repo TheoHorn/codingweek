@@ -132,7 +132,7 @@
             </StackPane>
             <StackPane>
                <children>
-                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#e4264c" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" StackPane.alignment="CENTER" fx:id="rec_status"/>
+                  <Rectangle fx:id="rec_status" arcHeight="20.0" arcWidth="20.0" fill="#e4264c" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" StackPane.alignment="CENTER" />
                   <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="90.0" text="STATUS" textAlignment="CENTER" textFill="WHITE" wrapText="true" StackPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -143,7 +143,8 @@
                   </Label>
                </children>
             </StackPane>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelReservation" styleClass="seeMore_button" text="Annuler Ma Demande" fx:id="cancelButton"/>
+            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelReservation" styleClass="seeMore_button" text="Annuler Ma Demande" />
+            <Button fx:id="disputeButton" mnemonicParsing="false" onAction="#porterReclamation" text="Porter réclamation" />
          </children>
       </VBox>
    </children>
