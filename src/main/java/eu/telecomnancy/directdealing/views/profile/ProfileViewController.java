@@ -24,10 +24,23 @@ public class ProfileViewController implements Observer {
     @FXML
     private TextField surname_field;
     /**
-     * TextField for the email
+     * Label for the email
      */
     @FXML
     private Label email_field;
+
+    /**
+     * TextField for the city
+     */
+    @FXML
+    private TextField city_field;
+
+    /**
+     * TextField for the address
+     */
+    @FXML
+    private TextField address_field;
+
     /**
      * PasswordField for the old password
      */
@@ -92,7 +105,7 @@ public class ProfileViewController implements Observer {
      */
     @FXML
     public void updateProfile() throws Exception {
-        isFailed = this.app.updateCurrentAccount(this.name_field.getText(), this.surname_field.getText());
+        isFailed = this.app.updateCurrentAccount(this.name_field.getText(), this.surname_field.getText(),this.city_field.getText(), this.address_field.getText());
         System.out.println(isFailed);
     }
 
@@ -139,6 +152,8 @@ public class ProfileViewController implements Observer {
         this.name_field.setText(this.app.getCurrentUser().getFirstName());
         this.surname_field.setText(this.app.getCurrentUser().getLastName());
         this.email_field.setText(this.app.getCurrentUser().getEmail());
+        this.city_field.setText(this.app.getCurrentUser().getCity());
+        this.address_field.setText(this.app.getCurrentUser().getAddress());
         this.modify_info_label.setVisible(false);
         this.modify_password_label.setVisible(false);
         this.sleeping_label.setText(this.app.getCurrentUser().isSleeping() ? "Actif" : "Inactif");

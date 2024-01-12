@@ -90,6 +90,14 @@ public abstract class Account {
         this.email = email;
     }
 
+    public void setCity(String city) {
+    	this.city = city;
+    }
+
+    public void setAddress(String address) {
+    	this.address = address;
+    }
+
     public String getPassword() {
     	return password;
     }

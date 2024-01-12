@@ -9,7 +9,6 @@ import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.content.ContentManager;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
-import eu.telecomnancy.directdealing.model.dispute.Dispute;
 import eu.telecomnancy.directdealing.model.dispute.DisputeManager;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;
@@ -22,11 +21,8 @@ import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
 import eu.telecomnancy.directdealing.model.reservation.ReservationManager;
 import eu.telecomnancy.directdealing.model.slot.SlotManager;
-import eu.telecomnancy.directdealing.views.messaging.MessagingController;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -449,16 +445,21 @@ public class Application {
     }
 
     /**
-     * update the current account
-     * @param name First name
-     * @param surname Last name
+     * update the current account with the new information
+     *
+     * @param name the new name
+     * @param surname the new surname
+     * @param city  the new city
+     * @param address the new address
      * @return true if the account is updated, false otherwise
      * @throws Exception if the account is not updated
      */
-    public boolean updateCurrentAccount(String name, String surname) throws Exception {
-        if (!(name.isEmpty() || surname.isEmpty())) {
+    public boolean updateCurrentAccount(String name, String surname, String city, String address) throws Exception {
+        if (!(name.isEmpty() || surname.isEmpty() || city.isEmpty() || address.isEmpty())) {
             this.getCurrentUser().setFirstName(name);
             this.getCurrentUser().setLastName(surname);
+            this.getCurrentUser().setCity(city);
+            this.getCurrentUser().setAddress(address);
             accountDAO.save(this.getCurrentUser());;
             notifyObservers();
             return true;
