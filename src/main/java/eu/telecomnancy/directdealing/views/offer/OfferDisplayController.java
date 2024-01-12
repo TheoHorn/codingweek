@@ -85,6 +85,7 @@ public class OfferDisplayController implements Observer {
     @Override
     public void update() throws Exception {
         Offer offer = this.app.getLastOffer();
+        List<Slot> slots = this.app.getSlotDAO().get(offer.getIdOffer());
         Content content = app.getContentDAO().get(offer.getIdContent());
         Account owner = app.getAccountDAO().get(offer.getMail());
         this.title_label.setText(content.getTitle());
