@@ -38,4 +38,6 @@ module eu.telecomnancy.directdealing {
     exports eu.telecomnancy.directdealing.model.demande;
     exports eu.telecomnancy.directdealing.views.messaging;
     exports eu.telecomnancy.directdealing.model.messaging;
+    exports eu.telecomnancy.directdealing.views.request;
+    opens eu.telecomnancy.directdealing.views.request to javafx.fxml;
 }
