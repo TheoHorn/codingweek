@@ -5,6 +5,10 @@ import com.calendarfx.view.*;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.content.Content;
+import eu.telecomnancy.directdealing.model.demande.Demande;
+import eu.telecomnancy.directdealing.model.offer.Offer;
+import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
@@ -57,22 +61,27 @@ public class ReservationPopupController {
             LocalDateTime end;
             Entry<?> entry;
             LocalDateTime tmp;
+            Demande demande;
             for (Slot slot: app.getSlotDAO().get(app.getLastOffer().getIdOffer())) {
                 if (slot.getStartTime() == null) {
                     continue;
                 }
                 tmp = slot.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                demande = app.getDemandeDAO().get("idSlot", slot.getId());
                 if (slot.getRecurrence() != 0) {
                     while (tmp.isBefore(slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())) {
                         interval = new Interval(tmp, tmp);
-                        if (app.getReservationDAO().get(slot.getId()) != null) {
-                            booked.addEntry(new Entry<>("Réservé", interval));
-                        } else if (app.getDemandeDAO().get("idSlot", slot.getId()) != null) {
-                            requested.addEntry(new Entry<>("Demandé", interval));
-                        } else {
+                        if (demande == null) {
+                            // disponible
                             entry = new Entry<>("Disponible", interval);
                             entry.fullDayProperty().setValue(true);
                             slots.addEntry(entry);
+                        } else if (demande.getStatus() == 0) {
+                            // demandée
+                            requested.addEntry(new Entry<>("Demandé", interval));
+                        } else if (demande.getStatus() == 1) {
+                            // réservée
+                            booked.addEntry(new Entry<>("Réservé", interval));
                         }
                         tmp = tmp.plusDays(slot.getRecurrence());
                     }
@@ -96,10 +105,15 @@ public class ReservationPopupController {
                             entry.fullDayProperty().setValue(true);
                             requested.addEntry(entry);
                         }
-                    } else {
-                        entry = new Entry<>("Disponible", interval);
-                        entry.fullDayProperty().setValue(true);
-                        slots.addEntry(entry);
+                    } else if (demande.getStatus() == 1) {
+                        // réservée
+                        if (slot.getEndTime() != null) {
+                            booked.addEntry(new Entry<>("Réservé", interval));
+                        } else {
+                            entry = new Entry<>("Réservé", interval);
+                            entry.fullDayProperty().setValue(true);
+                            booked.addEntry(entry);
+                        }
                     }
                 }
             }

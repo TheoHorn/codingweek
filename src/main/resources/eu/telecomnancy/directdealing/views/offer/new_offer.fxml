@@ -82,7 +82,7 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Button mnemonicParsing="false" onAction="#pickImage" text="Importer un fichier" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <Button fx:id="imagePicker" mnemonicParsing="false" onAction="#pickImage" text="Importer un fichier" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                 <TextArea fx:id="descriptionTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Description de l'annonce" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                 <Button mnemonicParsing="false" onAction="#pressValiderNewOffer" text="Valider" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="14"/>
                 <Label alignment="CENTER_RIGHT" text="Image" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
