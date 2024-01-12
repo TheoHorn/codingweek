@@ -10,6 +10,7 @@ import javafx.scene.control.*;
  * HomeViewController class
  */
 public class HomeViewController implements Observer {
+
     /**
      * ListView of the offers
      */
@@ -17,7 +18,7 @@ public class HomeViewController implements Observer {
     protected ListView<Offer> offersListView;
 
     @FXML
-    private ChoiceBox filter_location;
+    public TextField filter_city;
 
     @FXML
     private ChoiceBox filter_date;
@@ -69,8 +70,8 @@ public class HomeViewController implements Observer {
         if (this.filter_price.getValue() != null){
             this.app.getResearchFilterManager().filterOffersByPrice(this.filter_price.getValue().toString());
         }
-        if (this.filter_location.getValue() != null){
-            this.app.getResearchFilterManager().filterOffersByLocation(this.filter_location.getValue().toString());
+        if (this.filter_city.getText() != null){
+            this.app.getResearchFilterManager().filterOffersByLocation(this.filter_city.getText());
         }
         if (this.filter_evaluation.getValue() != null){
             this.app.getResearchFilterManager().filterOffersByEvaluation(this.filter_evaluation.getValue().toString());
@@ -86,6 +87,7 @@ public class HomeViewController implements Observer {
         if (!category_available.toString().isEmpty()){
             this.app.getResearchFilterManager().filterOffersByCategory(category_available.toString());
         }
+        this.filter_city.setText(this.app.getCurrentUser().getCity());
         offersListView.getItems().clear();
         System.out.println("Offers to print: " + this.app.getResearchFilterManager().getFilteredOffers().size());
         this.app.getResearchFilterManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));
