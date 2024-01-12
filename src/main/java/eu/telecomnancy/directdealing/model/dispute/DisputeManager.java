@@ -1,5 +1,11 @@
 package eu.telecomnancy.directdealing.model.dispute;
 
+import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.account.Account;
+import eu.telecomnancy.directdealing.model.demande.Demande;
+import eu.telecomnancy.directdealing.model.offer.Offer;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,4 +22,6 @@ public class DisputeManager {
         }
         return myRequests;
     }
+
+
 }

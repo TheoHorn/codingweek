@@ -247,6 +247,12 @@ public class Application {
         return this.accountDAO.getUsers();
     }
 
+    public List<Dispute> getDisputes() {
+        List<Dispute> disputes = this.disputeDAO.get();
+        System.out.println(disputes);
+        return disputes;
+    }
+
     public List<Proposal> getMyProposals(){
         return myProposals;
     }
@@ -558,6 +564,11 @@ public class Application {
             this.sceneController.switchToLoginView();
         }
         this.accountManager.delete(account);
+        this.notifyObservers();
+    }
+
+    public void deleteDispute(Dispute dispute) throws Exception {
+        app.getDisputeDAO().delete(dispute.getIdDispute());
         this.notifyObservers();
     }
 
