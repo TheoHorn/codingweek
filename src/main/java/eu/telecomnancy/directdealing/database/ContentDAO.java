@@ -36,7 +36,11 @@ public class ContentDAO {
                     preparedStatementUpdate.setString(1, content.getTitle());
                     preparedStatementUpdate.setString(2, content.getCategory());
                     preparedStatementUpdate.setString(3, content.getDescription());
-                    preparedStatementUpdate.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
+                    if (content.getImage() == null) {
+                        preparedStatementUpdate.setBytes(4, null);
+                    } else {
+                        preparedStatementUpdate.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
+                    }
                     preparedStatementUpdate.setDouble(5, content.getPrice());
                     preparedStatementUpdate.setBoolean(6, content.isEquipment());
                     preparedStatementUpdate.setString(7, content.getLocalisation());
@@ -59,7 +63,11 @@ public class ContentDAO {
                         preparedStatementInsert.setString(1, content.getTitle());
                         preparedStatementInsert.setString(2, content.getCategory());
                         preparedStatementInsert.setString(3, content.getDescription());
-                        preparedStatementInsert.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
+                        if (content.getImage() == null) {
+                            preparedStatementInsert.setBytes(4, null);
+                        } else {
+                            preparedStatementInsert.setBytes(4, Files.readAllBytes(content.getImage().toPath()));
+                        }
                         preparedStatementInsert.setDouble(5, content.getPrice());
                         preparedStatementInsert.setBoolean(6, content.isEquipment());
                         preparedStatementInsert.setString(7, content.getLocalisation());
@@ -113,8 +121,13 @@ public class ContentDAO {
                 String category = resultSet.getString("category");
                 String description = resultSet.getString("description");
                 byte[] imageBytes = resultSet.getBytes("image");
-                File image = Files.createTempFile("image" + idContent, ".png").toFile();
-                Files.write(image.toPath(), imageBytes);
+                File image;
+                if (imageBytes == null) {
+                    image = null;
+                } else {
+                    image = Files.createTempFile("image" + idContent, ".png").toFile();
+                    Files.write(image.toPath(), imageBytes);
+                }
                 boolean isEquipment = resultSet.getBoolean("isEquipment");
                 double price = resultSet.getDouble("price");
                 String localisation = resultSet.getString("localisation");

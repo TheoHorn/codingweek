@@ -88,7 +88,11 @@ public class OfferCell extends ListCell<Offer> {
             }
 
             try {
-                image.setImage(new Image(app.getContentDAO().get(offer.getIdContent()).getImage().toURI().toString()));
+                if (app.getContentDAO().get(offer.getIdContent()).getImage() == null) {
+                    image.setImage(null);
+                } else {
+                    image.setImage(new Image(app.getContentDAO().get(offer.getIdContent()).getImage().toURI().toString()));
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

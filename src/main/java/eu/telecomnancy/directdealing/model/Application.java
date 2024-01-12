@@ -385,7 +385,7 @@ public class Application {
      * @throws SQLException if the offer is not validate
      */
     public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, List<Slot> slots) throws Exception {
-        if (title.isEmpty() || description.isEmpty() || price == 0 || slots.isEmpty() || image == null || category == null) {
+        if (title.isEmpty() || description.isEmpty() || price == 0 || slots.isEmpty() || category == null) {
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             Service service = new Service(title, category, description, image, price, currentUser.getLocalisation());
@@ -419,7 +419,7 @@ public class Application {
      * @throws SQLException if the offer is not validate
      */
     public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, LocalDate returnDate) throws Exception {
-        if (title.isEmpty() || description.isEmpty() || price == 0 || image == null || category == null) {
+        if (title.isEmpty() || description.isEmpty() || price == 0 || category == null) {
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             Equipment service = new Equipment(title, category, description, image, price, currentUser.getLocalisation());
