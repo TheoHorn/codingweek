@@ -10,6 +10,7 @@ import eu.telecomnancy.directdealing.model.offer.Proposal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -46,6 +47,8 @@ public class DemandCell extends ListCell<Demande> {
     private Label status;
     @FXML
     private Button cancelButton;
+    @FXML
+    private Button disputeButton;
     /**
      * FXMLLoader
      */
@@ -100,6 +103,7 @@ public class DemandCell extends ListCell<Demande> {
                     this.status.setText("Acceptée");
                     this.rec_status.setStyle("-fx-fill: #4CAF50");
                     this.cancelButton.setVisible(false);
+                    this.disputeButton.setVisible(true);
 
                 } else {
                     this.status.setText("Refusée");
@@ -131,5 +135,14 @@ public class DemandCell extends ListCell<Demande> {
             Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
             Application.getInstance().getSceneController().switchToProfileDisplay();
         }
+    }
+
+    @FXML
+    public void porterReclamation() throws Exception {
+        Application.getInstance().setLastDemand(getItem());
+        Slot slot = app.getSlotDAO().get(getItem().getIdSlot(),false);
+        int idOffer = slot.getIdOffer();
+        Offer offer = app.getOfferDAO().get(idOffer);
+        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), offer.getMail());;
     }
 }

@@ -21,6 +21,7 @@ module eu.telecomnancy.directdealing {
     opens eu.telecomnancy.directdealing.views.messaging to javafx.fxml;
     opens eu.telecomnancy.directdealing.views.conversations to javafx.fxml;
     opens eu.telecomnancy.directdealing.views.reponse to javafx.fxml;
+    opens eu.telecomnancy.directdealing.views.dispute to javafx.fxml;
     exports eu.telecomnancy.directdealing.views.offer to javafx.fxml;
     exports eu.telecomnancy.directdealing.views.home to javafx.fxml;
     exports eu.telecomnancy.directdealing.views.reponse;
@@ -38,4 +39,6 @@ module eu.telecomnancy.directdealing {
     exports eu.telecomnancy.directdealing.model.demande;
     exports eu.telecomnancy.directdealing.views.messaging;
     exports eu.telecomnancy.directdealing.model.messaging;
+    exports eu.telecomnancy.directdealing.views.dispute;
+    opens eu.telecomnancy.directdealing.views.request to javafx.fxml;
 }

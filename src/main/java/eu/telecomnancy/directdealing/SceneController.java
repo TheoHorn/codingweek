@@ -1,6 +1,7 @@
 package eu.telecomnancy.directdealing;
 
 import eu.telecomnancy.directdealing.model.Application;
+import eu.telecomnancy.directdealing.views.request.NewDispute;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -210,6 +211,29 @@ public class SceneController {
         scene = new Scene(root.load());
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Administrateur");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void openDisputePopup(String attacker, String defender) throws Exception{
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader();
+        root.setLocation(getClass().getResource("/eu/telecomnancy/directdealing/views/request/new_dispute.fxml"));
+        root.setControllerFactory(iC -> new NewDispute(attacker, defender));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Nouveau litige");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    public void switchToDispute() throws Exception {
+        Application.getInstance().removeAllObservers();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/dispute/dispute_view.fxml"));
+        scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
+        stage.setTitle("TELECOM Nancy DirectDealing - Mes réclamations");
         stage.setScene(scene);
         stage.show();
     }

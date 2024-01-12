@@ -35,6 +35,8 @@ public class ReponseCell extends ListCell<Demande> {
     private ChoiceBox statusChoiceBox;
     @FXML
     private Button validateButton;
+    @FXML
+    private Button disputeButton;
     /**
      * FXMLLoader
      */
@@ -85,6 +87,7 @@ public class ReponseCell extends ListCell<Demande> {
                         statusChoiceBox.setValue("Accepter");
                         validateButton.setVisible(false);
                         validateButton.setDisable(true);
+                        disputeButton.setVisible(true);
                         break;
                     case 2:
                         statusChoiceBox.setValue("Refuser");
@@ -105,6 +108,11 @@ public class ReponseCell extends ListCell<Demande> {
 
         Application.getInstance().setLastDemand(getItem());
         app.saveDemandeStatus(statusChoiceBox.getValue().toString());
+    }
+
+    public void porterReclamantion() throws Exception {
+        Application.getInstance().setLastDemand(getItem());
+        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), getItem().getMail());
     }
 
 
