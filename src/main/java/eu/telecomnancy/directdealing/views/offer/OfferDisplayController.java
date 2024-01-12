@@ -108,12 +108,12 @@ public class OfferDisplayController implements Observer {
         double prix = app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice();
         if (balance >= prix){
             this.resa_button.setDisable(false);
-            this.resa_label.setVisible(false);
+            // this.resa_label.setVisible(false);
         } else {
             this.resa_button.setDisable(true);
-            this.resa_label.setVisible(true);
+            //this.resa_label.setVisible(true);
             double diff = prix - balance;
-            this.resa_label.setText("Il vous manque "+diff+" florains pour pouvoir réserver.");
+            // this.resa_label.setText("Il vous manque "+diff+" florains pour pouvoir réserver.");
         }
 
 
