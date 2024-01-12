@@ -82,6 +82,7 @@
                   </ImageView>
                </children>
             </HBox>
+            <Label fx:id="avisLabel" onMouseClicked="#displayForeignProfil" text="Avis sur l'utilisateur" />
             <HBox>
                <VBox.margin>
                   <Insets top="30.0" />

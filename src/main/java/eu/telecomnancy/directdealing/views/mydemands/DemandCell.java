@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.views.mydemands;
 
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.offer.Offer;
@@ -121,5 +122,14 @@ public class DemandCell extends ListCell<Demande> {
     public void cancelReservation() throws Exception {
         Application.getInstance().setLastDemand(getItem());
         app.deleteDemande();
+    }
+
+
+    @FXML
+    public void displayForeignProfil() throws Exception {
+        if (app.getCurrentUser() instanceof User) {
+            Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
+            Application.getInstance().getSceneController().switchToProfileDisplay();
+        }
     }
 }

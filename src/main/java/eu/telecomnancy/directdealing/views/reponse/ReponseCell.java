@@ -102,6 +102,7 @@ public class ReponseCell extends ListCell<Demande> {
     }
 
     public void saveStatus() throws Exception {
+
         Application.getInstance().setLastDemand(getItem());
         app.saveDemandeStatus(statusChoiceBox.getValue().toString());
     }

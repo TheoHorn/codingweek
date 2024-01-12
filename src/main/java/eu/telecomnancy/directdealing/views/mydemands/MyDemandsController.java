@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.views.mydemands;
 
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
+import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
