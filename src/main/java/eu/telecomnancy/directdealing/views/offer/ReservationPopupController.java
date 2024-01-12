@@ -4,6 +4,7 @@ import com.calendarfx.model.*;
 import com.calendarfx.view.*;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
@@ -60,6 +61,9 @@ public class ReservationPopupController {
             Entry<?> entry;
             LocalDateTime tmp;
             for (Slot slot: app.getSlotDAO().get(app.getLastOffer().getIdOffer())) {
+                if (slot.getStartTime() == null) {
+                    continue;
+                }
                 tmp = slot.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 if (slot.getRecurrence() != 0) {
                     while (tmp.isBefore(slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())) {
@@ -77,12 +81,24 @@ public class ReservationPopupController {
                     }
                 } else {
                     start = slot.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                    end =  slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                    interval = new Interval(start, end);
+                    end =   slot.getEndTime() != null ? slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
+                    interval = slot.getEndTime() != null ? new Interval(start, end) : new Interval(start, start);
                     if (app.getReservationDAO().get(slot.getId()) != null) {
-                        booked.addEntry(new Entry<>("Réservé", interval));
+                        if (slot.getEndTime() != null) {
+                            booked.addEntry(new Entry<>("Réservé", interval));
+                        } else {
+                            entry = new Entry<>("Réservé", interval);
+                            entry.fullDayProperty().setValue(true);
+                            booked.addEntry(entry);
+                        }
                     } else if (app.getDemandeDAO().get("idSlot", slot.getId()) != null) {
-                        requested.addEntry(new Entry<>("Demandé", interval));
+                        if (slot.getEndTime() != null) {
+                            requested.addEntry(new Entry<>("Demandé", interval));
+                        } else {
+                            entry = new Entry<>("Demandé", interval);
+                            entry.fullDayProperty().setValue(true);
+                            requested.addEntry(entry);
+                        }
                     } else {
                         entry = new Entry<>("Disponible", interval);
                         entry.fullDayProperty().setValue(true);
@@ -114,7 +130,13 @@ public class ReservationPopupController {
                 Date startDate = Date.from(start.atZone(ZoneId.systemDefault()).toInstant());
                 Date endDate = Date.from(end.atZone(ZoneId.systemDefault()).toInstant());
                 try {
-                    slots.add(new Slot(startDate, endDate, 0, app.getLastOffer().getIdOffer()));
+                    Content content = this.app.getContentDAO().get(this.app.getLastOffer().getIdContent());
+                    List<Slot> slots1 = this.app.getSlotDAO().get(this.app.getLastOffer().getIdOffer());
+                    if (content.isEquipment() && slots1.get(0).getStartTime() == null) {
+                        slots.add(new Slot(startDate, null, 0, app.getLastOffer().getIdOffer()));
+                    } else {
+                        slots.add(new Slot(startDate, endDate, 0, app.getLastOffer().getIdOffer()));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

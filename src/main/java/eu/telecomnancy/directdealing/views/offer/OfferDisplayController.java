@@ -54,8 +54,9 @@ public class OfferDisplayController implements Observer {
 
     @FXML
     public void reservation() throws Exception {
+        Content content = this.app.getContentDAO().get(this.app.getLastOffer().getIdContent());
         List<Slot> slots = this.app.getSlotDAO().get(this.app.getLastOffer().getIdOffer());
-        if (!slots.isEmpty()){
+        if (content.isEquipment() && slots.get(0).getStartTime() != null){
             this.app.validateNewDemand(this.app.getLastOffer(), slots);
             this.app.getSceneController().switchToHome();
         } else {

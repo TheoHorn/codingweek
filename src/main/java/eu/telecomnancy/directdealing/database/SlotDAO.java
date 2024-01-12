@@ -33,7 +33,10 @@ public class SlotDAO {
                 // extract infos from request result
                 int recupIdSlot = resultSet.getInt("idSlot");
                 Timestamp tempStartTime = resultSet.getTimestamp("startTime");
-                java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
+                java.util.Date startTime = null;
+                if (tempStartTime != null) {
+                    startTime = new java.util.Date(tempStartTime.getTime());
+                }
                 Timestamp tempEndTime = resultSet.getTimestamp("endTime");
                 java.util.Date endTime = null;
                 if (tempEndTime != null) {
@@ -70,7 +73,10 @@ public class SlotDAO {
                 // extract infos from request result
                 int recupIdSlot = resultSet.getInt("idSlot");
                 Timestamp tempStartTime = resultSet.getTimestamp("startTime");
-                java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
+                java.util.Date startTime = null;
+                if (tempStartTime != null) {
+                    startTime = new java.util.Date(tempStartTime.getTime());
+                }
                 Timestamp tempEndTime = resultSet.getTimestamp("endTime");
                 java.util.Date endTime = null;
                 if (tempEndTime != null) {
@@ -113,7 +119,11 @@ public class SlotDAO {
                 // updaye slot
                 String queryUpdate = "UPDATE SLOT SET startTime = ?, endTime = ?, recurring = ?, idOffer = ? WHERE idSlot = ?";
                 try (PreparedStatement preparedStatementUpdate = connection.prepareStatement(queryUpdate)) {
-                    preparedStatementUpdate.setTimestamp(1, new Timestamp(slot.getStartTime().getTime()));
+                    if (slot.getStartTime() != null) {
+                        preparedStatementUpdate.setTimestamp(1, new Timestamp(slot.getStartTime().getTime()));
+                    } else {
+                        preparedStatementUpdate.setTimestamp(1, null);
+                    }
                     if (slot.getEndTime() != null) {
                         preparedStatementUpdate.setTimestamp(2, new Timestamp(slot.getEndTime().getTime()));
                     } else {
@@ -132,7 +142,11 @@ public class SlotDAO {
                 try (PreparedStatement preparedStatementInsert = connection.prepareStatement(queryInsert);
                      PreparedStatement statementGetLastId = connection.prepareStatement(queryGetLastId)) {
                     // Set parameters for the prepared statement
-                    preparedStatementInsert.setTimestamp(1, new Timestamp(slot.getStartTime().getTime()));
+                    if (slot.getStartTime() != null) {
+                        preparedStatementInsert.setTimestamp(1, new Timestamp(slot.getStartTime().getTime()));
+                    } else {
+                        preparedStatementInsert.setTimestamp(1, null);
+                    }
                     if (slot.getEndTime() != null) {
                         preparedStatementInsert.setTimestamp(2, new Timestamp(slot.getEndTime().getTime()));
                     } else {
@@ -175,7 +189,10 @@ public class SlotDAO {
             if (resultSet.next()) { // Check if there are results
                 // extract infos from request result
                 Timestamp tempStartTime = resultSet.getTimestamp("startTime");
-                java.util.Date startTime = new java.util.Date(tempStartTime.getTime());
+                java.util.Date startTime = null;
+                if (tempStartTime != null) {
+                    startTime = new java.util.Date(tempStartTime.getTime());
+                }
                 Timestamp tempEndTime = resultSet.getTimestamp("endTime");
                 Date endTime;
                 if (tempEndTime == null) {
