@@ -1,13 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.home.HomeViewController">
    <top>
       <fx:include source="../navbar/navbar.fxml" />
    </top>
    <center>
-      <ListView fx:id="offersListView" BorderPane.alignment="CENTER" />
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Label text="Filtre : ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="filter_location" prefHeight="26.0" prefWidth="114.0" value="Tout">
+                     <String fx:value="Moins de 1km" />
+                     <String fx:value="Moins de 2km" />
+                     <String fx:value="Moins de 5km" />
+                     <String fx:value="Moins de 10km" />
+                     <String fx:value="Moins de 50km" />
+                     <String fx:value="Tout" />
+
+                  </ChoiceBox>
+                  <ChoiceBox fx:id="filter_date" prefHeight="26.0" prefWidth="114.0" value="Tout">
+                        <String fx:value="Aujourd'hui" />
+                        <String fx:value="Demain" />
+                        <String fx:value="Cette semaine" />
+                        <String fx:value="Ce mois-ci" />
+                        <String fx:value="Cette année" />
+                        <String fx:value="Tout" />
+                    </ChoiceBox>
+                  <ChoiceBox fx:id="filter_evaluation" prefHeight="26.0" prefWidth="109.0" value="Tout">
+                        <String fx:value="Tout" />
+                        <String fx:value="Plus de 1 étoile" />
+                        <String fx:value="Plus de 2 étoiles" />
+                        <String fx:value="Plus de 3 étoiles" />
+                        <String fx:value="Plus de 4 étoiles" />
+                  </ChoiceBox>
+                  <ChoiceBox fx:id="filter_price" prefHeight="26.0" prefWidth="103.0" value="Tout">
+                        <String fx:value="Gratuit" />
+                        <String fx:value="Moins de 5€" />
+                        <String fx:value="Moins de 10€" />
+                        <String fx:value="Moins de 20€" />
+                        <String fx:value="Moins de 50€" />
+                        <String fx:value="Moins de 100€" />
+                        <String fx:value="Tout" />
+                  </ChoiceBox>
+                  <MenuButton fx:id="filter_category" mnemonicParsing="false" prefHeight="22.0" prefWidth="84.0" text="Categorie">
+                     <items>
+                        <CheckMenuItem mnemonicParsing="false" text="Véhicule" />
+                        <CheckMenuItem mnemonicParsing="false" text="Immobilier" />
+                        <CheckMenuItem mnemonicParsing="false" text="Multimédia" />
+                        <CheckMenuItem mnemonicParsing="false" text="Maison &amp; Jardin" />
+                        <CheckMenuItem mnemonicParsing="false" text="Mode" />
+                        <CheckMenuItem mnemonicParsing="false" text="Loisirs" />
+                        <CheckMenuItem mnemonicParsing="false" text="Autres" />
+                     </items>
+                  </MenuButton>
+                  <Button mnemonicParsing="false" onAction="#applyFilter" prefHeight="28.0" text="Ajouter les filtres" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <ListView fx:id="offersListView" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
    </center>
 </BorderPane>
