@@ -108,4 +108,8 @@ public abstract class Account {
     public String getLocalisation() {
         return localisation;
     }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }

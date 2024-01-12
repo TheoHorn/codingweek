@@ -139,11 +139,10 @@ public class NewOfferController implements Observer {
 
     /**
      * allows to validate the new offer
-     * @param actionEvent the event that trigger the validation
      * @throws SQLException if the validation failed
      */
     @FXML
-    public void pressValiderNewOffer(ActionEvent actionEvent) {
+    public void pressValiderNewOffer() {
         try {
             if (this.isService.isSelected() && this.isRecurrent.isSelected()) {
                 app.validateNewOffer(this.titleTextField.getText(), this.descriptionTextArea.getText(), (String) this.categoryChoiceBox.getValue(), this.request_button.isSelected(), Double.parseDouble(this.priceTextField.getText()), this.image, new ArrayList<>(this.tempSlots));

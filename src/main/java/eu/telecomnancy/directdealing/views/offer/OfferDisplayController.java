@@ -54,7 +54,13 @@ public class OfferDisplayController implements Observer {
     @FXML
     public void reservation() throws Exception {
         System.out.println("in OfferDisplay: " + Application.getInstance().getLastOffer().getIdOffer());
-        this.app.getSceneController().openReservationPopup();
+        double balance = app.getAccountDAO().get(app.getCurrentUser().getEmail()).getBalance();
+        if (balance >= app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice()) {
+            this.app.getSceneController().openReservationPopup();
+        } else {
+            // TODO : display message
+        }
+
     }
 
     @FXML
