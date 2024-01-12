@@ -8,6 +8,8 @@ import eu.telecomnancy.directdealing.model.content.Content;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static eu.telecomnancy.directdealing.Main.app;
@@ -20,6 +22,8 @@ public class ResearchFilterManager {
     List<Offer> all_offers_visible;
     List<Offer> researchedOffers;
     List<Offer> filteredOffers;
+
+    private String search_text;
 
     public ResearchFilterManager() {
         this.researchedOffers = new ArrayList<>();
@@ -78,6 +82,11 @@ public class ResearchFilterManager {
      * @return List of the offers which contains the string
      */
     public void searchOffer(String motRecherche) throws Exception {
+        if (motRecherche == null || motRecherche.equals("")){
+            this.resetOffers();
+            return;
+        }
+        this.search_text = motRecherche;
         this.resetOffers();
         List<Offer> result = new ArrayList<>();
         for (Offer offer : this.researchedOffers){
@@ -85,15 +94,59 @@ public class ResearchFilterManager {
             Content ctn = app.getContentDAO().get(offer.getIdContent());
             User user = (User)app.getAccountDAO().get(offer.getMail());
             info += ctn.getTitle() + " " + ctn.getCategory() + " " + ctn.getLocalisation() + " " + ctn.getCategory() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getEmail();
-            if (info.toUpperCase().contains(motRecherche.toUpperCase())){
+            if (info.toUpperCase().contains(this.search_text.toUpperCase())){
                 result.add(offer);
             }
         }
         this.researchedOffers = result;
     }
 
-    public void filterOffersByDate(){
-        return ;
+    public void filterOffersByDate(String date) throws SQLException {
+        Date debut = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+        Date fin;
+        switch (date) {
+            case "Aujourd'hui":
+                fin = debut;
+                break;
+            case "Demain":
+                cal.setTime(debut);
+                cal.add(Calendar.DATE, 1);
+                fin = cal.getTime();
+                break;
+            case "Cette semaine":
+                cal.setTime(debut);
+                cal.set(Calendar.WEEK_OF_YEAR, cal.get(Calendar.WEEK_OF_YEAR) + 1);
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                fin = cal.getTime();
+                break;
+            case "Ce mois-ci":
+                cal.setTime(debut);
+                cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + 1);
+                cal.set(Calendar.DAY_OF_MONTH, 1);
+                fin = cal.getTime();
+                break;
+            case "Cette année":
+                cal.setTime(debut);
+                cal.set(Calendar.YEAR, cal.get(Calendar.YEAR) + 1);
+                cal.set(Calendar.DAY_OF_YEAR, 1);
+                fin = cal.getTime();
+                break;
+            default:
+                cal.setTime(debut);
+                cal.add(Calendar.DATE, 200000);
+                fin = cal.getTime();
+                break;
+        }
+        List<Offer> result = new ArrayList<>();
+        for(Offer o: this.filteredOffers){
+            Slot slot = app.getSlotDAO().get(o.getIdOffer()).get(0);
+            if (slot != null && slot.getStartTime().after(debut) && (slot.getEndTime() == null || slot.getEndTime().before(fin))){
+                result.add(o);
+            }
+        }
+        this.filteredOffers = result;
     }
 
     public void filterOffersByPrice(String price) throws Exception {
@@ -103,7 +156,7 @@ public class ResearchFilterManager {
             case "Moins de 20€" -> 20.0;
             case "Moins de 50€" -> 50.0;
             case "Moins de 100€" -> 100.0;
-            case "Plus de 100€" -> 999999.99;
+            case "Tout" -> 999999.99;
             default -> 0.0;
         };
         List<Offer> result = new ArrayList<>();
@@ -129,7 +182,7 @@ public class ResearchFilterManager {
     }
 
     public void filterOffersByLocation(String text){
-        return ;
+        return;
     }
 
     public void filterOffersByEvaluation(String text){
@@ -154,10 +207,4 @@ public class ResearchFilterManager {
         }
         this.filteredOffers = result;
     }
-
-
-    public void resetFilter() {
-        this.filteredOffers = this.researchedOffers;
-    }
-
 }
