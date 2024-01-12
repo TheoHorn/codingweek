@@ -96,6 +96,33 @@ public class DemandeDAO {
         return null;
     }
 
+    public Demande get(int idDemande) {
+        // check if the demande is already in the database
+        String query = "SELECT * FROM DEMANDE WHERE idDemande = ?";
+        ResultSet resultSet = null;
+        List<Demande> demandes = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idDemande);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) { // Check if there are results
+                // demande already exists
+                // update demande
+                String mail = resultSet.getString("mail");
+                int idSlot = resultSet.getInt("idSlot");
+                Timestamp timestamp = resultSet.getTimestamp("dateDemande");
+                Date demande = new Date(timestamp.getTime());
+                int status = resultSet.getInt("status");
+
+                return new Demande(idDemande, idSlot, mail, demande, status);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Demande> get(String mail) {
         // check if the demande is already in the database
         String query = "SELECT * FROM DEMANDE WHERE mail = ?";

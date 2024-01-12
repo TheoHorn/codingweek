@@ -183,6 +183,7 @@ public class Application {
         this.messagingDAO = new MessagingDAO();
         this.messagingManager = new MessagingManager();
         this.disputeDAO = new DisputeDAO();
+        this.disputeManager = new DisputeManager();
     }
 
     /**

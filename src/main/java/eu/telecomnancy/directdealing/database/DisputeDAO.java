@@ -71,6 +71,7 @@ public class DisputeDAO {
         ResultSet resultSet = null;
         List<Dispute> disputes = new ArrayList<Dispute>();
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)){
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) { // Check if there are results
                 // message already exists
                 // get message

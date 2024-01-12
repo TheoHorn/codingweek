@@ -113,8 +113,13 @@ public class NavBarController implements Observer {
         app.getSceneController().swicthToConversation();
     }
 
+    public void swicthToReclamations() throws Exception {
+        app.getSceneController().switchToDispute();
+    }
+
     @Override
     public void update() throws Exception {
         florain.setText(String.valueOf(app.getCurrentUser().getBalance()));
     }
+
 }
