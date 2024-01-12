@@ -105,7 +105,6 @@ public class DisputeCell extends ListCell<Dispute> {
     }
 
     public void pressDefender() throws Exception {
-        System.out.println("Attaquant, C'est mal !");
         app.deleteDispute(getItem());
         app.getSceneController().switchToAdminHome();
 
