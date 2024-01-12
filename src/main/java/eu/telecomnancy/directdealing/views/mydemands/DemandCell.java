@@ -3,14 +3,12 @@ package eu.telecomnancy.directdealing.views.mydemands;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.account.User;
-import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -143,6 +141,6 @@ public class DemandCell extends ListCell<Demande> {
         Slot slot = app.getSlotDAO().get(getItem().getIdSlot(),false);
         int idOffer = slot.getIdOffer();
         Offer offer = app.getOfferDAO().get(idOffer);
-        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), offer.getMail());;
+        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), offer.getMail());
     }
 }

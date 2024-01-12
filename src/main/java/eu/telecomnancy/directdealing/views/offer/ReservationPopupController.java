@@ -5,9 +5,6 @@ import com.calendarfx.view.*;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.content.Content;
-import eu.telecomnancy.directdealing.model.offer.Offer;
-import javafx.collections.ListChangeListener;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
@@ -24,7 +21,7 @@ import java.util.Map;
 public class ReservationPopupController {
     @FXML
     private BorderPane root;
-    private Application app;
+    private final Application app;
     private CalendarSource myCalendarSource2;
 
     public ReservationPopupController() {
@@ -32,7 +29,7 @@ public class ReservationPopupController {
     }
 
     @FXML
-    public void initialize() throws SQLException {
+    public void initialize() {
         CalendarView calendarView = new CalendarView();
 
         // Configure the calendar view
@@ -107,7 +104,7 @@ public class ReservationPopupController {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         myCalendarSource.getCalendars().addAll(slots, requested, booked);

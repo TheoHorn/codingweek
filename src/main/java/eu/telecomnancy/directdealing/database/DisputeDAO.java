@@ -1,11 +1,8 @@
 package eu.telecomnancy.directdealing.database;
 
 import eu.telecomnancy.directdealing.model.dispute.Dispute;
-import eu.telecomnancy.directdealing.model.messaging.Messaging;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +10,7 @@ public class DisputeDAO {
     public int save(Dispute dispute) {
         // check if the dispute is already in the database
         String query = "SELECT * FROM DISPUTE WHERE idDispute = ?";
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try(PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)){
             preparedStatement.setInt(1, dispute.getIdDispute());
             resultSet = preparedStatement.executeQuery();

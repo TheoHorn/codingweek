@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
 /**
@@ -24,7 +23,6 @@ public class ReservationDAO {
         // check if reservation already exists
         String query = "SELECT * FROM RESERVATION WHERE mail = ? AND idSlot = ?";
         ResultSet resultSet = null;
-        boolean find = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, reservation.getEmailReserver());
             preparedStatement.setInt(2, reservation.getIdSlot());

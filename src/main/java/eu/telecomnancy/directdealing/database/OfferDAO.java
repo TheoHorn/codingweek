@@ -1,11 +1,8 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.Slot;
-import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
-import javafx.scene.SubScene;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
 /**
@@ -30,7 +26,6 @@ public class OfferDAO {
         // check if the offer exist
         String query = "SELECT * FROM OFFER WHERE idOffer = ?";
         ResultSet resultSet = null;
-        boolean find = false;
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             preparedStatement.setInt(1, offer.getIdOffer());
             resultSet = preparedStatement.executeQuery();
@@ -58,19 +53,14 @@ public class OfferDAO {
                      PreparedStatement statementGetLastId = connection.prepareStatement(queryGetLastId)) {
                     // Set parameters for the prepared statement
                     preparedStatementInsert.setString(1, offer.getMail());
-                    if (offer.isRequest()){
-                        preparedStatementInsert.setBoolean(2, true);
-                    } else {
-                        preparedStatementInsert.setBoolean(2, false);
-                    }
+                    preparedStatementInsert.setBoolean(2, offer.isRequest());
                     preparedStatementInsert.setInt(3, offer.getIdContent());
                     // Execute the insertion query
                     preparedStatementInsert.executeUpdate();
                     // Retrieve the last inserted ID
                     try (ResultSet resultSetID = statementGetLastId.executeQuery()) {
                         if (resultSetID.next()) {
-                            int lastInsertId = resultSetID.getInt("id");
-                            return lastInsertId;
+                            return resultSetID.getInt("id");
                         } else {
                             throw new SQLException("Unable to retrieve last inserted ID");
                         }
@@ -107,7 +97,6 @@ public class OfferDAO {
                 int idContent = resultSet.getInt("idContent");
 
                 if (request){
-                    System.out.println(app.getContentDAO().get(idContent).getTitle());
                     Request res =  new Request(mail, true, idContent);
                     res.setIdOffer(idOffer);
                     return res;

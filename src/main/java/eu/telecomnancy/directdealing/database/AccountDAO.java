@@ -3,16 +3,11 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.Admin;
 import eu.telecomnancy.directdealing.model.account.User;
-import eu.telecomnancy.directdealing.model.offer.Offer;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static eu.telecomnancy.directdealing.Main.app;
-import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
 
 /**
  * AccountDAO is the class that allows to access the ACCOUNT table in the database
@@ -33,14 +28,12 @@ public class AccountDAO {
         // check if account already exists
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
-        boolean find = false;
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             preparedStatement.setString(1, account.getEmail());
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
 
-                find = true;
                 // update account
                 String queryUpdate = "UPDATE ACCOUNT SET lastname = ?, firstname = ?, balance = ?, sleep = ?, type = ?, password = ?, city = ?, address = ? WHERE mail = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
@@ -95,7 +88,6 @@ public class AccountDAO {
      * @throws SQLException if the connection is not open
      */
     public Account get(String mail) throws SQLException {
-        System.out.println("mail : " + mail);
         // check if connection is open
         if (DatabaseAccess.connection == null) {
             throw new SQLException("Veuillez créer ou ouvrir une base de données (Fichier)");
@@ -177,8 +169,6 @@ public class AccountDAO {
     public void delete(String mail) throws SQLException {
 
         String query = "DELETE FROM ACCOUNT WHERE mail = ?;";
-
-        ResultSet resultSet = null;
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setString(1, mail);

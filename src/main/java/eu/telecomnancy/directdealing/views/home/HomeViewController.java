@@ -93,7 +93,6 @@ public class HomeViewController implements Observer {
             this.filter_city.setText(this.app.getCurrentUser().getCity());
         }
         offersListView.getItems().clear();
-        System.out.println("Offers to print: " + this.app.getResearchFilterManager().getFilteredOffers().size());
         this.app.getResearchFilterManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));
         offersListView.setCellFactory(lv -> new OfferCell());
     }

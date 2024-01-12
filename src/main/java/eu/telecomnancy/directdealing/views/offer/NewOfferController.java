@@ -14,10 +14,8 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,7 +137,6 @@ public class NewOfferController implements Observer {
 
     /**
      * allows to validate the new offer
-     * @throws SQLException if the validation failed
      */
     @FXML
     public void pressValiderNewOffer() {

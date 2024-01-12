@@ -26,22 +26,18 @@ public class DatabaseAccess {
     /**
      * Create a new database.
      * @param file the file where the database will be created
-     * @throws SQLException if an error occurs
      */
-    public static void createDatabase(File file) throws SQLException {
+    public static void createDatabase(File file) {
         String databaseUrl = "jdbc:sqlite:" + file.getAbsolutePath();
 
         try (Connection conn = DriverManager.getConnection(databaseUrl)) {
-            System.out.println("Connected to SQLite database.");
 
             String schemaFilePath = DatabaseAccess.class.getResource("/eu/telecomnancy/directdealing/database/schema_database.sql").getPath();
             executeSchemaFile(conn, schemaFilePath);
 
-            conn.commit();
-            conn.close();
-            System.out.println("Database created successfully.");
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -63,7 +59,7 @@ public class DatabaseAccess {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(schema.toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
