@@ -35,7 +35,7 @@ public class DatabaseAccess {
             String schemaFilePath = DatabaseAccess.class.getResource("/eu/telecomnancy/directdealing/database/schema_database.sql").getPath();
             executeSchemaFile(conn, schemaFilePath);
 
-            conn.commit();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
