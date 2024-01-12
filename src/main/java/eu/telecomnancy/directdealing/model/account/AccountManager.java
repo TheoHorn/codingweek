@@ -3,7 +3,9 @@ package eu.telecomnancy.directdealing.model.account;
 import eu.telecomnancy.directdealing.database.DatabaseAccess;
 import eu.telecomnancy.directdealing.database.EvaluationDAO;
 import eu.telecomnancy.directdealing.model.Reservation;
+import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
+import eu.telecomnancy.directdealing.model.messaging.Messaging;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 
 import java.security.NoSuchAlgorithmException;
@@ -86,7 +88,7 @@ public class AccountManager {
 
     public void delete(Account account) throws SQLException {
 
-        // Delete all reservation to the account
+        // Delete all offer related to the account
         List<Offer> offers = app.getOfferDAO().get(account.getEmail());
         offers.forEach((offer) -> {
             try {
@@ -96,7 +98,7 @@ public class AccountManager {
             }
         });
 
-        // Delete all reservation to the account
+        // Delete all reservation related to the account
         List<Reservation> reservations = app.getReservationDAO().get(account.getEmail());
         reservations.forEach((reservation) -> {
             try {
@@ -106,7 +108,7 @@ public class AccountManager {
             }
         });
 
-        // Delete all reservation to the account
+        // Delete all evaluation related to the account
         List<Evaluation> evaluations = app.getEvaluationDAO().get(account.getEmail()); // For the evaluated
         evaluations.forEach((evaluation) -> {
             try {
@@ -124,6 +126,31 @@ public class AccountManager {
                 throw new RuntimeException(e);
             }
         });
+
+
+        // Delete all message related to the account
+        List<Messaging> messagings = app.getMessagingDAO().getSender(account.getEmail()); // For the sender
+        messagings.forEach((messaging) -> {
+            try {
+                app.getMessagingManager().delete(messaging);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        messagings = app.getMessagingDAO().getReceiver(account.getEmail()); // For the receiver
+        messagings.forEach((messaging) -> {
+            try {
+                app.getMessagingManager().delete(messaging);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Delete all demande related to slot
+        Demande demandes = app.getDemandeDAO().get(account.getEmail());
+        if (demandes != null)
+            app.getDemandeManager().delete(demandes);
 
         // Delete the account
         app.getAccountDAO().delete(account.getEmail());

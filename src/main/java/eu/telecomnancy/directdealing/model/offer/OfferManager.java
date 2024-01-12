@@ -2,6 +2,7 @@ package eu.telecomnancy.directdealing.model.offer;
 
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
+import eu.telecomnancy.directdealing.model.content.Content;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,6 +21,11 @@ public class OfferManager {
                 throw new RuntimeException(e);
             }
         });
+
+        // Delete the attached content
+        Content content = app.getContentDAO().get(offer.getIdContent());
+        if (content != null)
+            app.getContentManager().delete(content);
 
         // Delete the offer
         app.getOfferDAO().delete(offer.getIdOffer());

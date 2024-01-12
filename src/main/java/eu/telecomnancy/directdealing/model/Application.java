@@ -164,6 +164,7 @@ public class Application {
         this.observers = new ArrayList<>();
         this.accountDAO = new AccountDAO();
         this.contentDAO = new ContentDAO();
+        this.contentManager = new ContentManager();
         this.offerDAO = new OfferDAO();
         this.offerManager = new OfferManager();
         this.demandeDAO = new DemandeDAO();

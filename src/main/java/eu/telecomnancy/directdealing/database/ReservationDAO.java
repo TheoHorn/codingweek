@@ -84,7 +84,8 @@ public class ReservationDAO {
                 // extract infos from request result
                 String mailRes = resultSet.getString("mail");
                 int idSlotRes = resultSet.getInt("idSlot");
-                Date date = resultSet.getDate("dateReservation");
+                Timestamp timestamp = resultSet.getTimestamp("dateReservation");
+                Date date = new Date(timestamp.getTime());
 
                 // creation of the reservation and return
                 return new Reservation(mailRes, idSlotRes, date);
@@ -114,7 +115,8 @@ public class ReservationDAO {
                 // extract infos from request result
                 String mailRes = resultSet.getString("mail");
                 int idSlotRes = resultSet.getInt("idSlot");
-                Date date = resultSet.getDate("dateReservation");
+                Timestamp timestamp = resultSet.getTimestamp("dateReservation");
+                Date date = new Date(timestamp.getTime());
 
                 // creation of the reservation and return
                 reservations.add(new Reservation(mailRes, idSlotRes, date));
@@ -144,7 +146,8 @@ public class ReservationDAO {
                 // extract infos from request result
                 String mailRes = resultSet.getString("mail");
                 int idSlotRes = resultSet.getInt("idSlot");
-                Date date = resultSet.getDate("dateReservation");
+                Timestamp timestamp = resultSet.getTimestamp("dateReservation");
+                Date date = new Date(timestamp.getTime());
 
                 // creation of the reservation and return
                 reservations.add(new Reservation(mailRes, idSlotRes, date));
@@ -158,13 +161,12 @@ public class ReservationDAO {
         return reservations;
     }
 
-    public void delete(int idSlot, String mail) throws SQLException {
+    public void delete(int idSlot) throws SQLException {
 
         String query = "DELETE FROM RESERVATION WHERE idSlot = ? AND mail = ?;";
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idSlot);
-        preparedStatement.setString(2, mail);
         preparedStatement.execute();
     }
 }

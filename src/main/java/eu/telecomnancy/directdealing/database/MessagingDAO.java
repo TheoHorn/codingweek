@@ -136,9 +136,64 @@ public class MessagingDAO {
     }
 
 
+    public List<Messaging> getSender(String mailSender){
+        // get all messages
+        List<Messaging> messages = new ArrayList<>();
+
+        String query = "SELECT * FROM MESSAGING WHERE sender = ?";
+        ResultSet resultSet = null;
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setString(1, mailSender);
+            resultSet = preparedStatement.executeQuery();
+
+
+            while (resultSet.next()) { // Check if there are results
+                // message already exists
+                // get message
+                int idMessage = resultSet.getInt("idMessage");
+                String content = resultSet.getString("content");
+                String sender = resultSet.getString("sender");
+                String receiver = resultSet.getString("receiver");
+                Timestamp timestamp = resultSet.getTimestamp("timestamp");
+                messages.add(new Messaging(idMessage, content, sender, receiver, timestamp));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+
+    public List<Messaging> getReceiver(String mailReceiver){
+        // get all messages
+        List<Messaging> messages = new ArrayList<>();
+
+        String query = "SELECT * FROM MESSAGING WHERE receiver = ?";
+        ResultSet resultSet = null;
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setString(1, mailReceiver);
+            resultSet = preparedStatement.executeQuery();
+
+
+            while (resultSet.next()) { // Check if there are results
+                // message already exists
+                // get message
+                int idMessage = resultSet.getInt("idMessage");
+                String content = resultSet.getString("content");
+                String sender = resultSet.getString("sender");
+                String receiver = resultSet.getString("receiver");
+                Timestamp timestamp = resultSet.getTimestamp("timestamp");
+                messages.add(new Messaging(idMessage, content, sender, receiver, timestamp));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+
+
     public void delete(int idMessage) throws SQLException {
 
-        String query = "DELETE FROM ACCOUNT WHERE idMessage = ?;";
+        String query = "DELETE FROM MESSAGING WHERE idMessage = ?;";
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idMessage);

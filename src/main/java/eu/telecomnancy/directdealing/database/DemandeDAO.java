@@ -96,6 +96,34 @@ public class DemandeDAO {
         return null;
     }
 
+    public Demande get(String mail) {
+        // check if the demande is already in the database
+        String query = "SELECT * FROM DEMANDE WHERE mail = ?";
+        ResultSet resultSet = null;
+
+        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, mail);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) { // Check if there are results
+                // demande already exists
+                // update demande
+                int idSlot = resultSet.getInt("idSlot");
+                int idDemande = resultSet.getInt("idDemande");
+                Timestamp timestamp = resultSet.getTimestamp("dateDemande");
+                Date demande = new Date(timestamp.getTime());
+                int status = resultSet.getInt("status");
+                return new Demande(idDemande, idSlot, mail, demande, status);
+            } else {
+                // demande doesn't exist
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Demande> get() throws SQLException {
         // get all demands
         List<Demande> demands = new ArrayList<Demande>();
@@ -119,40 +147,9 @@ public class DemandeDAO {
         }
     }
 
-    /*public boolean delete(int idDemande) {
-        // check if the demande is already in the database
-        String query = "SELECT * FROM DEMANDE WHERE idDemande = ?";
-        ResultSet resultSet = null;
-
-        try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, idDemande);
-            resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) { // Check if there are results
-                // demande already exists
-                // update demande
-                String queryDelete = "DELETE FROM DEMANDE WHERE idDemande = ?";
-                try (PreparedStatement preparedStatementDelete = DatabaseAccess.connection.prepareStatement(queryDelete)) {
-                    // Set parameters for the prepared statement
-                    preparedStatementDelete.setInt(1, idDemande);
-                    // Execute the updated query
-                    preparedStatementDelete.executeUpdate();
-                    return true;
-                }
-            } else {
-                // demande doesn't exist
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }*/
-
-
     public void delete(int idDemande) throws SQLException {
 
-        String query = "DELETE FROM ACCOUNT WHERE idDemande = ?;";
+        String query = "DELETE FROM DEMANDE WHERE idDemande = ?;";
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setInt(1, idDemande);

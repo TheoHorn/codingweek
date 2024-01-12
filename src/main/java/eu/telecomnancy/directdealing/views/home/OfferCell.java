@@ -73,9 +73,18 @@ public class OfferCell extends ListCell<Offer> {
 
             if (app.getCurrentUser() instanceof User){
                 this.button.setText("voir +");
+
+                try {
+                    this.avisLabel.setText("Avis sur l'utilisateur : "+ String.valueOf(app.getEvaluationManager().getAverage(offer.getMail()))+"/5 ("+app.getEvaluationManager().getEvaluationCount(offer.getMail())+")");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
             else {
                 this.button.setText("supprimer");
+
+                this.avisLabel.setText(this.getItem().getMail());
             }
 
             try {
@@ -115,12 +124,6 @@ public class OfferCell extends ListCell<Offer> {
             }
             try {
                 place.setText(app.getContentDAO().get(offer.getIdContent()).getLocalisation());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            try {
-                avisLabel.setText("Avis sur l'utilisateur : "+ String.valueOf(app.getEvaluationManager().getAverage(offer.getMail()))+"/5 ("+app.getEvaluationManager().getEvaluationCount(offer.getMail())+")");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

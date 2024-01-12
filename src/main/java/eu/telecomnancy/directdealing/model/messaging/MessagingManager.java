@@ -50,4 +50,9 @@ public class MessagingManager {
         }
         return conversers;
     }
+
+    public void delete(Messaging messaging) throws SQLException {
+        // Delete the messaging
+        app.getMessagingDAO().delete(messaging.getIdMsg());
+    }
 }

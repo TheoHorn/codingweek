@@ -109,7 +109,7 @@ public class EvaluationDAO {
 
     public void delete(String mailEvaluator, String mailEvaluated) throws SQLException {
 
-        String query = "DELETE FROM ACCOUNT WHERE mailEvaluator = ? AND mailEvaluated = ?;";
+        String query = "DELETE FROM EVALUATION WHERE mailEvaluator = ? AND mailEvaluated = ?;";
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setString(1, mailEvaluator);
