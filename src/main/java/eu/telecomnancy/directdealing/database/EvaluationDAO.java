@@ -2,7 +2,6 @@ package eu.telecomnancy.directdealing.database;
 
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
 
-import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -3,14 +3,10 @@ package eu.telecomnancy.directdealing.views.profile;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import org.w3c.dom.events.MouseEvent;
 
 import java.sql.SQLException;
 

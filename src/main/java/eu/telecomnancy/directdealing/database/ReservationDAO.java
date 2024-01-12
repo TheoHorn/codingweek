@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
 /**

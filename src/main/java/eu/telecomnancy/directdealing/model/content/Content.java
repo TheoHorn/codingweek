@@ -1,7 +1,5 @@
 package eu.telecomnancy.directdealing.model.content;
 
-import javafx.scene.image.Image;
-
 import java.io.File;
 
 public abstract class Content {

@@ -2,14 +2,9 @@ package eu.telecomnancy.directdealing;
 
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.views.request.NewDispute;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * SceneController class

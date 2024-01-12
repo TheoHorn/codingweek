@@ -1,9 +1,7 @@
 package eu.telecomnancy.directdealing.views.navbar;
 
-import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
-import eu.telecomnancy.directdealing.model.account.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

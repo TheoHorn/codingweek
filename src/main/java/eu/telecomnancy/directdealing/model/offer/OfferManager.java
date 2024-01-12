@@ -1,6 +1,5 @@
 package eu.telecomnancy.directdealing.model.offer;
 
-import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.content.Content;
 

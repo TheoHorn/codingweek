@@ -3,10 +3,6 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

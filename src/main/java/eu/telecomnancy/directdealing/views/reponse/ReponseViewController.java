@@ -3,7 +3,6 @@ package eu.telecomnancy.directdealing.views.reponse;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.Observer;
-import eu.telecomnancy.directdealing.views.home.OfferCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 

@@ -4,7 +4,6 @@ import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.account.Account;
-import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OfferDisplayController implements Observer {

@@ -8,8 +8,6 @@ import eu.telecomnancy.directdealing.model.demande.Demande;
 import java.sql.SQLException;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
-
 public class SlotManager {
     public void delete(Slot slot) throws SQLException {
         // Delete all reservation related to slot

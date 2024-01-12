@@ -1,11 +1,8 @@
 package eu.telecomnancy.directdealing.database;
 
-import eu.telecomnancy.directdealing.model.Slot;
-import eu.telecomnancy.directdealing.model.account.User;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 import eu.telecomnancy.directdealing.model.offer.Proposal;
 import eu.telecomnancy.directdealing.model.offer.Request;
-import javafx.scene.SubScene;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.DatabaseAccess.connection;
 
 /**

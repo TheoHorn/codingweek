@@ -1,18 +1,12 @@
 package eu.telecomnancy.directdealing.views.conversations;
 
 import eu.telecomnancy.directdealing.model.Application;
-import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.account.Account;
-import eu.telecomnancy.directdealing.model.content.Content;
-import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.messaging.Messaging;
-import eu.telecomnancy.directdealing.model.offer.Offer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.MenuButton;
 
 import java.sql.SQLException;
 import java.util.List;

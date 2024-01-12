@@ -5,9 +5,6 @@ import com.calendarfx.view.*;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Slot;
 import eu.telecomnancy.directdealing.model.content.Content;
-import eu.telecomnancy.directdealing.model.offer.Offer;
-import javafx.collections.ListChangeListener;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 

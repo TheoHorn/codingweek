@@ -3,16 +3,11 @@ package eu.telecomnancy.directdealing.database;
 import eu.telecomnancy.directdealing.model.account.Account;
 import eu.telecomnancy.directdealing.model.account.Admin;
 import eu.telecomnancy.directdealing.model.account.User;
-import eu.telecomnancy.directdealing.model.offer.Offer;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static eu.telecomnancy.directdealing.Main.app;
-import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.validatePassword;
 
 /**
  * AccountDAO is the class that allows to access the ACCOUNT table in the database
