@@ -11,7 +11,7 @@ import static eu.telecomnancy.directdealing.Main.app;
 public class DemandeManager {
     public List<Demande> getAllMyAnswer() throws SQLException {
         String myMail = app.getCurrentUser().getEmail();
-        List<Demande> myAnswers = new ArrayList<Demande>();
+        List<Demande> myAnswers = new ArrayList<>();
         List<Offer> myOffers = app.getOfferDAO().get(myMail);
         for (Demande demande : app.getDemandeDAO().get()){
             int slotDemande = demande.getIdSlot();

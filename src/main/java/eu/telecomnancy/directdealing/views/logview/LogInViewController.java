@@ -1,13 +1,11 @@
 package eu.telecomnancy.directdealing.views.logview;
 
-import javafx.event.ActionEvent;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 /**
  * LogInViewController class
@@ -31,7 +29,7 @@ public class LogInViewController implements Observer {
     /**
      * Application instance
      */
-    private Application app;
+    private final Application app;
 
     /**
      * Constructor of the login view controller
@@ -42,21 +40,21 @@ public class LogInViewController implements Observer {
 
     /**
      * perform the switch to the sign view
-     * @param event the event that trigger the switch
+     *
      * @throws Exception if the switch failed
      */
     @FXML
-    public void switchToSign(MouseEvent event) throws Exception {
+    public void switchToSign() throws Exception {
         app.getSceneController().switchToSignView();
     }
 
     /**
      * perform the login
-     * @param event the event that trigger the login
+     *
      * @throws Exception if the login failed
      */
     @FXML
-    public void loginButton(ActionEvent event) throws Exception {
+    public void loginButton() throws Exception {
         try {
             app.login(mail_TextField.getText(), password_TextField.getText());
         } catch (Exception e) {

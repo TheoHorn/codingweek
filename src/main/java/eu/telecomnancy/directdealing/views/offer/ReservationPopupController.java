@@ -21,7 +21,7 @@ import java.util.Map;
 public class ReservationPopupController {
     @FXML
     private BorderPane root;
-    private Application app;
+    private final Application app;
     private CalendarSource myCalendarSource2;
 
     public ReservationPopupController() {
@@ -29,7 +29,7 @@ public class ReservationPopupController {
     }
 
     @FXML
-    public void initialize() throws SQLException {
+    public void initialize() {
         CalendarView calendarView = new CalendarView();
 
         // Configure the calendar view

@@ -26,7 +26,6 @@ public class OfferDAO {
         // check if the offer exist
         String query = "SELECT * FROM OFFER WHERE idOffer = ?";
         ResultSet resultSet = null;
-        boolean find = false;
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             preparedStatement.setInt(1, offer.getIdOffer());
             resultSet = preparedStatement.executeQuery();
@@ -54,19 +53,14 @@ public class OfferDAO {
                      PreparedStatement statementGetLastId = connection.prepareStatement(queryGetLastId)) {
                     // Set parameters for the prepared statement
                     preparedStatementInsert.setString(1, offer.getMail());
-                    if (offer.isRequest()){
-                        preparedStatementInsert.setBoolean(2, true);
-                    } else {
-                        preparedStatementInsert.setBoolean(2, false);
-                    }
+                    preparedStatementInsert.setBoolean(2, offer.isRequest());
                     preparedStatementInsert.setInt(3, offer.getIdContent());
                     // Execute the insertion query
                     preparedStatementInsert.executeUpdate();
                     // Retrieve the last inserted ID
                     try (ResultSet resultSetID = statementGetLastId.executeQuery()) {
                         if (resultSetID.next()) {
-                            int lastInsertId = resultSetID.getInt("id");
-                            return lastInsertId;
+                            return resultSetID.getInt("id");
                         } else {
                             throw new SQLException("Unable to retrieve last inserted ID");
                         }

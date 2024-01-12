@@ -10,7 +10,7 @@ public class ReponseViewController implements Observer {
 
     @FXML
     protected ListView<Demande> answersListView;
-    private Application app;
+    private final Application app;
 
     /**
      * Constructor of reponse view controller

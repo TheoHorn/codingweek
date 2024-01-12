@@ -25,11 +25,7 @@ public class AccountManager {
      */
     public boolean isSave(String mail) throws SQLException {
         Account account = app.getAccountDAO().get(mail);
-        if (account == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return account != null;
     }
 
     /**

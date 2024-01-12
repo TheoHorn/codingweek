@@ -20,7 +20,7 @@ public class Main extends Application {
 
     /**
      * stop the application
-     * @throws SQLException
+     * @throws SQLException if the disconnection failed
      */
     @Override
     public void stop() throws SQLException {

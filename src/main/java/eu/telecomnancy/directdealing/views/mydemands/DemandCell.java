@@ -141,6 +141,6 @@ public class DemandCell extends ListCell<Demande> {
         Slot slot = app.getSlotDAO().get(getItem().getIdSlot(),false);
         int idOffer = slot.getIdOffer();
         Offer offer = app.getOfferDAO().get(idOffer);
-        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), offer.getMail());;
+        app.getSceneController().openDisputePopup(app.getCurrentUser().getEmail(), offer.getMail());
     }
 }

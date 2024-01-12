@@ -24,7 +24,6 @@ public class ContentDAO {
         // Check if content already exists
         String query = "SELECT * FROM CONTENT WHERE idContent = ?";
         ResultSet resultSet = null;
-        boolean find = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, content.getIdContent());
             resultSet = preparedStatement.executeQuery();
@@ -69,8 +68,7 @@ public class ContentDAO {
                         // Retrieve the last inserted ID
                         try (ResultSet resultSetInsert = statementGetLastId.executeQuery()) {
                             if (resultSetInsert.next()) {
-                                int lastInsertId = resultSetInsert.getInt("id");
-                                return lastInsertId;
+                                return resultSetInsert.getInt("id");
                             } else {
                                 throw new SQLException("Unable to retrieve last inserted ID");
                             }

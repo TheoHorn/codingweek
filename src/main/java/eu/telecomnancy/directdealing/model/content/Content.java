@@ -8,9 +8,6 @@ public abstract class Content {
      */
     private int idContent;
     /**
-     * current id of the content
-     */
-    /**
      * title of the content
      */
     private String title;

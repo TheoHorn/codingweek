@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OfferDisplayController implements Observer {
 
-    private Application app;
+    private final Application app;
 
     @FXML
     private Label title_label;
@@ -85,7 +85,6 @@ public class OfferDisplayController implements Observer {
     public void update() throws Exception {
         Offer offer = this.app.getLastOffer();
         Content content = app.getContentDAO().get(offer.getIdContent());
-        List<Slot> slots = app.getSlotDAO().get(offer.getIdOffer());
         Account owner = app.getAccountDAO().get(offer.getMail());
         this.title_label.setText(content.getTitle());
         this.description_label.setText(content.getDescription());

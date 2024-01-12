@@ -7,21 +7,18 @@ public abstract class Offer {
      * Owner of the offer
      */
     private int idOffer;
+    /**
+     *
+     */
     private String mail;
+    /**
+     * boolean to know if the offer is a request
+     */
     private boolean isRequest;
+    /**
+     * id of the content
+     */
     private int idContent;
-    /**
-     * Content of the offer
-     */
-    /**
-     * boolean to know if the offer is a request or a proposal
-     */
-    /**
-     * slot of the offer
-     */
-    /**
-     * id of the offer
-     */
 
 
     public Offer(int idOffer, String mail, boolean isRequest, int idContent) throws SQLException {

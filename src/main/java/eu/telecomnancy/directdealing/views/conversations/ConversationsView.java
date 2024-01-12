@@ -9,7 +9,7 @@ public class ConversationsView implements Observer {
 
     @FXML
     protected ListView<String> conversationsListView;
-    private Application app;
+    private final Application app;
 
     /**
      * Constructor of reponse view controller

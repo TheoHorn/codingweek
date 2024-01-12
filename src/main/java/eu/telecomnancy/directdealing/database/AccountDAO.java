@@ -28,14 +28,12 @@ public class AccountDAO {
         // check if account already exists
         String query = "SELECT * FROM ACCOUNT WHERE mail = ?";
         ResultSet resultSet = null;
-        boolean find = false;
         try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
             preparedStatement.setString(1, account.getEmail());
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) { // Check if there are results
 
-                find = true;
                 // update account
                 String queryUpdate = "UPDATE ACCOUNT SET lastname = ?, firstname = ?, balance = ?, sleep = ?, type = ?, password = ?, city = ?, address = ? WHERE mail = ?";
                 try (PreparedStatement preparedStatementUpdate = DatabaseAccess.connection.prepareStatement(queryUpdate)) {
@@ -171,8 +169,6 @@ public class AccountDAO {
     public void delete(String mail) throws SQLException {
 
         String query = "DELETE FROM ACCOUNT WHERE mail = ?;";
-
-        ResultSet resultSet = null;
 
         PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query);
         preparedStatement.setString(1, mail);

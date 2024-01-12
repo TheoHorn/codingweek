@@ -8,13 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eu.telecomnancy.directdealing.Main.app;
 
 public class EvaluationDAO {
     public void save(Evaluation evaluation){
         // check if evaluation exist
         String query = "SELECT * FROM evaluation WHERE mailEvaluator = ? AND mailEvaluated = ?";
-        ResultSet result = null;
+        ResultSet result;
         try (PreparedStatement statement = DatabaseAccess.connection.prepareStatement(query)) {
             statement.setString(1, evaluation.getMailEvaluator());
             statement.setString(2, evaluation.getMailEvaluated());

@@ -25,7 +25,7 @@ public class ForeignProfilViewController implements Observer {
     private ChoiceBox valueEvaluation;
     @FXML
     private Button evaluateButton;
-    private Application app;
+    private final Application app;
     public ForeignProfilViewController(){
         this.app = Application.getInstance();
         this.app.addObserver(this);
@@ -48,7 +48,7 @@ public class ForeignProfilViewController implements Observer {
             valueEvaluation.setValue("3/5");
 
         }
-        this.moyenneLabel.setText(String.valueOf(app.getEvaluationManager().getAverage(app.getLastAccount().getEmail()))+"/5 "+ "("+app.getEvaluationManager().getEvaluationCount(app.getLastAccount().getEmail())+") " +commentaire);
+        this.moyenneLabel.setText(app.getEvaluationManager().getAverage(app.getLastAccount().getEmail()) +"/5 "+ "("+app.getEvaluationManager().getEvaluationCount(app.getLastAccount().getEmail())+") " +commentaire);
 
     }
 

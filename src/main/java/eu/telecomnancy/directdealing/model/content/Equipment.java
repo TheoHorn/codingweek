@@ -20,7 +20,7 @@ public class Equipment extends Content{
         super.isEquipment = true;
         super.setIdContent(app.getContentDAO().save(this));
     }
-    public Equipment(int idContent, String title, String category, String description, File image, double price, String localisation) throws SQLException {
+    public Equipment(int idContent, String title, String category, String description, File image, double price, String localisation) {
         super(title, category, description, image, price, localisation);
         super.isEquipment = true;
         super.setIdContent(idContent);

@@ -26,9 +26,8 @@ public class DatabaseAccess {
     /**
      * Create a new database.
      * @param file the file where the database will be created
-     * @throws SQLException if an error occurs
      */
-    public static void createDatabase(File file) throws SQLException {
+    public static void createDatabase(File file) {
         String databaseUrl = "jdbc:sqlite:" + file.getAbsolutePath();
 
         try (Connection conn = DriverManager.getConnection(databaseUrl)) {
@@ -37,7 +36,6 @@ public class DatabaseAccess {
             executeSchemaFile(conn, schemaFilePath);
 
             conn.commit();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

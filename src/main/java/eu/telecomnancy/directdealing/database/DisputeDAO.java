@@ -10,7 +10,7 @@ public class DisputeDAO {
     public int save(Dispute dispute) {
         // check if the dispute is already in the database
         String query = "SELECT * FROM DISPUTE WHERE idDispute = ?";
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try(PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)){
             preparedStatement.setInt(1, dispute.getIdDispute());
             resultSet = preparedStatement.executeQuery();

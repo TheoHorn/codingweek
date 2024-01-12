@@ -137,7 +137,6 @@ public class NewOfferController implements Observer {
 
     /**
      * allows to validate the new offer
-     * @throws SQLException if the validation failed
      */
     @FXML
     public void pressValiderNewOffer() {
