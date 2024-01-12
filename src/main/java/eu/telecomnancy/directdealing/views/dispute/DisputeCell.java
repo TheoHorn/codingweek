@@ -27,7 +27,8 @@ public class DisputeCell extends ListCell<Dispute> {
     /**
      * FXMLLoader
      */
-
+    @FXML
+    private Label messageLabel;
     private FXMLLoader mLLoader;
 
     @Override
@@ -54,6 +55,7 @@ public class DisputeCell extends ListCell<Dispute> {
                 Content content = app.getContentDAO().get(offer.getIdContent());
                 this.title.setText(content.getTitle());
                 this.defender.setText(dispute.getDefender());
+                this.messageLabel.setText(dispute.getContent());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
