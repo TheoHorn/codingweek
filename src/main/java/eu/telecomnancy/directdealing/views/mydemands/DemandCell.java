@@ -97,6 +97,8 @@ public class DemandCell extends ListCell<Demande> {
                 if (status == 0) {
                     this.status.setText("En attente");
                     this.rec_status.setStyle("-fx-fill: #FFC107");
+                    this.disputeButton.setVisible(false);
+
                 } else if (status == 1) {
                     this.status.setText("Acceptée");
                     this.rec_status.setStyle("-fx-fill: #4CAF50");
@@ -106,6 +108,7 @@ public class DemandCell extends ListCell<Demande> {
                 } else {
                     this.status.setText("Refusée");
                     this.rec_status.setStyle("-fx-fill: #F44336");
+                    this.disputeButton.setVisible(false);
                     this.cancelButton.setVisible(false);
 
                 }
