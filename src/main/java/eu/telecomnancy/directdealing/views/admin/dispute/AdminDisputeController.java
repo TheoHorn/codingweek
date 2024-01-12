@@ -29,8 +29,6 @@ public class AdminDisputeController implements Observer {
     @Override
     public void update() throws Exception {
         disputesListView.getItems().clear();
-
-
         this.app.getDisputes().forEach(dispute -> disputesListView.getItems().add(dispute));
         disputesListView.setCellFactory(lv -> new DisputeCell());
     }

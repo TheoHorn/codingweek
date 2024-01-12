@@ -89,18 +89,25 @@ public class DisputeCell extends ListCell<Dispute> {
                 attacker.setBalance(attacker.getBalance() + getItem().getContentObject().getPrice());
                 app.getAccountDAO().save(attacker);
             }
+
         } else {
             if (owner_label.getText().equals(defender_label.getText())){
                 Account attacker = app.getAccountDAO().get(attacker_label.getText());
                 attacker.setBalance(attacker.getBalance() + getItem().getContentObject().getPrice());
                 app.getAccountDAO().save(attacker);
             }
+
+
         }
         app.deleteDispute(getItem());
+        app.getSceneController().switchToAdminHome();
+
     }
 
     public void pressDefender() throws Exception {
         System.out.println("Attaquant, C'est mal !");
         app.deleteDispute(getItem());
+        app.getSceneController().switchToAdminHome();
+
     }
 }
