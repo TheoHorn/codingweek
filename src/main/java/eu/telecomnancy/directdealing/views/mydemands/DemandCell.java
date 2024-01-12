@@ -104,13 +104,11 @@ public class DemandCell extends ListCell<Demande> {
                     this.rec_status.setStyle("-fx-fill: #4CAF50");
                     this.cancelButton.setVisible(false);
                     this.disputeButton.setVisible(true);
-
                 } else {
                     this.status.setText("Refusée");
                     this.rec_status.setStyle("-fx-fill: #F44336");
                     this.disputeButton.setVisible(false);
                     this.cancelButton.setVisible(false);
-
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

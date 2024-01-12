@@ -90,13 +90,9 @@ public class ReservationPopupController {
                     end =   slot.getEndTime() != null ? slot.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
                     interval = slot.getEndTime() != null ? new Interval(start, end) : new Interval(start, start);
                     if (demande == null) {
-                        if (slot.getEndTime() != null) {
-                            booked.addEntry(new Entry<>("Réservé", interval));
-                        } else {
-                            entry = new Entry<>("Réservé", interval);
-                            entry.fullDayProperty().setValue(true);
-                            booked.addEntry(entry);
-                        }
+                        entry = new Entry<>("Disponible", interval);
+                        entry.fullDayProperty().setValue(true);
+                        slots.addEntry(entry);
                     } else if (demande.getStatus() == 0) {
                         if (slot.getEndTime() != null) {
                             requested.addEntry(new Entry<>("Demandé", interval));

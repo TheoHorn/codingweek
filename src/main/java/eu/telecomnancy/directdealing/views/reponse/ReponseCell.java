@@ -87,11 +87,13 @@ public class ReponseCell extends ListCell<Demande> {
                         validateButton.setVisible(false);
                         validateButton.setDisable(true);
                         disputeButton.setVisible(true);
+                        this.statusChoiceBox.setDisable(true);
                         break;
                     case 2:
                         statusChoiceBox.setValue("Refuser");
                         validateButton.setVisible(false);
                         validateButton.setDisable(true);
+                        this.statusChoiceBox.setDisable(true);
                         break;
                 }
             } catch (SQLException e) {
