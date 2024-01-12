@@ -71,7 +71,7 @@
                         <Insets left="60.0" />
                      </HBox.margin>
                   </Label>
-                  <ListView prefHeight="93.0" prefWidth="639.0" fx:id="dispoListView" />
+                  <ListView fx:id="dispoListView" prefHeight="93.0" prefWidth="639.0" />
                </children>
                <GridPane.margin>
                   <Insets bottom="10.0" top="10.0" />
@@ -108,7 +108,7 @@
                               <Rectangle arcHeight="50.0" arcWidth="35.0" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
                               <Label fx:id="category_label" alignment="CENTER" contentDisplay="CENTER" minWidth="200.0" prefWidth="200.0" text="test" textAlignment="CENTER" textFill="WHITE">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="14.0" name="System Bold"/>
                                  </font>
                                  <StackPane.margin>
                                     <Insets />
@@ -175,12 +175,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#contact" text="Contacter">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#proposeService" text="Proposer son service " textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="contacterButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#contact" text="Contacter">
                      <font>
                         <Font size="14.0" />
                      </font>

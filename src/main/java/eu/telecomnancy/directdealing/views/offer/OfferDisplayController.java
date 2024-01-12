@@ -52,6 +52,8 @@ public class OfferDisplayController implements Observer {
     @FXML
     private Label resa_label;
 
+    @FXML
+    private Button contacterButton;
 
     public OfferDisplayController() {
         this.app = Application.getInstance();
@@ -95,30 +97,41 @@ public class OfferDisplayController implements Observer {
         this.category_label.setText(content.getCategory());
         this.location_label.setText(content.getLocalisation());
         // this.disponibility_label.setText(slot.getDisponibility());
-        this.owner_label.setText(owner.getFirstName()+" "+owner.getLastName());
-        if (offer.isRequest()){
-            this.type_label.setText("Requête :");
-        } else {
-            this.type_label.setText("Proposition :");
-        }
-        //this.image_view.setImage(new Image(content.getImage().impl_getUrl()));
-        //this.location_label.setText();
-        this.dispoListView.getItems().clear();
-        for (Slot slot : slots){
-            this.dispoListView.getItems().add(slot.toString());
-        }
-        double balance = app.getAccountDAO().get(app.getCurrentUser().getEmail()).getBalance();
-        double prix = app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice();
-        if (balance >= prix){
-            this.resa_button.setDisable(false);
-            this.resa_label.setVisible(false);
-        } else {
-            this.resa_button.setDisable(true);
+        this.owner_label.setText(owner.getFirstName() + " " + owner.getLastName());
+        if (offer.getMail().equals(app.getCurrentUser().getEmail())) {
+            this.resa_button.setVisible(false);
+            this.resa_label.setText("Vous ne pouvez pas réserver votre propre offre.");
             this.resa_label.setVisible(true);
-            double diff = prix - balance;
-            this.resa_label.setText("Il vous manque "+diff+" florains pour pouvoir réserver.");
+            this.contacterButton.setVisible(false);
+        } else {
+            this.resa_button.setVisible(true);
         }
+            if (offer.isRequest()) {
+                this.type_label.setText("DEMANDE");
+                this.resa_button.setText("Proposer son aide");
+            } else {
+                this.type_label.setText("ANNONCE");
+                this.resa_button.setText("Réserver");
+            }
+            //this.image_view.setImage(new Image(content.getImage().impl_getUrl()));
+            //this.location_label.setText();
+            this.dispoListView.getItems().clear();
+            for (Slot slot : slots) {
+                this.dispoListView.getItems().add(slot.toString());
+            }
+            double balance = app.getAccountDAO().get(app.getCurrentUser().getEmail()).getBalance();
+            double prix = app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice();
+            if (!app.getCurrentUser().getEmail().equals(offer.getMail())){
+            if (balance >= prix) {
+                this.resa_button.setDisable(false);
+                this.resa_label.setVisible(false);
+            } else {
+                this.resa_button.setDisable(true);
+                this.resa_label.setVisible(true);
+                double diff = prix - balance;
+                this.resa_label.setText("Il vous manque " + diff + " florains pour pouvoir réserver.");
+            }}
 
 
-    }
+            }
 }
