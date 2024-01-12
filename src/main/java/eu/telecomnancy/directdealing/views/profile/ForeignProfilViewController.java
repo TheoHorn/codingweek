@@ -4,11 +4,13 @@ import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import org.w3c.dom.events.MouseEvent;
 
 import java.sql.SQLException;
 
@@ -31,6 +33,7 @@ public class ForeignProfilViewController implements Observer {
         this.app.addObserver(this);
 
     }
+
     @Override
     public void update() throws SQLException {
         this.nameLabel.setText(app.getLastAccount().getLastName());
@@ -51,6 +54,10 @@ public class ForeignProfilViewController implements Observer {
     }
 
     public void sendEvaluation() throws Exception {
+        // Update the evaluation :
+        Evaluation evaluation = new Evaluation(app.getCurrentUser().getEmail(), app.getLastAccount().getEmail(), app.getEvaluationManager().convert((String) valueEvaluation.getValue()));
+        app.getEvaluationDAO().save(evaluation);
+
         app.sendEvaluation(app.getCurrentUser().getEmail(), app.getLastAccount().getEmail(), this.valueEvaluation.getValue().toString());
     }
 
