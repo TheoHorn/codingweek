@@ -1,10 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="152.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="330.4" minWidth="167.19998779296873" prefWidth="238.7999755859375" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.20001220703125" minWidth="152.20001220703125" prefWidth="244.2000244140625" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="190.5999877929687" minWidth="86.5999877929687" prefWidth="149.6000244140625" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="144.99997558593748" minWidth="108.99997558593748" prefWidth="144.99997558593748" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Attaquant :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="attacker_label" text="Label">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Défendeur :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="defender_label" text="Label">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+         <children>
+            <Label fx:id="message_label" text="Message :">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1">
+         <children>
+            <Label fx:id="type_label" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label text="de">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="owner_label" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="3">
+         <children>
+            <Button onAction="#pressAttacker" mnemonicParsing="false" text="Attaquant à raison" />
+              <Button onAction="#pressDefender" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Défendeur à raison" />
+         </children>
+      </VBox>
+    </children>
 </GridPane>
