@@ -39,4 +39,23 @@ public class Dispute {
     public String getDefender() {
         return defender;
     }
+
+    public Demande getDemande(){
+        return app.getDemandeDAO().get(this.getIdDemande());
+    }
+
+    public Slot getSlot() throws SQLException {
+        return app.getSlotDAO().get(this.getDemande().getIdSlot(), false);
+    }
+    public Offer getOffer() throws SQLException {
+        return app.getOfferDAO().get(this.getSlot().getIdOffer());
+    }
+
+    public boolean isOwner(String mail) throws SQLException {
+        return this.getOffer().getMail().equals(mail);
+    }
+
+    public Content getContentObject() throws SQLException {
+        return app.getContentDAO().get(this.getOffer().getIdContent());
+    }
 }

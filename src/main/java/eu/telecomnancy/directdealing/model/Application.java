@@ -247,6 +247,12 @@ public class Application {
         return this.accountDAO.getUsers();
     }
 
+    public List<Dispute> getDisputes() {
+        List<Dispute> disputes = this.disputeDAO.get();
+        System.out.println(disputes);
+        return disputes;
+    }
+
     public List<Proposal> getMyProposals(){
         return myProposals;
     }
