@@ -344,7 +344,7 @@ public class Application {
      * @param password_confirm Password confirmation of the user
      * @throws Exception
      */
-    public void signin(String mail, String password, String firstname, String lastname, String password_confirm) throws Exception {
+    public void signin(String mail, String password, String firstname, String lastname, String password_confirm, String city, String address) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
             System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
@@ -353,7 +353,7 @@ public class Application {
                     throw new Exception("Les mots de passe sont différents");
                 }
                 String generateStrongPasswordHash;
-                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password), "Nancy");
+                User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password), city, address);
                 accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();

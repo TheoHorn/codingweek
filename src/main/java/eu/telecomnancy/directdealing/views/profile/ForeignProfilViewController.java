@@ -22,6 +22,8 @@ public class ForeignProfilViewController implements Observer {
     @FXML
     private Label mailLabel;
     @FXML
+    private Label addressLabel;
+    @FXML
     private Label moyenneLabel;
     @FXML
     private ChoiceBox valueEvaluation;
@@ -39,6 +41,7 @@ public class ForeignProfilViewController implements Observer {
         this.nameLabel.setText(app.getLastAccount().getLastName());
         this.prenomLabel.setText(app.getLastAccount().getFirstName());
         this.mailLabel.setText(app.getLastAccount().getEmail());
+        this.addressLabel.setText(app.getLastAccount().getLocalisation());
         Evaluation userEvaluation = app.getEvaluationDAO().get(app.getCurrentUser().getEmail(), app.getLastAccount().getEmail());
         String commentaire;
         if(userEvaluation != null){

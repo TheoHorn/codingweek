@@ -39,9 +39,13 @@ public abstract class Account {
      */
     double balance;
     /**
-     * Localisation of the account
+     * City of the account
      */
-    private String localisation;
+    private String city;
+    /**
+     * Address of the account
+     */
+    private String address;
 
     /**
      * Constructor of the account
@@ -50,14 +54,15 @@ public abstract class Account {
      * @param email Email of the account
      * @param password Password of the account
      */
-    public Account(String lastName, String firstName, String email,String password,Boolean isSleeping, double balance, String localisation) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Account(String lastName, String firstName, String email,String password,Boolean isSleeping, double balance, String city, String address) throws NoSuchAlgorithmException, InvalidKeySpecException {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
         this.password = password;
         this.isSleeping = isSleeping;
         this.balance = balance;
-        this.localisation = localisation;
+        this.city = city;
+        this.address = address;
     }
 
     public String getLastName() {
@@ -105,7 +110,15 @@ public abstract class Account {
         return this.getEmail().equals(account.getEmail());
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity(){
+        return city;
+    }
+
     public String getLocalisation() {
-        return localisation;
+        return city + ", " + address;
     }
 }

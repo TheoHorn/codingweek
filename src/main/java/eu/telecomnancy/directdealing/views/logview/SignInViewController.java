@@ -35,6 +35,16 @@ public class SignInViewController implements Observer {
     @FXML
     private TextField lastname_textfield;
     /**
+     * TextField for the city
+     */
+    @FXML
+    private TextField city_textfield;
+    /**
+     * Textfield for the address
+     */
+    @FXML
+    private TextField address_textfield;
+    /**
      * TextField for the password confirmation
      */
     @FXML
@@ -68,7 +78,7 @@ public class SignInViewController implements Observer {
      */
     public void pressCreationButton(ActionEvent event) throws Exception {
         try {
-            app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText());
+            app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText(), city_textfield.getText(), address_textfield.getText());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             statusLabel.setText(e.getMessage());
