@@ -113,29 +113,42 @@ public class ResearchFilterManager {
         Date fin;
         switch (date) {
             case "Aujourd'hui":
+                cal.setTime(debut);
+                cal.set(Calendar.HOUR_OF_DAY, 23);
+                cal.set(Calendar.MINUTE,59);
+                cal.set(Calendar.SECOND,59);
                 fin = debut;
                 break;
             case "Demain":
                 cal.setTime(debut);
                 cal.add(Calendar.DATE, 1);
+                cal.set(Calendar.HOUR_OF_DAY, 23);
+                cal.set(Calendar.MINUTE,59);
+                cal.set(Calendar.SECOND,59);
                 fin = cal.getTime();
                 break;
             case "Cette semaine":
                 cal.setTime(debut);
-                cal.set(Calendar.WEEK_OF_YEAR, cal.get(Calendar.WEEK_OF_YEAR) + 1);
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                cal.set(Calendar.DAY_OF_WEEK, cal.getActualMaximum(Calendar.DAY_OF_WEEK));
+                cal.set(Calendar.HOUR_OF_DAY, 23);
+                cal.set(Calendar.MINUTE,59);
+                cal.set(Calendar.SECOND,59);
                 fin = cal.getTime();
                 break;
             case "Ce mois-ci":
                 cal.setTime(debut);
-                cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + 1);
-                cal.set(Calendar.DAY_OF_MONTH, 1);
+                cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                cal.set(Calendar.HOUR_OF_DAY, 23);
+                cal.set(Calendar.MINUTE,59);
+                cal.set(Calendar.SECOND,59);
                 fin = cal.getTime();
                 break;
             case "Cette année":
                 cal.setTime(debut);
-                cal.set(Calendar.YEAR, cal.get(Calendar.YEAR) + 1);
-                cal.set(Calendar.DAY_OF_YEAR, 1);
+                cal.set(Calendar.DAY_OF_YEAR, cal.getActualMaximum(Calendar.DAY_OF_YEAR));
+                cal.set(Calendar.HOUR_OF_DAY, 23);
+                cal.set(Calendar.MINUTE,59);
+                cal.set(Calendar.SECOND,59);
                 fin = cal.getTime();
                 break;
             default:
@@ -146,9 +159,27 @@ public class ResearchFilterManager {
         }
         List<Offer> result = new ArrayList<>();
         for(Offer o: this.filteredOffers){
+            Content content = app.getContentDAO().get(o.getIdContent());
+            boolean isEquipment = content.isEquipment();
             Slot slot = app.getSlotDAO().get(o.getIdOffer()).get(0);
-            if (slot != null && slot.getStartTime().after(debut) && (slot.getEndTime() == null || slot.getEndTime().before(fin))){
-                result.add(o);
+            if (slot != null){
+                Date slot_debut = slot.getStartTime();
+                Date slot_fin = slot.getEndTime();
+                if (isEquipment){
+                    if (slot_debut == null){
+                        result.add(o);
+                    }else if (slot_debut.after(debut) && slot_debut.before(fin)){
+                        result.add(o);
+                    }
+                }else {
+                    if (slot_debut.after(debut) && slot_debut.before(fin)) {
+                        result.add(o);
+                    } else if (slot_fin.after(debut) && slot_fin.before(fin)) {
+                        result.add(o);
+                    } else if (slot_debut.before(debut) && slot_fin.after(fin)) {
+                        result.add(o);
+                    }
+                }
             }
         }
         this.filteredOffers = result;
