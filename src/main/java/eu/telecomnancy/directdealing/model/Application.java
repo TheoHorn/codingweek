@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static eu.telecomnancy.directdealing.Main.app;
 import static eu.telecomnancy.directdealing.database.ReallyStrongSecuredPassword.generateStrongPasswordHash;
 
 /**
@@ -227,6 +228,7 @@ public class Application {
 
     public List<Offer> getOffers() throws Exception {
         offers = this.offerDAO.get();
+        System.out.println(offers);
         return offers;
     }
 
@@ -388,6 +390,11 @@ public class Application {
             Service service = new Service(title, category, description, image, price);
             int idOffer;
             if (isRequest) {
+                System.out.println(app.getCurrentUser().getBalance());
+                if (app.getCurrentUser().getBalance() < price) {
+                    throw new Exception("Vous n'avez pas assez de florains");
+                }
+                app.getCurrentUser().setBalance(app.getCurrentUser().getBalance() - service.getPrice());
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
             } else {
@@ -421,6 +428,10 @@ public class Application {
             Equipment service = new Equipment(title, category, description, image, price);
             int idOffer;
             if (isRequest) {
+                System.out.println(app.getCurrentUser().getBalance());
+                if (app.getCurrentUser().getBalance() < price) {
+                    throw new Exception("Vous n'avez pas assez de florains");
+                }
                 Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
             } else {
@@ -514,7 +525,6 @@ public class Application {
     }
 
     public boolean updateCurrentUserSleeping(boolean isSleeping) throws Exception {
-        System.out.println(isSleeping);
         boolean b = accountManager.updateSleeping(this.getCurrentUser(), isSleeping);
         notifyObservers();
         return b;
@@ -568,6 +578,13 @@ public class Application {
             for (Slot newSlot : newSlots) {
                 idSlot = this.getSlotDAO().save(newSlot);
                 this.demandeDAO.save(new Demande(idSlot, currentUser.getEmail(), new Date(), 0));
+                int idOffer = this.slotDAO.get(idSlot,false).getIdOffer();
+                Offer temp = this.offerDAO.get(idOffer);
+                if (!temp.isRequest()){
+                    Content content = this.contentDAO.get(this.offerDAO.get(idOffer).getIdContent());
+                    currentUser.setBalance(currentUser.getBalance() - content.getPrice());
+                    getAccountDAO().save(currentUser);
+                }
             }
             this.sceneController.switchToHome();
         }
@@ -591,6 +608,19 @@ public class Application {
                 // Change demand into reservation
                 Reservation reservation = this.reservationManager.getFromDemand(this.lastDemand);
                 this.reservationDAO.save(reservation);
+                // add credit to the owner of the offer
+                int idSlot = this.lastDemand.getIdSlot();
+                int idOffer = this.slotDAO.get(idSlot,false).getIdOffer();
+                Offer offer = this.offerDAO.get(idOffer);
+                Content content = this.contentDAO.get(this.offerDAO.get(idOffer).getIdContent());
+                if (offer.isRequest()){
+                    Account answer = this.accountDAO.get(lastDemand.getMail());
+                    answer.setBalance(answer.getBalance() + content.getPrice());
+                    getAccountDAO().save(answer);
+                } else {
+                    currentUser.setBalance(currentUser.getBalance() + content.getPrice());
+                    getAccountDAO().save(currentUser);
+                }
                 break;
             case "Refuser":
                 this.lastDemand.setStatus(2);
@@ -604,6 +634,12 @@ public class Application {
     public void deleteDemande() {
         try {
             getDemandeDAO().delete(this.lastDemand.getIdDemande());
+            int idSlot = this.lastDemand.getIdSlot();
+            int idOffer = this.slotDAO.get(idSlot,false).getIdOffer();
+            Content content = this.contentDAO.get(this.offerDAO.get(idOffer).getIdContent());
+            Account demander = this.accountDAO.get(this.lastDemand.getMail());
+            demander.setBalance(demander.getBalance() + content.getPrice());
+            getAccountDAO().save(demander);
             notifyObservers();
         } catch (Exception e) {
             e.printStackTrace();

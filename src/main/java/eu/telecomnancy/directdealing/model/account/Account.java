@@ -121,4 +121,8 @@ public abstract class Account {
     public String getLocalisation() {
         return city + ", " + address;
     }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }

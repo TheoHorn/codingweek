@@ -42,6 +42,9 @@ public class DemandeManager {
     }
 
     public void delete(Demande demandes) throws SQLException {
-        app.getDemandeDAO().delete(demandes.getIdSlot());
+        int idSlot = demandes.getIdSlot();
+        app.getDemandeDAO().delete(demandes.getIdDemande());
+        app.getSlotDAO().delete(idSlot);
+
     }
 }

@@ -43,6 +43,7 @@ public class SceneController {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/login_view.fxml"));
         scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - LogIn");
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -57,6 +58,7 @@ public class SceneController {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/logview/signin_view.fxml"));
         scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - SignIn");
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -71,6 +73,7 @@ public class SceneController {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view.fxml"));
         scene = new Scene(root.load());
+        Application.getInstance().getResearchFilterManager().initialize_visible_offers();
         Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Home");
         stage.setScene(scene);
@@ -86,6 +89,7 @@ public class SceneController {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/new_offer.fxml"));
         scene = new Scene(root.load());
+        Application.getInstance().notifyObservers();
         stage.setTitle("TELECOM Nancy DirectDealing - Offer");
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -133,16 +137,6 @@ public class SceneController {
         stage.show();
     }
 
-    public void switchToHomeAfterResearch() throws Exception{
-        Application.getInstance().removeAllObservers();
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/home/home_view_after_research.fxml"));
-        scene = new Scene(root.load());
-        Application.getInstance().notifyObservers();
-        stage.setTitle("TELECOM Nancy DirectDealing - Home");
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
-    }
      public void openReservationPopup() throws Exception {
         Application.getInstance().removeAllObservers();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/eu/telecomnancy/directdealing/views/offer/reservation_popup.fxml"));

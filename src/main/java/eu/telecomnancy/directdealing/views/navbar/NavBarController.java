@@ -97,7 +97,7 @@ public class NavBarController implements Observer {
     @FXML
     public void searchUpdate(ActionEvent event) throws Exception {
         app.getResearchFilterManager().searchOffer(search_text.getText());
-        app.getSceneController().switchToHomeAfterResearch();
+        app.getSceneController().switchToHome();
     }
 
     @FXML

@@ -56,12 +56,18 @@ public class OfferDisplayController implements Observer {
     public void reservation() throws Exception {
         Content content = this.app.getContentDAO().get(this.app.getLastOffer().getIdContent());
         List<Slot> slots = this.app.getSlotDAO().get(this.app.getLastOffer().getIdOffer());
-        if (content.isEquipment() && slots.get(0).getStartTime() != null){
-            this.app.validateNewDemand(this.app.getLastOffer(), slots);
-            this.app.getSceneController().switchToHome();
+        double balance = app.getAccountDAO().get(app.getCurrentUser().getEmail()).getBalance();
+        if (balance >= app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice()) {
+            if (content.isEquipment() && slots.get(0).getStartTime() != null) {
+                this.app.validateNewDemand(this.app.getLastOffer(), slots);
+                this.app.getSceneController().switchToHome();
+            } else {
+                this.app.getSceneController().openReservationPopup();
+            }
         } else {
-            this.app.getSceneController().openReservationPopup();
+            // TODO : display message
         }
+
     }
 
     @FXML

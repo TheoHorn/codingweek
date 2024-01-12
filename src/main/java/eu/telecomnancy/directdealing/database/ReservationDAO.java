@@ -30,35 +30,28 @@ public class ReservationDAO {
             preparedStatement.setInt(2, reservation.getIdSlot());
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) { // Check if there are results
-                find = true;
-                // reservation already exists
+            if (resultSet.next()) { // Check if there are results// reservation already exists
                 return false;
+            } else {
+                String queryAdding = "INSERT INTO RESERVATION (mail, idSlot, dateReservation) VALUES (?, ?, ?);";
+                try (PreparedStatement preparedStatementInsert = DatabaseAccess.connection.prepareStatement(queryAdding)) {
+                    // Set parameters for the prepared statement
+                    preparedStatementInsert.setString(1, reservation.getEmailReserver());
+                    preparedStatementInsert.setInt(2, reservation.getIdSlot());
+                    Timestamp timestamp = new Timestamp(reservation.getReservationDate().getTime());
+                    preparedStatementInsert.setTimestamp(3, timestamp);
+
+                    // Execute the insertion query
+                    preparedStatementInsert.executeUpdate();
+                    return true;
+                }
             }
+        } catch (SQLException e) {
+            // Handle SQL exceptions
+            e.printStackTrace();
         } finally {
             if (resultSet != null) {
                 resultSet.close();
-            }
-        if (!find){
-            // reservation doesn't exist
-            try (Statement statement = DatabaseAccess.connection.createStatement()) {
-                String queryAdding = "INSERT INTO RESERVATION (mail, idSlot, dateReservation) VALUES (?, ?, ?);";
-                try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(queryAdding)) {
-                    // Set parameters for the prepared statement
-                    preparedStatement.setString(1, reservation.getEmailReserver());
-                    preparedStatement.setInt(2, reservation.getIdSlot());
-                    Timestamp timestamp = new Timestamp(reservation.getReservationDate().getTime());
-                    preparedStatement.setTimestamp(3, timestamp);
-
-                    // Execute the insertion query
-                    int rowsAffected = preparedStatement.executeUpdate();
-                    System.out.println("Rows affected: " + rowsAffected);
-                    return true;
-                }
-            } catch (SQLException e) {
-                // Handle SQL exceptions
-                e.printStackTrace();
-                }
             }
         }
         return false;
