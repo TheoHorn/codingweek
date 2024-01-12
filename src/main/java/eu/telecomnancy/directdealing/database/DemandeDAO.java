@@ -160,9 +160,15 @@ public class DemandeDAO {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) { // Check if there are results
-                // recup des infos
+                // demande already exists
+                // update demande
                 int idDemande = resultSet.getInt("idDemande");
-                demands.add(get(idDemande));
+                int idSlot = resultSet.getInt("idSlot");
+                String mail = resultSet.getString("mail");
+                Timestamp timestamp = resultSet.getTimestamp("dateDemande");
+                Date demande = new Date(timestamp.getTime());
+                int status = resultSet.getInt("status");
+                demands.add(new Demande(idDemande, idSlot, mail, demande, status));
             }
             return demands;
 

@@ -22,7 +22,7 @@ public class ReservationDAO {
      */
     public boolean save(Reservation reservation) throws SQLException {
         // check if reservation already exists
-        String query = "SELECT * FROM SLOT WHERE mail = ? AND idSlot = ?";
+        String query = "SELECT * FROM RESERVATION WHERE mail = ? AND idSlot = ?";
         ResultSet resultSet = null;
         boolean find = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -42,8 +42,8 @@ public class ReservationDAO {
         if (!find){
             // reservation doesn't exist
             try (Statement statement = DatabaseAccess.connection.createStatement()) {
-                String queryAdding = "INSERT INTO CONTENT (mail, idSlot, dateReservation) VALUES (?, ?, ?);";
-                try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(query)) {
+                String queryAdding = "INSERT INTO RESERVATION (mail, idSlot, dateReservation) VALUES (?, ?, ?);";
+                try (PreparedStatement preparedStatement = DatabaseAccess.connection.prepareStatement(queryAdding)) {
                     // Set parameters for the prepared statement
                     preparedStatement.setString(1, reservation.getEmailReserver());
                     preparedStatement.setInt(2, reservation.getIdSlot());
