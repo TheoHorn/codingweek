@@ -335,7 +335,6 @@ public class Application {
             else {
                 sceneController.switchToAdminHome();
             }
-            notifyObservers();
         } else {
             throw new Exception("Mot de passe ou email incorrect");
         }

@@ -64,30 +64,34 @@ public class HomeViewController implements Observer {
     public void update() throws Exception {
         this.app.getResearchFilterManager().resetOffers();
         this.app.getResearchFilterManager().doResearch();
-        if (this.filter_date.getValue() != null){
+        if (this.filter_date != null && this.filter_date.getValue() != null){
             this.app.getResearchFilterManager().filterOffersByDate(this.filter_date.getValue().toString());
         }
-        if (this.filter_price.getValue() != null){
+        if (this.filter_price != null && this.filter_price.getValue() != null){
             this.app.getResearchFilterManager().filterOffersByPrice(this.filter_price.getValue().toString());
         }
-        if (this.filter_city.getText() != null){
+        if (this.filter_city != null && this.filter_city.getText() != null){
             this.app.getResearchFilterManager().filterOffersByLocation(this.filter_city.getText());
         }
-        if (this.filter_evaluation.getValue() != null){
+        if (this.filter_evaluation != null && this.filter_evaluation.getValue() != null){
             this.app.getResearchFilterManager().filterOffersByEvaluation(this.filter_evaluation.getValue().toString());
         }
         StringBuilder category_available = new StringBuilder();
-        for (MenuItem item : this.filter_category.getItems()){
-            CheckMenuItem checkItem = (CheckMenuItem) item;
-            //we can have multiple category that we want to filter
-            if (checkItem.isSelected()){
-                category_available.append(checkItem.getText());
+        if (this.filter_category != null){
+            for (MenuItem item : this.filter_category.getItems()){
+                CheckMenuItem checkItem = (CheckMenuItem) item;
+                //we can have multiple category that we want to filter
+                if (checkItem.isSelected()){
+                    category_available.append(checkItem.getText());
+                }
             }
         }
         if (!category_available.toString().isEmpty()){
             this.app.getResearchFilterManager().filterOffersByCategory(category_available.toString());
         }
-        this.filter_city.setText(this.app.getCurrentUser().getCity());
+        if (filter_city != null){
+            this.filter_city.setText(this.app.getCurrentUser().getCity());
+        }
         offersListView.getItems().clear();
         System.out.println("Offers to print: " + this.app.getResearchFilterManager().getFilteredOffers().size());
         this.app.getResearchFilterManager().getFilteredOffers().forEach(offer -> offersListView.getItems().add(offer));
