@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.mydemands.MyDemandsController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.mydemands.MyDemandsController">
    <top>
       <fx:include source="../navbar/navbar.fxml" />
    </top>
