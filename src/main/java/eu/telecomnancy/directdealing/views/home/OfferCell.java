@@ -142,6 +142,7 @@ public class OfferCell extends ListCell<Offer> {
         if (app.getCurrentUser() instanceof User){
             app.setLastOffer(getItem());
             app.getSceneController().switchToOfferDisplay();
+            Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem().getMail()));
         } else {
             app.deleteOffer(getItem());
         }

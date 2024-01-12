@@ -77,7 +77,7 @@ public class OfferDisplayController implements Observer {
 
     @FXML
     public void contact() throws Exception {
-        // TODO
+        this.app.getSceneController().switchtoMessaging();
     }
 
     @FXML
@@ -121,7 +121,9 @@ public class OfferDisplayController implements Observer {
             //this.location_label.setText();
             this.dispoListView.getItems().clear();
             for (Slot slot : slots) {
-                this.dispoListView.getItems().add(slot.toString());
+                if (app.getDemandeDAO().get("idSlot", slot.getId()) == null) {
+                    this.dispoListView.getItems().add(slot.toString());
+                }
             }
             double balance = app.getAccountDAO().get(app.getCurrentUser().getEmail()).getBalance();
             double prix = app.getContentDAO().get(app.getLastOffer().getIdContent()).getPrice();
