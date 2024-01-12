@@ -5,9 +5,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.request.NewDispute">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.request.NewDispute">
    <children>
-      <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description du litige" />
+      <TextArea fx:id="description" promptText="Description du litige" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></TextArea>
       <Button mnemonicParsing="false" onAction="#claim" text="Saisir la justice" />
    </children>
    <padding>

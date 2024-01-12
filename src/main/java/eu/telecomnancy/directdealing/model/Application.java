@@ -9,6 +9,7 @@ import eu.telecomnancy.directdealing.model.content.Content;
 import eu.telecomnancy.directdealing.model.content.ContentManager;
 import eu.telecomnancy.directdealing.model.content.Equipment;
 import eu.telecomnancy.directdealing.model.content.Service;
+import eu.telecomnancy.directdealing.model.dispute.Dispute;
 import eu.telecomnancy.directdealing.model.dispute.DisputeManager;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.demande.DemandeManager;

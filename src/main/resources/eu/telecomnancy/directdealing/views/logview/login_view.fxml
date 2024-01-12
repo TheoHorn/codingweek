@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.LogInViewController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.logview.LogInViewController">
    <top>
       <fx:include source="menu_bar.fxml" />
    </top>
@@ -43,6 +43,8 @@
                 <RowConstraints maxHeight="132.40001525878904" minHeight="3.600018310546858" prefHeight="52.0" />
                   <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="42.399990844726574" vgrow="NEVER" />
                   <RowConstraints maxHeight="132.40001525878904" minHeight="10.0" prefHeight="42.399990844726574" vgrow="NEVER" />
+                  <RowConstraints />
+                  <RowConstraints />
               </rowConstraints>
                <children>
                   <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="143.0" text="Email : " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />

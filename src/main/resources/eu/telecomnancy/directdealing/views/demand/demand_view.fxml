@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
-
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.mydemands.MyDemandsController">
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.directdealing.views.mydemands.MyDemandsController">
    <top>
       <fx:include source="../navbar/navbar.fxml" />
    </top>
@@ -27,7 +27,7 @@
                </Label>
             </children>
          </HBox>
-         <ListView fx:id="myDemandsListView" BorderPane.alignment="CENTER" />
+         <ListView fx:id="myDemandsListView" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </center>
