@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" minWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="CENTER" minWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="394.0" minWidth="205.59996337890624" prefWidth="255.99998779296874" />
     <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="327.2000366210937" minWidth="230.39998779296877" prefWidth="268.0000244140625" />

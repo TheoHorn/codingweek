@@ -1,9 +1,7 @@
 package eu.telecomnancy.directdealing.views.conversations;
 
 import eu.telecomnancy.directdealing.model.Application;
-import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.Observer;
-import eu.telecomnancy.directdealing.views.home.OfferCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -11,7 +9,7 @@ public class ConversationsView implements Observer {
 
     @FXML
     protected ListView<String> conversationsListView;
-    private Application app;
+    private final Application app;
 
     /**
      * Constructor of reponse view controller

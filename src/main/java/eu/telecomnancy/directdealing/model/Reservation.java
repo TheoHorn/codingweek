@@ -1,8 +1,5 @@
 package eu.telecomnancy.directdealing.model;
 
-import eu.telecomnancy.directdealing.model.offer.Offer;
-
-import java.sql.SQLException;
 import java.util.Date;
 
 /**

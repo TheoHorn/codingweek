@@ -1,7 +1,6 @@
 package eu.telecomnancy.directdealing;
 
 import eu.telecomnancy.directdealing.database.DatabaseAccess;
-import eu.telecomnancy.directdealing.views.logview.LogInViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,7 +20,7 @@ public class Main extends Application {
 
     /**
      * stop the application
-     * @throws SQLException
+     * @throws SQLException if the disconnection failed
      */
     @Override
     public void stop() throws SQLException {

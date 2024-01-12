@@ -1,33 +1,24 @@
 package eu.telecomnancy.directdealing.model.offer;
 
-import eu.telecomnancy.directdealing.model.Slot;
-import eu.telecomnancy.directdealing.model.account.User;
-import eu.telecomnancy.directdealing.model.content.Content;
-
 import java.sql.SQLException;
-
-import static eu.telecomnancy.directdealing.Main.app;
 
 public abstract class Offer {
     /**
      * Owner of the offer
      */
     private int idOffer;
+    /**
+     *
+     */
     private String mail;
+    /**
+     * boolean to know if the offer is a request
+     */
     private boolean isRequest;
+    /**
+     * id of the content
+     */
     private int idContent;
-    /**
-     * Content of the offer
-     */
-    /**
-     * boolean to know if the offer is a request or a proposal
-     */
-    /**
-     * slot of the offer
-     */
-    /**
-     * id of the offer
-     */
 
 
     public Offer(int idOffer, String mail, boolean isRequest, int idContent) throws SQLException {

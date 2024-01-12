@@ -1,10 +1,7 @@
 package eu.telecomnancy.directdealing.views.navbar;
 
-import eu.telecomnancy.directdealing.SceneController;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
-import eu.telecomnancy.directdealing.model.account.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -33,7 +30,7 @@ public class NavBarController implements Observer {
     /**
      * Application instance
      */
-    private Application app;
+    private final Application app;
 
     /**
      * Constructor of the navbar view controller
@@ -90,18 +87,18 @@ public class NavBarController implements Observer {
     }
 
 /**
-     * perform the switch to the home view after research
-     * @param event the event that trigger the switch
-     * @throws Exception if the switch failed
-     */
+ * perform the switch to the home view after research
+ *
+ * @throws Exception if the switch failed
+ */
     @FXML
-    public void searchUpdate(ActionEvent event) throws Exception {
+    public void searchUpdate() throws Exception {
         app.getResearchFilterManager().searchOffer(search_text.getText());
         app.getSceneController().switchToHome();
     }
 
     @FXML
-    public void switchToMyDemands(MouseEvent mouseEvent) throws Exception {
+    public void switchToMyDemands() throws Exception {
         app.getSceneController().switchToMyDemands();
     }
 

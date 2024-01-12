@@ -1,7 +1,5 @@
 package eu.telecomnancy.directdealing.model.content;
 
-import javafx.scene.image.Image;
-
 import java.io.File;
 
 public abstract class Content {
@@ -9,9 +7,6 @@ public abstract class Content {
      * id of the content
      */
     private int idContent;
-    /**
-     * current id of the content
-     */
     /**
      * title of the content
      */

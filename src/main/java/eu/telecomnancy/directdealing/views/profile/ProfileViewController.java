@@ -2,7 +2,6 @@ package eu.telecomnancy.directdealing.views.profile;
 
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -89,7 +88,7 @@ public class ProfileViewController implements Observer {
     /**
      * Application instance
      */
-    private Application app;
+    private final Application app;
 
     /**
      * Constructor of the profile view controller
@@ -106,7 +105,6 @@ public class ProfileViewController implements Observer {
     @FXML
     public void updateProfile() throws Exception {
         isFailed = this.app.updateCurrentAccount(this.name_field.getText(), this.surname_field.getText(),this.city_field.getText(), this.address_field.getText());
-        System.out.println(isFailed);
     }
 
     /**
@@ -129,9 +127,8 @@ public class ProfileViewController implements Observer {
     }
 
     @FXML
-    public void sleeping_update(ActionEvent event) throws Exception {
-        boolean b = this.app.updateCurrentUserSleeping(!this.app.getCurrentUser().isSleeping());
-        System.out.println("sleeping update : " + b);
+    public void sleeping_update() throws Exception {
+        this.app.updateCurrentUserSleeping(!this.app.getCurrentUser().isSleeping());
         this.update();
     }
 

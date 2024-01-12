@@ -18,7 +18,6 @@ public class User extends Account{
      */
     public User(String lastName, String firstName, String email, double balance, boolean isSleeping, String password, String city, String address) throws NoSuchAlgorithmException, InvalidKeySpecException {
         super(lastName, firstName, email, password, isSleeping,balance, city, address);
-        System.out.println("User created");
     }
 
     @Override

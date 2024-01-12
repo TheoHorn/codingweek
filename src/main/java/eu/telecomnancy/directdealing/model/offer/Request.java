@@ -1,9 +1,5 @@
 package eu.telecomnancy.directdealing.model.offer;
 
-import eu.telecomnancy.directdealing.model.Slot;
-import eu.telecomnancy.directdealing.model.account.User;
-import eu.telecomnancy.directdealing.model.content.Content;
-
 import java.sql.SQLException;
 
 /**

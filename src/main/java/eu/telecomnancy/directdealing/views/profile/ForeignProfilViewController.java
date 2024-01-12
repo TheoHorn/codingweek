@@ -3,14 +3,10 @@ package eu.telecomnancy.directdealing.views.profile;
 import eu.telecomnancy.directdealing.model.Application;
 import eu.telecomnancy.directdealing.model.Observer;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import org.w3c.dom.events.MouseEvent;
 
 import java.sql.SQLException;
 
@@ -29,7 +25,7 @@ public class ForeignProfilViewController implements Observer {
     private ChoiceBox valueEvaluation;
     @FXML
     private Button evaluateButton;
-    private Application app;
+    private final Application app;
     public ForeignProfilViewController(){
         this.app = Application.getInstance();
         this.app.addObserver(this);
@@ -52,7 +48,7 @@ public class ForeignProfilViewController implements Observer {
             valueEvaluation.setValue("3/5");
 
         }
-        this.moyenneLabel.setText(String.valueOf(app.getEvaluationManager().getAverage(app.getLastAccount().getEmail()))+"/5 "+ "("+app.getEvaluationManager().getEvaluationCount(app.getLastAccount().getEmail())+") " +commentaire);
+        this.moyenneLabel.setText(app.getEvaluationManager().getAverage(app.getLastAccount().getEmail()) +"/5 "+ "("+app.getEvaluationManager().getEvaluationCount(app.getLastAccount().getEmail())+") " +commentaire);
 
     }
 

@@ -66,57 +66,57 @@ public class Application {
     /**
      * account DAO
      */
-    private AccountDAO accountDAO;
+    private final AccountDAO accountDAO;
     /**
      * content DAO
      */
-    private ContentDAO contentDAO;
+    private final ContentDAO contentDAO;
     /**
      * offer DAO
      */
-    private OfferDAO offerDAO;
+    private final OfferDAO offerDAO;
     /**
      * slot DAO
      */
-    private SlotDAO slotDAO;
+    private final SlotDAO slotDAO;
     /**
      * reservation DAO
      */
-    private ReservationDAO reservationDAO;
+    private final ReservationDAO reservationDAO;
     /**
      * account manager
      */
-    private AccountManager accountManager;
+    private final AccountManager accountManager;
 
 
     /**
      * offer manager
      */
-    private OfferManager offerManager;
+    private final OfferManager offerManager;
 
 
     /**
      * content manager
      */
-    private ContentManager contentManager;
+    private final ContentManager contentManager;
 
 
     /**
      * dispute manager
      */
-    private DisputeManager disputeManager;
+    private final DisputeManager disputeManager;
 
 
     /**
      * reservation manager
      */
-    private ReservationManager reservationManager;
+    private final ReservationManager reservationManager;
 
 
     /**
      * slot manager
      */
-    private SlotManager slotManager;
+    private final SlotManager slotManager;
 
     /**
      * the last offer used
@@ -128,7 +128,7 @@ public class Application {
     /**
      * the research manager
      */
-    private ResearchFilterManager researchFilterManager;
+    private final ResearchFilterManager researchFilterManager;
     /**
      * demande DAO
      */
@@ -136,22 +136,34 @@ public class Application {
     /**
      * demande manager
      */
-    private DemandeManager demandeManager;
-    private EvaluationDAO evaluationDAO;
-    private EvaluationManager evaluationManager;
+    private final DemandeManager demandeManager;
+    /**
+     * evaluation DAO
+     */
+    private final EvaluationDAO evaluationDAO;
+    /**
+     * evaluation manager
+     */
+    private final EvaluationManager evaluationManager;
 
     /**
      * messaging DAO
      */
-    private MessagingDAO messagingDAO;
+    private final MessagingDAO messagingDAO;
 
     /**
      * messaging manager
      */
-    private MessagingManager messagingManager;
+    private final MessagingManager messagingManager;
 
+    /**
+     * the last demand used
+     */
     private Demande lastDemand;
-    private DisputeDAO disputeDAO;
+    /**
+     * dispute DAO
+     */
+    private final DisputeDAO disputeDAO;
 
     /**
      * Constructor of the application that initialize the lists
@@ -228,14 +240,11 @@ public class Application {
 
     public List<Offer> getOffers() throws Exception {
         offers = this.offerDAO.get();
-        System.out.println(offers);
         return offers;
     }
 
     public List<User> getUsers() throws Exception {
-        List<User> users = this.accountDAO.getUsers();
-        System.out.println(users);
-        return users;
+        return this.accountDAO.getUsers();
     }
 
     public List<Proposal> getMyProposals(){
@@ -315,7 +324,6 @@ public class Application {
     }
 
     public void addOffer(Offer offer) {
-        System.out.println("Add offer");
         offers.add(offer);
     }
 
@@ -323,7 +331,6 @@ public class Application {
      * login the user
      * @param mail Email of the user
      * @param password Password of the user
-     * @return true if the login is correct, false otherwise
      * @throws Exception if the login is not correct
      */
     public void login(String mail, String password) throws Exception {
@@ -347,29 +354,23 @@ public class Application {
      * @param firstname First name of the user
      * @param lastname Last name of the user
      * @param password_confirm Password confirmation of the user
-     * @throws Exception
+     * @throws Exception if the sign in is not correct
      */
     public void signin(String mail, String password, String firstname, String lastname, String password_confirm, String city, String address) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
-            System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
                 if (!password.equals(password_confirm)){
-                    System.out.println("[Debug:AccountCreatingController] Mot de passe non identique");
                     throw new Exception("Les mots de passe sont différents");
                 }
-                String generateStrongPasswordHash;
                 User user = new User(lastname,firstname,mail,500.0, false,generateStrongPasswordHash(password), city, address);
                 accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
-                System.out.println("[Debug:AccountCreatingController] Succesfull");
             }
             else {
-                System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
                 throw new Exception("Email déjà utilisé");
             }
         } else {
-            System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         }
     }
@@ -381,27 +382,23 @@ public class Application {
      * @param category Category of the offer
      * @param isRequest Boolean to know if the offer is a request or a proposal
      * @param price Price of the offer
-     * @return true if the offer is validated, false otherwise
      * @throws SQLException if the offer is not validate
      */
     public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, List<Slot> slots) throws Exception {
-        System.out.println("category is:" + category);
         if (title.isEmpty() || description.isEmpty() || price == 0 || slots.isEmpty() || image == null || category == null) {
-            System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             Service service = new Service(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
-                System.out.println(app.getCurrentUser().getBalance());
                 if (app.getCurrentUser().getBalance() < price) {
                     throw new Exception("Vous n'avez pas assez de florains");
                 }
                 app.getCurrentUser().setBalance(app.getCurrentUser().getBalance() - service.getPrice());
-                Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
+                Request request = new Request(Application.getInstance().getCurrentUser().getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
             } else {
-                Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
+                Proposal proposal = new Proposal(Application.getInstance().getCurrentUser().getEmail(), false, service.getIdContent());
                 idOffer = getOfferDAO().save(proposal);
             }
             for (Slot slot : slots) {
@@ -419,30 +416,25 @@ public class Application {
      * @param isRequest Boolean to know if the offer is a request or a proposal
      * @param price Price of the offer
      * @param returnDate Return date of the offer
-     * @return true if the offer is validated, false otherwise
      * @throws SQLException if the offer is not validate
      */
     public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, LocalDate returnDate) throws Exception {
-        System.out.println("category is:" + category);
         if (title.isEmpty() || description.isEmpty() || price == 0 || image == null || category == null) {
-            System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             Equipment service = new Equipment(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
-                System.out.println(app.getCurrentUser().getBalance());
                 if (app.getCurrentUser().getBalance() < price) {
                     throw new Exception("Vous n'avez pas assez de florains");
                 }
-                Request request = new Request(((User) Application.getInstance().getCurrentUser()).getEmail(), true, service.getIdContent());
+                Request request = new Request(Application.getInstance().getCurrentUser().getEmail(), true, service.getIdContent());
                 idOffer = getOfferDAO().save(request);
             } else {
-                Proposal proposal = new Proposal(((User) Application.getInstance().getCurrentUser()).getEmail(), false, service.getIdContent());
+                Proposal proposal = new Proposal(Application.getInstance().getCurrentUser().getEmail(), false, service.getIdContent());
                 idOffer = getOfferDAO().save(proposal);
             }
             if (returnDate != null) {
-                System.out.println(returnDate);
                 LocalDateTime tmp = returnDate.atStartOfDay();
                 Date returnDateDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
                 getSlotDAO().save(new Slot(0, returnDateDate, null, 0, idOffer));
@@ -467,7 +459,7 @@ public class Application {
             this.getCurrentUser().setLastName(surname);
             this.getCurrentUser().setCity(city);
             this.getCurrentUser().setAddress(address);
-            accountDAO.save(this.getCurrentUser());;
+            accountDAO.save(this.getCurrentUser());
             notifyObservers();
             return true;
         }
@@ -542,12 +534,11 @@ public class Application {
         return lastAccount;
     }
 
-    public boolean sendEvaluation(String mailEvaluator, String mailEvaluated, String note) throws Exception {
+    public void sendEvaluation(String mailEvaluator, String mailEvaluated, String note) throws Exception {
         int noteInt = evaluationManager.convert(note);
         Evaluation evaluation = new Evaluation(mailEvaluator, mailEvaluated, noteInt);
         evaluationDAO.save(evaluation);
         notifyObservers();
-        return true;
     }
 
     public void setLastAccount(Account lastAccount) {
@@ -579,7 +570,6 @@ public class Application {
 
     public void validateNewDemand(Offer offer, List<Slot> newSlots) throws Exception {
         if (offer == null) {
-            System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             int idSlot;
@@ -635,7 +625,6 @@ public class Application {
                 break;
         }
         getDemandeDAO().save(this.lastDemand);
-        System.out.println(this.lastDemand.getStatus());
         notifyObservers();
     }
 

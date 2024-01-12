@@ -1,6 +1,5 @@
 package eu.telecomnancy.directdealing.model.content;
 
-
 import java.sql.SQLException;
 
 import static eu.telecomnancy.directdealing.Main.app;

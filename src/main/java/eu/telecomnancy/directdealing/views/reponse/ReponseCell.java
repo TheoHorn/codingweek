@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 
 import java.sql.SQLException;
-import java.util.List;
 import static eu.telecomnancy.directdealing.Main.app;
 
 public class ReponseCell extends ListCell<Demande> {

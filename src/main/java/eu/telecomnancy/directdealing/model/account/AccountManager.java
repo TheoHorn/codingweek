@@ -1,17 +1,12 @@
 package eu.telecomnancy.directdealing.model.account;
 
-import eu.telecomnancy.directdealing.database.DatabaseAccess;
-import eu.telecomnancy.directdealing.database.EvaluationDAO;
+
 import eu.telecomnancy.directdealing.model.Reservation;
 import eu.telecomnancy.directdealing.model.demande.Demande;
 import eu.telecomnancy.directdealing.model.evaluation.Evaluation;
 import eu.telecomnancy.directdealing.model.messaging.Messaging;
 import eu.telecomnancy.directdealing.model.offer.Offer;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,11 +25,7 @@ public class AccountManager {
      */
     public boolean isSave(String mail) throws SQLException {
         Account account = app.getAccountDAO().get(mail);
-        if (account == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return account != null;
     }
 
     /**
