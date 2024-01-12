@@ -86,6 +86,5 @@ public class DisputeDAO {
         }
         return disputes;
         }
-    }
 
 }
