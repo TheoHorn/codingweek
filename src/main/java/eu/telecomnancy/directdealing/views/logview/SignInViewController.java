@@ -80,7 +80,6 @@ public class SignInViewController implements Observer {
         try {
             app.signin(mail_textfield.getText(), password_textfield.getText(), firstname_textfield.getText(), lastname_textfield.getText(), password_confirm_textfield.getText(), city_textfield.getText(), address_textfield.getText());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             statusLabel.setText(e.getMessage());
         }
 

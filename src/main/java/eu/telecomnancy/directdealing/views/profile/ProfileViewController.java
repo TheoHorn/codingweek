@@ -106,7 +106,6 @@ public class ProfileViewController implements Observer {
     @FXML
     public void updateProfile() throws Exception {
         isFailed = this.app.updateCurrentAccount(this.name_field.getText(), this.surname_field.getText(),this.city_field.getText(), this.address_field.getText());
-        System.out.println(isFailed);
     }
 
     /**
@@ -131,7 +130,6 @@ public class ProfileViewController implements Observer {
     @FXML
     public void sleeping_update(ActionEvent event) throws Exception {
         boolean b = this.app.updateCurrentUserSleeping(!this.app.getCurrentUser().isSleeping());
-        System.out.println("sleeping update : " + b);
         this.update();
     }
 

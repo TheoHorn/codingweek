@@ -32,16 +32,14 @@ public class DatabaseAccess {
         String databaseUrl = "jdbc:sqlite:" + file.getAbsolutePath();
 
         try (Connection conn = DriverManager.getConnection(databaseUrl)) {
-            System.out.println("Connected to SQLite database.");
 
             String schemaFilePath = DatabaseAccess.class.getResource("/eu/telecomnancy/directdealing/database/schema_database.sql").getPath();
             executeSchemaFile(conn, schemaFilePath);
 
             conn.commit();
             conn.close();
-            System.out.println("Database created successfully.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -63,7 +61,7 @@ public class DatabaseAccess {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(schema.toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

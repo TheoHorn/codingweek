@@ -59,7 +59,6 @@ public class ConversationCell extends ListCell<String> {
 
     @FXML
     public void displayConversation() throws Exception {
-        System.out.println(app.getAccountDAO().get(getItem()));
         Application.getInstance().setLastAccount(app.getAccountDAO().get(getItem()));
         app.getSceneController().switchtoMessaging();
     }

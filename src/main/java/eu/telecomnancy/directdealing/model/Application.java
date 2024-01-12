@@ -228,13 +228,11 @@ public class Application {
 
     public List<Offer> getOffers() throws Exception {
         offers = this.offerDAO.get();
-        System.out.println(offers);
         return offers;
     }
 
     public List<User> getUsers() throws Exception {
         List<User> users = this.accountDAO.getUsers();
-        System.out.println(users);
         return users;
     }
 
@@ -315,7 +313,6 @@ public class Application {
     }
 
     public void addOffer(Offer offer) {
-        System.out.println("Add offer");
         offers.add(offer);
     }
 
@@ -351,10 +348,8 @@ public class Application {
      */
     public void signin(String mail, String password, String firstname, String lastname, String password_confirm, String city, String address) throws Exception {
         if (!mail.isEmpty() && !password.isEmpty() && !lastname.isEmpty() && !firstname.isEmpty() && !password_confirm.isEmpty()){
-            System.out.println(!accountManager.isSave(mail));
             if (!accountManager.isSave(mail)){
                 if (!password.equals(password_confirm)){
-                    System.out.println("[Debug:AccountCreatingController] Mot de passe non identique");
                     throw new Exception("Les mots de passe sont différents");
                 }
                 String generateStrongPasswordHash;
@@ -362,14 +357,11 @@ public class Application {
                 accountDAO.save(user);
                 setCurrentUser(user);
                 sceneController.switchToHome();
-                System.out.println("[Debug:AccountCreatingController] Succesfull");
             }
             else {
-                System.out.println("[Debug:AccountCreatingController] Email déjà utilisé");
                 throw new Exception("Email déjà utilisé");
             }
         } else {
-            System.out.println("[Debug:AccountCreatingController] Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         }
     }
@@ -385,15 +377,12 @@ public class Application {
      * @throws SQLException if the offer is not validate
      */
     public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, List<Slot> slots) throws Exception {
-        System.out.println("category is:" + category);
         if (title.isEmpty() || description.isEmpty() || price == 0 || slots.isEmpty() || image == null || category == null) {
-            System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             Service service = new Service(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
-                System.out.println(app.getCurrentUser().getBalance());
                 if (app.getCurrentUser().getBalance() < price) {
                     throw new Exception("Vous n'avez pas assez de florains");
                 }
@@ -423,15 +412,12 @@ public class Application {
      * @throws SQLException if the offer is not validate
      */
     public void validateNewOffer(String title, String description, String category, boolean isRequest, double price, File image, LocalDate returnDate) throws Exception {
-        System.out.println("category is:" + category);
         if (title.isEmpty() || description.isEmpty() || price == 0 || image == null || category == null) {
-            System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             Equipment service = new Equipment(title, category, description, image, price, currentUser.getLocalisation());
             int idOffer;
             if (isRequest) {
-                System.out.println(app.getCurrentUser().getBalance());
                 if (app.getCurrentUser().getBalance() < price) {
                     throw new Exception("Vous n'avez pas assez de florains");
                 }
@@ -442,7 +428,6 @@ public class Application {
                 idOffer = getOfferDAO().save(proposal);
             }
             if (returnDate != null) {
-                System.out.println(returnDate);
                 LocalDateTime tmp = returnDate.atStartOfDay();
                 Date returnDateDate = Date.from(tmp.atZone(ZoneId.systemDefault()).toInstant());
                 getSlotDAO().save(new Slot(0, returnDateDate, null, 0, idOffer));
@@ -579,7 +564,6 @@ public class Application {
 
     public void validateNewDemand(Offer offer, List<Slot> newSlots) throws Exception {
         if (offer == null) {
-            System.out.println("Veuillez remplir tous les champs");
             throw new Exception("Veuillez remplir tous les champs");
         } else {
             int idSlot;
@@ -635,7 +619,6 @@ public class Application {
                 break;
         }
         getDemandeDAO().save(this.lastDemand);
-        System.out.println(this.lastDemand.getStatus());
         notifyObservers();
     }
 

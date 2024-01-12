@@ -107,7 +107,7 @@ public class ReservationPopupController {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         myCalendarSource.getCalendars().addAll(slots, requested, booked);

@@ -95,7 +95,6 @@ public class AccountDAO {
      * @throws SQLException if the connection is not open
      */
     public Account get(String mail) throws SQLException {
-        System.out.println("mail : " + mail);
         // check if connection is open
         if (DatabaseAccess.connection == null) {
             throw new SQLException("Veuillez créer ou ouvrir une base de données (Fichier)");

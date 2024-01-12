@@ -107,7 +107,6 @@ public class OfferDAO {
                 int idContent = resultSet.getInt("idContent");
 
                 if (request){
-                    System.out.println(app.getContentDAO().get(idContent).getTitle());
                     Request res =  new Request(mail, true, idContent);
                     res.setIdOffer(idOffer);
                     return res;

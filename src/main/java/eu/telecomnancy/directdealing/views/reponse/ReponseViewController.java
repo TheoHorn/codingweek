@@ -26,7 +26,6 @@ public class ReponseViewController implements Observer {
     @Override
     public void update() throws Exception {
         answersListView.getItems().clear();
-        System.out.println("demande "+ this.app.getDemandeManager().getAllMyAnswer());
         this.app.getDemandeManager().getAllMyAnswer().forEach(demande -> answersListView.getItems().add(demande));
         answersListView.setCellFactory(lv -> new ReponseCell());
     }
